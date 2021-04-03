@@ -7,12 +7,17 @@
 <%@ include file="/common/admin/header.jsp" %>
 <%@ include file="/common/admin/navigation.jsp" %>
 		<h1>Danh sách sản phẩm</h1>
+		<button onclick="create();">Create</button>
+		<div class="abc" style="width: 700px;height: 500px;background-color: greenyellow;margin: 0 auto;visibility: hidden;">
+			<h2>xin chao</h2>
+			<a onclick="exitCreate();">&times</a>
+		</div>
 		<br>
 		<hr>
 		<h2>${message }</h2>
 		<hr>
 		<br>
-		<form action="list.htm" method="post" >
+		<form>
 			<table class="table" border="1">
 				<thead class="table-dark">
 					<tr>
@@ -42,6 +47,9 @@
 										|
 										<button name="lnkDelete">Delete</button>
 									</th>
+									<th>
+										<button > abc</button>
+									</th>
 									<%-- <th scope="row"><f_rt:formatNumber value="${ }" type="currency" />Giá tiền</th> --%>
 								</tr>
 				          	</c_rt:when>
@@ -59,6 +67,9 @@
 										|
 										<button name="linkDelete">Delete</button>
 									</th>
+									<th>
+										<button> abc</button>
+									</th>
 									<%-- <th scope="row"><f_rt:formatNumber value="${ }" type="currency" />Giá tiền</th> --%>
 								</tr>
 				        	</c_rt:otherwise>
@@ -68,4 +79,13 @@
 			</table>
 		</form>
 	</div>
+
+	<script>
+		function create(){
+	    	document.getElementsByClassName("abc")[0].style.visibility = "visible";
+		};
+		function exitCreate(){
+			document.getElementsByClassName("abc")[0].style.visibility = "hidden";
+		}
+	</script>
 <%@ include file="/common/admin/footer.jsp" %>
