@@ -77,7 +77,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="nhasachphuongnam/product/list.htm">Danh sách
+                                        <a href="http:nhasachphuongnam/product/list.htm">Danh sách
                                         </a>
                                     </li>
                                     <li>
