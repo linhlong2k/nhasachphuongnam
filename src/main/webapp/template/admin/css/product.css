@@ -2,7 +2,20 @@
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
 body {
     padding: 0;
-    background-color: rgb(220, 220, 220);
+    background-color: #f8f9fa;
+}
+
+.createForm {
+	border: groove 5px;
+	border-radius: 10px;
+	width: 700px;
+	height: 0px;
+	background-color: whitesmoke;
+	visibility: hidden;
+	position: absolute;
+	z-index: 2;
+	left: 30%;
+	padding: 10px 40px;
 }
 
 .event-list {

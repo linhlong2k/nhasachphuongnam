@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
         content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>Sidebar template</title>
+    <title>Nhà sách phương nam</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="${pageContext.servletContext.contextPath }/assets/images/users/user.jpg" alt="avatar người dùng">
+                        <img class="img-responsive img-rounded" src="${pageContext.servletContext.contextPath }/template/admin/assets/images/user.jpg" alt="avatar người dùng">
                     </div>
                     <div class="user-info">
                         <span class="user-name">Jhon <strong>Smith</strong></span>
@@ -48,15 +48,14 @@
                         </li>
                         <li class="sidebar-dropdown">
                             <a>
-                                <i class="fa fa-tachometer-alt"></i>
+                                <i class="fas fa-tachometer-alt"></i>
                                 <span>Dashboard</span>
                                 <span class="badge badge-pill badge-warning">New</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Dashboard 1
-                                            <span class="badge badge-pill badge-success">Pro</span>
+                                        <a href="http://localhost:8080/nhasachphuongnam/dashboard/index.htm">Index<span class="badge badge-pill badge-success">Pro</span>
                                         </a>
                                     </li>
                                     <li>
@@ -77,7 +76,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="http:nhasachphuongnam/product/list.htm">Danh sách
+                                        <a href="http://localhost:8080/nhasachphuongnam/product/list.htm">Danh sách
                                         </a>
                                     </li>
                                     <li>
@@ -116,7 +115,7 @@
                         </li>
                         <li class="sidebar-dropdown">
                             <a>
-                                <i class="fa fa-chart-line"></i>
+                                <i class="fas fa-chart-line"></i>
                                 <span>Charts</span>
                             </a>
                             <div class="sidebar-submenu">

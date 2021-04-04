@@ -1,5 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
-<div class="navbar navbar-dark bg-dark">
+<div class="navbar navbar-light bg-light">
                 <!-- Left Section -->
                 <div class="content-header-section">
                     <!-- Toggle Sidebar -->
@@ -10,8 +10,9 @@
                     <!-- END Toggle Sidebar -->
                     <span class="header-logo-hide">
                         <a href="/">
-                            <img src="#" alt="logo trang web đặt ở đây" width="50px">
-                            <label><h4>Nhà sách Phương Nam</h4></label>
+                        	<img src="template/admin/assets/images/Logo-nhasachphuongnam.jpg" style="" data-src="" width="290" height="56" alt="" title="">
+                            <!-- <img src="#" alt="logo trang web đặt ở đây" width="50px"> -->
+                            <!-- <label><h4>Nhà sách Phương Nam</h4></label> -->
                         </a>
                     </span>
                 </div>

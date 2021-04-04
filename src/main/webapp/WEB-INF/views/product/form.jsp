@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c_rt"%>
-<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="f"%>
-<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="f_rt"%>
+<%@ include file="../../../common/taglib.jsp" %>
 <%@ include file="/common/admin/header.jsp" %>
 <%@ include file="/common/admin/navigation.jsp" %>
 		            <div class="container">
                 <h1 class="text-center">DANH SÁCH MẶT HÀNG</h1>
                 <div>
-                    <button onclick="createProduct();" style="float: right;">Create</button>
+                    <button class="btn btn-outline-success" type="submit" onclick="createProduct();" style="float: right;">Create</button>
                     <div class="createForm">
                         <ul style="list-style: none;">
                             <li style="font-size: 30px; font-weight: 500;">
@@ -60,8 +57,8 @@
                                   </div>
                             </li>
                             <li >
-                            	<button style="margin: 0 auto; padding: 10px; width: 50px; border: 0;margin: 5px;">tạo</button>
-                            	<button onclick="exitCreateProduct();" style="margin: 0 auto; padding: 10px; width: 50px; border: 0;margin: 5px;">hủy</button>
+                            	<button class="btn btn-outline-success" type="submit">tạo</button>
+                            	<button class="btn btn-outline-success" type="submit" onclick="exitCreateProduct();">hủy</button>
                             </li>
                         </ul>
                     </div>
@@ -134,30 +131,7 @@
 					</div>
 				</div>
 
-				
-            <style>
-                .createForm{
-                    border: groove 5px;
-                    border-radius: 10px;
-                    width: 700px; 
-                    height: 0px; 
-                    background-color: whitesmoke; 
-                    visibility: hidden; 
-                    position: absolute; 
-                    z-index: 2; 
-                    left: 30%;
-                    padding: 10px 40px;
-                }
-            </style>
-            <script>
-                function createProduct() {
-                    document.getElementsByClassName("createForm")[0].style.visibility = "visible";
-                    document.getElementsByClassName("createForm")[0].style.height = "650px";
-                };
-                function exitCreateProduct() {
-                    document.getElementsByClassName("createForm")[0].style.visibility = "hidden";
-                    document.getElementsByClassName("createForm")[0].style.height = "0px";
-                }
-            </script>
+	
 	<link rel="stylesheet" href="template/admin/css/product.css">
+	<script type="text/javascript" src="<c:url value="template/admin/js/product.js"/>"></script>
 <%@ include file="/common/admin/footer.jsp" %>
