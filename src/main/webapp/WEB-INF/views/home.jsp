@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h2>Đây là nhà sách phương nam</h2>
+	<h2>test</h2>
 <%-- 	<h3>${message }</h3> --%>
 </body>
 </html>
