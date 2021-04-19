@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	@RequestMapping("index")
-	public String homePage() {
+	public String homePage(ModelMap model) {
 		/* model.addAttribute("message", "xin chào"); */
 		return "/product/form";
 	}

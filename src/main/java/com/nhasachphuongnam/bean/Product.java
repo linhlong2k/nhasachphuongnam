@@ -1,8 +1,11 @@
 package com.nhasachphuongnam.bean;
 
+import com.ibm.icu.math.BigDecimal;
+
 public class Product {
 	private String maMH;
 	private String tenMH;
+	private long gia;
 	private int soLuong;
 	private String moTaNgan;
 	private String moTa;
@@ -12,22 +15,13 @@ public class Product {
 	public Product() {
 		super();
 	}
-	
-	public Product(String tenMH, int soLuong, String moTaNgan, String moTa, String hinhAnh, String maLoai) {
-		super();
-		this.tenMH = tenMH;
-		this.soLuong = soLuong;
-		this.moTaNgan = moTaNgan;
-		this.moTa = moTa;
-		this.hinhAnh = hinhAnh;
-		this.maLoai = maLoai;
-	}
 
-	public Product(String maMH, String tenMH, int soLuong, String moTaNgan, String moTa, String hinhAnh,
+	public Product(String maMH, String tenMH, long gia, int soLuong, String moTaNgan, String moTa, String hinhAnh,
 			String maLoai) {
 		super();
 		this.maMH = maMH;
 		this.tenMH = tenMH;
+		this.gia = gia;
 		this.soLuong = soLuong;
 		this.moTaNgan = moTaNgan;
 		this.moTa = moTa;
@@ -49,6 +43,14 @@ public class Product {
 
 	public void setTenMH(String tenMH) {
 		this.tenMH = tenMH;
+	}
+
+	public long getGia() {
+		return gia;
+	}
+
+	public void setGia(long gia) {
+		this.gia = gia;
 	}
 
 	public int getSoLuong() {
@@ -90,4 +92,5 @@ public class Product {
 	public void setMaLoai(String maLoai) {
 		this.maLoai = maLoai;
 	}
+
 }

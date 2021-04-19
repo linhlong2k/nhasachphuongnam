@@ -1,5 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
-<div class="navbar navbar-light bg-light">
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+			<div class="navbar navbar-light bg-light">
                 <!-- Left Section -->
                 <div class="content-header-section">
                     <!-- Toggle Sidebar -->
@@ -9,7 +11,7 @@
                     </button>
                     <!-- END Toggle Sidebar -->
                     <span class="header-logo-hide">
-                        <a href="/">
+                        <a href="#">
                         	<img src="template/admin/assets/images/Logo-nhasachphuongnam.jpg" style="" data-src="" width="290" height="56" alt="" title="">
                             <!-- <img src="#" alt="logo trang web đặt ở đây" width="50px"> -->
                             <!-- <label><h4>Nhà sách Phương Nam</h4></label> -->

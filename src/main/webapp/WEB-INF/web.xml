@@ -23,11 +23,9 @@
 	
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/context/applicationContext.xml
-        </param-value>
+        <param-value>/WEB-INF/context/applicationContext.xml</param-value>
     </context-param>
-
+	
 	<!-- Spring MVC -->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
@@ -36,7 +34,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/context/dispatcher-servlet.xml</param-value>
+            <param-value>/WEB-INF/context/*.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -54,11 +52,6 @@
 
 
 	<welcome-file-list>
-<!-- 		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file> -->
 		<welcome-file>index.jsp</welcome-file>
-		<!-- <welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file> -->
 	</welcome-file-list>
 </web-app>

@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>nhasachphuongnam</title>
-</head>
-<body>
-	<h2>Đây là nhà sách phương nam</h2>
-<%-- 	<h3>${message }</h3> --%>
-</body>
-</html>
+	pageEncoding="UTF-8"%>
+<%@ include file="../../../common/taglib.jsp" %>
+<%@ include file="/common/admin/header.jsp" %>
+<%@ include file="/common/admin/verticalMenu.jsp" %>
+<%@ include file="/common/admin/navigation.jsp" %>
+			<div>
+				CHÀO MỪNG ĐẾN VỚI TRANG QUẢN LÍ CỦA NHÀ SÁCH PHƯƠNG NAM
+            </div>
+	<link rel="stylesheet" href="template/admin/css/argon.css">
+<%@ include file="/common/admin/footer.jsp" %>

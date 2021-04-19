@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../../common/taglib.jsp" %>
 <%@ include file="/common/admin/header.jsp" %>
+<%@ include file="/common/admin/verticalMenu.jsp" %>
 <%@ include file="/common/admin/navigation.jsp" %>
 			<div>
                 <div class="header bg-primary pb-6">

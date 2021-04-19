@@ -1,4 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c_rt"%>
-<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="f"%>
-<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="f_rt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c_rt" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="f_rt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
