@@ -8,7 +8,7 @@ import javax.persistence.*;
  * 
  */
 @Embeddable
-public class CtHoadonPK implements Serializable {
+public class ctHoaDonPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class CtHoadonPK implements Serializable {
 	@Column(name="MAMH", insertable=false, updatable=false)
 	private String mamh;
 
-	public CtHoadonPK() {
+	public ctHoaDonPK() {
 	}
 	public String getMahd() {
 		return this.mahd;
@@ -37,10 +37,10 @@ public class CtHoadonPK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof CtHoadonPK)) {
+		if (!(other instanceof ctHoaDonPK)) {
 			return false;
 		}
-		CtHoadonPK castOther = (CtHoadonPK)other;
+		ctHoaDonPK castOther = (ctHoaDonPK)other;
 		return 
 			this.mahd.equals(castOther.mahd)
 			&& this.mamh.equals(castOther.mamh);

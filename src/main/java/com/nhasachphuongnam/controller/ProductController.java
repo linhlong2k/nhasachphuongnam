@@ -14,9 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nhasachphuongnam.bean.*;
 
 @Controller
-@RequestMapping("/product/index") 
+@RequestMapping("/product/") 
 public class ProductController {
-	@RequestMapping()
+	
+	@RequestMapping("index")
 	public String list(ModelMap model) {
 		List<Product> list = new ArrayList<Product>();
 		list.add(new Product("MH001", "sổ tay xinh đẹp", 10000, 10, "đây là cuốn sổ tay", "sổ tay này xinh đẹp", "assets/images/products/chibi1.jpg", "Loai02"));
@@ -35,9 +36,10 @@ public class ProductController {
 		list.add(new Product("MH014", "sổ tay xinh sắn", 70000, 60, "đây là cuốn sổ tay", "sổ tay này xinh sắn", "assets/images/products/chibi2.jpg", "Loai04"));
 		list.add(new Product("MH015", "sổ tay xinh xẻo", 70000, 70, "đây là cuốn sổ tay", "sổ tay này xinh xẻo", "assets/images/products/chibi1.jpg", "Loai03"));
 		list.add(new Product("MH016", "sổ tay xinh quá", 50000, 80, "đây là cuốn sổ tay", "sổ tay này xinh quá", "assets/images/products/chibi2.jpg", "Loai01"));
-		model.addAttribute("prods", list);
+		model.addAttribute("product", list);
 		return "product/list";
 	}
+	
 	@RequestMapping(params = "btnCreate")
 	public String create(ModelMap model,
 			@ModelAttribute("product") Product product) {

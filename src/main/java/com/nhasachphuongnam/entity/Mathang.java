@@ -35,7 +35,7 @@ public class Mathang implements Serializable {
 
 	//bi-directional many-to-one association to CtHoadon
 	@OneToMany(mappedBy="mathang")
-	private List<CtHoadon> ctHoadons;
+	private List<ctHoaDon> ctHoadons;
 
 	//bi-directional many-to-one association to CtPhieunhap
 	@OneToMany(mappedBy="mathang")
@@ -105,22 +105,22 @@ public class Mathang implements Serializable {
 		this.tenmh = tenmh;
 	}
 
-	public List<CtHoadon> getCtHoadons() {
+	public List<ctHoaDon> getCtHoadons() {
 		return this.ctHoadons;
 	}
 
-	public void setCtHoadons(List<CtHoadon> ctHoadons) {
+	public void setCtHoadons(List<ctHoaDon> ctHoadons) {
 		this.ctHoadons = ctHoadons;
 	}
 
-	public CtHoadon addCtHoadon(CtHoadon ctHoadon) {
+	public ctHoaDon addCtHoadon(ctHoaDon ctHoadon) {
 		getCtHoadons().add(ctHoadon);
 		ctHoadon.setMathang(this);
 
 		return ctHoadon;
 	}
 
-	public CtHoadon removeCtHoadon(CtHoadon ctHoadon) {
+	public ctHoaDon removeCtHoadon(ctHoaDon ctHoadon) {
 		getCtHoadons().remove(ctHoadon);
 		ctHoadon.setMathang(null);
 

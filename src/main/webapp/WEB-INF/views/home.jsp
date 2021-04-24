@@ -4,6 +4,12 @@
 <%@ include file="/common/admin/sidebar.jsp" %>
 <%@ include file="/common/admin/topbar.jsp" %>
 <!-- 	========================================================start content======================================================================= -->
-		
+<div class="content-wrapper">
+	<div class="container-fluid">
+	
+	
+	</div><!-- End container-fluid-->
+</div>
+<!--End content-wrapper-->
 <!-- 	========================================================end content======================================================================= -->
 <%@ include file="/common/admin/footer.jsp" %>

@@ -33,7 +33,7 @@ public class Hoadon implements Serializable {
 
 	//bi-directional many-to-one association to CtHoadon
 	@OneToMany(mappedBy="hoadon")
-	private List<CtHoadon> ctHoadons;
+	private List<ctHoaDon> ctHoadons;
 
 	//bi-directional many-to-one association to Khachhang
 	@ManyToOne
@@ -72,22 +72,22 @@ public class Hoadon implements Serializable {
 		this.thoigian = thoigian;
 	}
 
-	public List<CtHoadon> getCtHoadons() {
+	public List<ctHoaDon> getCtHoadons() {
 		return this.ctHoadons;
 	}
 
-	public void setCtHoadons(List<CtHoadon> ctHoadons) {
+	public void setCtHoadons(List<ctHoaDon> ctHoadons) {
 		this.ctHoadons = ctHoadons;
 	}
 
-	public CtHoadon addCtHoadon(CtHoadon ctHoadon) {
+	public ctHoaDon addCtHoadon(ctHoaDon ctHoadon) {
 		getCtHoadons().add(ctHoadon);
 		ctHoadon.setHoadon(this);
 
 		return ctHoadon;
 	}
 
-	public CtHoadon removeCtHoadon(CtHoadon ctHoadon) {
+	public ctHoaDon removeCtHoadon(ctHoaDon ctHoadon) {
 		getCtHoadons().remove(ctHoadon);
 		ctHoadon.setHoadon(null);
 

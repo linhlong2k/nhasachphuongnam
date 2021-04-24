@@ -17,10 +17,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="CT_HOADON")
-public class CtHoadon implements Serializable {
+public class ctHoaDon implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EmbeddedId
-	private CtHoadonPK id;
+	private ctHoaDonPK id;
 
 	@Column(name="GIATIEN")
 	private BigDecimal giatien;
@@ -38,14 +38,14 @@ public class CtHoadon implements Serializable {
 	@JoinColumn(name="MAMH")
 	private Mathang mathang;
 
-	public CtHoadon() {
+	public ctHoaDon() {
 	}
 
-	public CtHoadonPK getId() {
+	public ctHoaDonPK getId() {
 		return this.id;
 	}
 
-	public void setId(CtHoadonPK id) {
+	public void setId(ctHoaDonPK id) {
 		this.id = id;
 	}
 

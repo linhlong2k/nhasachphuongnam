@@ -3,7 +3,7 @@
 	 <!-- Start sidebar-wrapper-->
    <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
      <div class="brand-logo">
-      <a href="index.html">
+      <a href="index.htm">
       <img alt="logo icon" src="resources/assets/images/Logonhasachphuongnam.png" width="100%">
 <!--        <img src="resources/assets/images/logo.png" class="logo-icon" alt="logo icon">
        <h5 class="logo-text">Nhà sách Phương Nam</h5> -->
@@ -19,7 +19,7 @@
 		</li>
 
 		<li>
-			<a href="#">
+			<a href="product/index.htm">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Sản phẩm</span>
 			</a>
@@ -29,6 +29,27 @@
 			<a href="order/index.htm">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Đơn hàng</span>
+			</a>
+		</li>
+		
+		<li>
+			<a href="staff/index.htm">
+				<i class="zmdi zmdi-view-dashboard"></i>
+				<span>Nhân viên</span>
+			</a>
+		</li>
+		
+		<li>
+			<a href="customer/index.htm">
+				<i class="zmdi zmdi-view-dashboard"></i>
+				<span>Khách hàng</span>
+			</a>
+		</li>
+		
+		<li>
+			<a href="supplier/index.htm">
+				<i class="zmdi zmdi-view-dashboard"></i>
+				<span>Nhà cung cấp</span>
 			</a>
 		</li>
 <!-- 		============================================================================
