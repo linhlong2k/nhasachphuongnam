@@ -9,6 +9,6 @@ public class HomeController {
 	@RequestMapping("index")
 	public String homePage(ModelMap model) {
 		/* model.addAttribute("message", "xin chào"); */
-		return "/product/form";
+		return "home";
 	}
 }

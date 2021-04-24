@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/dashboard/index")
+@RequestMapping("/dashboard/")
 public class DashboardController {
-	@RequestMapping()
+	@RequestMapping("index")
 	public String index() {
-		return "dashboard/init";
+		return "dashboard/index";
 	}
 }

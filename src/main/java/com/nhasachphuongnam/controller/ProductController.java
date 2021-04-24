@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nhasachphuongnam.bean.*;
 
 @Controller
-@RequestMapping("/product/list") 
+@RequestMapping("/product/index") 
 public class ProductController {
 	@RequestMapping()
 	public String list(ModelMap model) {
