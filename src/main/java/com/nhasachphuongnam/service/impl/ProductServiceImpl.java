@@ -87,6 +87,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	public boolean update(Product product) {
 		MatHang matHang = convert(product);
+		matHang.setAllow(true);
 			//add gia
 		if(product.getGia() != giaDAO.getGiaCurrent(product.getMaMH()).longValue()) {
 			Gia giaMH = new Gia();
