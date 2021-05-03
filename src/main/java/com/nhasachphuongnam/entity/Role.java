@@ -2,7 +2,6 @@ package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 
@@ -12,55 +11,55 @@ import java.util.List;
  */
 @Entity
 @Table(name="[ROLE]")
-public class Role implements Serializable {
+public class Role  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="MAROLE")
-	private String marole;
-	
+	private String maRole;
+
 	@Column(name="TENROLE")
-	private String tenrole;
+	private String tenRole;
 
 	//bi-directional many-to-one association to Taikhoan
 	@OneToMany(mappedBy="role")
-	private List<Taikhoan> taikhoans;
+	private List<TaiKhoan> taikhoans;
 
 	public Role() {
 	}
 
-	public String getMarole() {
-		return this.marole;
+	public String getMaRole() {
+		return this.maRole;
 	}
 
-	public void setMarole(String marole) {
-		this.marole = marole;
+	public void setMaRole(String maRole) {
+		this.maRole = maRole;
 	}
 
-	public String getTenrole() {
-		return this.tenrole;
+	public String getTenRole() {
+		return this.tenRole;
 	}
 
-	public void setTenrole(String tenrole) {
-		this.tenrole = tenrole;
+	public void setTenRole(String tenRole) {
+		this.tenRole = tenRole;
 	}
 
-	public List<Taikhoan> getTaikhoans() {
+	public List<TaiKhoan> getTaikhoans() {
 		return this.taikhoans;
 	}
 
-	public void setTaikhoans(List<Taikhoan> taikhoans) {
+	public void setTaikhoans(List<TaiKhoan> taikhoans) {
 		this.taikhoans = taikhoans;
 	}
 
-	public Taikhoan addTaikhoan(Taikhoan taikhoan) {
+	public TaiKhoan addTaikhoan(TaiKhoan taikhoan) {
 		getTaikhoans().add(taikhoan);
 		taikhoan.setRole(this);
 
 		return taikhoan;
 	}
 
-	public Taikhoan removeTaikhoan(Taikhoan taikhoan) {
+	public TaiKhoan removeTaikhoan(TaiKhoan taikhoan) {
 		getTaikhoans().remove(taikhoan);
 		taikhoan.setRole(null);
 

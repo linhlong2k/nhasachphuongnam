@@ -7,9 +7,10 @@
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<properties>
-		<!-- <springframework.version>5.3.5</springframework.version> -->
+<!-- 		<springframework.version>5.3.5</springframework.version> -->
 		<springframework.version>4.3.30.RELEASE</springframework.version>
-		<hibernate.version>6.0.0.Alpha7</hibernate.version>
+<!-- 		<hibernate.version>6.0.0.Alpha7</hibernate.version> -->
+		<hibernate.version>4.3.11.Final</hibernate.version>
 		<mssql-jdbc.version>9.2.1.jre11</mssql-jdbc.version>
 		<jsp.api.version>2.3.1</jsp.api.version>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -34,11 +35,17 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-			<!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+			<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
-			<groupId>org.hibernate.orm</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate.version}</version>
+		</dependency>
+			<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+		<dependency>
+		    <groupId>org.hibernate.javax.persistence</groupId>
+		    <artifactId>hibernate-jpa-2.1-api</artifactId>
+		    <version>1.0.2.Final</version>
 		</dependency>
 			<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
 		<dependency>
@@ -58,11 +65,31 @@
 		    <artifactId>jstl</artifactId>
 		    <version>1.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.ejb/ejb-api -->
+		<dependency>
+		    <groupId>javax.ejb</groupId>
+		    <artifactId>ejb-api</artifactId>
+		    <version>3.0</version>
+		    <scope>provided</scope>
+		</dependency>
 			<!-- https://mvnrepository.com/artifact/jstl/jstl -->
 		<dependency>
-		    <groupId>jstl</groupId>
-		    <artifactId>jstl</artifactId>
-		    <version>1.2</version>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>3.3.1</version>
 		</dependency>
 		
 

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../../../common/taglib.jsp" %>
+<%@ include file="/common/taglib.jsp" %>
 <%@ include file="/common/admin/header.jsp" %>
 <%@ include file="/common/admin/sidebar.jsp" %>
 <%@ include file="/common/admin/topbar.jsp" %>
     <div class="content-wrapper">
-      <div class="container-fluid">
+    <div class="container-fluid">
 
         <div class="row mt-3">
           <div class="col-lg-6">

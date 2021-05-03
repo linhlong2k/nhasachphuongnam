@@ -2,17 +2,31 @@ package com.nhasachphuongnam.service;
 
 import java.util.List;
 
-import com.nhasachphuongnam.model.ProductDTO;
+import com.nhasachphuongnam.bean.Product;
+import com.nhasachphuongnam.entity.MatHang;
 
 public interface ProductService {
 	
-	public void addProduct(ProductDTO product);
+	Product convert(MatHang mathang);
 	
-	public void updateProduct(ProductDTO product);
+	boolean add(Product product);
 	
-	public void deleteProduct(String productId);
+	boolean update(Product product);
 	
-	public ProductDTO getProductById(String productId);
+	boolean delete(String maProduct);
 	
-	public List<ProductDTO> getAllProducts();
+	Product getByID(String maProduct);
+	
+	List<Product> getAll();
+	/*
+	 * public void addProduct(ProductDTO product);
+	 * 
+	 * public void updateProduct(ProductDTO product);
+	 * 
+	 * public void deleteProduct(String productId);
+	 * 
+	 * public ProductDTO getProductById(String productId);
+	 * 
+	 * public List<ProductDTO> getAllProducts();
+	 */
 }

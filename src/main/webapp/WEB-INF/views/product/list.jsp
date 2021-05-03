@@ -25,7 +25,7 @@
             <div class="card-body">
 	            <div>
 	            	<h5 class="card-title" style="float: left;"><strong>Danh sách sản phẩm</strong></h5>
-	            	<form:form action="create.htm" style="float: right; margin: 5px;">
+	            	<form:form action="product/create.htm" method="GET" style="float: right; margin: 5px;" >
 	            		<button type="submit" class="btn btn-light btn-round px-3">Create</button>
 	            	</form:form>
 	            </div>
@@ -53,12 +53,12 @@
 	                    	<td>${prod.soLuong }</td>
 	                    	<td>${prod.maLoai }</td>
 	                    	<td>
-	                    		<form:form action="update/${prod.maMH }.htm">
+	                    		<form:form action="product/update/${prod.maMH }.htm" method="GET">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Chỉnh sửa</button>
 	                    		</form:form>
 	                    	</td>
 	                    	<td>
-	                    		<form:form action="delete/${prod.maMH }.htm">
+	                    		<form:form action="product/delete/${prod.maMH }.htm" method="GET">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>
 	                    		</form:form>
 	                    	</td>
@@ -71,6 +71,6 @@
 		</div>
     </div>
     <!-- End container-fluid-->
-   </div><!--End content-wrapper-->
+	</div><!--End content-wrapper-->
 <!-- 	========================================================end content======================================================================= -->
 <%@ include file="/common/admin/footer.jsp" %>

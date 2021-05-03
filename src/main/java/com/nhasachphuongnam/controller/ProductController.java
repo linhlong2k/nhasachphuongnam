@@ -1,75 +1,156 @@
 package com.nhasachphuongnam.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.nhasachphuongnam.bean.*;
+import com.nhasachphuongnam.bean.Product;
+import com.nhasachphuongnam.bean.ProductType;
+import com.nhasachphuongnam.service.ProductService;
+import com.nhasachphuongnam.service.ProductTypeService;
 
 @Controller
 @RequestMapping("/product/") 
 public class ProductController {
 	
+	@Autowired(required=true)
+	ProductService productService;
+	
+	@Autowired(required=true)
+	ProductTypeService productTypeService;
+
 	@RequestMapping("index")
 	public String list(ModelMap model) {
-		List<Product> list = new ArrayList<Product>();
-		list.add(new Product("MH001", "sổ tay xinh đẹp", 10000, 10, "đây là cuốn sổ tay", "sổ tay này xinh đẹp", "assets/images/products/chibi1.jpg", "Loai02"));
-		list.add(new Product("MH002", "sổ tay xinh sắn", 50000, 20, "đây là cuốn sổ tay", "sổ tay này xinh sắn", "assets/images/products/chibi2.jpg", "Loai04"));
-		list.add(new Product("MH003", "sổ tay xinh xẻo", 60000, 30, "đây là cuốn sổ tay", "sổ tay này xinh xẻo", "assets/images/products/chibi1.jpg", "Loai03"));
-		list.add(new Product("MH004", "sổ tay xinh quá", 70000, 40, "đây là cuốn sổ tay", "sổ tay này xinh quá", "assets/images/products/chibi2.jpg", "Loai01"));
-		list.add(new Product("MH005", "sổ tay xinh đẹp", 88000, 50, "đây là cuốn sổ tay", "sổ tay này xinh đẹp", "assets/images/products/chibi1.jpg", "Loai02"));
-		list.add(new Product("MH006", "sổ tay xinh sắn", 13000, 60, "đây là cuốn sổ tay", "sổ tay này xinh sắn", "assets/images/products/chibi2.jpg", "Loai04"));
-		list.add(new Product("MH007", "sổ tay xinh xẻo", 40000, 70, "đây là cuốn sổ tay", "sổ tay này xinh xẻo", "assets/images/products/chibi1.jpg", "Loai03"));
-		list.add(new Product("MH008", "sổ tay xinh quá", 60000, 80, "đây là cuốn sổ tay", "sổ tay này xinh quá", "assets/images/products/chibi2.jpg", "Loai01"));
-		list.add(new Product("MH009", "sổ tay xinh đẹp", 40000, 10, "đây là cuốn sổ tay", "sổ tay này xinh đẹp", "assets/images/products/chibi1.jpg", "Loai02"));
-		list.add(new Product("MH010", "sổ tay xinh sắn", 10000, 20, "đây là cuốn sổ tay", "sổ tay này xinh sắn", "assets/images/products/chibi2.jpg", "Loai04"));
-		list.add(new Product("MH011", "sổ tay xinh xẻo", 20000, 30, "đây là cuốn sổ tay", "sổ tay này xinh xẻo", "assets/images/products/chibi1.jpg", "Loai03"));
-		list.add(new Product("MH012", "sổ tay xinh quá", 70000, 40, "đây là cuốn sổ tay", "sổ tay này xinh quá", "assets/images/products/chibi2.jpg", "Loai01"));
-		list.add(new Product("MH013", "sổ tay xinh đẹp", 40000, 50, "đây là cuốn sổ tay", "sổ tay này xinh đẹp", "assets/images/products/chibi1.jpg", "Loai02"));
-		list.add(new Product("MH014", "sổ tay xinh sắn", 70000, 60, "đây là cuốn sổ tay", "sổ tay này xinh sắn", "assets/images/products/chibi2.jpg", "Loai04"));
-		list.add(new Product("MH015", "sổ tay xinh xẻo", 70000, 70, "đây là cuốn sổ tay", "sổ tay này xinh xẻo", "assets/images/products/chibi1.jpg", "Loai03"));
-		list.add(new Product("MH016", "sổ tay xinh quá", 50000, 80, "đây là cuốn sổ tay", "sổ tay này xinh quá", "assets/images/products/chibi2.jpg", "Loai01"));
-		model.addAttribute("product", list);
+		List<Product> productList = productService.getAll();
+		model.addAttribute("product", productList);
 		return "product/list";
 	}
 	
-	@RequestMapping(params = "btnCreate")
-	public String create(ModelMap model,
-			@ModelAttribute("product") Product product) {
-		
-		model.addAttribute("label", "TẠO MẶT HÀNG MỚI!");
-		return "product/list";
+	@RequestMapping(value="create", method=RequestMethod.GET)
+	public String createGet(ModelMap model) {
+		List<ProductType> types = productTypeService.getAll();
+		model.addAttribute("type", types);
+		model.addAttribute("product", new Product()); 
+		return "product/createProduct";
 	}
 	
-	@RequestMapping(params = "lnkEdit")
-	public String edit(ModelMap model) {
-		model.addAttribute("label", "CHỈNH SỬA MẶT HÀNG!");
-		model.addAttribute("product", new Product());
+	@RequestMapping(value="create", method=RequestMethod.POST)
+	public String createPost(ModelMap model,
+			@ModelAttribute("product") Product product,
+			BindingResult errors) {
+			//check input value
+		//tenMH
+		if (product.getTenMH().trim().length() == 0) {
+			errors.rejectValue("tenMH", "product", "Vui lòng nhập tên mặt hàng!");
+		} else if(product.getTenMH().trim().length() > 25) {
+			errors.rejectValue("tenMH", "product", "Tên mặt hàng quá dài");
+		}
+		//gia
+		if (product.getGia() != (int)product.getGia()) {
+			errors.rejectValue("Gia", "product", "Vui lòng nhập gía tiền đúng định dạng!");
+		} else if (product.getSoLuong() < 0) {
+			errors.rejectValue("Gia", "product", "Giá tiền nhập vào không hợp lệ!");
+		}
+		//soLuong
+		if (product.getSoLuong() != (int)product.getSoLuong()) {
+			errors.rejectValue("soLuong", "product", "Vui lòng nhập số lượng đúng định dạng!");
+		} else if (product.getSoLuong() < 0) {
+			errors.rejectValue("soLuong", "product", "Số lượng không hợp lệ!");
+		}
+		//Loai Mat Hang
+		if (product.getMaLoai() == null) {
+			errors.rejectValue("maLoai", "product", "Vui lòng chọn một loại mặt hàng!");
+		}
+
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Thông tin bạn nhập không đúng định dạng vui lòng nhập lại");
+			
+		} else {
+			if(productService.add(product)) {
+				model.addAttribute("message", "Tạo mặt hàng mới thành công");
+			} else {
+				model.addAttribute("message", "Tạo mặt hàng mới không thành công!");
+			}
+		}
+		List<ProductType> types = productTypeService.getAll();
+		model.addAttribute("type", types);
+		return "product/createProduct";
+	}
+	
+	/*
+	 * @RequestMapping(value="update", method=RequestMethod.GET) public String
+	 * updateGet() { return "redirect:create.htm"; }
+	 */
+	
+	@RequestMapping(value="update/{id}", method=RequestMethod.GET)
+	public String updateGet(ModelMap model,
+			@PathVariable("id") String maMH) {
+		List<ProductType> types = productTypeService.getAll();
+		model.addAttribute("type", types);
+		Product product = productService.getByID(maMH);
+		model.addAttribute("product", product);
 		return "product/update";
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
-	public String editPost(ModelMap model,
-			@ModelAttribute("product") Product product) {
-		if("chỉnh sửa thất bại".equals("abc")) {
-			model.addAttribute("message", "Chỉnh sửa thất bại");
-			return "product/list";
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updatePost(ModelMap model,
+			@ModelAttribute("product") Product product,
+			BindingResult errors) {
+			// check input value
+		// tenMH
+		if (product.getTenMH().trim().length() == 0) {
+			errors.rejectValue("tenMH", "product", "Vui lòng nhập tên mặt hàng!");
+		} else if (product.getTenMH().trim().length() > 50) {
+			errors.rejectValue("tenMH", "product", "Tên mặt hàng quá dài");
 		}
-		model.addAttribute("message", "Chỉnh sửa thành công");
+		// gia
+		if (product.getGia() != (int) product.getGia()) {
+			errors.rejectValue("Gia", "product", "Vui lòng nhập gía tiền đúng định dạng!");
+		} else if (product.getSoLuong() < 0) {
+			errors.rejectValue("Gia", "product", "Giá tiền nhập vào không hợp lệ!");
+		}
+		// soLuong
+		if (product.getSoLuong() != (int) product.getSoLuong()) {
+			errors.rejectValue("soLuong", "product", "Vui lòng nhập số lượng đúng định dạng!");
+		} else if (product.getSoLuong() < 0) {
+			errors.rejectValue("soLuong", "product", "Số lượng không hợp lệ!");
+		}
+		// Loai Mat Hang
+		if (product.getMaLoai() == null) {
+			errors.rejectValue("maLoai", "product", "Vui lòng chọn một loại mặt hàng!");
+		}
+
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Thông tin bạn nhập không đúng định dạng vui lòng nhập lại");
+
+		} else {
+			if (productService.update(product)) {
+				model.addAttribute("message", "Cập nhật mặt hàng mới thành công");
+			} else {
+				model.addAttribute("message", "Cập nhật mặt hàng mới không thành công!");
+			}
+		}
+		List<ProductType> types = productTypeService.getAll();
+		model.addAttribute("type", types);
+		return "product/update";
+	}
+	
+	@RequestMapping(value="delete/{id}", method=RequestMethod.GET)
+	public String deleteGet(ModelMap model,
+			@PathVariable("id") String maMH) {
+		if(productService.delete(maMH))
+			model.addAttribute("mesage", "Xóa đơn hàng " + maMH + " thành công!");
+		else
+			model.addAttribute("mesage", "Xóa đơn hàng " + maMH + " không thành công!");
+		List<Product> productList = productService.getAll();
+		model.addAttribute("product", productList);
 		return "product/list";
 	}
-
-	@RequestMapping(params = "lnkDelete")
-	public String Delete(ModelMap model) {
-		model.addAttribute("message", "Bạn gọi Delete!");
-		return "product/list";
-	}
-
 }

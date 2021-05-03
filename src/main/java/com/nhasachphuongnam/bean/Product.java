@@ -1,7 +1,5 @@
 package com.nhasachphuongnam.bean;
 
-import com.ibm.icu.math.BigDecimal;
-
 public class Product {
 	private String maMH;
 	private String tenMH;
@@ -14,6 +12,17 @@ public class Product {
 
 	public Product() {
 		super();
+	}
+	
+	public Product(String tenMH, long gia, int soLuong, String moTaNgan, String moTa, String hinhAnh, String maLoai) {
+		super();
+		this.tenMH = tenMH;
+		this.gia = gia;
+		this.soLuong = soLuong;
+		this.moTaNgan = moTaNgan;
+		this.moTa = moTa;
+		this.hinhAnh = hinhAnh;
+		this.maLoai = maLoai;
 	}
 
 	public Product(String maMH, String tenMH, long gia, int soLuong, String moTaNgan, String moTa, String hinhAnh,

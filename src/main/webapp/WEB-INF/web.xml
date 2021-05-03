@@ -21,10 +21,10 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping> -->
 	
-    <context-param>
+<!--     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/context/applicationContext.xml</param-value>
-    </context-param>
+    </context-param> -->
 	
 	<!-- Spring MVC -->
     <servlet>
@@ -47,8 +47,23 @@
 <!--     <session-config>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config> -->
-
-
+<!-- 	UTF-8 -->
+	<filter>
+		<filter-name>utf8</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>utf8</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 
 	<welcome-file-list>
