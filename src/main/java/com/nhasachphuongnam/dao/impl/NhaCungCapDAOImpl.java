@@ -43,7 +43,7 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(nhaCungCap);
+			session.update(nhaCungCap);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

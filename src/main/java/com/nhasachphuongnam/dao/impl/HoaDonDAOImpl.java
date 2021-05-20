@@ -44,7 +44,7 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(hoaDon);
+			session.update(hoaDon);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

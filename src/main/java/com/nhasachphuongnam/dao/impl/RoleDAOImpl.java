@@ -43,7 +43,7 @@ public class RoleDAOImpl implements RoleDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(role);
+			session.update(role);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

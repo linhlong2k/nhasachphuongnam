@@ -43,7 +43,7 @@ public class NhanVienDAOImpl implements NhanVienDAO {
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(nhanVien);
+			session.update(nhanVien);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

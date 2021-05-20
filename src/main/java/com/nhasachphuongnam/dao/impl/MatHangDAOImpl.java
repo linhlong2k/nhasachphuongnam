@@ -44,7 +44,7 @@ public class MatHangDAOImpl implements MatHangDAO {
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(mathang);
+			session.update(mathang);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

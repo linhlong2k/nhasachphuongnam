@@ -43,7 +43,7 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(khachHang);
+			session.update(khachHang);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

@@ -43,7 +43,7 @@ public class CtPhieuNhapDAOImpl implements CtPhieuNhapDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(ctPhieuNhap);
+			session.update(ctPhieuNhap);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

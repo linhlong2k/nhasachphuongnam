@@ -43,7 +43,7 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(phieuNhap);
+			session.update(phieuNhap);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

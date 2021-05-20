@@ -43,7 +43,7 @@ public class CtHoaDonDAOImpl implements CtHoaDonDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(ctHoaDon);
+			session.update(ctHoaDon);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

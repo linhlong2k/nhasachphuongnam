@@ -43,7 +43,7 @@ public class TaiKhoanDAOImpl implements TaiKhoanDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(taiKhoan);
+			session.update(taiKhoan);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

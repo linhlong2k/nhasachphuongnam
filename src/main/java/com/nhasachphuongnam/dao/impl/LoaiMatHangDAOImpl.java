@@ -43,7 +43,7 @@ public class LoaiMatHangDAOImpl implements LoaiMatHangDAO {
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.merge(loai);
+			session.update(loai);
 			tran.commit();
 		} catch (HibernateException ex) {
 			tran.rollback();

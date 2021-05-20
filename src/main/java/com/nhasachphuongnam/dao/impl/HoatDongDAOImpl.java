@@ -43,7 +43,7 @@ public class HoatDongDAOImpl implements HoatDongDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(hoatDong);
+			session.update(hoatDong);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();
