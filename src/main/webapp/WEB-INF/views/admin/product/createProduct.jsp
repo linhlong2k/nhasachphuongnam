@@ -40,11 +40,11 @@
                     		<form:input path="tenMatHang" type="text" class="form-control form-control-rounded" id="input-2" required="true" />
                     		<form:errors path="tenMatHang" class="text-danger" />
                   		</div>
-                  		<div class="form-group">
+                  		<%-- <div class="form-group">
                     		<label for="input-3">Hình ảnh</label>
                     		<form:input path="hinhAnh" type="text" class="form-control form-control-rounded" id="input-3" />
                     		<form:errors path="hinhAnh" class="text-danger" />
-                  		</div>
+                  		</div> --%>
                   		<div class="form-group">
                     		<label for="input-4">Giá</label>
                     		<form:input path="gia" type="text" class="form-control form-control-rounded" id="input-4" />
@@ -63,12 +63,12 @@
                   		</div>
                   		<div class="form-group">
                     		<label for="input-7">Mô tả ngắn</label>
-                    		<form:textarea path="moTaNgan" type="text" class="form-control form-control-rounded" id="input-7" />
+                    		<form:textarea path="moTaNgan" class="form-control form-control-rounded" rows="5" id="input-7" />
                     		<form:errors path="moTaNgan" class="text-danger" />
                   		</div>
                   		<div class="form-group">
                     		<label for="input-8">Mô tả</label>
-                    		<form:textarea path="moTa" type="text" class="form-control form-control-rounded" id="input-8" />
+                    		<form:textarea path="moTa" class="form-control form-control-rounded" rows="10" id="input-8" />
                     		<form:errors path="moTa" class="text-danger" />
                   		</div>
                   		<div class="form-group">

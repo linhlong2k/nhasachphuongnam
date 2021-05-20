@@ -11,11 +11,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nhasachphuongnam.dao.KhachHangDAO;
 import com.nhasachphuongnam.dao.NhanVienDAO;
 import com.nhasachphuongnam.dao.RoleDAO;
-import com.nhasachphuongnam.dao.TaiKhoanDAO;
+import com.nhasachphuongnam.entity.KhachHang;
 import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.service.LoginService;
 
@@ -40,6 +41,11 @@ public class LoginController {
 	public Login dangNhapMoi() {
 		return new Login();
 	}
+	
+	@ModelAttribute("khachHangMoi")
+	public KhachHang khachHangMoi() {
+		return new KhachHang();
+	}
 
 	// ==========================================controller====================================
 
@@ -54,15 +60,14 @@ public class LoginController {
 			@ModelAttribute("thongTinDangNhap") Login login,
 			BindingResult errors) {
 		Login newLogin = null;
-		if (login.getUsername().trim().length() == 0) {
+		if (login.getUsername().trim().length() == 0)
 			errors.rejectValue("username", "thongTinDangNhap", "Vui lòng nhập tên đăng nhập!");
-		} else {
+		else
 			newLogin = loginService.getByID(login.getUsername());
-		}
-
-		if (login.getPassword().trim().length() == 0) {
+		
+		if (login.getPassword().trim().length() == 0)
 			errors.rejectValue("password", "thongTinDangNhap", "Vui lòng nhập mật khẩu!");
-		} else if (loginService.checkLogin(login)) {
+		else if (loginService.checkLogin(login)) {
 			if(newLogin.getRole().equals("0") || newLogin.getRole().equals("1")) {
 				Cookie userCookie = new Cookie("user", String.valueOf(nhanVienDAO.getMaByUsername(newLogin.getUsername())));
 				userCookie.setMaxAge(24 * 60 * 60);
@@ -79,9 +84,43 @@ public class LoginController {
 				response.addCookie(roleCookie);
 			}
 			return "redirect:index.htm";
-		} else {
+		} else
 			model.addAttribute("message", "Tên đăng nhập hoặc mật khẩu không chính xác!");
-		}
+		
 		return "login/login";
 	}
+	
+	/*
+	 * @RequestMapping(value="dang-ky", method=RequestMethod.GET) public String
+	 * registerGET(ModelMap model) { return "login/register"; }
+	 * 
+	 * @RequestMapping(value = "dangky", method = RequestMethod.POST) public String
+	 * registerPOST(ModelMap model,
+	 * 
+	 * @ModelAttribute("khachHangMoi") KhachHang khachHang,
+	 * 
+	 * @RequestParam("username") String username,
+	 * 
+	 * @RequestParam("password") String password,
+	 * 
+	 * @RequestParam("passwordconfirm") String passwordConfirm, BindingResult
+	 * errors) { if (khachHang.getTen().trim().length() == 0) {
+	 * errors.rejectValue("ten", "thongtincanhan", "Vui lòng nhập tên!"); } if
+	 * (info.getSdt().trim().length() == 0) { errors.rejectValue("sdt",
+	 * "thongtincanhan", "Vui lòng nhập số điện thoại!"); } if
+	 * (info.getDiaChi().trim().length() == 0) { errors.rejectValue("diaChi",
+	 * "thongtincanhan", "Vui lòng nhập địa chỉ!"); }
+	 * 
+	 * if (loginDAO.getByID(username) != null) { model.addAttribute("message",
+	 * "Tên đăng nhập đã tồn tại"); return "login/register"; }
+	 * if(!password.equals(passwordConfirm)) { model.addAttribute("message",
+	 * "Mật khẩu xác nhận không trùng khớp"); return "login/register"; } Login login
+	 * = new Login(); login.setUsername(username); login.setPassword(password);
+	 * login.setRole("0"); if(loginDAO.insert(login)) { info.setLogin(login);
+	 * if(thongTinCaNhanDAO.insert(info)) { model.addAttribute("message",
+	 * "Tạo tài khoản mới thành công"); } else { model.addAttribute("message",
+	 * "Không thể khởi tạo thông tin cá nhân mới"); } } else {
+	 * model.addAttribute("message", "Không thể khởi tạo thông tin đăng nhập mới");
+	 * } return "login/register"; }
+	 */
 }

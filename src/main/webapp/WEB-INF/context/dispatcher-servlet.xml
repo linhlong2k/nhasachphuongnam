@@ -51,4 +51,11 @@
     		class="org.springframework.orm.hibernate4.HibernateTransactionManager" 
        		p:sessionFactory-ref="sessionFactory" />
     <tx:annotation-driven transaction-manager="transactionManager" />
+    
+    <!-- upload photo -->
+    <bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	 	<!-- maxUploadSize=20MB -->
+	 	<property name="maxUploadSize" value="200971520"/>
+	</bean>
 </beans>

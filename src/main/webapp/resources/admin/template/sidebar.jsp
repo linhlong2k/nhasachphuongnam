@@ -21,7 +21,14 @@
 		<li>
 			<a href="mat-hang/index.htm">
 				<i class="zmdi zmdi-view-dashboard"></i>
-				<span>Sản phẩm</span>
+				<span>Mặt hàng</span>
+			</a>
+		</li>
+		
+		<li>
+			<a href="loai-mat-hang/index.htm">
+				<i class="zmdi zmdi-view-dashboard"></i>
+				<span>Loại mặt hàng</span>
 			</a>
 		</li>
 		

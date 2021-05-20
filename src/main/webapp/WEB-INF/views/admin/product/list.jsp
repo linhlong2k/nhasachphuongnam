@@ -27,13 +27,14 @@
 		<div class="card">
             <div class="card-body">
 	            <div>
-	            	<h5 class="card-title" style="float: left;"><strong>Danh sách sản phẩm</strong></h5>
+	            	<h3 class="card-title" style="float: left;"><strong>Danh sách sản phẩm</strong></h3>
 	            	<form:form action="mat-hang/tao-mat-hang-moi.htm" method="GET" style="float: right; margin: 5px;" >
-	            		<button type="submit" class="btn btn-light btn-round px-3">Create</button>
+	            		<button type="submit" class="btn btn-light btn-round px-3">Tạo sản phẩm mới</button>
 	            	</form:form>
+	            	<br><br>
 	            </div>
 			  	<div class="table-responsive">
-              	<table class="table table-hover">
+              	<table class="table table-hover" id="table">
                 	<thead>
 	        			<tr>
 		             		<th scope="col">Mã mặt hàng</th>
@@ -50,7 +51,21 @@
                 	<c:forEach var="prod" items="${danhSachMatHang}">
 	                	<tr>
 	                    	<th scope="row">${prod.maMatHang }</th>
-	                    	<td>abc</td>
+	                    	<c:choose>
+	                    		<c:when test="${empty prod.hinhAnh}">
+	                    			<td>
+							    		<p><img alt="image" src="resources/images/products/defaultProduct.png" style="max-height: 100px; max-width: 100px;"/></p>
+							    		<a href="mat-hang/cap-nhap-hinh-anh/${prod.maMatHang}.htm">Cập nhập ảnh</a>
+							    	</td>
+								</c:when>
+								<%-- test="${not empty prod.hinhAnh }" --%>
+								<c:otherwise>
+									<td>
+										<p><img alt="image" src="data:image/jpeg;base64,${prod.getBase64Photo() }" style="max-height: 100px; max-width: 100px;"/></p>	
+										<a href="mat-hang/cap-nhap-hinh-anh/${prod.maMatHang}.htm">Thay đổi ảnh</a>
+									</td>
+								</c:otherwise>
+							</c:choose>
 	                    	<td>${prod.tenMatHang }</td>
 	                    	<td>${prod.gia }</td>
 	                    	<td>${prod.soLuong }</td>
@@ -75,5 +90,25 @@
     </div>
     <!-- End container-fluid-->
 	</div><!--End content-wrapper-->
+	<script>
+		function myFunction() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("search");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("table");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[1];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
 <!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

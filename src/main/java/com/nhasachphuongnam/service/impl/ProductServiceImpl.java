@@ -42,10 +42,17 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	public MatHang convert(Product product) {
-			//add mat hang
-		MatHang matHang = new MatHang();
-		matHang.setMaMH(product.getMaMatHang());
-		matHang.setTenMH(product.getTenMatHang());
+			//
+		MatHang matHang;
+		try{
+			matHang = matHangDAO.getByID(product.getMaMatHang());
+			matHang.setTenMH(product.getTenMatHang());
+		} catch(NullPointerException ex) {
+			ex.printStackTrace();
+			matHang = new MatHang();
+			matHang.setTenMH(product.getTenMatHang());
+		}
+		
 		if(product.getHinhAnh() != null)
 			matHang.setHinhAnh(product.getHinhAnh());
 		if(product.getMoTaNgan() != null)
@@ -69,13 +76,22 @@ public class ProductServiceImpl implements ProductService{
 	
 	public boolean update(Product product) {
 		MatHang matHang = convert(product);
-		matHang.setAllow(true);
 		if(matHangDAO.update(matHang))
 			return true;
 		return false;
 	}
 	
+	//Chỉ làm mặt hàng bị ẩn đi trong danh sách
 	public boolean delete(String maProduct) {
+		MatHang matHang = matHangDAO.getByID(maProduct);
+		matHang.setAllow(false);
+		if(matHangDAO.update(matHang))
+			return true;
+		return false;
+	}
+	
+	//xóa toàn bộ thông tin hay đơn hàng liên quan đến mặt hàng này
+	public boolean cleanAll(String maProduct) {
 		if(matHangDAO.delete(maProduct))
 			return true;
 		return false;

@@ -1,0 +1,7 @@
+* Liên kết giữa MatHang với CtHoaDon có Cascade (update, delete)
+* Liên kết giữa MatHang với CtPhieuNhap có Cascade (update, delete)
+* Không thể xóa Product bằng delete, delete chỉ ẩn Product (setAllow = false) đó đi
+* Xóa Product bằng cleanAll
+* Nếu LoaiMatHang bị xóa, các mặt hàng thuộc LoaiMatHang này sẽ bị chuyển về LoaiMatHang null (L000000000)
+
+

@@ -31,7 +31,7 @@
                 <h3><strong>Loại mặt hàng</strong></h3>
             </div>
             <div class="table-responsive">
-                <table class="table align-items-center">
+                <table class="table align-items-center" id="table">
                     <tbody>
                         <tr>
                             <td><i class="text-white mr-2"></i>Mã</td>
@@ -40,26 +40,26 @@
                             <td></td>
                             <td></td>
                         </tr>
-                        <c:forEach var="t" items="${types }">
+                        <c:forEach var="t" items="${danhSachLoaiMatHang }">
                         <tr>
-							<form:form action="product/type/update/${t.maLoai }.htm" modelAttribute="ProductType" method="post">
+							<form:form action="loai-mat-hang/chinh-sua-loai-mat-hang/${t.maLoai }.htm" modelAttribute="loaiMatHangChinhSua" method="post">
 	                       		<td><form:input path="maLoai" value="${t.maLoai }" class="form-control" readonly="true" /></td>
-		                          	<td><form:input path="tenLoai" value="${t.tenLoai }" class="form-control" /></td>
-		                           	<td style="padding: 0;">
-		                               	<button type="submit" class="btn btn-light btn-round px-3">
-		                                   	<i class="zmdi zmdi-save"></i>
-		                               	</button>
-		                           	</td>
+		                        <td><form:input path="tenLoai" value="${t.tenLoai }" class="form-control" /></td>
+		                        <td style="padding: 0;">
+		                         	<button type="submit" class="btn btn-light btn-round px-3">
+		                          		<i class="zmdi zmdi-save"></i>
+		                         	</button>
+		                      	</td>
 	                       	</form:form>
 	                       	<td style="padding: 0;">
-	                       		<form:form action="product/type/delete/${t.maLoai }.htm" method="post">
+	                       		<form:form action="loai-mat-hang/xoa-loai-mat-hang/${t.maLoai }.htm" method="post">
 		                            <button type="submit" class="btn btn-light btn-round px-3">
 			                        	<i class="zmdi zmdi-delete"></i>
 			                      	</button>
 		                     	</form:form>
 	                    	</td>
 	                     	<td style="padding: 0;">
-	                     		<form:form action="product/type/detail/${t.maLoai }.htm" method="post">
+	                     		<form:form action="loai-mat-hang/chi-tiet-loai-mat-hang/${t.maLoai }.htm" method="post">
 		                            <button type="submit" class="btn btn-light btn-round px-3">
 			                        	<i class="zmdi zmdi-info-outline"></i>
 			                      	</button>
@@ -75,7 +75,7 @@
     <div class="col-12 col-lg-6 col-xl-6">
     	<div class="card">
             <div class="card-header">Thêm loại mặt hàng</div>
-            <form:form action="product/type/create.htm" modelAttribute="newType" method="post">
+            <form:form action="loai-mat-hang/tao-loai-mat-hang-moi.htm" modelAttribute="loaiMatHangMoi" method="post">
             	<div class="card-body">
                 	<%-- <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Mã Loại</label>
@@ -114,10 +114,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="prod" items="${products}">
+                            <c:forEach var="prod" items="${danhSachMatHang}">
                                 <tr>
-                                    <th scope="row">${prod.maMH }</th>
-                                    <td>${prod.tenMH }</td>
+                                    <th scope="row">${prod.maMatHang }</th>
+                                    <td>${prod.tenMatHang }</td>
                                     <td>${prod.soLuong }</td>
                                 </tr>
                             </c:forEach>
@@ -131,5 +131,25 @@
 	
 	</div><!-- End container-fluid-->
 	</div><!--End content-wrapper-->
+<!-- 	============================================<script>============================================= -->
+	<script>
+			/* var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("search");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("table");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[1];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			} */
+			document.getElementById("search").placeholder = "Tìm kiếm chưa được phát triển ở trang này";
+	</script>
 <!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

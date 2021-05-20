@@ -10,11 +10,12 @@ public class Login {
 		super();
 	}
 
-	public Login(String username, String password, String role) {
+	public Login(String username, String password, String role, String tenRole) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.tenRole = tenRole;
 	}
 
 	public String getUsername() {

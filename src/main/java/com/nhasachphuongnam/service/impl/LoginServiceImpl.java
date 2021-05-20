@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.RoleDAO;
 import com.nhasachphuongnam.dao.TaiKhoanDAO;
@@ -11,6 +13,8 @@ import com.nhasachphuongnam.entity.TaiKhoan;
 import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.service.LoginService;
 
+@Repository
+@Transactional
 public class LoginServiceImpl implements LoginService {
 	@Autowired(required = true)
 	TaiKhoanDAO taiKhoanDAO;
@@ -19,13 +23,13 @@ public class LoginServiceImpl implements LoginService {
 	RoleDAO roleDAO;
 	
 	public Login convert(TaiKhoan taiKhoan) {
-		Login res = new Login(taiKhoan.getUsername(), taiKhoan.getPassword(), taiKhoan.getRole().getMaRole());
+		Login res = new Login(taiKhoan.getUsername(), taiKhoan.getPassword(), taiKhoan.getRole().getMaRole(), taiKhoan.getRole().getTenRole());
 		return res;
 	}
 	
 	public TaiKhoan convert(Login login) {
 		TaiKhoan taiKhoan = new TaiKhoan();
-		taiKhoan.setUsername(null);
+		taiKhoan.setUsername(login.getUsername());
 		taiKhoan.setPassword(login.getPassword());
 		taiKhoan.setRole(roleDAO.getByID(login.getRole()));
 		return taiKhoan;
@@ -65,10 +69,11 @@ public class LoginServiceImpl implements LoginService {
 	
 	public Boolean checkLogin(Login login) {
 		TaiKhoan taiKhoan = taiKhoanDAO.getByID(login.getUsername());
+		System.out.println("0");
 		if(taiKhoan == null)
 			return false;
 		else if(login.getPassword().equals(taiKhoan.getPassword()))
-			return false;
-		else return true;
+			return true;
+		else return false;
 	}
 }

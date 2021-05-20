@@ -79,7 +79,16 @@ public class MatHangDAOImpl implements MatHangDAO {
 	}
 
 	public MatHang getByID(String maMH) {
-		return (MatHang) factory.getCurrentSession().get(MatHang.class, maMH);
+		MatHang res = null;
+		Session session = factory.openSession();
+		try {
+			res = (MatHang) session.get(MatHang.class, maMH);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return res;
 	}
 	
 	public List<MatHang> getAll(){

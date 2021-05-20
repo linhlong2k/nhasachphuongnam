@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.LoaiMatHangDAO;
 import com.nhasachphuongnam.entity.LoaiMatHang;
+import com.nhasachphuongnam.entity.MatHang;
 
 @Repository
 @Transactional
@@ -57,13 +58,18 @@ public class LoaiMatHangDAOImpl implements LoaiMatHangDAO {
 
 	public boolean delete(String maLoai) {
 		boolean flag = true;
-		LoaiMatHang loai = getByID(maLoai);
 		/* loai.setMathangs(null); */
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
+		LoaiMatHang loai = (LoaiMatHang) session.get(LoaiMatHang.class, maLoai);
+		LoaiMatHang loaiNull = (LoaiMatHang) session.get(LoaiMatHang.class, "L000000000");
 		if(loai == null)
 			return false;
 		try {
+			for(MatHang i: loai.getMathangs()) {
+				i.setLoaimathang(loaiNull);
+				session.update(i);
+			}
 			session.delete(loai);
 			tran.commit();
 		} catch (HibernateException ex) {
@@ -80,6 +86,7 @@ public class LoaiMatHangDAOImpl implements LoaiMatHangDAO {
 		return (LoaiMatHang) factory.getCurrentSession().get(LoaiMatHang.class, maLoai);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<LoaiMatHang> getAll(){
 		Criteria cr = factory.getCurrentSession().createCriteria(LoaiMatHang.class);
 		return cr.list();

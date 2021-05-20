@@ -15,6 +15,8 @@ public interface ProductService {
 	
 	boolean delete(String maProduct);
 	
+	boolean cleanAll(String maProduct);
+	
 	Product getByID(String maProduct);
 	
 	List<Product> getProductListByType(String ma);
