@@ -2,16 +2,16 @@ package com.nhasachphuongnam.dao;
 
 import java.util.List;
 
-import com.nhasachphuongnam.entity.CTHoaDon;
+import com.nhasachphuongnam.entity.CtHoaDon;
 
 public interface CtHoaDonDAO {
-	boolean add(CTHoaDon cthoadon);
+	boolean add(CtHoaDon cthoadon);
 
-	boolean update(CTHoaDon cthoadon);
+	boolean update(CtHoaDon cthoadon);
 
 	boolean delete(String maCtHD);
 
-	CTHoaDon getByID(String maCtHD);
+	CtHoaDon getByID(String maCtHD);
 
-	List<CTHoaDon> getAll();
+	List<CtHoaDon> getAll();
 }

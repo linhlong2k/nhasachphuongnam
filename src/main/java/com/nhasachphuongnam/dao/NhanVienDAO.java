@@ -14,4 +14,6 @@ public interface NhanVienDAO {
 	NhanVien getByID(String maNV);
 
 	List<NhanVien> getAll();
+	
+	String getMaByUsername(String username);
 }

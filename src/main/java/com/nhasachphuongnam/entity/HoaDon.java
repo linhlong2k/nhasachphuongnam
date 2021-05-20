@@ -2,26 +2,18 @@ package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
-/**
- * The persistent class for the HOADON database table.
- * 
- */
 @Entity
 @Table(name="HOADON")
-public class HoaDon  {
+//@NamedQuery(name="Hoadon.findAll", query="SELECT h FROM Hoadon h")
+public class HoaDon implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="MAHD")
 	private String maHD;
-
-	@Column(name="THANHTIEN")
-	private BigDecimal thanhTien;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="THOIGIAN")
@@ -29,7 +21,7 @@ public class HoaDon  {
 
 	//bi-directional many-to-one association to CtHoadon
 	@OneToMany(mappedBy="hoadon")
-	private List<CTHoaDon> ctHoadons;
+	private List<CtHoaDon> ctHoadons;
 
 	//bi-directional many-to-one association to Khachhang
 	@ManyToOne
@@ -52,14 +44,6 @@ public class HoaDon  {
 		this.maHD = maHD;
 	}
 
-	public BigDecimal getThanhTien() {
-		return this.thanhTien;
-	}
-
-	public void setThanhTien(BigDecimal thanhTien) {
-		this.thanhTien = thanhTien;
-	}
-
 	public Date getThoiGian() {
 		return this.thoiGian;
 	}
@@ -68,22 +52,22 @@ public class HoaDon  {
 		this.thoiGian = thoiGian;
 	}
 
-	public List<CTHoaDon> getCtHoadons() {
+	public List<CtHoaDon> getCtHoadons() {
 		return this.ctHoadons;
 	}
 
-	public void setCtHoadons(List<CTHoaDon> ctHoadons) {
+	public void setCtHoadons(List<CtHoaDon> ctHoadons) {
 		this.ctHoadons = ctHoadons;
 	}
 
-	public CTHoaDon addCtHoadon(CTHoaDon ctHoadon) {
+	public CtHoaDon addCtHoadon(CtHoaDon ctHoadon) {
 		getCtHoadons().add(ctHoadon);
 		ctHoadon.setHoadon(this);
 
 		return ctHoadon;
 	}
 
-	public CTHoaDon removeCtHoadon(CTHoaDon ctHoadon) {
+	public CtHoaDon removeCtHoadon(CtHoaDon ctHoadon) {
 		getCtHoadons().remove(ctHoadon);
 		ctHoadon.setHoadon(null);
 

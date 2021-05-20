@@ -2,26 +2,18 @@ package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
-/**
- * The persistent class for the PHIEUNHAP database table.
- * 
- */
 @Entity
 @Table(name="PHIEUNHAP")
-public class PhieuNhap  {
+//@NamedQuery(name="Phieunhap.findAll", query="SELECT p FROM Phieunhap p")
+public class PhieuNhap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="MAPN")
 	private String maPN;
-
-	@Column(name="THANHTIEN")
-	private BigDecimal thanhTien;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="THOIGIAN")
@@ -29,7 +21,7 @@ public class PhieuNhap  {
 
 	//bi-directional many-to-one association to CtPhieunhap
 	@OneToMany(mappedBy="phieunhap")
-	private List<CTPhieuNhap> ctPhieunhaps;
+	private List<CtPhieuNhap> ctPhieunhaps;
 
 	//bi-directional many-to-one association to Nhacungcap
 	@ManyToOne
@@ -52,14 +44,6 @@ public class PhieuNhap  {
 		this.maPN = maPN;
 	}
 
-	public BigDecimal getThanhTien() {
-		return this.thanhTien;
-	}
-
-	public void setThanhTien(BigDecimal thanhTien) {
-		this.thanhTien = thanhTien;
-	}
-
 	public Date getThoiGian() {
 		return this.thoiGian;
 	}
@@ -68,22 +52,22 @@ public class PhieuNhap  {
 		this.thoiGian = thoiGian;
 	}
 
-	public List<CTPhieuNhap> getCtPhieunhaps() {
+	public List<CtPhieuNhap> getCtPhieunhaps() {
 		return this.ctPhieunhaps;
 	}
 
-	public void setCtPhieunhaps(List<CTPhieuNhap> ctPhieunhaps) {
+	public void setCtPhieunhaps(List<CtPhieuNhap> ctPhieunhaps) {
 		this.ctPhieunhaps = ctPhieunhaps;
 	}
 
-	public CTPhieuNhap addCtPhieunhap(CTPhieuNhap ctPhieunhap) {
+	public CtPhieuNhap addCtPhieunhap(CtPhieuNhap ctPhieunhap) {
 		getCtPhieunhaps().add(ctPhieunhap);
 		ctPhieunhap.setPhieunhap(this);
 
 		return ctPhieunhap;
 	}
 
-	public CTPhieuNhap removeCtPhieunhap(CTPhieuNhap ctPhieunhap) {
+	public CtPhieuNhap removeCtPhieunhap(CtPhieuNhap ctPhieunhap) {
 		getCtPhieunhaps().remove(ctPhieunhap);
 		ctPhieunhap.setPhieunhap(null);
 

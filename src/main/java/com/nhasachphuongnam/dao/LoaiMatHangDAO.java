@@ -14,6 +14,8 @@ public interface LoaiMatHangDAO {
 	LoaiMatHang getByID(String maLoai);
 
 	List<LoaiMatHang> getAll();
+	
+	String getLastMaLoai();
 	/*
 	 * public boolean addLoaiMatHang(String maLoai, String tenLoai);
 	 * 

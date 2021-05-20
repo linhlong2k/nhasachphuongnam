@@ -4,14 +4,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
-/**
- * The persistent class for the TAIKHOAN database table.
- * 
- */
 @Entity
 @Table(name="TAIKHOAN")
-public class TaiKhoan  {
+//@NamedQuery(name="Taikhoan.findAll", query="SELECT t FROM Taikhoan t")
+public class TaiKhoan implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,14 +17,13 @@ public class TaiKhoan  {
 	@Column(name="PASSWORD")
 	private String password;
 
-	//bi-directional many-to-one association to Hoatdong
+	//bi-directional many-to-one association to Khachhang
 	@OneToMany(mappedBy="taikhoan")
-	private List<HoatDong> hoatdongs;
+	private List<KhachHang> khachhangs;
 
 	//bi-directional many-to-one association to Nhanvien
-	@ManyToOne
-	@JoinColumn(name="MANV")
-	private NhanVien nhanvien;
+	@OneToMany(mappedBy="taikhoan")
+	private List<NhanVien> nhanviens;
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne
@@ -54,34 +49,48 @@ public class TaiKhoan  {
 		this.password = password;
 	}
 
-	public List<HoatDong> getHoatdongs() {
-		return this.hoatdongs;
+	public List<KhachHang> getKhachhangs() {
+		return this.khachhangs;
 	}
 
-	public void setHoatdongs(List<HoatDong> hoatdongs) {
-		this.hoatdongs = hoatdongs;
+	public void setKhachhangs(List<KhachHang> khachhangs) {
+		this.khachhangs = khachhangs;
 	}
 
-	public HoatDong addHoatdong(HoatDong hoatdong) {
-		getHoatdongs().add(hoatdong);
-		hoatdong.setTaikhoan(this);
+	public KhachHang addKhachhang(KhachHang khachhang) {
+		getKhachhangs().add(khachhang);
+		khachhang.setTaikhoan(this);
 
-		return hoatdong;
+		return khachhang;
 	}
 
-	public HoatDong removeHoatdong(HoatDong hoatdong) {
-		getHoatdongs().remove(hoatdong);
-		hoatdong.setTaikhoan(null);
+	public KhachHang removeKhachhang(KhachHang khachhang) {
+		getKhachhangs().remove(khachhang);
+		khachhang.setTaikhoan(null);
 
-		return hoatdong;
+		return khachhang;
 	}
 
-	public NhanVien getNhanvien() {
-		return this.nhanvien;
+	public List<NhanVien> getNhanviens() {
+		return this.nhanviens;
 	}
 
-	public void setNhanvien(NhanVien nhanvien) {
-		this.nhanvien = nhanvien;
+	public void setNhanviens(List<NhanVien> nhanviens) {
+		this.nhanviens = nhanviens;
+	}
+
+	public NhanVien addNhanvien(NhanVien nhanvien) {
+		getNhanviens().add(nhanvien);
+		nhanvien.setTaikhoan(this);
+
+		return nhanvien;
+	}
+
+	public NhanVien removeNhanvien(NhanVien nhanvien) {
+		getNhanviens().remove(nhanvien);
+		nhanvien.setTaikhoan(null);
+
+		return nhanvien;
 	}
 
 	public Role getRole() {

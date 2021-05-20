@@ -2,16 +2,13 @@ package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
-
-/**
- * The persistent class for the NHANVIEN database table.
- * 
- */
 @Entity
 @Table(name="NHANVIEN")
-public class NhanVien  {
+//@NamedQuery(name="Nhanvien.findAll", query="SELECT n FROM Nhanvien n")
+public class NhanVien implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,8 +18,13 @@ public class NhanVien  {
 	@Column(name="DIACHI")
 	private String diaChi;
 
+	@Lob
+	@Column(name="HINHANH")
+	private byte[] hinhAnh;
+
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="NGAYSINH")
-	private String ngaySinh;
+	private Date ngaySinh;
 
 	@Column(name="SDT")
 	private String sdt;
@@ -34,13 +36,18 @@ public class NhanVien  {
 	@OneToMany(mappedBy="nhanvien")
 	private List<HoaDon> hoadons;
 
+	//bi-directional many-to-one association to Hoatdong
+	@OneToMany(mappedBy="nhanvien")
+	private List<HoatDong> hoatdongs;
+
+	//bi-directional many-to-one association to Taikhoan
+	@ManyToOne
+	@JoinColumn(name="USERNAME")
+	private TaiKhoan taikhoan;
+
 	//bi-directional many-to-one association to Phieunhap
 	@OneToMany(mappedBy="nhanvien")
 	private List<PhieuNhap> phieunhaps;
-
-	//bi-directional many-to-one association to Taikhoan
-	@OneToMany(mappedBy="nhanvien")
-	private List<TaiKhoan> taikhoans;
 
 	public NhanVien() {
 	}
@@ -61,11 +68,19 @@ public class NhanVien  {
 		this.diaChi = diaChi;
 	}
 
-	public String getNgaySinh() {
+	public byte[] getHinhAnh() {
+		return this.hinhAnh;
+	}
+
+	public void setHinhAnh(byte[] hinhAnh) {
+		this.hinhAnh = hinhAnh;
+	}
+
+	public Date getNgaySinh() {
 		return this.ngaySinh;
 	}
 
-	public void setNgaySinh(String ngaySinh) {
+	public void setNgaySinh(Date ngaySinh) {
 		this.ngaySinh = ngaySinh;
 	}
 
@@ -107,6 +122,36 @@ public class NhanVien  {
 		return hoadon;
 	}
 
+	public List<HoatDong> getHoatdongs() {
+		return this.hoatdongs;
+	}
+
+	public void setHoatdongs(List<HoatDong> hoatdongs) {
+		this.hoatdongs = hoatdongs;
+	}
+
+	public HoatDong addHoatdong(HoatDong hoatdong) {
+		getHoatdongs().add(hoatdong);
+		hoatdong.setNhanvien(this);
+
+		return hoatdong;
+	}
+
+	public HoatDong removeHoatdong(HoatDong hoatdong) {
+		getHoatdongs().remove(hoatdong);
+		hoatdong.setNhanvien(null);
+
+		return hoatdong;
+	}
+
+	public TaiKhoan getTaikhoan() {
+		return this.taikhoan;
+	}
+
+	public void setTaikhoan(TaiKhoan taikhoan) {
+		this.taikhoan = taikhoan;
+	}
+
 	public List<PhieuNhap> getPhieunhaps() {
 		return this.phieunhaps;
 	}
@@ -127,28 +172,6 @@ public class NhanVien  {
 		phieunhap.setNhanvien(null);
 
 		return phieunhap;
-	}
-
-	public List<TaiKhoan> getTaikhoans() {
-		return this.taikhoans;
-	}
-
-	public void setTaikhoans(List<TaiKhoan> taikhoans) {
-		this.taikhoans = taikhoans;
-	}
-
-	public TaiKhoan addTaikhoan(TaiKhoan taikhoan) {
-		getTaikhoans().add(taikhoan);
-		taikhoan.setNhanvien(this);
-
-		return taikhoan;
-	}
-
-	public TaiKhoan removeTaikhoan(TaiKhoan taikhoan) {
-		getTaikhoans().remove(taikhoan);
-		taikhoan.setNhanvien(null);
-
-		return taikhoan;
 	}
 
 }

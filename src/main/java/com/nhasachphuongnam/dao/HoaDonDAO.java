@@ -5,13 +5,13 @@ import java.util.List;
 import com.nhasachphuongnam.entity.HoaDon;
 
 public interface HoaDonDAO {
-	boolean add(HoaDon hoadon);
+	boolean add(HoaDon hoaDon);
 
-	boolean update(HoaDon hoadon);
+	boolean update(HoaDon hoaDon);
 
-	boolean delete(HoaDon hoadon);
+	boolean delete(String ma);
 
-	HoaDon getByID(String maHD);
+	HoaDon getByID(String ma);
 
 	List<HoaDon> getAll();
 }

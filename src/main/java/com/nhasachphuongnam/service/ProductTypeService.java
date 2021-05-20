@@ -2,8 +2,8 @@ package com.nhasachphuongnam.service;
 
 import java.util.List;
 
-import com.nhasachphuongnam.bean.ProductType;
 import com.nhasachphuongnam.entity.LoaiMatHang;
+import com.nhasachphuongnam.model.ProductType;
 
 public interface ProductTypeService {
 	

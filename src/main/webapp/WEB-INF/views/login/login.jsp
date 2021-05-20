@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../../../common/taglib.jsp" %>
-<%@ include file="/common/admin/header.jsp" %>
-<%-- <%@ include file="/common/admin/sidebar.jsp" %>
-<%@ include file="/common/admin/topbar.jsp" %> --%>
+<%@ include file="/resources/taglib.jsp" %>
+<%@ include file="/resources/admin/template/header.jsp" %>
+
        <div class="loader-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
 	<div class="card card-authentication1 mx-auto my-5">
 		<div class="card-body">
@@ -58,23 +57,23 @@
 
 
   <!-- Bootstrap core JavaScript-->
-  <script src="template/admin/assets/js/jquery.min.js"></script>
-  <script src="template/admin/assets/js/popper.min.js"></script>
-  <script src="template/admin/assets/js/bootstrap.min.js"></script>
+  <script src="resources/admin/assets/js/jquery.min.js"></script>
+  <script src="resources/admin/assets/js/popper.min.js"></script>
+  <script src="resources/admin/assets/js/bootstrap.min.js"></script>
 	
  <!-- simplebar js -->
-  <script src="assets/plugins/simplebar/js/simplebar.js"></script>
+  <script src="resources/admin/assets/plugins/simplebar/js/simplebar.js"></script>
   <!-- sidebar-menu js -->
-  <script src="assets/js/sidebar-menu.js"></script>
+  <script src="resources/admin/assets/js/sidebar-menu.js"></script>
   <!-- loader scripts -->
-  <script src="assets/js/jquery.loading-indicator.js"></script>
+  <script src="resources/admin/assets/js/jquery.loading-indicator.js"></script>
   <!-- Custom scripts -->
-  <script src="assets/js/app-script.js"></script>
+  <script src="resources/admin/assets/js/app-script.js"></script>
   <!-- Chart js -->
   
-  <script src="assets/plugins/Chart.js/Chart.min.js"></script>
+  <script src="resources/admin/assets/plugins/Chart.js/Chart.min.js"></script>
  
   <!-- Index js -->
-  <script src="assets/js/index.js"></script>
+  <script src="resources/admin/assets/js/index.js"></script>
 </body>
 </html>

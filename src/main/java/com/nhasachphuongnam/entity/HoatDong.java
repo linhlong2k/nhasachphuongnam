@@ -4,14 +4,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
-/**
- * The persistent class for the HOATDONG database table.
- * 
- */
 @Entity
 @Table(name="HOATDONG")
-public class HoatDong  {
+//@NamedQuery(name="Hoatdong.findAll", query="SELECT h FROM Hoatdong h")
+public class HoatDong implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,10 +21,10 @@ public class HoatDong  {
 	@Column(name="THOIGIAN")
 	private Date thoiGian;
 
-	//bi-directional many-to-one association to Taikhoan
+	//bi-directional many-to-one association to Nhanvien
 	@ManyToOne
-	@JoinColumn(name="USERNAME")
-	private TaiKhoan taikhoan;
+	@JoinColumn(name="MANV")
+	private NhanVien nhanvien;
 
 	public HoatDong() {
 	}
@@ -57,12 +53,12 @@ public class HoatDong  {
 		this.thoiGian = thoiGian;
 	}
 
-	public TaiKhoan getTaikhoan() {
-		return this.taikhoan;
+	public NhanVien getNhanvien() {
+		return this.nhanvien;
 	}
 
-	public void setTaikhoan(TaiKhoan taikhoan) {
-		this.taikhoan = taikhoan;
+	public void setNhanvien(NhanVien nhanvien) {
+		this.nhanvien = nhanvien;
 	}
 
 }

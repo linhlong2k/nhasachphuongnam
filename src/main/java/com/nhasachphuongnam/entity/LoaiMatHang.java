@@ -4,14 +4,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
-/**
- * The persistent class for the LOAIMATHANG database table.
- * 
- */
 @Entity
 @Table(name="LOAIMATHANG")
-public class LoaiMatHang  {
+//@NamedQuery(name="Loaimathang.findAll", query="SELECT l FROM Loaimathang l")
+public class LoaiMatHang implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,13 +23,7 @@ public class LoaiMatHang  {
 
 	public LoaiMatHang() {
 	}
-	
-	public LoaiMatHang(String maLoai, String tenLoai) {
-		super();
-		this.maLoai = maLoai;
-		this.tenLoai = tenLoai;
-	}
-	
+
 	public String getMaLoai() {
 		return this.maLoai;
 	}

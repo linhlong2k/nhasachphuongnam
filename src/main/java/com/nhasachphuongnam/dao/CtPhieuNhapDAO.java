@@ -2,16 +2,16 @@ package com.nhasachphuongnam.dao;
 
 import java.util.List;
 
-import com.nhasachphuongnam.entity.CTPhieuNhap;
+import com.nhasachphuongnam.entity.CtPhieuNhap;
 
 public interface CtPhieuNhapDAO {
-	boolean add(CTPhieuNhap ctphieunhap);
+	boolean add(CtPhieuNhap ctphieunhap);
 
-	boolean update(CTPhieuNhap ctphieunhap);
+	boolean update(CtPhieuNhap ctphieunhap);
 
 	boolean delete(String maCtPN);
 
-	CTPhieuNhap getByID(String maCtPN);
+	CtPhieuNhap getByID(String maCtPN);
 
-	List<CTPhieuNhap> getAll();
+	List<CtPhieuNhap> getAll();
 }

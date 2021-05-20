@@ -2,22 +2,28 @@ package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
-
-/**
- * The persistent class for the MATHANG database table.
- * 
- */
 @Entity
 @Table(name="MATHANG")
-public class MatHang  {
+//@NamedQuery(name="Mathang.findAll", query="SELECT m FROM Mathang m")
+public class MatHang implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="MAMH")
 	private String maMH;
 
+	@Column(name="ALLOW")
+	private boolean allow;
+
+	@Column(name="GIA")
+	private BigDecimal gia;
+
+	@Lob
 	@Column(name="HINHANH")
-	private String hinhAnh;
+	private byte[] hinhAnh;
 
 	@Column(name="MOTA")
 	private String moTa;
@@ -26,25 +32,18 @@ public class MatHang  {
 	private String moTaNgan;
 
 	@Column(name="SOLUONG")
-	private Integer soLuong;
+	private int soLuong;
 
 	@Column(name="TENMH")
 	private String tenMH;
-	
-	@Column(name="ALLOW")
-	boolean allow;
 
 	//bi-directional many-to-one association to CtHoadon
 	@OneToMany(mappedBy="mathang")
-	private List<CTHoaDon> ctHoadons;
+	private List<CtHoaDon> ctHoadons;
 
 	//bi-directional many-to-one association to CtPhieunhap
 	@OneToMany(mappedBy="mathang")
-	private List<CTPhieuNhap> ctPhieunhaps;
-
-	//bi-directional many-to-one association to Gia
-	@OneToMany(mappedBy="mathang")
-	private List<Gia> gias;
+	private List<CtPhieuNhap> ctPhieunhaps;
 
 	//bi-directional many-to-one association to Loaimathang
 	@ManyToOne
@@ -53,7 +52,7 @@ public class MatHang  {
 
 	public MatHang() {
 	}
-	
+
 	public String getMaMH() {
 		return this.maMH;
 	}
@@ -62,11 +61,27 @@ public class MatHang  {
 		this.maMH = maMH;
 	}
 
-	public String getHinhAnh() {
+	public boolean getAllow() {
+		return this.allow;
+	}
+
+	public void setAllow(boolean allow) {
+		this.allow = allow;
+	}
+
+	public BigDecimal getGia() {
+		return this.gia;
+	}
+
+	public void setGia(BigDecimal gia) {
+		this.gia = gia;
+	}
+
+	public byte[] getHinhAnh() {
 		return this.hinhAnh;
 	}
 
-	public void setHinhAnh(String hinhAnh) {
+	public void setHinhAnh(byte[] hinhAnh) {
 		this.hinhAnh = hinhAnh;
 	}
 
@@ -86,11 +101,11 @@ public class MatHang  {
 		this.moTaNgan = moTaNgan;
 	}
 
-	public Integer getSoLuong() {
+	public int getSoLuong() {
 		return this.soLuong;
 	}
 
-	public void setSoLuong(Integer soLuong) {
+	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
 
@@ -101,79 +116,49 @@ public class MatHang  {
 	public void setTenMH(String tenMH) {
 		this.tenMH = tenMH;
 	}
-	
-	public boolean isAllow() {
-		return allow;
-	}
 
-	public void setAllow(boolean allow) {
-		this.allow = allow;
-	}
-
-	public List<CTHoaDon> getCtHoadons() {
+	public List<CtHoaDon> getCtHoadons() {
 		return this.ctHoadons;
 	}
 
-	public void setCtHoadons(List<CTHoaDon> ctHoadons) {
+	public void setCtHoadons(List<CtHoaDon> ctHoadons) {
 		this.ctHoadons = ctHoadons;
 	}
 
-	public CTHoaDon addCtHoadon(CTHoaDon ctHoadon) {
+	public CtHoaDon addCtHoadon(CtHoaDon ctHoadon) {
 		getCtHoadons().add(ctHoadon);
 		ctHoadon.setMathang(this);
 
 		return ctHoadon;
 	}
 
-	public CTHoaDon removeCtHoadon(CTHoaDon ctHoadon) {
+	public CtHoaDon removeCtHoadon(CtHoaDon ctHoadon) {
 		getCtHoadons().remove(ctHoadon);
 		ctHoadon.setMathang(null);
 
 		return ctHoadon;
 	}
 
-	public List<CTPhieuNhap> getCtPhieunhaps() {
+	public List<CtPhieuNhap> getCtPhieunhaps() {
 		return this.ctPhieunhaps;
 	}
 
-	public void setCtPhieunhaps(List<CTPhieuNhap> ctPhieunhaps) {
+	public void setCtPhieunhaps(List<CtPhieuNhap> ctPhieunhaps) {
 		this.ctPhieunhaps = ctPhieunhaps;
 	}
 
-	public CTPhieuNhap addCtPhieunhap(CTPhieuNhap ctPhieunhap) {
+	public CtPhieuNhap addCtPhieunhap(CtPhieuNhap ctPhieunhap) {
 		getCtPhieunhaps().add(ctPhieunhap);
 		ctPhieunhap.setMathang(this);
 
 		return ctPhieunhap;
 	}
 
-	public CTPhieuNhap removeCtPhieunhap(CTPhieuNhap ctPhieunhap) {
+	public CtPhieuNhap removeCtPhieunhap(CtPhieuNhap ctPhieunhap) {
 		getCtPhieunhaps().remove(ctPhieunhap);
 		ctPhieunhap.setMathang(null);
 
 		return ctPhieunhap;
-	}
-
-	public List<Gia> getGias() {
-		return this.gias;
-	}
-
-	public void setGias(List<Gia> gias) {
-		this.gias = gias;
-	}
-
-	public Gia addGia(Gia gia) {
-		getGias().add(gia);
-		gia.setMathang(this);
-
-		return gia;
-	}
-
-	public Gia removeGia(Gia gia) {
-		getGias().remove(gia);
-		gia.setMathang(null);
-
-		return gia;
 	}
 
 	public LoaiMatHang getLoaimathang() {

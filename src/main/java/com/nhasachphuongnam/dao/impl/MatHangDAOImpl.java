@@ -22,15 +22,10 @@ public class MatHangDAOImpl implements MatHangDAO {
 	@Autowired
 	SessionFactory factory;
 	
-	public void print(MatHang mathang) {
-		System.out.println(mathang.getLoaimathang().getTenLoai());
-	}
-	
 	public boolean add(MatHang mathang) {
 		boolean flag = true;
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
-		print(mathang);
 		try {
 			session.save(mathang);
 			tran.commit();
@@ -49,7 +44,7 @@ public class MatHangDAOImpl implements MatHangDAO {
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.merge(mathang);
+			session.save(mathang);
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();
@@ -63,14 +58,14 @@ public class MatHangDAOImpl implements MatHangDAO {
 
 	public boolean delete(String maMH) {
 		boolean flag = true;
-		Session session = factory.openSession();
+		Session session = null;
+		session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		MatHang mathang = (MatHang) getByID(maMH);
-		if(mathang == null)
-			return false;
-		System.out.println(mathang.getMaMH() + "--" + mathang.getTenMH() + "--" + mathang.getSoLuong() + "--" + mathang.getMoTa());
+		/*
+		 * if(mathang == null) return false;
+		 */
 		try {
-			//đang bug chỗ delete:  Illegal attempt to associate a collection with two open sessions. Collection : [com.nhasachphuongnam.entity.MatHang.ctHoadons#MH0000000005] at org.hibernate.collection.internal.AbstractPersistentCollection.setCurrentSession
 			session.delete(mathang);
 			tran.commit();
 		} catch(HibernateException ex) {
@@ -87,7 +82,6 @@ public class MatHangDAOImpl implements MatHangDAO {
 		return (MatHang) factory.getCurrentSession().get(MatHang.class, maMH);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<MatHang> getAll(){
 		Criteria cr = factory.getCurrentSession().createCriteria(MatHang.class);
 		return cr.list();

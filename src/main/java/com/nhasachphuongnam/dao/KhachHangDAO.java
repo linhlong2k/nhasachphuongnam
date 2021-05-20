@@ -14,4 +14,6 @@ public interface KhachHangDAO {
 	KhachHang getByID(String maKH);
 
 	List<KhachHang> getAll();
+	
+	String getMaByUsername(String username);
 }

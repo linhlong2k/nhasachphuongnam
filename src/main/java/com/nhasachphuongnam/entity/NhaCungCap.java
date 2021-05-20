@@ -4,14 +4,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
-/**
- * The persistent class for the NHACUNGCAP database table.
- * 
- */
 @Entity
 @Table(name="NHACUNGCAP")
-public class NhaCungCap  {
+//@NamedQuery(name="Nhacungcap.findAll", query="SELECT n FROM Nhacungcap n")
+public class NhaCungCap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

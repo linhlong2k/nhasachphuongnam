@@ -4,19 +4,19 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
-/**
- * The persistent class for the KHACHHANG database table.
- * 
- */
 @Entity
 @Table(name="KHACHHANG")
-public class KhachHang  {
+//@NamedQuery(name="Khachhang.findAll", query="SELECT k FROM Khachhang k")
+public class KhachHang implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="MAKH")
 	private String maKH;
+
+	@Lob
+	@Column(name="HINHANH")
+	private byte[] hinhAnh;
 
 	@Column(name="SDT")
 	private String sdt;
@@ -28,6 +28,11 @@ public class KhachHang  {
 	@OneToMany(mappedBy="khachhang")
 	private List<HoaDon> hoadons;
 
+	//bi-directional many-to-one association to Taikhoan
+	@ManyToOne
+	@JoinColumn(name="USERNAME")
+	private TaiKhoan taikhoan;
+
 	public KhachHang() {
 	}
 
@@ -37,6 +42,14 @@ public class KhachHang  {
 
 	public void setMaKH(String maKH) {
 		this.maKH = maKH;
+	}
+
+	public byte[] getHinhAnh() {
+		return this.hinhAnh;
+	}
+
+	public void setHinhAnh(byte[] hinhAnh) {
+		this.hinhAnh = hinhAnh;
 	}
 
 	public String getSdt() {
@@ -75,6 +88,14 @@ public class KhachHang  {
 		hoadon.setKhachhang(null);
 
 		return hoadon;
+	}
+
+	public TaiKhoan getTaikhoan() {
+		return this.taikhoan;
+	}
+
+	public void setTaikhoan(TaiKhoan taikhoan) {
+		this.taikhoan = taikhoan;
 	}
 
 }

@@ -1,10 +1,6 @@
 package com.nhasachphuongnam.service.impl;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nhasachphuongnam.bean.Product;
-import com.nhasachphuongnam.dao.GiaDAO;
 import com.nhasachphuongnam.dao.LoaiMatHangDAO;
 import com.nhasachphuongnam.dao.MatHangDAO;
-import com.nhasachphuongnam.entity.Gia;
+import com.nhasachphuongnam.entity.LoaiMatHang;
 import com.nhasachphuongnam.entity.MatHang;
+import com.nhasachphuongnam.model.Product;
 import com.nhasachphuongnam.service.ProductService;
 
 @Repository
@@ -29,9 +24,6 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired(required = true)
 	LoaiMatHangDAO loaiMatHangDAO;
-	
-	@Autowired(required = true)
-	GiaDAO giaDAO;
 
 	public String theNextMaMH() {
 		String mamh = matHangDAO.getLastMaMH();
@@ -44,18 +36,16 @@ public class ProductServiceImpl implements ProductService{
 		return newmamh;
 	}
 	
-	public Product convert(MatHang mathang) {
-		Product res = new Product(mathang.getMaMH(), mathang.getTenMH(), 0, mathang.getSoLuong(), mathang.getMoTaNgan(), mathang.getMoTa(), mathang.getHinhAnh(), mathang.getLoaimathang().getMaLoai());
-		List<Gia> giaList = mathang.getGias();
-		res.setGia(giaList.get(giaList.size()-1).getGia().longValue());
+	public Product convert(MatHang matHang) {
+		Product res = new Product(matHang.getMaMH(), matHang.getTenMH(), matHang.getHinhAnh(), matHang.getSoLuong(), matHang.getMoTaNgan(), matHang.getMoTa(), matHang.getAllow(), matHang.getGia().longValue(), matHang.getLoaimathang().getMaLoai());
 		return res;
 	}
 	
 	public MatHang convert(Product product) {
 			//add mat hang
 		MatHang matHang = new MatHang();
-		matHang.setMaMH(product.getMaMH());
-		matHang.setTenMH(product.getTenMH());
+		matHang.setMaMH(product.getMaMatHang());
+		matHang.setTenMH(product.getTenMatHang());
 		if(product.getHinhAnh() != null)
 			matHang.setHinhAnh(product.getHinhAnh());
 		if(product.getMoTaNgan() != null)
@@ -64,6 +54,7 @@ public class ProductServiceImpl implements ProductService{
 			matHang.setMoTa(product.getMoTa());
 		matHang.setSoLuong(product.getSoLuong());
 		matHang.setLoaimathang(loaiMatHangDAO.getByID(product.getMaLoai()));
+		matHang.setGia(new BigDecimal(product.getGia()));
 		return matHang;
 	}
 	
@@ -71,45 +62,21 @@ public class ProductServiceImpl implements ProductService{
 		MatHang matHang = convert(product);
 		matHang.setMaMH(theNextMaMH());
 		matHang.setAllow(true);
-			//add gia
-		Gia giaMH = new Gia();
-		giaMH.setMathang(matHang);
-		giaMH.setGia(BigDecimal.valueOf(product.getGia()));
-		//get today
-		LocalDate today = java.time.LocalDate.now();
-		giaMH.setThoiGian(Date.valueOf(today));
-			//database
 		if(matHangDAO.add(matHang))
-			if(giaDAO.add(giaMH))
-				return true;
+			return true;
 		return false;
 	}
 	
 	public boolean update(Product product) {
 		MatHang matHang = convert(product);
 		matHang.setAllow(true);
-			//add gia
-		if(product.getGia() != giaDAO.getGiaCurrent(product.getMaMH()).longValue()) {
-			Gia giaMH = new Gia();
-			giaMH.setMathang(matHang);
-			giaMH.setGia(BigDecimal.valueOf(product.getGia()));
-			//get today
-			LocalDate today = java.time.LocalDate.now();
-			giaMH.setThoiGian(Date.valueOf(today));
-				//database
-			if(matHangDAO.update(matHang))
-				if(giaDAO.add(giaMH))
-					return true;
-		} else
-			if(matHangDAO.update(matHang))
-				return true;
+		if(matHangDAO.update(matHang))
+			return true;
 		return false;
 	}
 	
 	public boolean delete(String maProduct) {
-		MatHang mathang = matHangDAO.getByID(maProduct);
-		mathang.setAllow(false);
-		if(matHangDAO.update(mathang))
+		if(matHangDAO.delete(maProduct))
 			return true;
 		return false;
 	}
@@ -118,11 +85,24 @@ public class ProductServiceImpl implements ProductService{
 		return convert(matHangDAO.getByID(maProduct));
 	}
 	
+	//==============================advanced=========================================
+	
+	public List<Product> getProductListByType(String ma) {
+		LoaiMatHang loai = loaiMatHangDAO.getByID(ma);
+		if(loai == null)
+			return null;
+		List<MatHang> matHangList = loai.getMathangs();
+		List<Product> res = new ArrayList<Product>();
+		for(MatHang i: matHangList)
+			res.add(convert(i));
+		return res;
+	}
+	
 	public List<Product> getAll(){
 		List<Product> productList = new ArrayList<Product>();
 		List<MatHang> matHangList = matHangDAO.getAll();
 		for(MatHang i: matHangList) {
-			if(i.isAllow()) {
+			if(i.getAllow() == true) {
 				productList.add(convert(i));
 			}
 		}

@@ -2,12 +2,12 @@ package com.nhasachphuongnam.service;
 
 import java.util.List;
 
-import com.nhasachphuongnam.bean.Product;
 import com.nhasachphuongnam.entity.MatHang;
+import com.nhasachphuongnam.model.Product;
 
 public interface ProductService {
 	
-	Product convert(MatHang mathang);
+	Product convert(MatHang matHang);
 	
 	boolean add(Product product);
 	
@@ -16,6 +16,8 @@ public interface ProductService {
 	boolean delete(String maProduct);
 	
 	Product getByID(String maProduct);
+	
+	List<Product> getProductListByType(String ma);
 	
 	List<Product> getAll();
 	/*
