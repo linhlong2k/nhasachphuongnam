@@ -12,10 +12,11 @@ import com.nhasachphuongnam.dao.NhanVienDAO;
 import com.nhasachphuongnam.entity.KhachHang;
 import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.model.PersonalInfo;
+import com.nhasachphuongnam.service.PIService;
 
 @Repository
 @Transactional
-public class PIServiceImpl {
+public class PIServiceImpl implements PIService{
 	/*
 	 * phần service này không xử lý các thông tin liên quan đến username, passord, role
 	 */

@@ -168,7 +168,9 @@ public class ProductController {
 	@RequestMapping(value="xoa-mat-hang/{id}", method=RequestMethod.GET)
 	public String deleteGet(ModelMap model,
 			@PathVariable("id") String maMatHang) {
-		if(productService.delete(maMatHang))
+		if(productService.getByID(maMatHang) == null)
+			model.addAttribute("message", "Không tìm thấy mặt hàng " + maMatHang + "!");
+		else if(productService.delete(maMatHang))
 			model.addAttribute("message", "Xóa mặt hàng " + maMatHang + " thành công!");
 		else
 			model.addAttribute("message", "Xóa mặt hàng " + maMatHang + " không thành công!");

@@ -3,19 +3,17 @@ package com.nhasachphuongnam.model;
 public class Login {
 	private String username;
 	private String password;
-	private String role;
-	private String tenRole;
+	private RoleDTO role;
 
 	public Login() {
 		super();
 	}
 
-	public Login(String username, String password, String role, String tenRole) {
+	public Login(String username, String password, RoleDTO role) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.role = role;
-		this.tenRole = tenRole;
 	}
 
 	public String getUsername() {
@@ -34,21 +32,12 @@ public class Login {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public RoleDTO getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(RoleDTO role) {
 		this.role = role;
 	}
-
-	public String getTenRole() {
-		return tenRole;
-	}
-
-	public void setTenRole(String tenRole) {
-		this.tenRole = tenRole;
-	}
-	
 	
 }

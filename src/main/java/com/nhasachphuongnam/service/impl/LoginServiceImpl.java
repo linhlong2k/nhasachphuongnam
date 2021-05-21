@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.RoleDAO;
 import com.nhasachphuongnam.dao.TaiKhoanDAO;
+import com.nhasachphuongnam.entity.Role;
 import com.nhasachphuongnam.entity.TaiKhoan;
 import com.nhasachphuongnam.model.Login;
+import com.nhasachphuongnam.model.RoleDTO;
 import com.nhasachphuongnam.service.LoginService;
 
 @Repository
@@ -22,8 +24,16 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired(required = true)
 	RoleDAO roleDAO;
 	
+	//======role=====
+	public RoleDTO convert(Role role) {
+		RoleDTO roleDTO = new RoleDTO(role.getMaRole(), role.getTenRole());
+		return roleDTO;
+	}
+	
+	//=====end-role===
+	
 	public Login convert(TaiKhoan taiKhoan) {
-		Login res = new Login(taiKhoan.getUsername(), taiKhoan.getPassword(), taiKhoan.getRole().getMaRole(), taiKhoan.getRole().getTenRole());
+		Login res = new Login(taiKhoan.getUsername(), taiKhoan.getPassword(), convert(taiKhoan.getRole()));
 		return res;
 	}
 	
@@ -31,7 +41,7 @@ public class LoginServiceImpl implements LoginService {
 		TaiKhoan taiKhoan = new TaiKhoan();
 		taiKhoan.setUsername(login.getUsername());
 		taiKhoan.setPassword(login.getPassword());
-		taiKhoan.setRole(roleDAO.getByID(login.getRole()));
+		taiKhoan.setRole(roleDAO.getByID(login.getRole().getMaRole()));
 		return taiKhoan;
 	}
 
@@ -69,11 +79,26 @@ public class LoginServiceImpl implements LoginService {
 	
 	public Boolean checkLogin(Login login) {
 		TaiKhoan taiKhoan = taiKhoanDAO.getByID(login.getUsername());
-		System.out.println("0");
 		if(taiKhoan == null)
 			return false;
 		else if(login.getPassword().equals(taiKhoan.getPassword()))
 			return true;
 		else return false;
+	}
+	
+	public boolean toAdmin(String username) {
+		TaiKhoan taiKhoan = taiKhoanDAO.getByID(username);
+		taiKhoan.setRole(roleDAO.getByID("0"));
+		if(taiKhoanDAO.update(taiKhoan))
+			return true;
+		return false;
+	}
+	
+	public boolean toNormal(String username) {
+		TaiKhoan taiKhoan = taiKhoanDAO.getByID(username);
+		taiKhoan.setRole(roleDAO.getByID("1"));
+		if(taiKhoanDAO.update(taiKhoan))
+			return true;
+		return false;
 	}
 }

@@ -24,8 +24,74 @@
 <!-- 		================================================================ create button ===================================================== -->
 		
 <!--     	=================================================================== table ==================================================================== -->
-		<div>
-			abc
+		<div class="card">
+            <div class="card-body">
+	            <div>
+	            	<h3 class="card-title" style="float: left;"><strong>Danh sách nhân viên</strong></h3>
+	            	<form:form action="nhan-vien/them-nhan-vien-moi.htm" method="GET" style="float: right; margin: 5px;" >
+	            		<button type="submit" class="btn btn-light btn-round px-3">Thêm nhân viên mới</button>
+	            	</form:form>
+	            	<br><br>
+	            </div>
+			  	<div class="table-responsive">
+              	<table class="table table-hover" id="table">
+                	<thead>
+	        			<tr>
+		             		<th scope="col">Mã nhân viên</th>
+		                    <th scope="col">Hình ảnh</th>
+		                    <th scope="col">Tên nhân viên</th>
+		                    <th scope="col">Địa chỉ</th>
+		                    <th scope="col">Ngày sinh</th>
+		                    <th scope="col">Loại nhân viên</th>
+		                    <th scope="col"></th>
+		                    <th scope="col"></th>
+	                  	</tr>
+                	</thead>
+                	<tbody>
+                	<c:forEach var="nhanvien" items="${danhSachNhanVien}">
+	                	<tr>
+	                    	<th scope="row">${nhanvien.ma }</th>
+	                    	<c:choose>
+	                    		<c:when test="${empty nhanvien.hinhAnh}">
+	                    			<td>
+							    		<p><img alt="image" src="resources/images/users/defaultUser.jpg" style="max-height: 100px; max-width: 100px;"/></p>
+							    	</td>
+								</c:when>
+								<%-- test="${not empty prod.hinhAnh }" --%>
+								<c:otherwise>
+									<td>
+										<p><img alt="image" src="data:image/jpeg;base64,${nhanvien.getBase64Photo() }" style="max-height: 100px; max-width: 100px;"/></p>	
+									</td>
+								</c:otherwise>
+							</c:choose>
+	                    	<td>${nhanvien.ten }</td>
+	                    	<td>${nhanvien.diaChi }</td>
+	                    	<td><fmt:formatDate value="${nhanvien.ngaySinh }" pattern="yyyy-MM-dd" /></td>
+	                    	<td>
+	                    		<c:choose>
+	                    			<c:when test="${nhanvien.maRole == '0' }">
+	                    				<form:form action="nhan-vien/xoa-quyen-admin/${nhanvien.username }.htm">
+			                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa quyền admin</button>
+			                    		</form:form>
+	                    			</c:when>
+	                    			<c:otherwise>
+	                    				<form:form action="nhan-vien/tro-thanh-admin/${nhanvien.username }.htm">
+			                    			<button type="submit" class="btn btn-light btn-round px-3">Trở thành admin</button>
+			                    		</form:form>
+	                    			</c:otherwise>
+	                    		</c:choose>
+	                    	</td>
+	                    	<td>
+	                    		<form:form action="nhan-vien/xoa-nhan-vien/${nhanvien.ma }.htm" method="GET">
+	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>
+	                    		</form:form>
+	                    	</td>
+	                  	</tr>
+	                </c:forEach>	
+                </tbody>
+            </table>
+            </div>
+            </div>
 		</div>
     </div>
     <!-- End container-fluid-->

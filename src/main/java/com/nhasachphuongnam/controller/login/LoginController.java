@@ -72,14 +72,14 @@ public class LoginController {
 				Cookie userCookie = new Cookie("user", String.valueOf(nhanVienDAO.getMaByUsername(newLogin.getUsername())));
 				userCookie.setMaxAge(24 * 60 * 60);
 				response.addCookie(userCookie);
-				Cookie roleCookie = new Cookie("role", newLogin.getRole());
+				Cookie roleCookie = new Cookie("role", newLogin.getRole().getMaRole());
 				roleCookie.setMaxAge(24 * 60 * 60);
 				response.addCookie(roleCookie);
 			} else {
 				Cookie userCookie = new Cookie("user", String.valueOf(khachHangDAO.getMaByUsername(newLogin.getUsername())));
 				userCookie.setMaxAge(24 * 60 * 60);
 				response.addCookie(userCookie);
-				Cookie roleCookie = new Cookie("role", newLogin.getRole());
+				Cookie roleCookie = new Cookie("role", newLogin.getRole().getMaRole());
 				roleCookie.setMaxAge(24 * 60 * 60);
 				response.addCookie(roleCookie);
 			}

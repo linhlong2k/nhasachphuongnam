@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.nhasachphuongnam.dao.MatHangDAO;
 import com.nhasachphuongnam.model.Product;
 import com.nhasachphuongnam.model.ProductType;
 import com.nhasachphuongnam.service.ProductService;
@@ -104,7 +103,9 @@ public class ProductTypeController {
 	public String deleteType(ModelMap model,
 			@ModelAttribute("ProductType") ProductType type,
 			@PathVariable("id") String typeID) {
-		if(productTypeService.delete(typeID)) {
+		if(productTypeService.getByID(typeID) == null)
+			model.addAttribute("message", "Không tìm thấy mã loại mặt hàng " + typeID);
+		else if(productTypeService.delete(typeID)) {
 			model.addAttribute("message", "Xóa loại mặt hàng " + typeID + " thành công!");
 			model.addAttribute("danhSachLoaiMatHang", productTypeService.getAll());
 		} else
@@ -117,8 +118,6 @@ public class ProductTypeController {
 	public String detailType(ModelMap model,
 			@ModelAttribute("ProductType") ProductType type,
 			@PathVariable("id") String typeID) {
-		List<ProductType> typeList = productTypeService.getAll();
-		
 		model.addAttribute("danhSachMatHang", productService.getProductListByType(typeID));
 		return "admin/product/productType";
 	}
