@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService{
 	LoaiMatHangDAO loaiMatHangDAO;
 
 	public String theNextMaMH() {
-		String mamh = matHangDAO.getLastMaMH();
+		String mamh = matHangDAO.getLastMa();
 		int index = Integer.parseInt(mamh.substring(2, mamh.length()));
 		String newmamh = "MH";
 		index++;

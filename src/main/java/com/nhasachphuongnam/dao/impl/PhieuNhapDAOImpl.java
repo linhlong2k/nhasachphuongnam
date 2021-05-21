@@ -78,7 +78,16 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 	}
 
 	public PhieuNhap getByID(String ma) {
-		return (PhieuNhap) factory.getCurrentSession().get(PhieuNhap.class, ma);
+		PhieuNhap phieuNhap = null;
+		Session session = factory.openSession();
+		try {
+			phieuNhap = (PhieuNhap) session.get(PhieuNhap.class, ma);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return phieuNhap;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -90,6 +99,14 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 	/*
 	 * ===================================advanced==================================
 	 */
+	public String getLastMa() {
+		String sql = "SELECT top 1 MAPN FROM PHIEUNHAP ORDER BY MAPN DESC";
+		Session session = factory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(sql);
+		@SuppressWarnings("unchecked")
+		List<String> results = (List<String>)query.list();
+		return results.get(0);
+	}
 	
 	public String getby() {
 		String sql = "";

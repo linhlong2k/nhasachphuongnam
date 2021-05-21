@@ -78,7 +78,16 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO{
 	}
 
 	public NhaCungCap getByID(String ma) {
-		return (NhaCungCap) factory.getCurrentSession().get(NhaCungCap.class, ma);
+		NhaCungCap nhaCungCap = null;
+		Session session = factory.openSession();
+		try {
+			nhaCungCap = (NhaCungCap) session.get(NhaCungCap.class, ma);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return nhaCungCap;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -90,6 +99,14 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO{
 	/*
 	 * ===================================advanced==================================
 	 */
+	public String getLastMa() {
+		String sql = "SELECT top 1 MANCC FROM NHACUNGCAP ORDER BY MANCC DESC";
+		Session session = factory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(sql);
+		@SuppressWarnings("unchecked")
+		List<String> results = (List<String>)query.list();
+		return results.get(0);
+	}
 	
 	public String getby() {
 		String sql = "";

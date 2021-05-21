@@ -78,7 +78,16 @@ public class HoatDongDAOImpl implements HoatDongDAO{
 	}
 
 	public HoatDong getByID(String ma) {
-		return (HoatDong) factory.getCurrentSession().get(HoatDong.class, ma);
+		HoatDong hoatDong = null;
+		Session session = factory.openSession();
+		try {
+			hoatDong = (HoatDong) session.get(HoatDong.class, ma);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return hoatDong;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -90,6 +99,15 @@ public class HoatDongDAOImpl implements HoatDongDAO{
 	/*
 	 * ===================================advanced==================================
 	 */
+	
+	public String getLastMa() {
+		String sql = "SELECT top 1 MAHDTK FROM HOATDONG ORDER BY MAHDTK DESC";
+		Session session = factory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(sql);
+		@SuppressWarnings("unchecked")
+		List<String> results = (List<String>)query.list();
+		return results.get(0);
+	}
 	
 	public String getby() {
 		String sql = "";

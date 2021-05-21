@@ -79,9 +79,19 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 	}
 
 	public HoaDon getByID(String ma) {
-		return (HoaDon) factory.getCurrentSession().get(HoaDon.class, ma);
+		HoaDon hoaDon = null;
+		Session session = factory.openSession();
+		try {
+			hoaDon = (HoaDon) session.get(HoaDon.class, ma);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return hoaDon;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<HoaDon> getAll(){
 		Criteria cr = factory.getCurrentSession().createCriteria(HoaDon.class);
 		return cr.list();
@@ -90,6 +100,14 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 	/*
 	 * ===================================advanced==================================
 	 */
+	public String getLastMa() {
+		String sql = "SELECT top 1 MAHD FROM HOADON ORDER BY MAHD DESC";
+		Session session = factory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(sql);
+		@SuppressWarnings("unchecked")
+		List<String> results = (List<String>)query.list();
+		return results.get(0);
+	}
 	
 	public String getby() {
 		String sql = "";

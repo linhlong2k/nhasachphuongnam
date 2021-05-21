@@ -78,7 +78,16 @@ public class RoleDAOImpl implements RoleDAO{
 	}
 
 	public Role getByID(String ma) {
-		return (Role) factory.getCurrentSession().get(Role.class, ma);
+		Role role = null;
+		Session session = factory.openSession();
+		try {
+			role = (Role) session.get(Role.class, ma);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return role;
 	}
 	
 	@SuppressWarnings("unchecked")

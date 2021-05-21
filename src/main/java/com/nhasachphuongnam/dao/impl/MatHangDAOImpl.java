@@ -91,12 +91,13 @@ public class MatHangDAOImpl implements MatHangDAO {
 		return res;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<MatHang> getAll(){
 		Criteria cr = factory.getCurrentSession().createCriteria(MatHang.class);
 		return cr.list();
 	}
 	
-	public String getLastMaMH() {
+	public String getLastMa() {
 		String sql = "SELECT top 1 MAMH FROM MATHANG ORDER BY MAMH DESC";
 		Session session = factory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(sql);

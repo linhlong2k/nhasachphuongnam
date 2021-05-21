@@ -1,8 +1,19 @@
 package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="KHACHHANG")
@@ -14,9 +25,16 @@ public class KhachHang implements Serializable {
 	@Column(name="MAKH")
 	private String maKH;
 
+	@Column(name="DIACHI")
+	private String diaChi;
+
 	@Lob
 	@Column(name="HINHANH")
 	private byte[] hinhAnh;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="NGAYSINH")
+	private Date ngaySinh;
 
 	@Column(name="SDT")
 	private String sdt;
@@ -44,12 +62,28 @@ public class KhachHang implements Serializable {
 		this.maKH = maKH;
 	}
 
+	public String getDiaChi() {
+		return this.diaChi;
+	}
+
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+
 	public byte[] getHinhAnh() {
 		return this.hinhAnh;
 	}
 
 	public void setHinhAnh(byte[] hinhAnh) {
 		this.hinhAnh = hinhAnh;
+	}
+
+	public Date getNgaySinh() {
+		return this.ngaySinh;
+	}
+
+	public void setNgaySinh(Date ngaySinh) {
+		this.ngaySinh = ngaySinh;
 	}
 
 	public String getSdt() {

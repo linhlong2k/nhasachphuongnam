@@ -19,7 +19,7 @@ public class ProductTypeServiceImpl implements ProductTypeService{
 	LoaiMatHangDAO loaiMatHangDAO;
 	
 	public String theNextMaLoai() {
-		String mamh = loaiMatHangDAO.getLastMaLoai();
+		String mamh = loaiMatHangDAO.getLastMa();
 		int index = Integer.parseInt(mamh.substring(1, mamh.length()));
 		String newmamh = "L";
 		index++;
@@ -61,14 +61,6 @@ public class ProductTypeServiceImpl implements ProductTypeService{
 	//delete this ProductType and setAllow(false) for product producttype items
 	public boolean delete(String maProductType) {
 		if(loaiMatHangDAO.delete(maProductType)) {
-			/*
-			LoaiMatHang loai = loaiMatHangDAO.getByID(maProductType);
-			if(loai == null)
-				return false;
-			List<MatHang> matHangList = loai.getMathangs();
-			for(MatHang i: matHangList)
-				loaiMatHangDAO.delete(i.getMaMH());
-				*/
 			return true;
 		}
 		return false;

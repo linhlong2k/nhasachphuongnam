@@ -78,7 +78,16 @@ public class TaiKhoanDAOImpl implements TaiKhoanDAO{
 	}
 
 	public TaiKhoan getByID(String ma) {
-		return (TaiKhoan) factory.getCurrentSession().get(TaiKhoan.class, ma);
+		TaiKhoan taiKhoan = null;
+		Session session = factory.openSession();
+		try {
+			taiKhoan = (TaiKhoan) session.get(TaiKhoan.class, ma);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return taiKhoan;
 	}
 	
 	@SuppressWarnings("unchecked")

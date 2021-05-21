@@ -16,6 +16,6 @@ public interface MatHangDAO {
 
 	List<MatHang> getAll();
 	
-	String getLastMaMH();
+	String getLastMa();
 
 }

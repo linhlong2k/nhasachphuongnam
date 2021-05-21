@@ -78,7 +78,16 @@ public class NhanVienDAOImpl implements NhanVienDAO {
 	}
 
 	public NhanVien getByID(String ma) {
-		return (NhanVien) factory.getCurrentSession().get(NhanVien.class, ma);
+		NhanVien nhanVien = null;
+		Session session = factory.openSession();
+		try {
+			nhanVien = (NhanVien) session.get(NhanVien.class, ma);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return nhanVien;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -90,6 +99,14 @@ public class NhanVienDAOImpl implements NhanVienDAO {
 	/*
 	 * ===================================advanced==================================
 	 */
+	public String getLastMa() {
+		String sql = "SELECT top 1 MANV FROM NHANVIEN ORDER BY MANV DESC";
+		Session session = factory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(sql);
+		@SuppressWarnings("unchecked")
+		List<String> results = (List<String>)query.list();
+		return results.get(0);
+	}
 	
 	public String getMaByUsername(String username) {
 		String sql = "SELECT MANV FROM NHANVIEN WHERE NHANVIEN.USERNAME='" + username +"'";

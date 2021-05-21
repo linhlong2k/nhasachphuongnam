@@ -9,57 +9,57 @@
        <h5 class="logo-text">Nhà sách Phương Nam</h5> -->
      </a>
    </div>
-   <ul class="sidebar-menu do-nicescrol">
+   <ul class="sidebar-menu do-nicescrol" id="side">
       <li class="sidebar-header">MAIN NAVIGATION</li>
-		<li>
-			<a href="dashboard/index.htm">
+		<li class="item">
+			<a href="dashboard/index.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Dashboard</span>
 			</a>
 		</li>
 
-		<li>
-			<a href="mat-hang/index.htm">
+		<li class="item">
+			<a href="mat-hang/index.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Mặt hàng</span>
 			</a>
 		</li>
 		
-		<li>
-			<a href="loai-mat-hang/index.htm">
+		<li class="item">
+			<a href="loai-mat-hang/index.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Loại mặt hàng</span>
 			</a>
 		</li>
 		
-		<li>
-			<a href="don-hang/index.htm">
+		<li class="item">
+			<a href="don-hang/index.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Đơn hàng</span>
 			</a>
 		</li>
 		
-		<li>
-			<a href="nhan-vien/index.htm">
+		<li class="item">
+			<a href="nhan-vien/index.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Nhân viên</span>
 			</a>
 		</li>
 		
-		<li>
-			<a href="khach-hang/index.htm">
+		<li class="item">
+			<a href="khach-hang/index.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Khách hàng</span>
 			</a>
 		</li>
 		
-		<li>
-			<a href="nha-cung-cap/index.htm">
+		<li class="item">
+			<a href="nha-cung-cap/index.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Nhà cung cấp</span>
 			</a>
 		</li>
-<!-- 		============================================================================
+		<!-- 		============================================================================
  -->      <li>
         <a href="#">
           <i class="zmdi zmdi-invert-colors"></i> <span>UI Icons</span>

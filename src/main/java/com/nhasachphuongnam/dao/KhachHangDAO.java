@@ -15,5 +15,8 @@ public interface KhachHangDAO {
 
 	List<KhachHang> getAll();
 	
+	String getLastMa();
+	
 	String getMaByUsername(String username);
+	
 }

@@ -91,6 +91,7 @@
     <!-- End container-fluid-->
 	</div><!--End content-wrapper-->
 	<script>
+	    var activeItem = document.querySelector("a[href='mat-hang/index.htm']").class += ' active';
 		function myFunction() {
 			var input, filter, table, tr, td, i, txtValue;
 			input = document.getElementById("search");

@@ -92,7 +92,7 @@ public class LoaiMatHangDAOImpl implements LoaiMatHangDAO {
 		return cr.list();
 	}
 	
-	public String getLastMaLoai() {
+	public String getLastMa() {
 		String sql = "SELECT top 1 MALOAI FROM LOAIMATHANG ORDER BY MALOAI DESC";
 		Session session = factory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(sql);

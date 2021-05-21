@@ -3,5 +3,6 @@
 * Không thể xóa Product bằng delete, delete chỉ ẩn Product (setAllow = false) đó đi
 * Xóa Product bằng cleanAll
 * Nếu LoaiMatHang bị xóa, các mặt hàng thuộc LoaiMatHang này sẽ bị chuyển về LoaiMatHang null (L000000000)
+* NhanVien với KhachHang trong entity bị gộp thành PersonalInfo trong model;
 
 

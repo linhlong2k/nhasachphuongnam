@@ -97,15 +97,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="prod" items="${product}">
+                                        <c:forEach var="prod" items="${danhSachMatHang}">
                                             <tr>
-                                                <th scope="row">${prod.maMH }</th>
+                                                <th scope="row">${prod.maMatHang }</th>
                                                 <td>${prod.hinhAnh }</td>
-                                                <td>${prod.tenMH }</td>
+                                                <td>${prod.tenMatHang }</td>
                                                 <td>
                                                     <form:form action="order/update/${prod.maMH }.htm" method="GET">
-                                                        <button type="submit" class="btn btn-light btn-round px-3">Chỉnh
-                                                            sửa</button>
+                                                        <button type="submit" class="btn btn-light btn-round px-3">Chỉnh sửa</button>
                                                     </form:form>
                                                 </td>
                                             </tr>

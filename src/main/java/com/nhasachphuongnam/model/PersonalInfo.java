@@ -3,56 +3,59 @@ package com.nhasachphuongnam.model;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-public class Staff {
-	private String maNhanVien;
-	private String tenNhanVien;
+public class PersonalInfo {
+	private String ma;
+	private String ten;
 	private byte[] hinhAnh;
 	private String diaChi;
 	private Date ngaySinh;
 	private String soDienThoai;
 	private String username;
+	private String maRole;
 
-	public Staff() {
+	public PersonalInfo() {
 		super();
 	}
-
-	public Staff(String tenNhanVien, byte[] hinhAnh, String diaChi, Date ngaySinh, String soDienThoai,
-			String username) {
+	
+	public PersonalInfo(String ten, byte[] hinhAnh, String diaChi, Date ngaySinh, String soDienThoai, String username,
+			String maRole) {
 		super();
-		this.tenNhanVien = tenNhanVien;
+		this.ten = ten;
 		this.hinhAnh = hinhAnh;
 		this.diaChi = diaChi;
 		this.ngaySinh = ngaySinh;
 		this.soDienThoai = soDienThoai;
 		this.username = username;
+		this.maRole = maRole;
 	}
 
-	public Staff(String maNhanVien, String tenNhanVien, byte[] hinhAnh, String diaChi, Date ngaySinh,
-			String soDienThoai, String username) {
+	public PersonalInfo(String ma, String ten, byte[] hinhAnh, String diaChi, Date ngaySinh, String soDienThoai,
+			String username, String maRole) {
 		super();
-		this.maNhanVien = maNhanVien;
-		this.tenNhanVien = tenNhanVien;
+		this.ma = ma;
+		this.ten = ten;
 		this.hinhAnh = hinhAnh;
 		this.diaChi = diaChi;
 		this.ngaySinh = ngaySinh;
 		this.soDienThoai = soDienThoai;
 		this.username = username;
+		this.maRole = maRole;
+	}
+	
+	public String getMa() {
+		return ma;
 	}
 
-	public String getMaNhanVien() {
-		return maNhanVien;
+	public void setMa(String ma) {
+		this.ma = ma;
 	}
 
-	public void setMaNhanVien(String maNhanVien) {
-		this.maNhanVien = maNhanVien;
+	public String getTen() {
+		return ten;
 	}
 
-	public String getTenNhanVien() {
-		return tenNhanVien;
-	}
-
-	public void setTenNhanVien(String tenNhanVien) {
-		this.tenNhanVien = tenNhanVien;
+	public void setTen(String ten) {
+		this.ten = ten;
 	}
 
 	public byte[] getHinhAnh() {
@@ -95,8 +98,16 @@ public class Staff {
 		this.username = username;
 	}
 
+	public String getMaRole() {
+		return maRole;
+	}
+
+	public void setMaRole(String maRole) {
+		this.maRole = maRole;
+	}
+
 	/* =============================advanced=========================== */
-	
+
 	public String getBase64Photo() {
 		String base64DataString = null;
 		if (hinhAnh != null) {                

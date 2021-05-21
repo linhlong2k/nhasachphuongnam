@@ -78,7 +78,16 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 	}
 
 	public KhachHang getByID(String ma) {
-		return (KhachHang) factory.getCurrentSession().get(KhachHang.class, ma);
+		KhachHang khachHang = null;
+		Session session = factory.openSession();
+		try {
+			khachHang = (KhachHang) session.get(KhachHang.class, ma);
+		} catch(HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return khachHang;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -90,6 +99,14 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 	/*
 	 * ===================================advanced==================================
 	 */
+	public String getLastMa() {
+		String sql = "SELECT top 1 MAKH FROM KHACHHANG ORDER BY MAKH DESC";
+		Session session = factory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(sql);
+		@SuppressWarnings("unchecked")
+		List<String> results = (List<String>)query.list();
+		return results.get(0);
+	}
 	
 	public String getMaByUsername(String username) {
 		String sql = "SELECT MAKH FROM KHACHHANG WHERE KHACHHANG.USERNAME='" + username +"'";
