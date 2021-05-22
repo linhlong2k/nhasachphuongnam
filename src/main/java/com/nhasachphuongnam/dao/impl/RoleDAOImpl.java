@@ -18,6 +18,7 @@ import com.nhasachphuongnam.entity.Role;
 @Repository
 @Transactional
 public class RoleDAOImpl implements RoleDAO{
+	
 	@Autowired
 	SessionFactory factory;
 

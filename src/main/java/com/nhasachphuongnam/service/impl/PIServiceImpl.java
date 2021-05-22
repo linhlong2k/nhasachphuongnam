@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.KhachHangDAO;
 import com.nhasachphuongnam.dao.NhanVienDAO;
+import com.nhasachphuongnam.dao.TaiKhoanDAO;
 import com.nhasachphuongnam.entity.KhachHang;
 import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.model.PersonalInfo;
@@ -27,6 +28,9 @@ public class PIServiceImpl implements PIService{
 	@Autowired(required = true)
 	NhanVienDAO nhanVienDAO;
 	
+	@Autowired(required = true)
+	TaiKhoanDAO taiKhoanDAO;
+	
 	public PersonalInfo convert(KhachHang khachHang) {
 		PersonalInfo pi = new PersonalInfo(khachHang.getMaKH(), khachHang.getTenKH(), khachHang.getHinhAnh(), khachHang.getDiaChi(), khachHang.getNgaySinh(), khachHang.getSdt(), khachHang.getTaikhoan().getUsername(), khachHang.getTaikhoan().getRole().getMaRole());
 		return pi;
@@ -39,14 +43,11 @@ public class PIServiceImpl implements PIService{
 	
 	//không chỉnh các thông tin như username, role của người dùng
 	public KhachHang convert2KhachHang(PersonalInfo pi) {
-		KhachHang khachHang;
-		try {
-			khachHang = khachHangDAO.getByID(pi.getMa());
-			khachHang.setTenKH(pi.getTen());
-		} catch(NullPointerException ex) {
+		KhachHang khachHang = khachHangDAO.getByID(pi.getMa());
+		if(khachHang == null)
 			khachHang = new KhachHang();
-			khachHang.setTenKH(pi.getTen());
-		}
+		khachHang.setMaKH(pi.getMa());
+		khachHang.setTenKH(pi.getTen());
 		if(pi.getHinhAnh() != null)
 			khachHang.setHinhAnh(pi.getHinhAnh());
 		if(pi.getSoDienThoai() != null)
@@ -55,18 +56,16 @@ public class PIServiceImpl implements PIService{
 			khachHang.setDiaChi(pi.getDiaChi());
 		if(pi.getNgaySinh() != null)
 			khachHang.setNgaySinh(pi.getNgaySinh());
+		khachHang.setTaikhoan(taiKhoanDAO.getByID(pi.getUsername()));
 		return khachHang;
 	}
 	
 	public NhanVien convert2NhanVien(PersonalInfo pi) {
-		NhanVien nhanVien;
-		try {
-			nhanVien = nhanVienDAO.getByID(pi.getMa());
-			nhanVien.setTenNV(pi.getTen());
-		} catch(NullPointerException ex) {
+		NhanVien nhanVien =  nhanVienDAO.getByID(pi.getMa());
+		if(nhanVien == null)
 			nhanVien = new NhanVien();
-			nhanVien.setTenNV(pi.getTen());
-		}
+		nhanVien.setMaNV(pi.getMa());
+		nhanVien.setTenNV(pi.getTen());
 		if(pi.getHinhAnh() != null)
 			nhanVien.setHinhAnh(pi.getHinhAnh());
 		if(pi.getSoDienThoai() != null)
@@ -75,41 +74,42 @@ public class PIServiceImpl implements PIService{
 			nhanVien.setDiaChi(pi.getDiaChi());
 		if(pi.getNgaySinh() != null)
 			nhanVien.setNgaySinh(pi.getNgaySinh());
+		nhanVien.setTaikhoan(taiKhoanDAO.getByID(pi.getUsername()));
 		return nhanVien;
 	}
 	
 	public String theNextMaKH() {
-		String mamh = khachHangDAO.getLastMa();
-		int index = Integer.parseInt(mamh.substring(2, mamh.length()));
-		String newmamh = "KH";
+		String ma = khachHangDAO.getLastMa();
+		int index = Integer.parseInt(ma.substring(2, ma.length()));
+		String newma = "KH";
 		index++;
-		for(int i = 0; i < 10 - String.valueOf(index).length(); i++)
-			newmamh += '0';
-		newmamh += String.valueOf(index);
-		return newmamh;
+		for(int i = 0; i < 8 - String.valueOf(index).length(); i++)
+			newma += '0';
+		newma += String.valueOf(index);
+		return newma;
 	}
 	
 	public String theNextMaNV() {
-		String mamh = nhanVienDAO.getLastMa();
-		int index = Integer.parseInt(mamh.substring(2, mamh.length()));
-		String newmamh = "NV";
+		String ma = nhanVienDAO.getLastMa();
+		int index = Integer.parseInt(ma.substring(2, ma.length()));
+		String newma = "NV";
 		index++;
-		for(int i = 0; i < 10 - String.valueOf(index).length(); i++)
-			newmamh += '0';
-		newmamh += String.valueOf(index);
-		return newmamh;
+		for(int i = 0; i < 8 - String.valueOf(index).length(); i++)
+			newma += '0';
+		newma += String.valueOf(index);
+		return newma;
 	}
 	
 	public boolean add(PersonalInfo pi) {
 		if(pi.getMaRole().equals("2")) {
+			pi.setMa(theNextMaKH());
 			KhachHang khachHang = convert2KhachHang(pi);
-			khachHang.setMaKH(theNextMaKH());
 			if(khachHangDAO.add(khachHang))
 				return true;
 			return false;
 		} else {
+			pi.setMa(theNextMaNV());
 			NhanVien nhanVien = convert2NhanVien(pi);
-			nhanVien.setMaNV(theNextMaNV());
 			if(nhanVienDAO.add(nhanVien))
 				return true;
 			return false;

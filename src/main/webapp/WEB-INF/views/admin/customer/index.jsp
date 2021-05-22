@@ -24,8 +24,57 @@
 <!-- 		================================================================ create button ===================================================== -->
 		
 <!--     	=================================================================== table ==================================================================== -->
-		<div>
-			abc
+		<div class="card">
+            <div class="card-body">
+	            <div>
+	            	<h3 class="card-title" style="float: left;"><strong>Danh sách khách hàng</strong></h3>
+	            	<br><br>
+	            </div>
+			  	<div class="table-responsive">
+              	<table class="table table-hover" id="table">
+                	<thead>
+	        			<tr>
+		             		<th scope="col">Mã khách hàng</th>
+		                    <th scope="col">Hình ảnh</th>
+		                    <th scope="col">Tên khách hàng</th>
+		                    <th scope="col">Địa chỉ</th>
+		                    <th scope="col">Ngày sinh</th>
+		                    <th scope="col">username</th>
+		                    <th scope="col"></th>
+		                    <th scope="col"></th>
+	                  	</tr>
+                	</thead>
+                	<tbody>
+                	<c:forEach var="khachHang" items="${danhSachKhachHang}">
+	                	<tr>
+	                    	<th scope="row">${khachHang.ma }</th>
+	                    	<c:choose>
+	                    		<c:when test="${empty khachHang.hinhAnh}">
+	                    			<td>
+							    		<p><img alt="image" src="resources/images/users/defaultUser.jpg" style="max-height: 100px; max-width: 100px;"/></p>
+							    	</td>
+								</c:when>
+								<%-- test="${not empty prod.hinhAnh }" --%>
+								<c:otherwise>
+									<td>
+										<p><img alt="image" src="data:image/jpeg;base64,${khachHang.getBase64Photo() }" style="max-height: 100px; max-width: 100px;"/></p>	
+									</td>
+								</c:otherwise>
+							</c:choose>
+	                    	<td>${khachHang.ten }</td>
+	                    	<td>${khachHang.diaChi }</td>
+	                    	<td><fmt:formatDate value="${khachHang.ngaySinh }" pattern="yyyy-MM-dd" /></td>
+	                    	<td>
+	                    		<form:form action="khach-hang/xoa-khach-hang/${khachHang.ma }.htm" method="GET">
+	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>
+	                    		</form:form>
+	                    	</td>
+	                  	</tr>
+	                </c:forEach>	
+                </tbody>
+            </table>
+            </div>
+            </div>
 		</div>
     </div>
     <!-- End container-fluid-->

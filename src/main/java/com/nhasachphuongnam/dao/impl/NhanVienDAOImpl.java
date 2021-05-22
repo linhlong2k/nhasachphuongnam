@@ -66,6 +66,7 @@ public class NhanVienDAOImpl implements NhanVienDAO {
 		 */
 		try {
 			session.delete(nhanVien);
+			session.delete(nhanVien.getTaikhoan());
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

@@ -14,18 +14,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.model.PersonalInfo;
+import com.nhasachphuongnam.model.RoleDTO;
 import com.nhasachphuongnam.service.LoginService;
 import com.nhasachphuongnam.service.PIService;
+import com.nhasachphuongnam.service.RoleService;
 
 @Controller
 @RequestMapping("/nhan-vien/")
 public class StaffController {
+	
 	@Autowired(required=true)
 	PIService piService;
 	
 	@Autowired(required = true)
 	LoginService loginService;
+	
+	@Autowired(required = true)
+	RoleService roleService;
 	
 	@Autowired
 	ServletContext context;
@@ -93,15 +100,37 @@ public class StaffController {
 			@RequestParam("password") String password,
 			@RequestParam("passwordconfirm") String passwordConfirm,
 			BindingResult errors) {
-		/*
-		 * if(info.getTen().trim().length() == 0) errors.rejectValue("ten",
-		 * "nhanVienMoi", "Vui lòng nhập tên của nhân viên"); if() else { if
-		 * (loginService.getByID(info.getUsername()) != null) {
-		 * model.addAttribute("message", "Tên đăng nhập đã tồn tại"); return
-		 * "admin/staff/create"; } if(!password.equals(passwordConfirm)) {
-		 * model.addAttribute("message", "Mật khẩu xác nhận không trùng khớp"); return
-		 * "login/register"; } loginService.add(null) }
-		 */
+		if(info.getTen().trim().length() == 0)
+			errors.rejectValue("ten", "nhanVienMoi", "Vui lòng nhập tên của nhân viên");
+		if(info.getUsername().trim().length() == 0)
+			errors.rejectValue("username", "nhanVienMoi", "Vui lòng nhập username");
+		if(errors.hasErrors())
+			model.addAttribute("message", "Thông tin nhập vào không hợp lệ, vui lòng nhập lại");
+		else {
+			if (loginService.getByID(info.getUsername()) != null) {
+				model.addAttribute("message", "Tên đăng nhập đã tồn tại");
+			} else if(password.trim().length() == 0)
+				model.addAttribute("message", "Mật khẩu không được để trống!");
+			else if(!password.equals(passwordConfirm))
+				model.addAttribute("message", "Mật khẩu xác nhận không chính xác!");
+			else {
+				RoleDTO temp = roleService.getByID("1");
+				if(temp == null)
+					model.addAttribute("message", "Không tìm thấy mã role nhân viên!");
+				else {
+					Login login = new Login(info.getUsername(), password, temp);
+					info.setMaRole("1");
+					if(loginService.add(login))
+						if(piService.add(info))
+							model.addAttribute("message", "Thêm nhân viên mới thành công!");
+						else
+							model.addAttribute("message", "Thêm nhân viên mới không thành công!");
+					else
+						model.addAttribute("message", "Có lỗi xảy ra khi tạo thông tin đăng nhập cho nhân viên với,<br>Thêm nhân viên mới không thành công");
+				}
+				
+			}
+		}
 		return "admin/staff/create";
 	}
 	

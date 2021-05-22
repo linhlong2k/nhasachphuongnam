@@ -149,7 +149,7 @@
 					}
 				}
 			} */
-			document.getElementById("search").placeholder = "Tìm kiếm chưa được phát triển ở trang này";
+			document.getElementById("search").style.visibility = "hidden";
 	</script>
 <!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

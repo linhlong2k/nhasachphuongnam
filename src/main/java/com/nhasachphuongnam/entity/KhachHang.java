@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="KHACHHANG")
 //@NamedQuery(name="Khachhang.findAll", query="SELECT k FROM Khachhang k")
@@ -32,7 +34,8 @@ public class KhachHang implements Serializable {
 	@Column(name="HINHANH")
 	private byte[] hinhAnh;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="NGAYSINH")
 	private Date ngaySinh;
 

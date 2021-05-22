@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.KhachHangDAO;
 import com.nhasachphuongnam.entity.KhachHang;
+import com.nhasachphuongnam.entity.TaiKhoan;
 
 @Repository
 @Transactional
@@ -66,6 +67,7 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 		 */
 		try {
 			session.delete(khachHang);
+			session.delete(khachHang.getTaikhoan());
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

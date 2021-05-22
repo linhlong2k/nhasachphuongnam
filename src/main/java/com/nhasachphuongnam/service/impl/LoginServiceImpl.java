@@ -66,6 +66,8 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	public Login getByID(String ma) {
+		if(taiKhoanDAO.getByID(ma) == null)
+			return null;
 		return convert(taiKhoanDAO.getByID(ma));
 	}
 	

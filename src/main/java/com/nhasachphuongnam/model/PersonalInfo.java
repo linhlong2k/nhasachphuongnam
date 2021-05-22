@@ -3,11 +3,14 @@ package com.nhasachphuongnam.model;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class PersonalInfo {
 	private String ma;
 	private String ten;
 	private byte[] hinhAnh;
 	private String diaChi;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date ngaySinh;
 	private String soDienThoai;
 	private String username;
