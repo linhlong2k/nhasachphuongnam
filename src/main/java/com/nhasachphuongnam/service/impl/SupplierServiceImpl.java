@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.NhaCungCapDAO;
-import com.nhasachphuongnam.entity.LoaiMatHang;
 import com.nhasachphuongnam.entity.NhaCungCap;
 import com.nhasachphuongnam.model.Supplier;
+import com.nhasachphuongnam.service.SupplierService;
 
-public class SupplierServiceImpl {
+@Repository
+@Transactional
+public class SupplierServiceImpl implements SupplierService {
 	
 	@Autowired(required=true)
 	NhaCungCapDAO nhaCungCapDAO;
@@ -32,14 +36,10 @@ public class SupplierServiceImpl {
 	}
 	
 	public NhaCungCap convert(Supplier supplier) {
-		NhaCungCap nhaCungCap;
-		try {
-			nhaCungCap = nhaCungCapDAO.getByID(supplier.getMaNhaCungCap());
-			nhaCungCap.setTenNCC(supplier.getTenNhaCungCap());
-		} catch(NullPointerException ex) {
+		NhaCungCap nhaCungCap = nhaCungCapDAO.getByID(supplier.getMaNhaCungCap());
+		if(nhaCungCap == null)
 			nhaCungCap = new NhaCungCap();
-			nhaCungCap.setTenNCC(supplier.getTenNhaCungCap());
-		}
+		nhaCungCap.setTenNCC(supplier.getTenNhaCungCap());
 		if(supplier.getDiaChi() != null)
 			nhaCungCap.setDiaChi(supplier.getDiaChi());
 		if(supplier.getSoDienThoai() != null)

@@ -5,6 +5,7 @@ import java.util.List;
 import com.nhasachphuongnam.entity.HoaDon;
 
 public interface HoaDonDAO {
+	
 	boolean add(HoaDon hoaDon);
 
 	boolean update(HoaDon hoaDon);

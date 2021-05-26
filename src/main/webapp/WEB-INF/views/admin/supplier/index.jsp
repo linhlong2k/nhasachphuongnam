@@ -24,8 +24,90 @@
 <!-- 		================================================================ create button ===================================================== -->
 		
 <!--     	=================================================================== table ==================================================================== -->
-		<div>
-			abc
+		<div class="card" style="width: 500px; margin: 0 auto;">
+			<!-- <div class="card-header">
+				<strong>Nhà cung cấp</strong>
+			</div> -->
+            <div class="card-body">
+			  	<form:form action="admin/nha-cung-cap/cap-nhat-nha-cung-cap.htm" method="post" modelAttribute="nhaCungCapNew">
+					<div class="form-group row">
+						<label class="col-lg-5 col-form-label form-control-label">Mã nhà cung cấp</label>
+						<div class="col-lg-7">
+							<form:input path="maNhaCungCap" class="form-control form-control-rounded" readonly="true"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-lg-5 col-form-label form-control-label">Tên nhà cung cấp</label>
+						<div class="col-lg-7">
+							<form:input path="tenNhaCungCap" class="form-control form-control-rounded" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-lg-5 col-form-label form-control-label">Địa chỉ</label>
+						<div class="col-lg-7">
+							<form:input path="diaChi" class="form-control form-control-rounded" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-lg-5 col-form-label form-control-label">Số điện thoại</label>
+						<div class="col-lg-7">
+							<form:input path="soDienThoai" class="form-control form-control-rounded" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<button type="submit" class="btn btn-light btn-round px-5 col-lg-5">
+							<i class="icon-lock"></i> Cập nhật
+						</button>
+						<div class="col-lg-2"></div>
+						<button type="submit" class="btn btn-light btn-round px-5 col-lg-5" name="reset" >
+							<i class="icon-lock"></i> Reset
+						</button>
+					</div>
+				</form:form>           
+            </div>
+        </div>
+       	<br>
+		<div class="card">
+            <div class="card-body">
+	            <div>
+	            	<h3 class="card-title" style="float: left;"><strong>Danh sách sản phẩm</strong></h3>
+	            	<br><br>
+	            </div>
+			  	<div class="table-responsive">
+              	<table class="table table-hover" id="table">
+                	<thead>
+	        			<tr>
+		             		<th scope="col">Mã nhà cung cấp</th>
+		                    <th scope="col">Tên nhà cung cấp</th>
+		                    <th scope="col">Địa chỉ</th>
+		                    <th scope="col">Số điện thoại</th>
+		                    <th scope="col"></th>
+		                    <th scope="col"></th>
+	                  	</tr>
+                	</thead>
+                	<tbody>
+                	<c:forEach var="ncc" items="${danhSachNhaCungCap}">
+	                	<tr>
+	                    	<form:form action="admin/nha-cung-cap/index.htm" method="post" modelAttribute="nhaCungCapIndex">
+		                    	<td scope="row">
+		                    		<form:input path="maNhaCungCap" value="${ncc.maNhaCungCap }" class="form-control" readonly="true"/>
+		                    	</td>
+		                    	<td>${ncc.tenNhaCungCap }</td>
+		                    	<td>${ncc.diaChi }</td>
+		                    	<td>${ncc.soDienThoai }</td>
+		                    	<td>
+		                    		<button type="submit" class="btn btn-light btn-round px-3" name="chinh-sua-nha-cung-cap">Chỉnh sửa</button>
+		                    	</td>
+		                    	<td>
+		                    		<button type="submit" class="btn btn-light btn-round px-3" name="xoa-nha-cung-cap">Xóa</button>
+		                    	</td>
+	                    	</form:form>
+	                  	</tr>
+	                </c:forEach>	
+                </tbody>
+            </table>
+            </div>
+            </div>
 		</div>
     </div>
     <!-- End container-fluid-->

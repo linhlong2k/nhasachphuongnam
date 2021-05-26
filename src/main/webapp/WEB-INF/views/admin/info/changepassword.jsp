@@ -43,7 +43,7 @@
                     <input name="passwordconfirm" type="password" class="form-control form-control-rounded" id="input-3" />
                   </div>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-light btn-round px-5"><i class="icon-lock"></i> Save</button>
+                    <button type="submit" class="btn btn-light btn-round px-5"><i class="icon-lock"></i> Lưu</button>
                   </div>
 				</form:form>           
             </div>

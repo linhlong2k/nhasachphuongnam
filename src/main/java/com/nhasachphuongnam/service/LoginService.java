@@ -2,7 +2,6 @@ package com.nhasachphuongnam.service;
 
 import java.util.List;
 
-import com.nhasachphuongnam.entity.TaiKhoan;
 import com.nhasachphuongnam.model.Login;
 
 public interface LoginService {
