@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.KhachHangDAO;
 import com.nhasachphuongnam.entity.KhachHang;
-import com.nhasachphuongnam.entity.TaiKhoan;
 
 @Repository
 @Transactional
@@ -116,6 +115,6 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 		SQLQuery query = session.createSQLQuery(sql);
 		@SuppressWarnings("unchecked")
 		List<String> results = (List<String>)query.list();
-		return results != null ? results.get(0) : null;
+		return results.get(0);
 	}
 }

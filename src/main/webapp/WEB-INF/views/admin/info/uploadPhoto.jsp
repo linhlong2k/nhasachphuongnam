@@ -24,9 +24,9 @@
 <!-- 		================================================================ create button ===================================================== -->
 		
 <!--     	=================================================================== table ==================================================================== -->
-		<form action="admin/mat-hang/cap-nhat-hinh-anh/${ma }.htm" method="post" enctype="multipart/form-data">
+		<form action="admin/thong-tin-ca-nhan/cap-nhat-hinh-anh/${ma }.htm" method="post" enctype="multipart/form-data">
 			<div class="card border-success mb-3" style="max-width: 60%; margin: 0 auto; padding: 50px;">
-			  	<div class="card-header bg-transparent border-primary"><h3>Cập nhật hình ảnh cho mặt hàng: ${ma }</h3></div>
+			  	<div class="card-header bg-transparent border-primary"><h3>Cập nhật hình ảnh nhân viên: ${ma }</h3></div>
 			  	<div class="card-body text-primary">
 			    	<div class="mb-3">
 					  	<label for="formFile" class="form-label">Hình ảnh </label>

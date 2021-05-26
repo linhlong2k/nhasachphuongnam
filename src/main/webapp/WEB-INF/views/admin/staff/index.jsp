@@ -28,7 +28,7 @@
             <div class="card-body">
 	            <div>
 	            	<h3 class="card-title" style="float: left;"><strong>Danh sách nhân viên</strong></h3>
-	            	<form:form action="nhan-vien/them-nhan-vien-moi.htm" method="GET" style="float: right; margin: 5px;" >
+	            	<form:form action="admin/nhan-vien/them-nhan-vien-moi.htm" method="GET" style="float: right; margin: 5px;" >
 	            		<button type="submit" class="btn btn-light btn-round px-3">Thêm nhân viên mới</button>
 	            	</form:form>
 	            	<br><br>
@@ -70,19 +70,19 @@
 	                    	<td>
 	                    		<c:choose>
 	                    			<c:when test="${nhanvien.maRole == '0' }">
-	                    				<form:form action="nhan-vien/xoa-quyen-admin/${nhanvien.username }.htm">
+	                    				<form:form action="admin/nhan-vien/xoa-quyen-admin/${nhanvien.username }.htm">
 			                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa quyền admin</button>
 			                    		</form:form>
 	                    			</c:when>
 	                    			<c:otherwise>
-	                    				<form:form action="nhan-vien/tro-thanh-admin/${nhanvien.username }.htm">
+	                    				<form:form action="admin/nhan-vien/tro-thanh-admin/${nhanvien.username }.htm">
 			                    			<button type="submit" class="btn btn-light btn-round px-3">Trở thành admin</button>
 			                    		</form:form>
 	                    			</c:otherwise>
 	                    		</c:choose>
 	                    	</td>
 	                    	<td>
-	                    		<form:form action="nhan-vien/xoa-nhan-vien/${nhanvien.ma }.htm" method="GET">
+	                    		<form:form action="admin/nhan-vien/xoa-nhan-vien/${nhanvien.ma }.htm" method="GET">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>
 	                    		</form:form>
 	                    	</td>

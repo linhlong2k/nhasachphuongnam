@@ -1,5 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
-
+	<br><br>
     <!--Start footer-->
 	<footer class="footer" style="margin-top:43px;">
 		<br>

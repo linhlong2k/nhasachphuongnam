@@ -42,7 +42,7 @@
                         </tr>
                         <c:forEach var="t" items="${danhSachLoaiMatHang }">
                         <tr>
-							<form:form action="loai-mat-hang/chinh-sua-loai-mat-hang/${t.maLoai }.htm" modelAttribute="loaiMatHangChinhSua" method="post">
+							<form:form action="admin/loai-mat-hang/chinh-sua-loai-mat-hang/${t.maLoai }.htm" modelAttribute="loaiMatHangChinhSua" method="post">
 	                       		<td><form:input path="maLoai" value="${t.maLoai }" class="form-control" readonly="true" /></td>
 		                        <td><form:input path="tenLoai" value="${t.tenLoai }" class="form-control" /></td>
 		                        <td style="padding: 0;">
@@ -52,14 +52,14 @@
 		                      	</td>
 	                       	</form:form>
 	                       	<td style="padding: 0;">
-	                       		<form:form action="loai-mat-hang/xoa-loai-mat-hang/${t.maLoai }.htm" method="post">
+	                       		<form:form action="admin/loai-mat-hang/xoa-loai-mat-hang/${t.maLoai }.htm" method="post">
 		                            <button type="submit" class="btn btn-light btn-round px-3">
 			                        	<i class="zmdi zmdi-delete"></i>
 			                      	</button>
 		                     	</form:form>
 	                    	</td>
 	                     	<td style="padding: 0;">
-	                     		<form:form action="loai-mat-hang/chi-tiet-loai-mat-hang/${t.maLoai }.htm" method="post">
+	                     		<form:form action="admin/loai-mat-hang/chi-tiet-loai-mat-hang/${t.maLoai }.htm" method="post">
 		                            <button type="submit" class="btn btn-light btn-round px-3">
 			                        	<i class="zmdi zmdi-info-outline"></i>
 			                      	</button>
@@ -75,7 +75,7 @@
     <div class="col-12 col-lg-6 col-xl-6">
     	<div class="card">
             <div class="card-header">Thêm loại mặt hàng</div>
-            <form:form action="loai-mat-hang/tao-loai-mat-hang-moi.htm" modelAttribute="loaiMatHangMoi" method="post">
+            <form:form action="admin/loai-mat-hang/tao-loai-mat-hang-moi.htm" modelAttribute="loaiMatHangMoi" method="post">
             	<div class="card-body">
                 	<%-- <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Mã Loại</label>

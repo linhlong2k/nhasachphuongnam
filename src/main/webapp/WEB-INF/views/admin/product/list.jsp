@@ -28,7 +28,7 @@
             <div class="card-body">
 	            <div>
 	            	<h3 class="card-title" style="float: left;"><strong>Danh sách sản phẩm</strong></h3>
-	            	<form:form action="mat-hang/tao-mat-hang-moi.htm" method="GET" style="float: right; margin: 5px;" >
+	            	<form:form action="admin/mat-hang/tao-mat-hang-moi.htm" method="GET" style="float: right; margin: 5px;" >
 	            		<button type="submit" class="btn btn-light btn-round px-3">Tạo sản phẩm mới</button>
 	            	</form:form>
 	            	<br><br>
@@ -55,14 +55,14 @@
 	                    		<c:when test="${empty prod.hinhAnh}">
 	                    			<td>
 							    		<p><img alt="image" src="resources/images/products/defaultProduct.png" style="max-height: 100px; max-width: 100px;"/></p>
-							    		<a href="mat-hang/cap-nhap-hinh-anh/${prod.maMatHang}.htm">Cập nhập ảnh</a>
+							    		<a href="admin/mat-hang/cap-nhat-hinh-anh/${prod.maMatHang}.htm">Cập nhập ảnh</a>
 							    	</td>
 								</c:when>
 								<%-- test="${not empty prod.hinhAnh }" --%>
 								<c:otherwise>
 									<td>
 										<p><img alt="image" src="data:image/jpeg;base64,${prod.getBase64Photo() }" style="max-height: 100px; max-width: 100px;"/></p>	
-										<a href="mat-hang/cap-nhap-hinh-anh/${prod.maMatHang}.htm">Thay đổi ảnh</a>
+										<a href="admin/mat-hang/cap-nhat-hinh-anh/${prod.maMatHang}.htm">Thay đổi ảnh</a>
 									</td>
 								</c:otherwise>
 							</c:choose>
@@ -71,12 +71,12 @@
 	                    	<td>${prod.soLuong }</td>
 	                    	<td>${prod.maLoai }</td>
 	                    	<td>
-	                    		<form:form action="mat-hang/chinh-sua-mat-hang/${prod.maMatHang }.htm" method="GET">
+	                    		<form:form action="admin/mat-hang/chinh-sua-mat-hang/${prod.maMatHang }.htm" method="GET">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Chỉnh sửa</button>
 	                    		</form:form>
 	                    	</td>
 	                    	<td>
-	                    		<form:form action="mat-hang/xoa-mat-hang/${prod.maMatHang }.htm" method="GET">
+	                    		<form:form action="admin/mat-hang/xoa-mat-hang/${prod.maMatHang }.htm" method="GET">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>
 	                    		</form:form>
 	                    	</td>

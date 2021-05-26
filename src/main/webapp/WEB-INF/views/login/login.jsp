@@ -39,6 +39,21 @@
 							</div>
 						</div>
 						<form:input path="role" value="0" type="hidden" />
+<!--     	================================================================= message =========================================================== -->
+		<c:if test="${message != null}">
+			<c:choose>
+				<c:when test="${fn:contains(message, 'không')}">
+					<div class="alert alert-danger" role="alert"><i class="zmdi zmdi-case-check"></i>${message }</div>
+					<!-- <script type="text/javascript">
+						alert("${message}");
+					</script> -->
+				</c:when>
+				<c:otherwise>
+					<div class="alert alert-success" role="alert"><i class="zmdi zmdi-alert-triangle"></i>${message }</div>
+				</c:otherwise>
+			</c:choose>
+		</c:if>
+<!-- 		================================================================ create button ===================================================== -->
 						<hr>
 						<button type="submit" class="btn btn-light btn-block">Đăng nhập</button>
 					</form:form>

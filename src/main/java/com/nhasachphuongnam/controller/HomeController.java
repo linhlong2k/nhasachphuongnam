@@ -16,10 +16,10 @@ public class HomeController {
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("role")) {
-					if(cookie.getValue().equals("0") || cookie.getValue().equals("1")) {
-						return "home";
-					} else {
+					if(cookie.getValue().equals("2")) {
 						return "redirect:nguoi-dung/index.htm";
+					} else {
+						return "redirect:admin/index.htm";
 					}
 				}
 			}

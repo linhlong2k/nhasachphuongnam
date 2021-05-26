@@ -24,20 +24,30 @@
 <!-- 		================================================================ create button ===================================================== -->
 		
 <!--     	=================================================================== table ==================================================================== -->
-		<form action="admin/mat-hang/cap-nhat-hinh-anh/${ma }.htm" method="post" enctype="multipart/form-data">
-			<div class="card border-success mb-3" style="max-width: 60%; margin: 0 auto; padding: 50px;">
-			  	<div class="card-header bg-transparent border-primary"><h3>Cập nhật hình ảnh cho mặt hàng: ${ma }</h3></div>
-			  	<div class="card-body text-primary">
-			    	<div class="mb-3">
-					  	<label for="formFile" class="form-label">Hình ảnh </label>
-					  	<input class="form-control" type="file" id="formFile" name="photo">
-					</div>
-			  	</div>
-			  	<button type="submit" class="btn btn-light btn-round px-5">
-                	Cập nhập
-                </button>
+			<div class="card" style="width: 500px; margin: 0 auto;">
+			<div class="card-header">
+				<strong>Thay đổi mật khẩu</strong>
 			</div>
-		</form>
+            <div class="card-body">
+			  	<form:form action="admin/thong-tin-ca-nhan/thay-doi-mat-khau.htm" method="post" >
+                  <div class="form-group">
+                    <label for="input-1">Mật khẩu cũ</label>
+                    <input name="password" type="password" class="form-control form-control-rounded" id="input-1"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="input-2">Mật khẩu mới</label>
+                    <input name="passwordnew" type="password" class="form-control form-control-rounded" id="input-2" />
+                  </div>
+                  <div class="form-group">
+                    <label for="input-3">Xác nhận mật khẩu mới</label>
+                    <input name="passwordconfirm" type="password" class="form-control form-control-rounded" id="input-3" />
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-light btn-round px-5"><i class="icon-lock"></i> Save</button>
+                  </div>
+				</form:form>           
+            </div>
+            </div>
     </div>
     <!-- End container-fluid-->
     </div><!--End content-wrapper-->

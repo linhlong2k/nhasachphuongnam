@@ -39,7 +39,6 @@
 		                    <th scope="col">Tên khách hàng</th>
 		                    <th scope="col">Địa chỉ</th>
 		                    <th scope="col">Ngày sinh</th>
-		                    <th scope="col">username</th>
 		                    <th scope="col"></th>
 		                    <th scope="col"></th>
 	                  	</tr>
@@ -65,7 +64,7 @@
 	                    	<td>${khachHang.diaChi }</td>
 	                    	<td><fmt:formatDate value="${khachHang.ngaySinh }" pattern="yyyy-MM-dd" /></td>
 	                    	<td>
-	                    		<form:form action="khach-hang/xoa-khach-hang/${khachHang.ma }.htm" method="GET">
+	                    		<form:form action="admin/khach-hang/xoa-khach-hang/${khachHang.ma }.htm" method="GET">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>
 	                    		</form:form>
 	                    	</td>

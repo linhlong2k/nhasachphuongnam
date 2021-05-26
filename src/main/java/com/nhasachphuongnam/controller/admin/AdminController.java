@@ -5,10 +5,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("admin/hoat-dong/")
-public class ActivityController {
+@RequestMapping("/admin/")
+public class AdminController {
 	@RequestMapping("index")
-	public String index(ModelMap model) {
-		return "historyActivity/index";
+	public String homePage(ModelMap model) {
+		return "admin/home";
 	}
 }

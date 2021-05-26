@@ -22,7 +22,7 @@ import com.nhasachphuongnam.service.PIService;
 import com.nhasachphuongnam.service.RoleService;
 
 @Controller
-@RequestMapping("/nhan-vien/")
+@RequestMapping("admin/nhan-vien/")
 public class StaffController {
 	
 	@Autowired(required=true)

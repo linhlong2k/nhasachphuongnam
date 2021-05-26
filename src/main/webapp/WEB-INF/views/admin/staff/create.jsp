@@ -31,7 +31,7 @@
             		<div class="card-title"><strong>Thêm nhân viên</strong>&nbsp;&nbsp;<a href="nhan-vien/index.htm" style="float: right;">Hủy</a></div>
             	</div>
               <div class="card-body">
-                <form:form action="nhan-vien/them-nhan-vien-moi.htm" method="post" modelAttribute="nhanVienMoi">
+                <form:form action="admin/nhan-vien/them-nhan-vien-moi.htm" method="post" modelAttribute="nhanVienMoi">
                   <div class="form-group">
                     <label for="input-1">Tên</label>
                     <form:input path="ten" type="text" class="form-control form-control-rounded" id="input-1" placeholder="Nhập họ và tên nhân viên" />

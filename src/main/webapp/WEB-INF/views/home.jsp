@@ -25,8 +25,9 @@
 		
 <!--     	=================================================================== table ==================================================================== -->
 		<div>
-			<h2>CHÀO MỪNG BẠN ĐẾN VỚI TRANG QUẢN LÝ CỦA</h2>
+			<h2>CHÀO MỪNG BẠN ĐẾN VỚI TRANG HOME CỦA</h2>
 			<h2>NHÀ SÁCH PHƯƠNG NAM</h2>
+			<h3>Đây là trang Home</h3>
 		</div>
     </div>
     <!-- End container-fluid-->

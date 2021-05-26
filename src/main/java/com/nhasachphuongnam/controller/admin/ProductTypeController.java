@@ -17,7 +17,7 @@ import com.nhasachphuongnam.service.ProductService;
 import com.nhasachphuongnam.service.ProductTypeService;
 
 @Controller
-@RequestMapping("loai-mat-hang")
+@RequestMapping("admin/loai-mat-hang/")
 public class ProductTypeController {
 	
 	@Autowired(required=true)
@@ -116,7 +116,6 @@ public class ProductTypeController {
 	
 	@RequestMapping(value="chi-tiet-loai-mat-hang/{id}", method=RequestMethod.POST)
 	public String detailType(ModelMap model,
-			@ModelAttribute("ProductType") ProductType type,
 			@PathVariable("id") String typeID) {
 		model.addAttribute("danhSachMatHang", productService.getProductListByType(typeID));
 		return "admin/product/productType";

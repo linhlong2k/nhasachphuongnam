@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nhasachphuongnam.dao.KhachHangDAO;
 import com.nhasachphuongnam.dao.NhanVienDAO;
@@ -31,7 +30,7 @@ public class LoginController {
 
 	@Autowired(required = true)
 	NhanVienDAO nhanVienDAO;
-
+	
 	@Autowired(required = true)
 	KhachHangDAO khachHangDAO;
 
@@ -68,7 +67,7 @@ public class LoginController {
 		if (login.getPassword().trim().length() == 0)
 			errors.rejectValue("password", "thongTinDangNhap", "Vui lòng nhập mật khẩu!");
 		else if (loginService.checkLogin(login)) {
-			if(newLogin.getRole().equals("0") || newLogin.getRole().equals("1")) {
+			if(newLogin.getRole().getMaRole().equals("0") || newLogin.getRole().getMaRole().equals("1")) {
 				Cookie userCookie = new Cookie("user", String.valueOf(nhanVienDAO.getMaByUsername(newLogin.getUsername())));
 				userCookie.setMaxAge(24 * 60 * 60);
 				response.addCookie(userCookie);
@@ -123,4 +122,15 @@ public class LoginController {
 	 * model.addAttribute("message", "Không thể khởi tạo thông tin đăng nhập mới");
 	 * } return "login/register"; }
 	 */
+	
+	@RequestMapping("dang-xuat")
+	public String dangXuat(HttpServletResponse response) {
+		Cookie cookie = new Cookie("user", null); // Not necessary, but saves bandwidth.
+		cookie.setMaxAge(0); // Don't set to -1 or it will become a session cookie!
+		response.addCookie(cookie);
+		cookie = new Cookie("role", null); // Not necessary, but saves bandwidth.
+		cookie.setMaxAge(0); // Don't set to -1 or it will become a session cookie!
+		response.addCookie(cookie);
+		return "user/index";
+	}
 }

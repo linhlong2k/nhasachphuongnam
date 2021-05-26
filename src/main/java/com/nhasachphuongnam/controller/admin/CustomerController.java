@@ -13,7 +13,7 @@ import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.service.PIService;
 
 @Controller
-@RequestMapping("/khach-hang/")
+@RequestMapping("admin/khach-hang/")
 public class CustomerController {
 
 	@Autowired(required=true)

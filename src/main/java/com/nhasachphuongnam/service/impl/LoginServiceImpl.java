@@ -66,9 +66,10 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	public Login getByID(String ma) {
-		if(taiKhoanDAO.getByID(ma) == null)
+		TaiKhoan temp = taiKhoanDAO.getByID(ma);
+		if(temp == null)
 			return null;
-		return convert(taiKhoanDAO.getByID(ma));
+		return convert(temp);
 	}
 	
 	public List<Login> getAll(){

@@ -10,106 +10,56 @@
      </a>
    </div>
    <ul class="sidebar-menu do-nicescrol" id="side">
-      <li class="sidebar-header">MAIN NAVIGATION</li>
+      <li class="sidebar-header">Nhân Viên</li>
 		<li class="item">
-			<a href="dashboard/index.htm" class="">
+			<a href="admin/dashboard/index.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Dashboard</span>
 			</a>
 		</li>
 
 		<li class="item">
-			<a href="mat-hang/index.htm" class="">
-				<i class="zmdi zmdi-view-dashboard"></i>
+			<a href="admin/mat-hang/index.htm" class="">
+				<i class="zmdi zmdi-dns"></i>
 				<span>Mặt hàng</span>
 			</a>
 		</li>
 		
 		<li class="item">
-			<a href="loai-mat-hang/index.htm" class="">
-				<i class="zmdi zmdi-view-dashboard"></i>
+			<a href="admin/loai-mat-hang/index.htm" class="">
+				<i class="zmdi zmdi-storage"></i>
 				<span>Loại mặt hàng</span>
 			</a>
 		</li>
 		
 		<li class="item">
-			<a href="don-hang/index.htm" class="">
-				<i class="zmdi zmdi-view-dashboard"></i>
+			<a href="admin/don-hang/index.htm" class="">
+				<i class="zmdi zmdi-shopping-basket"></i>
 				<span>Đơn hàng</span>
 			</a>
 		</li>
 		
 		<li class="item">
-			<a href="nhan-vien/index.htm" class="">
-				<i class="zmdi zmdi-view-dashboard"></i>
-				<span>Nhân viên</span>
-			</a>
-		</li>
-		
-		<li class="item">
-			<a href="khach-hang/index.htm" class="">
-				<i class="zmdi zmdi-view-dashboard"></i>
+			<a href="admin/khach-hang/index.htm" class="">
+				<i class="zmdi zmdi-male-female"></i>
 				<span>Khách hàng</span>
 			</a>
 		</li>
 		
 		<li class="item">
-			<a href="nha-cung-cap/index.htm" class="">
-				<i class="zmdi zmdi-view-dashboard"></i>
+			<a href="admin/nha-cung-cap/index.htm" class="">
+				<i class="zmdi zmdi-truck"></i>
 				<span>Nhà cung cấp</span>
 			</a>
 		</li>
-		<!-- 		============================================================================
- -->      <li>
-        <a href="#">
-          <i class="zmdi zmdi-invert-colors"></i> <span>UI Icons</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <i class="zmdi zmdi-format-list-bulleted"></i> <span>Forms</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <i class="zmdi zmdi-grid"></i> <span>Tables</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <i class="zmdi zmdi-calendar-check"></i> <span>Calendar</span>
-          <small class="badge float-right badge-light">New</small>
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <i class="zmdi zmdi-face"></i> <span>Profile</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="#" target="_blank">
-          <i class="zmdi zmdi-lock"></i> <span>Login</span>
-        </a>
-      </li>
-
-       <li>
-        <a href="#" target="_blank">
-          <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
-        </a>
-      </li>
-	  
-	   <li>
-        <a href="https://themeforest.net/item/dashtreme-multipurpose-bootstrap4-admin-template/23059455" target="_blank" class="pro-btn">
-          <i class="zmdi zmdi-cloud-upload"></i> <span>Upgrade To PRO</span>
-        </a>
-      </li>
-
-      <li class="sidebar-header">LABELS</li>
+		<!-- 		============================================================================ -->
+		<li class="sidebar-header">Admin</li>
+	      <li class="item">
+			<a href="admin/nhan-vien/index.htm" class="">
+				<i class="zmdi zmdi-accounts-alt"></i>
+				<span>Nhân viên</span>
+			</a>
+		</li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>

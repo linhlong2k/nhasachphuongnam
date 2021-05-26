@@ -22,7 +22,7 @@ import com.nhasachphuongnam.service.ProductService;
 import com.nhasachphuongnam.service.ProductTypeService;
 
 @Controller
-@RequestMapping("/mat-hang/") 
+@RequestMapping("admin/mat-hang/") 
 public class ProductController {
 	
 	@Autowired(required=true)
@@ -179,14 +179,14 @@ public class ProductController {
 		return "admin/product/list";
 	}
 	
-	@RequestMapping(value="cap-nhap-hinh-anh/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="cap-nhat-hinh-anh/{id}", method=RequestMethod.GET)
 	public String uploadPhotoGET(ModelMap model,
 			@PathVariable("id") String id) {
 		model.addAttribute("ma", id);
 		return "admin/product/uploadPhoto";
 	}
 	
-	@RequestMapping(value="cap-nhap-hinh-anh/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="cap-nhat-hinh-anh/{id}", method=RequestMethod.POST)
 	public String uploadPhotoPOST(ModelMap model,
 			@PathVariable("id") String id,
 			@RequestParam("photo") MultipartFile file) {
