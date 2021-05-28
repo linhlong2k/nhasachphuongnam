@@ -91,13 +91,14 @@ public class CtPhieuNhapDAOImpl implements CtPhieuNhapDAO{
 	 * ===================================advanced==================================
 	 */
 	
-	public String getby() {
-		String sql = "";
+	@SuppressWarnings("unchecked")
+	public List<CtPhieuNhap> getbyMaPN(String ma) {
+		String sql = "  SELECT * FROM CT_PHIEUNHAP WHERE MAPN = :mapn";
 		Session session = factory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(sql);
 
-		@SuppressWarnings("unchecked")
-		List<String> results = (List<String>) query.list();
-		return results.get(0);
+		query.addEntity(CtPhieuNhap.class);
+		query.setParameter("mapn", ma);
+		return query.list();
 	}
 }

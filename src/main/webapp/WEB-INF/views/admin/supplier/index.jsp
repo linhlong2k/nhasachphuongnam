@@ -51,7 +51,7 @@
 					<div class="form-group row">
 						<label class="col-lg-5 col-form-label form-control-label">Số điện thoại</label>
 						<div class="col-lg-7">
-							<form:input path="soDienThoai" class="form-control form-control-rounded" />
+							<form:input path="soDienThoai" class="form-control form-control-rounded" pattern="[0-9]{10}" />
 						</div>
 					</div>
 					<div class="form-group row">

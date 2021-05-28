@@ -102,14 +102,16 @@ public class PIServiceImpl implements PIService{
 	
 	public boolean add(PersonalInfo pi) {
 		if(pi.getMaRole().equals("2")) {
-			pi.setMa(theNextMaKH());
+			/*pi.setMa(theNextMaKH());*/
 			KhachHang khachHang = convert2KhachHang(pi);
+			khachHang.setMaKH(theNextMaKH());
 			if(khachHangDAO.add(khachHang))
 				return true;
 			return false;
 		} else {
-			pi.setMa(theNextMaNV());
+			/*pi.setMa(theNextMaNV());*/
 			NhanVien nhanVien = convert2NhanVien(pi);
+			nhanVien.setMaNV(theNextMaNV());
 			if(nhanVienDAO.add(nhanVien))
 				return true;
 			return false;
@@ -133,7 +135,7 @@ public class PIServiceImpl implements PIService{
 	
 	//delete this ProductType and setAllow(false) for product producttype items
 	public boolean delete(String ma) {
-		if(ma.substring(0, 1).equals("KH")) {
+		if(ma.substring(0, 2).equals("KH")) {
 			if(khachHangDAO.delete(ma))
 				return true;
 			return false;
@@ -145,7 +147,7 @@ public class PIServiceImpl implements PIService{
 	}
 	
 	public PersonalInfo getByID(String ma) {
-		if(ma.substring(0, 1).equals("KH")) {
+		if(ma.substring(0, 2).equals("KH")) {
 			KhachHang khachHang = khachHangDAO.getByID(ma);
 			if(khachHang == null)
 				return null;

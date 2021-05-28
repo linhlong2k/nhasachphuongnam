@@ -30,6 +30,12 @@ public class HoaDon implements Serializable {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="THOIGIAN")
 	private Date thoiGian;
+	
+	@Column(name="SDT")
+	private String sdt;
+	
+	@Column(name="DIACHI")
+	private String diaChi;
 
 	//bi-directional many-to-one association to CtHoadon
 	@OneToMany(mappedBy="hoadon")
@@ -101,5 +107,22 @@ public class HoaDon implements Serializable {
 	public void setNhanvien(NhanVien nhanvien) {
 		this.nhanvien = nhanvien;
 	}
+
+	public String getSdt() {
+		return sdt;
+	}
+
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
+	}
+
+	public String getDiaChi() {
+		return diaChi;
+	}
+
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+	
 
 }

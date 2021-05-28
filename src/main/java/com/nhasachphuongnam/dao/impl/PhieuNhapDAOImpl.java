@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
+import com.nhasachphuongnam.entity.CtPhieuNhap;
 import com.nhasachphuongnam.entity.PhieuNhap;
 
 @Repository
@@ -64,7 +65,7 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 		/*
 		 * if(ctHoaDon == null) return false;
 		 */
-		try {
+		try {	
 			session.delete(phieuNhap);
 			tran.commit();
 		} catch(HibernateException ex) {

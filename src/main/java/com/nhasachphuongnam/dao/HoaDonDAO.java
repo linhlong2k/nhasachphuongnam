@@ -15,4 +15,6 @@ public interface HoaDonDAO {
 	HoaDon getByID(String ma);
 
 	List<HoaDon> getAll();
+
+	String getLastMa();
 }

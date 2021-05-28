@@ -15,4 +15,6 @@ public interface PhieuNhapDAO {
 	PhieuNhap getByID(String maPN);
 
 	List<PhieuNhap> getAll();
+
+	String getLastMa();
 }

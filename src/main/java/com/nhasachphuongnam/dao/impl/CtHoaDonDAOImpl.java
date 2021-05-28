@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.CtHoaDonDAO;
 import com.nhasachphuongnam.entity.CtHoaDon;
+import com.nhasachphuongnam.entity.CtPhieuNhap;
 
 @Repository
 @Transactional
@@ -91,14 +92,15 @@ public class CtHoaDonDAOImpl implements CtHoaDonDAO{
 	 * ===================================advanced==================================
 	 */
 	
-	public String getby() {
-		String sql = "";
+	@SuppressWarnings("unchecked")
+	public List<CtHoaDon> getbyMaHD(String ma) {
+		String sql = "  SELECT * FROM CT_HOADON WHERE MAHD = :mahd";
 		Session session = factory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(sql);
 
-		@SuppressWarnings("unchecked")
-		List<String> results = (List<String>) query.list();
-		return results.get(0);
+		query.addEntity(CtHoaDon.class);
+		query.setParameter("mahd", ma);
+		return query.list();
 	}
 
 }
