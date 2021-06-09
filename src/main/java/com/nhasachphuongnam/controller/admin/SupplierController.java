@@ -20,11 +20,13 @@ public class SupplierController {
 	@Autowired(required = true)
 	SupplierService supplierService;
 	
+
 	@ModelAttribute("danhSachNhaCungCap")
 	public List<Supplier> danhSachNhaCungCap() {
 		List<Supplier> res = supplierService.getAll();
 		return res;
 	}
+	 
 	
 	@ModelAttribute("nhaCungCapNew")
 	public Supplier nhaCungCapNew() {

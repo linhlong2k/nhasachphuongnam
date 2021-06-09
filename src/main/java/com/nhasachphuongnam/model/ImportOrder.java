@@ -9,31 +9,31 @@ public class ImportOrder {
 	private String maDonHang;
 	// định dạng lưu trữ: mã mặt hàng:tên mặt hàng:số lượng:giá tiền
 	private List<ProductDetail> chiTiets;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date thoiGian;
-	private PersonalInfo nhanVien;
-	private Supplier nhaCungCap;
+	private String maNhanVien;
+	private String maNhaCungCap;
 
 	public ImportOrder() {
 		super();
 	}
 
-	public ImportOrder(List<ProductDetail> chiTiets, Date thoiGian, PersonalInfo nhanVien, Supplier nhaCungcap) {
+	public ImportOrder(List<ProductDetail> chiTiets, Date thoiGian, String maNhanVien, String maNhaCungCap) {
 		super();
 		this.chiTiets = chiTiets;
 		this.thoiGian = thoiGian;
-		this.nhanVien = nhanVien;
-		this.nhaCungCap = nhaCungcap;
+		this.maNhanVien = maNhanVien;
+		this.maNhaCungCap = maNhaCungCap;
 	}
 
-	public ImportOrder(String maDonHang, List<ProductDetail> chiTiets, Date thoiGian, PersonalInfo nhanVien,
-			Supplier nhaCungcap) {
+	public ImportOrder(String maDonHang, List<ProductDetail> chiTiets, Date thoiGian, String maNhanVien,
+			String maNhaCungCap) {
 		super();
 		this.maDonHang = maDonHang;
 		this.chiTiets = chiTiets;
 		this.thoiGian = thoiGian;
-		this.nhanVien = nhanVien;
-		this.nhaCungCap = nhaCungcap;
+		this.maNhanVien = maNhanVien;
+		this.maNhaCungCap = maNhaCungCap;
 	}
 
 	public String getMaDonHang() {
@@ -60,20 +60,20 @@ public class ImportOrder {
 		this.thoiGian = thoiGian;
 	}
 
-	public PersonalInfo getNhanVien() {
-		return nhanVien;
+	public String getMaNhanVien() {
+		return maNhanVien;
 	}
 
-	public void setNhanVien(PersonalInfo nhanVien) {
-		this.nhanVien = nhanVien;
+	public void setMaNhanVien(String maNhanVien) {
+		this.maNhanVien = maNhanVien;
 	}
 
-	public Supplier getNhaCungCap() {
-		return nhaCungCap;
+	public String getMaNhaCungCap() {
+		return maNhaCungCap;
 	}
 
-	public void setNhaCungCap(Supplier nhaCungcap) {
-		this.nhaCungCap = nhaCungcap;
+	public void setMaNhaCungCap(String maNhaCungCap) {
+		this.maNhaCungCap = maNhaCungCap;
 	}
 
 }

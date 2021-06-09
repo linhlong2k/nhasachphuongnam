@@ -40,10 +40,10 @@ public class StaffController {
 	//===============================================Model-Attribute===================================
 	
 	@ModelAttribute("danhSachNhanVien")
-	public List<PersonalInfo> danhSachNhanVien(){
+	public List<PersonalInfo> danhSachNhanVien() {
 		List<PersonalInfo> pis = piService.getAllNhanVien();
 		return pis;
-	}
+	} 
 	
 	@ModelAttribute("nhanVienMoi")
 	public PersonalInfo nhanVienMoi(){

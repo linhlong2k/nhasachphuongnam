@@ -1,18 +1,12 @@
 package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.math.BigDecimal;
-
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
 @Table(name="CT_HOADON")
-//@NamedQuery(name="CtHoadon.findAll", query="SELECT c FROM CtHoadon c")
+/* @NamedQuery(name="CtHoadon.findAll", query="SELECT c FROM CtHoadon c") */
 public class CtHoaDon implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,9 +15,6 @@ public class CtHoaDon implements Serializable {
 
 	@Column(name="GIA")
 	private BigDecimal gia;
-
-	@Column(name="GIAMGIA")
-	private float giamgia;
 
 	@Column(name="SOLUONG")
 	private int soLuong;
@@ -55,14 +46,6 @@ public class CtHoaDon implements Serializable {
 
 	public void setGia(BigDecimal gia) {
 		this.gia = gia;
-	}
-
-	public float getGiamgia() {
-		return this.giamgia;
-	}
-
-	public void setGiamgia(float giamgia) {
-		this.giamgia = giamgia;
 	}
 
 	public int getSoLuong() {

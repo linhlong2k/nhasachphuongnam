@@ -6,29 +6,40 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class ExportOrder {
-	
+
 	private String maDonHang;
 	// định dạng lưu trữ: mã mặt hàng:tên mặt hàng:số lượng:giá tiền
 	private List<ProductDetail> chiTiets;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date thoiGian;
-	private PersonalInfo nhanVien;
-	private PersonalInfo khachHang;
+	private String maNhanVien;
+	private String maKhachHang;
 	private String diaChi;
 	private String sdt;
-	
+
 	public ExportOrder() {
 		super();
 	}
 
-	public ExportOrder(String maDonHang, List<ProductDetail> chiTiets, Date thoiGian, PersonalInfo nhanVien,
-			PersonalInfo khachHang, String diaChi, String sdt) {
+	public ExportOrder(List<ProductDetail> chiTiets, Date thoiGian, String maNhanVien, String maKhachHang,
+			String diaChi, String sdt) {
+		super();
+		this.chiTiets = chiTiets;
+		this.thoiGian = thoiGian;
+		this.maNhanVien = maNhanVien;
+		this.maKhachHang = maKhachHang;
+		this.diaChi = diaChi;
+		this.sdt = sdt;
+	}
+
+	public ExportOrder(String maDonHang, List<ProductDetail> chiTiets, Date thoiGian, String maNhanVien,
+			String maKhachHang, String diaChi, String sdt) {
 		super();
 		this.maDonHang = maDonHang;
 		this.chiTiets = chiTiets;
 		this.thoiGian = thoiGian;
-		this.nhanVien = nhanVien;
-		this.khachHang = khachHang;
+		this.maNhanVien = maNhanVien;
+		this.maKhachHang = maKhachHang;
 		this.diaChi = diaChi;
 		this.sdt = sdt;
 	}
@@ -57,20 +68,20 @@ public class ExportOrder {
 		this.thoiGian = thoiGian;
 	}
 
-	public PersonalInfo getNhanVien() {
-		return nhanVien;
+	public String getMaNhanVien() {
+		return maNhanVien;
 	}
 
-	public void setNhanVien(PersonalInfo nhanVien) {
-		this.nhanVien = nhanVien;
+	public void setMaNhanVien(String maNhanVien) {
+		this.maNhanVien = maNhanVien;
 	}
 
-	public PersonalInfo getKhachHang() {
-		return khachHang;
+	public String getMaKhachHang() {
+		return maKhachHang;
 	}
 
-	public void setKhachHang(PersonalInfo khachHang) {
-		this.khachHang = khachHang;
+	public void setMaKhachHang(String maKhachHang) {
+		this.maKhachHang = maKhachHang;
 	}
 
 	public String getDiaChi() {
@@ -88,15 +99,5 @@ public class ExportOrder {
 	public void setSdt(String sdt) {
 		this.sdt = sdt;
 	}
-
-
-	
-	
-	//==================advanced========
-	/*
-	 * public void setKhachHang(String ma) {
-	 * 
-	 * }
-	 */
 
 }

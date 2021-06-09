@@ -25,10 +25,10 @@ import com.nhasachphuongnam.service.ProductTypeService;
 @RequestMapping("admin/mat-hang/") 
 public class ProductController {
 	
-	@Autowired(required=true)
+	@Autowired
 	ProductService productService;
 	
-	@Autowired(required=true)
+	@Autowired
 	ProductTypeService productTypeService;
 	
 	@Autowired
@@ -36,11 +36,13 @@ public class ProductController {
 	
 	//===============================================Model-Attribute===================================
 	
+
 	@ModelAttribute("danhSachMatHang")
 	public List<Product> danhSachMatHang(){
 		List<Product> matHangs = productService.getAll();
 		return matHangs;
 	}
+
 	
 	@ModelAttribute("matHangMoi")
 	public Product matHangMoi(){
@@ -53,7 +55,7 @@ public class ProductController {
 	}
 	
 	@ModelAttribute("danhSachLoaiMatHang")
-	public List<ProductType> danhSachLoaiMatHang(){
+	public List<ProductType> danhSachLoaiMatHang() {
 		List<ProductType> loaiMatHangs = productTypeService.getAll();
 		return loaiMatHangs;
 	}
@@ -194,7 +196,6 @@ public class ProductController {
 		try {
 			image = file.getBytes();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Product product = productService.getByID(id);

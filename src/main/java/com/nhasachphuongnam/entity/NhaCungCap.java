@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="NHACUNGCAP")
-//@NamedQuery(name="Nhacungcap.findAll", query="SELECT n FROM Nhacungcap n")
+/* @NamedQuery(name="Nhacungcap.findAll", query="SELECT n FROM Nhacungcap n") */
 public class NhaCungCap implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -20,19 +20,21 @@ import com.nhasachphuongnam.service.ProductTypeService;
 @RequestMapping("admin/loai-mat-hang/")
 public class ProductTypeController {
 	
-	@Autowired(required=true)
+	@Autowired
 	ProductTypeService productTypeService;
 	
-	@Autowired(required=true)
+	@Autowired
 	ProductService productService;
 	
 	//===============================================Model-Attribute===================================
 	
+
 	@ModelAttribute("danhSachLoaiMatHang")
-	public List<ProductType> danhSachLoaiMatHang(){
+	public List<ProductType> danhSachLoaiMatHang() {
 		List<ProductType> loaiMatHangs = productTypeService.getAll();
 		return loaiMatHangs;
 	}
+
 	
 	@ModelAttribute("loaiMatHangMoi")
 	public ProductType loaiMatHangMoi() {
@@ -43,9 +45,9 @@ public class ProductTypeController {
 	public ProductType loaiMatHangChinhSua() {
 		return new ProductType();
 	}
-	
+
 	@ModelAttribute("danhSachMatHang")
-	public List<Product> danhSachMatHang(){
+	public List<Product> danhSachMatHang() {
 		return productService.getAll();
 	}
 	

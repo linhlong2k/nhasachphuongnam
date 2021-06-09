@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name="MATHANG")
-//@NamedQuery(name="Mathang.findAll", query="SELECT m FROM Mathang m")
+/* @NamedQuery(name="Mathang.findAll", query="SELECT m FROM Mathang m") */
 public class MatHang implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -20,6 +20,9 @@ public class MatHang implements Serializable {
 
 	@Column(name="GIA")
 	private BigDecimal gia;
+
+	@Column(name="GIamGia")
+	private Float giamGia;
 
 	@Lob
 	@Column(name="HINHANH")
@@ -75,6 +78,14 @@ public class MatHang implements Serializable {
 
 	public void setGia(BigDecimal gia) {
 		this.gia = gia;
+	}
+
+	public Float getGiamGia() {
+		return this.giamGia;
+	}
+
+	public void setGiamGia(Float giamGia) {
+		this.giamGia = giamGia;
 	}
 
 	public byte[] getHinhAnh() {

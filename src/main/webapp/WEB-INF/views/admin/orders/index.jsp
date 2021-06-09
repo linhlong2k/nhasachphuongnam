@@ -52,8 +52,8 @@
                         <tr>
 							<td scope="row" style="margin: 0; padding: 10px;">${eo.maDonHang }</td>
 	                    	<td style="margin: 0; padding: 10px;">${eo.thoiGian }</td>
-	                    	<td style="margin: 0; padding: 10px;">${eo.nhanVien.ten }</td>
-	                    	<td style="margin: 0; padding: 10px;">${eo.khachHang.ten }</td>
+	                    	<td style="margin: 0; padding: 10px;">${eo.maNhanVien }</td>
+	                    	<td style="margin: 0; padding: 10px;">${eo.maKhachHang }</td>
 	                    	<td style="margin: 0; padding: 0;">
 	                    		<form:form action="admin/don-hang/xoa-don-hang/${eo.maDonHang }.htm">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>
@@ -93,8 +93,8 @@
                         <tr>
 							<td scope="row" style="margin: 0; padding: 10px;" >${io.maDonHang }</td>
 	                    	<td style="margin: 0; padding: 10px;">${io.thoiGian }</td>
-	                    	<td style="margin: 0; padding: 10px;">${io.nhanVien.ten }</td>
-	                    	<td style="margin: 0; padding: 10px;">${io.nhaCungCap.tenNhaCungCap }</td>
+	                    	<td style="margin: 0; padding: 10px;">${io.maNhanVien }</td>
+	                    	<td style="margin: 0; padding: 10px;">${io.maNhaCungCap }</td>
 	                    	<td style="margin: 0; padding: 0;">
 	                    		<form:form action="admin/don-hang/xoa-don-hang/${io.maDonHang }.htm">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>

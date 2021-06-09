@@ -105,4 +105,23 @@ public class MatHangDAOImpl implements MatHangDAO {
 		List<String> results = (List<String>)query.list();
 		return results.get(0);
 	}
+	
+	//chưa kiểm tra số lượng n với số lượng ban đầu.
+	public boolean changeSoLuong(String ma, int n) {
+		MatHang temp = this.getByID(ma);
+		temp.setSoLuong(temp.getSoLuong() + n);
+		Session session = factory.openSession();
+		Transaction tran = session.beginTransaction();
+		try {
+			session.update(temp);
+			tran.commit();
+		} catch(HibernateException ex) {
+			tran.rollback();
+			ex.printStackTrace();
+			session.close();
+			return false;
+		} 
+		session.close();
+		return true;
+	}
 }

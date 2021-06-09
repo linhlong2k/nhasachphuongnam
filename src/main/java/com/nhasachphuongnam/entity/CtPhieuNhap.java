@@ -6,7 +6,9 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name="CT_PHIEUNHAP")
-//@NamedQuery(name="CtPhieunhap.findAll", query="SELECT c FROM CtPhieunhap c")
+/*
+ * @NamedQuery(name="CtPhieunhap.findAll", query="SELECT c FROM CtPhieunhap c")
+ */
 public class CtPhieuNhap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -17,7 +19,7 @@ public class CtPhieuNhap implements Serializable {
 	private BigDecimal gia;
 
 	@Column(name="GIAMGIA")
-	private float giamgia;
+	private Float giamgia;
 
 	@Column(name="SOLUONG")
 	private int soLuong;
@@ -51,11 +53,11 @@ public class CtPhieuNhap implements Serializable {
 		this.gia = gia;
 	}
 
-	public float getGiamgia() {
+	public Float getGiamgia() {
 		return this.giamgia;
 	}
 
-	public void setGiamgia(float giamgia) {
+	public void setGiamgia(Float giamgia) {
 		this.giamgia = giamgia;
 	}
 

@@ -7,5 +7,8 @@
 * Nếu LoaiMatHang bị xóa, các mặt hàng thuộc LoaiMatHang này sẽ bị chuyển về LoaiMatHang null (L000000000)
 * NhanVien với KhachHang trong entity bị gộp thành PersonalInfo trong model;
 * Xóa NhanVien, KhachHang là xóa luôn TaiKhoan của họ
-
+* Tình trạng - Hóa đơn:
+	1 - đặt hàng
+	2 - xác nhận
+	3 - thành công
 

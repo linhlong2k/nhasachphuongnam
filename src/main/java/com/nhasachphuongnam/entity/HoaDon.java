@@ -1,24 +1,13 @@
 package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
 @Table(name="HOADON")
-//@NamedQuery(name="Hoadon.findAll", query="SELECT h FROM Hoadon h")
+/* @NamedQuery(name="Hoadon.findAll", query="SELECT h FROM Hoadon h") */
 public class HoaDon implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,16 +15,21 @@ public class HoaDon implements Serializable {
 	@Column(name="MAHD")
 	private String maHD;
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="dd/MM/yyyy")
-	@Column(name="THOIGIAN")
-	private Date thoiGian;
-	
+	@Column(name="DiaChi")
+	private String diaChi;
+
+	@Column(name="GIAMGIA")
+	private Float giamGia;
+
 	@Column(name="SDT")
 	private String sdt;
-	
-	@Column(name="DIACHI")
-	private String diaChi;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="THOIGIAN")
+	private Date thoiGian;
+
+	@Column(name="TINHTRANG")
+	private String tinhtrang;
 
 	//bi-directional many-to-one association to CtHoadon
 	@OneToMany(mappedBy="hoadon")
@@ -62,12 +56,44 @@ public class HoaDon implements Serializable {
 		this.maHD = maHD;
 	}
 
+	public String getDiaChi() {
+		return this.diaChi;
+	}
+
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+
+	public Float getGiamGia() {
+		return this.giamGia;
+	}
+
+	public void setGiamGia(Float giamGia) {
+		this.giamGia = giamGia;
+	}
+
+	public String getSdt() {
+		return this.sdt;
+	}
+
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
+	}
+
 	public Date getThoiGian() {
 		return this.thoiGian;
 	}
 
 	public void setThoiGian(Date thoiGian) {
 		this.thoiGian = thoiGian;
+	}
+
+	public String getTinhtrang() {
+		return this.tinhtrang;
+	}
+
+	public void setTinhtrang(String tinhtrang) {
+		this.tinhtrang = tinhtrang;
 	}
 
 	public List<CtHoaDon> getCtHoadons() {
@@ -107,22 +133,5 @@ public class HoaDon implements Serializable {
 	public void setNhanvien(NhanVien nhanvien) {
 		this.nhanvien = nhanvien;
 	}
-
-	public String getSdt() {
-		return sdt;
-	}
-
-	public void setSdt(String sdt) {
-		this.sdt = sdt;
-	}
-
-	public String getDiaChi() {
-		return diaChi;
-	}
-
-	public void setDiaChi(String diaChi) {
-		this.diaChi = diaChi;
-	}
-	
 
 }

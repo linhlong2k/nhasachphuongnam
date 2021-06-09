@@ -43,9 +43,6 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	@Autowired
 	CtHoaDonDAO ctHoaDonDAO;
 	
-	@Autowired
-	PIService piService;
-	
 	public String theNextMa() {
 		String ma = hoaDonDAO.getLastMa();
 		int index = Integer.parseInt(ma.substring(2, ma.length()));
@@ -58,15 +55,13 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	}
 	
 	public ExportOrder convert(HoaDon var) {
-		PersonalInfo temp1 = piService.getByID(var.getKhachhang().getMaKH());
 		ExportOrder res = new ExportOrder();
-		res.setKhachHang(temp1);
+		res.setMaKhachHang(var.getKhachhang().getMaKH());
 		res.setDiaChi(var.getDiaChi());
 		res.setSdt(var.getSdt());
 		res.setMaDonHang(var.getMaHD());
 		res.setThoiGian(var.getThoiGian());
-		temp1 = piService.getByID(var.getNhanvien().getMaNV());
-		res.setNhanVien(temp1);
+		res.setMaNhanVien(var.getNhanvien().getMaNV());
 		List<ProductDetail> temp2 = new ArrayList<ProductDetail>();
 		ProductDetail temp3;
 		List<CtHoaDon> temp4 = ctHoaDonDAO.getbyMaHD(var.getMaHD());
@@ -75,7 +70,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 			temp3.setMaMatHang(i.getMathang().getMaMH());
 			temp3.setSoLuong(i.getSoLuong());
 			temp3.setGia(i.getGia().longValue());
-			temp3.setGiamGia(i.getGiamgia());
+			/* temp3.setGiamGia(i.getGiamgia()); */
 			temp2.add(temp3);
 		}
 		res.setChiTiets(temp2);
@@ -87,9 +82,9 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		if(temp1 == null)
 			temp1 = new HoaDon();
 		temp1.setDiaChi(var.getDiaChi());
-		KhachHang temp2 = khachHangDAO.getByID(var.getKhachHang().getMa());
+		KhachHang temp2 = khachHangDAO.getByID(var.getMaKhachHang());
 		temp1.setKhachhang(temp2);
-		NhanVien temp3 = nhanVienDAO.getByID(var.getNhanVien().getMa());
+		NhanVien temp3 = nhanVienDAO.getByID(var.getMaNhanVien());
 		temp1.setNhanvien(temp3);
 		temp1.setSdt(var.getSdt());
 		temp1.setThoiGian(var.getThoiGian());

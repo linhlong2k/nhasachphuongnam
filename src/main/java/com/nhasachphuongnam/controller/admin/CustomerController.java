@@ -21,12 +21,13 @@ public class CustomerController {
 	
 	//===============================================Model-Attribute===================================
 	
+	
 	@ModelAttribute("danhSachKhachHang")
-	public List<PersonalInfo> danhSachKhachHang(){
+	public List<PersonalInfo> danhSachKhachHang() {
 		List<PersonalInfo> pis = piService.getAllKhachHang();
 		return pis;
 	}
-	
+	 
 	//===============================================Controller========================================
 	@RequestMapping("index")
 	public String index(ModelMap model) {

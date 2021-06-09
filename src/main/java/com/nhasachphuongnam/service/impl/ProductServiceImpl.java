@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	public Product convert(MatHang matHang) {
-		Product res = new Product(matHang.getMaMH(), matHang.getTenMH(), matHang.getHinhAnh(), matHang.getSoLuong(), matHang.getMoTaNgan(), matHang.getMoTa(), matHang.getAllow(), matHang.getGia().longValue(), matHang.getLoaimathang().getMaLoai());
+		Product res = new Product(matHang.getMaMH(), matHang.getTenMH(), matHang.getHinhAnh(), matHang.getSoLuong(), matHang.getMoTaNgan(), matHang.getMoTa(), matHang.getAllow(), matHang.getGia().longValue(), matHang.getGiamGia(), matHang.getLoaimathang().getMaLoai());
 		return res;
 	}
 	
@@ -59,6 +59,8 @@ public class ProductServiceImpl implements ProductService{
 			matHang.setMoTaNgan(product.getMoTaNgan());
 		if(product.getMoTa() != null)
 			matHang.setMoTa(product.getMoTa());
+		if(product.getGiamGia() != null)
+			matHang.setGiamGia(product.getGiamGia());                                             
 		matHang.setSoLuong(product.getSoLuong());
 		matHang.setLoaimathang(loaiMatHangDAO.getByID(product.getMaLoai()));
 		matHang.setGia(new BigDecimal(product.getGia()));

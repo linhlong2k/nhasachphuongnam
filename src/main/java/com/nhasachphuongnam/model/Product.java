@@ -11,36 +11,39 @@ public class Product {
 	private String moTa;
 	private boolean daXoa;
 	private long gia;
+	private Float giamGia;
 	private String maLoai;
 
 	public Product() {
 		super();
 	}
-	
-	public Product(String maMH, String tenMH, byte[] hinhAnh, int soLuong, String moTaNgan, String moTa, boolean daXoa,
-			long gia, String maLoai) {
+
+	public Product(String tenMatHang, byte[] hinhAnh, int soLuong, String moTaNgan, String moTa, boolean daXoa,
+			long gia, Float giamGia, String maLoai) {
 		super();
-		this.maMatHang = maMH;
-		this.tenMatHang = tenMH;
+		this.tenMatHang = tenMatHang;
 		this.hinhAnh = hinhAnh;
 		this.soLuong = soLuong;
 		this.moTaNgan = moTaNgan;
 		this.moTa = moTa;
 		this.daXoa = daXoa;
 		this.gia = gia;
+		this.giamGia = giamGia;
 		this.maLoai = maLoai;
 	}
-	
-	public Product(String tenMH, byte[] hinhAnh, int soLuong, String moTaNgan, String moTa, boolean daXoa, long gia,
-			String maLoai) {
+
+	public Product(String maMatHang, String tenMatHang, byte[] hinhAnh, int soLuong, String moTaNgan, String moTa,
+			boolean daXoa, long gia, Float giamGia, String maLoai) {
 		super();
-		this.tenMatHang = tenMH;
+		this.maMatHang = maMatHang;
+		this.tenMatHang = tenMatHang;
 		this.hinhAnh = hinhAnh;
 		this.soLuong = soLuong;
 		this.moTaNgan = moTaNgan;
 		this.moTa = moTa;
 		this.daXoa = daXoa;
 		this.gia = gia;
+		this.giamGia = giamGia;
 		this.maLoai = maLoai;
 	}
 
@@ -108,6 +111,14 @@ public class Product {
 		this.gia = gia;
 	}
 
+	public Float getGiamGia() {
+		return giamGia;
+	}
+
+	public void setGiamGia(Float giamGia) {
+		this.giamGia = giamGia;
+	}
+
 	public String getMaLoai() {
 		return maLoai;
 	}
@@ -115,20 +126,20 @@ public class Product {
 	public void setMaLoai(String maLoai) {
 		this.maLoai = maLoai;
 	}
-
-	/* =============================advanced=========================== */
 	
+	/* =============================advanced=========================== */
+
 	public String getBase64Photo() {
 		String base64DataString = null;
-		if (hinhAnh != null) {                
+		if (hinhAnh != null) {
 			byte[] encode = java.util.Base64.getEncoder().encode(this.getHinhAnh());
-            try {
-				base64DataString =  new String(encode, "UTF-8");
+			try {
+				base64DataString = new String(encode, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        }
+		}
 		return base64DataString;
 	}
 }

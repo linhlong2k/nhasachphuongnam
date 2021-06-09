@@ -6,7 +6,9 @@ import java.util.List;
 
 @Entity
 @Table(name="LOAIMATHANG")
-//@NamedQuery(name="Loaimathang.findAll", query="SELECT l FROM Loaimathang l")
+/*
+ * @NamedQuery(name="Loaimathang.findAll", query="SELECT l FROM Loaimathang l")
+ */
 public class LoaiMatHang implements Serializable {
 	private static final long serialVersionUID = 1L;
 

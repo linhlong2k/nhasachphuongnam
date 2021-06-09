@@ -40,6 +40,13 @@
 		</li>
 		
 		<li class="item">
+			<a href="admin/tao-don-hang-nhap/index.htm" class="">
+				<i class="zmdi zmdi-plus-square"></i>
+				<span>Thêm đơn hàng nhập</span>
+			</a>
+		</li>
+		
+		<li class="item">
 			<a href="admin/khach-hang/index.htm" class="">
 				<i class="zmdi zmdi-male-female"></i>
 				<span>Khách hàng</span>
@@ -52,6 +59,14 @@
 				<span>Nhà cung cấp</span>
 			</a>
 		</li>
+		
+		<li>
+			<a href="user/index.htm">
+				<i class="zmdi zmdi-arrow-right"></i>
+				<span>Chuyển đến trang user</span>
+			</a>
+		</li>
+		
 		<!-- 		============================================================================ -->
 		<li class="sidebar-header">Admin</li>
 	      <li class="item">

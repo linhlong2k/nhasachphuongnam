@@ -17,5 +17,7 @@ public interface MatHangDAO {
 	List<MatHang> getAll();
 	
 	String getLastMa();
+	
+	boolean changeSoLuong(String ma, int n);
 
 }

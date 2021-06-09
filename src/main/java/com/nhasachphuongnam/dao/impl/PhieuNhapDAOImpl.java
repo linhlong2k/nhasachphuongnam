@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nhasachphuongnam.dao.CtPhieuNhapDAO;
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
-import com.nhasachphuongnam.entity.CtPhieuNhap;
 import com.nhasachphuongnam.entity.PhieuNhap;
 
 @Repository
@@ -21,6 +21,9 @@ import com.nhasachphuongnam.entity.PhieuNhap;
 public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 	@Autowired
 	SessionFactory factory;
+	
+	@Autowired
+	CtPhieuNhapDAO ctPhieuNhapDAO;
 
 	public boolean add(PhieuNhap phieuNhap) {
 		boolean flag = true;

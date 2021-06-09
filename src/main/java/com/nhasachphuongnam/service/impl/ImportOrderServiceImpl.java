@@ -1,5 +1,6 @@
 package com.nhasachphuongnam.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,20 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nhasachphuongnam.dao.CtHoaDonDAO;
 import com.nhasachphuongnam.dao.CtPhieuNhapDAO;
 import com.nhasachphuongnam.dao.KhachHangDAO;
+import com.nhasachphuongnam.dao.MatHangDAO;
 import com.nhasachphuongnam.dao.NhaCungCapDAO;
 import com.nhasachphuongnam.dao.NhanVienDAO;
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
 import com.nhasachphuongnam.entity.CtPhieuNhap;
+import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.entity.NhaCungCap;
 import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.entity.PhieuNhap;
 import com.nhasachphuongnam.model.ImportOrder;
-import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.model.ProductDetail;
-import com.nhasachphuongnam.model.Supplier;
 import com.nhasachphuongnam.service.ImportOrderService;
 import com.nhasachphuongnam.service.PIService;
 import com.nhasachphuongnam.service.SupplierService;
@@ -45,6 +45,9 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	CtPhieuNhapDAO ctPhieuNhapDAO;
 	
 	@Autowired
+	MatHangDAO matHangDAO;
+	
+	@Autowired
 	PIService piService;
 	
 	@Autowired
@@ -65,10 +68,8 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 		ImportOrder res = new ImportOrder();
 		res.setMaDonHang(var.getMaPN());
 		res.setThoiGian(var.getThoiGian());
-		PersonalInfo temp2 = piService.getByID(var.getNhanvien().getMaNV());
-		res.setNhanVien(temp2);
-		Supplier temp1 = supplierService.getByID(var.getNhacungcap().getMaNCC());
-		res.setNhaCungCap(temp1);
+		res.setMaNhanVien(var.getNhanvien().getMaNV());
+		res.setMaNhaCungCap(var.getNhacungcap().getMaNCC());
 		List<ProductDetail> temp3 = new ArrayList<ProductDetail>();
 		ProductDetail temp4;
 		List<CtPhieuNhap> temp5 = ctPhieuNhapDAO.getbyMaPN(var.getMaPN());
@@ -88,18 +89,32 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 		PhieuNhap res = phieuNhapDAO.getByID(var.getMaDonHang());
 		if(res == null)
 			res = new PhieuNhap();
-		NhaCungCap temp1 = nhaCungCapDAO.getByID(var.getNhaCungCap().getMaNhaCungCap());
+		NhaCungCap temp1 = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
 		res.setNhacungcap(temp1);
-		NhanVien temp2 = nhanVienDAO.getByID(var.getNhanVien().getMa());
+		NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
 		res.setNhanvien(temp2);
 		res.setThoiGian(var.getThoiGian());
 		return res;
 	}
 	
+	public CtPhieuNhap convert(ProductDetail var) {
+		CtPhieuNhap res = new CtPhieuNhap();
+		MatHang temp = matHangDAO.getByID(var.getMaMatHang());
+		res.setMathang(temp);
+		res.setSoLuong(var.getSoLuong());
+		res.setGia(BigDecimal.valueOf(var.getGia()));
+		res.setGiamgia(var.getGiamGia());
+		return res;
+	}
+	
 	//chưa cập nhập số lượng của mặt hàng
 	public boolean add(ImportOrder var) {
+		var.setMaDonHang(this.theNextMa());
 		PhieuNhap temp1 = this.convert(var);
-		temp1.setMaPN(this.theNextMa());
+		for(ProductDetail i: var.getChiTiets()) {
+			temp1.addCtPhieunhap(convert(i));
+			/* matHangDAO.changeSoLuong(i.getMaMatHang(), 0 - i.getSoLuong()); */
+		}
 		if(phieuNhapDAO.add(temp1))
 			return true;
 		return false;

@@ -59,14 +59,14 @@ public class LoginController {
 			@ModelAttribute("thongTinDangNhap") Login login,
 			BindingResult errors) {
 		Login newLogin = null;
-		if (login.getUsername().trim().length() == 0)
+		if (login.getUsername().trim().length() == 0) {
 			errors.rejectValue("username", "thongTinDangNhap", "Vui lòng nhập tên đăng nhập!");
-		else
+		} else {
 			newLogin = loginService.getByID(login.getUsername());
-		
-		if (login.getPassword().trim().length() == 0)
+		}
+		if (login.getPassword().trim().length() == 0) {
 			errors.rejectValue("password", "thongTinDangNhap", "Vui lòng nhập mật khẩu!");
-		else if (loginService.checkLogin(login)) {
+		} else if (loginService.checkLogin(login)) {
 			if(newLogin.getRole().getMaRole().equals("0") || newLogin.getRole().getMaRole().equals("1")) {
 				Cookie userCookie = new Cookie("user", String.valueOf(nhanVienDAO.getMaByUsername(newLogin.getUsername())));
 				userCookie.setMaxAge(24 * 60 * 60);
@@ -82,10 +82,10 @@ public class LoginController {
 				roleCookie.setMaxAge(24 * 60 * 60);
 				response.addCookie(roleCookie);
 			}
-			return "redirect:index.htm";
-		} else
+			return "redirect:/.htm";
+		} else {
 			model.addAttribute("message", "Tên đăng nhập hoặc mật khẩu không chính xác!");
-		
+		}
 		return "login/login";
 	}
 	
