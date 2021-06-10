@@ -48,8 +48,8 @@
 												</c:otherwise>
 											</c:choose>
 										</a>
-										<form:form class="aa-add-card-btn" action="san-pham.htm?add-product-cart=${prod.maMatHang}" method="POST">
-											<span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng
+										<form:form class="aa-add-card-btn" action="san-pham.htm?id=${prod.maMatHang }" method="POST">
+											<span class="fa fa-shopping-cart"></span><button style="background-color: transparent; border-style: hidden;">Thêm vào giỏ hàng</button>
 										</form:form>
 										<%-- <a class="aa-add-card-btn" href="san-pham.htm?add-product-cart=${prod.maMatHang}" >
 											<span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng
@@ -59,7 +59,7 @@
 												<a href="chi-tiet-san-pham.htm?id=${prod.maMatHang}">${prod.tenMatHang}</a>
 											</h4>
 											<c:choose>
-												<c:when test="${empty prod.giamGia}">
+												<c:when test="${prod.giamGia.equals(0.0)}">
 													<span class="aa-product-price">
 														<fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value="${prod.gia }" type="currency" />
 													</span>

@@ -63,8 +63,8 @@ public class ChiTietSanPhamController {
 	public String addToCart(ModelMap model,
 			HttpServletRequest request,
 			HttpServletResponse response,
-			@ModelAttribute("gioHang") List<GioHang> gioHangs) {
-		String maMatHang = String.valueOf(request.getParameter("id"));
+			@ModelAttribute("gioHang") List<GioHang> gioHangs,
+			@RequestParam("id") String maMatHang) {
 		GioHang temp = new GioHang();
 		temp.setMaMatHang(maMatHang);
 		temp.setSoLuong(1);

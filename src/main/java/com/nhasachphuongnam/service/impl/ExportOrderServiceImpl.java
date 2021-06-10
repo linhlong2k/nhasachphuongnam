@@ -1,5 +1,6 @@
 package com.nhasachphuongnam.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,24 +11,25 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nhasachphuongnam.dao.CtHoaDonDAO;
 import com.nhasachphuongnam.dao.HoaDonDAO;
 import com.nhasachphuongnam.dao.KhachHangDAO;
+import com.nhasachphuongnam.dao.MatHangDAO;
 import com.nhasachphuongnam.dao.NhanVienDAO;
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
 import com.nhasachphuongnam.entity.CtHoaDon;
-import com.nhasachphuongnam.entity.CtPhieuNhap;
+import com.nhasachphuongnam.entity.CtHoaDonPK;
 import com.nhasachphuongnam.entity.HoaDon;
 import com.nhasachphuongnam.entity.KhachHang;
-import com.nhasachphuongnam.entity.LoaiMatHang;
 import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.model.ExportOrder;
-import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.model.ProductDetail;
-import com.nhasachphuongnam.model.ProductType;
 import com.nhasachphuongnam.service.ExportOrderService;
-import com.nhasachphuongnam.service.PIService;
 
 @Repository
 @Transactional
 public class ExportOrderServiceImpl implements ExportOrderService{
+	
+	@Autowired
+	MatHangDAO matHangDAO;
+
 	@Autowired
 	HoaDonDAO hoaDonDAO;
 	
@@ -62,6 +64,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		res.setMaDonHang(var.getMaHD());
 		res.setThoiGian(var.getThoiGian());
 		res.setMaNhanVien(var.getNhanvien().getMaNV());
+		res.setGiamGia(var.getGiamGia());
 		List<ProductDetail> temp2 = new ArrayList<ProductDetail>();
 		ProductDetail temp3;
 		List<CtHoaDon> temp4 = ctHoaDonDAO.getbyMaHD(var.getMaHD());
@@ -77,9 +80,10 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
+
 	public HoaDon convert(ExportOrder var) {
 		HoaDon temp1 = hoaDonDAO.getByID(var.getMaDonHang());
-		if(temp1 == null)
+		if (temp1 == null)
 			temp1 = new HoaDon();
 		temp1.setDiaChi(var.getDiaChi());
 		KhachHang temp2 = khachHangDAO.getByID(var.getMaKhachHang());
@@ -88,15 +92,38 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		temp1.setNhanvien(temp3);
 		temp1.setSdt(var.getSdt());
 		temp1.setThoiGian(var.getThoiGian());
+		temp1.setGiamGia(var.getGiamGia());
+		temp1.setTinhtrang(var.getTinhTrang());
 		return temp1;
 	}
 	
-	public boolean add(ExportOrder var) {
-		HoaDon temp1 = this.convert(var);
+	public String add(ExportOrder var) {
+		/*var.setMaDonHang(this.theNextMa());*/
+		/* HoaDon temp1 = this.convert(var); */
+		HoaDon temp1 = new HoaDon();
 		temp1.setMaHD(this.theNextMa());
+		temp1.setKhachhang(khachHangDAO.getByID(var.getMaKhachHang()));
+		temp1.setSdt(var.getSdt());
+		temp1.setThoiGian(var.getThoiGian());
+		temp1.setGiamGia(var.getGiamGia());
+		temp1.setTinhtrang(var.getTinhTrang());
+		temp1.setDiaChi(var.getDiaChi());
+		List<CtHoaDon> CTHoaDons = new ArrayList<CtHoaDon>();
+		for(ProductDetail i: var.getChiTiets()) {
+			CtHoaDonPK pk = new CtHoaDonPK();
+			pk.setMahd(temp1.getMaHD());
+			pk.setMamh(i.getMaMatHang());
+			CtHoaDon temp2 = new CtHoaDon();
+			temp2.setId(pk);
+			temp2.setSoLuong(i.getSoLuong());
+			temp2.setGia(BigDecimal.valueOf(i.getGia()));
+			matHangDAO.changeSoLuong(i.getMaMatHang(), 0 - i.getSoLuong());
+			CTHoaDons.add(temp2);
+		}
+		temp1.setCtHoadons(CTHoaDons);
 		if(hoaDonDAO.add(temp1))
-			return true;
-		return false;
+			return temp1.getMaHD();
+		return null;
 	}
 	
 	public boolean update(ExportOrder var) {

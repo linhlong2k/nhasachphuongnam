@@ -21,7 +21,7 @@ public class MatHang implements Serializable {
 	@Column(name="GIA")
 	private BigDecimal gia;
 
-	@Column(name="GIamGia")
+	@Column(name="GIAMGIA")
 	private Float giamGia;
 
 	@Lob

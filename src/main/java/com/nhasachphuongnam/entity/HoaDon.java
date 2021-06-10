@@ -2,6 +2,9 @@ package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +27,8 @@ public class HoaDon implements Serializable {
 	@Column(name="SDT")
 	private String sdt;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="THOIGIAN")
 	private Date thoiGian;
 

@@ -62,7 +62,7 @@
 													<div class="row">
 														<div class="col-md-12">
 															<div class="aa-checkout-single-bill">
-																<textarea cols="8" rows="3" name="diaChi" type="text" value="${user.diaChi }" required="required" pattern="[A-Za-z]" placeholder="Nhập địa chỉ"></textarea>
+																<textarea cols="8" rows="3" name="diaChi" type="text" required="required" pattern="[A-Za-z]" placeholder="Nhập địa chỉ">${user.diaChi }</textarea>
 															</div>
 														</div>
 													</div>

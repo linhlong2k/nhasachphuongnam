@@ -2,6 +2,9 @@ package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +25,8 @@ public class KhachHang implements Serializable {
 	@Column(name="HINHANH")
 	private byte[] hinhAnh;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="NGAYSINH")
 	private Date ngaySinh;
 

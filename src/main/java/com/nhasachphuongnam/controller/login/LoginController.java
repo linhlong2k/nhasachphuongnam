@@ -131,6 +131,9 @@ public class LoginController {
 		cookie = new Cookie("role", null); // Not necessary, but saves bandwidth.
 		cookie.setMaxAge(0); // Don't set to -1 or it will become a session cookie!
 		response.addCookie(cookie);
+		cookie = new Cookie("gioHang", null); // Not necessary, but saves bandwidth.
+		cookie.setMaxAge(0); // Don't set to -1 or it will become a session cookie!
+		response.addCookie(cookie);
 		return "user/index";
 	}
 }

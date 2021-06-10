@@ -11,4 +11,5 @@
 	1 - đặt hàng
 	2 - xác nhận
 	3 - thành công
+* /nhasachphuongnam/src/main/webapp/WEB-INF/views/user/product.jsp line:62 : không thể so sánh float = 0
 

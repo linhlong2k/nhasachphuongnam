@@ -16,13 +16,15 @@ public class ExportOrder {
 	private String maKhachHang;
 	private String diaChi;
 	private String sdt;
+	private Float giamGia;
+	private String tinhTrang;
 
 	public ExportOrder() {
 		super();
 	}
 
 	public ExportOrder(List<ProductDetail> chiTiets, Date thoiGian, String maNhanVien, String maKhachHang,
-			String diaChi, String sdt) {
+			String diaChi, String sdt, Float giamGia, String tinhTrang) {
 		super();
 		this.chiTiets = chiTiets;
 		this.thoiGian = thoiGian;
@@ -30,10 +32,12 @@ public class ExportOrder {
 		this.maKhachHang = maKhachHang;
 		this.diaChi = diaChi;
 		this.sdt = sdt;
+		this.giamGia = giamGia;
+		this.tinhTrang = tinhTrang;
 	}
 
 	public ExportOrder(String maDonHang, List<ProductDetail> chiTiets, Date thoiGian, String maNhanVien,
-			String maKhachHang, String diaChi, String sdt) {
+			String maKhachHang, String diaChi, String sdt, Float giamGia, String tinhTrang) {
 		super();
 		this.maDonHang = maDonHang;
 		this.chiTiets = chiTiets;
@@ -42,6 +46,8 @@ public class ExportOrder {
 		this.maKhachHang = maKhachHang;
 		this.diaChi = diaChi;
 		this.sdt = sdt;
+		this.giamGia = giamGia;
+		this.tinhTrang = tinhTrang;
 	}
 
 	public String getMaDonHang() {
@@ -98,6 +104,22 @@ public class ExportOrder {
 
 	public void setSdt(String sdt) {
 		this.sdt = sdt;
+	}
+
+	public Float getGiamGia() {
+		return giamGia;
+	}
+
+	public void setGiamGia(Float giamGia) {
+		this.giamGia = giamGia;
+	}
+
+	public String getTinhTrang() {
+		return tinhTrang;
+	}
+
+	public void setTinhTrang(String tinhTrang) {
+		this.tinhTrang = tinhTrang;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.HoaDonDAO;
+import com.nhasachphuongnam.entity.CtHoaDon;
 import com.nhasachphuongnam.entity.HoaDon;
 
 @Repository
@@ -28,6 +29,9 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 		Transaction tran = session.beginTransaction();
 		try {
 			session.save(hoaDon);
+			for(CtHoaDon i: hoaDon.getCtHoadons()) {
+				session.save(i);
+			}
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();
