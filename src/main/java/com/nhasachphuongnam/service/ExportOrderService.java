@@ -1,16 +1,10 @@
 package com.nhasachphuongnam.service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.nhasachphuongnam.entity.CtHoaDon;
-import com.nhasachphuongnam.entity.CtHoaDonPK;
 import com.nhasachphuongnam.entity.HoaDon;
-import com.nhasachphuongnam.entity.KhachHang;
-import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.model.ExportOrder;
-import com.nhasachphuongnam.model.ProductDetail;
+import com.nhasachphuongnam.model.Product;
 
 public interface ExportOrderService {
 	
@@ -29,4 +23,15 @@ public interface ExportOrderService {
 	ExportOrder getByID(String ma);
 	
 	List<ExportOrder> getAll();
+	
+	List<ExportOrder> getDanhSachDatHang();
+	
+	List<Product> getDanhSachMatHangByMaHD(String ma);
+	
+	List<ExportOrder> getDanhSachGiaoHang();
+	
+	String xacNhanDatHang(String ma, String maNhanVien);
+	
+	String xacNhanNhanHang(String ma);
+	
 }

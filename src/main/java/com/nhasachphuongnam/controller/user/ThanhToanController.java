@@ -85,10 +85,10 @@ public class ThanhToanController {
 			temp2.setSoLuong(i.getSoLuong());
 			Product temp3 = productService.getByID(i.getMaMatHang());
 			if(temp3 == null) {
-				model.addAttribute("message", "Không tìm thấy mặt hàng có mã mặt hàng " + i.getMaMatHang() + "!");
+				model.addAttribute("message", "Không tìm thấy mặt hàng " + temp3.getTenMatHang() + "!");
 				return "user/payment";
 			} else if(temp3.getSoLuong() < i.getSoLuong()) {
-				model.addAttribute("message", "Thanh toán không thành công, mặt hàng có mã mặt hàng " + i.getMaMatHang() + " có số lượng quá nhiều!");
+				model.addAttribute("message", "Thanh toán không thành công, mặt hàng " + temp3.getTenMatHang() + " có số lượng quá nhiều!");
 				return "user/payment";
 			}
 			temp2.setGia((long)(temp3.getGia() * (1 - temp3.getGiamGia())));

@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nhasachphuongnam.model.ImportOrder;
+import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.model.Product;
 import com.nhasachphuongnam.model.ProductDetail;
 import com.nhasachphuongnam.model.Supplier;
@@ -56,10 +58,8 @@ public class CreateImportOrderController {
 		return matHangs;
 	}
 	
-
 	@ModelAttribute("donHangNhapMoi")	//đơn hàng nhập mới
 	public ImportOrder donHangNhapMoi() {
-		System.out.println("đơn hàng nhập mới!" + this.newImportOrder.getMaNhaCungCap());;
 		return this.newImportOrder;
 	}
 
@@ -74,16 +74,23 @@ public class CreateImportOrderController {
 		return new ProductDetail();
 	}
 	
+	public void reloadModel(ModelMap model) {
+		//model.addAttribute("danhSachNhaCungCap", this.danhSachNhaCungCap()); //không cần reload
+		model.addAttribute("danhSachMatHang", this.danhSachMatHang());
+		model.addAttribute("donHangNhapMoi", this.donHangNhapMoi());
+		model.addAttribute("danhSachMatHangDaChon", this.danhSachMatHangDaChon());
+		model.addAttribute("matHangChon", this.matHangChon());
+	}
+	
 	//====================Controller==========================
 	
-	@RequestMapping("index")
+	@GetMapping(value="")
 	public String index(ModelMap model) {
-		this.selecteds = new ArrayList<ProductDetail>();
 		return "admin/orders/createIO";
 	}
 	
-	@RequestMapping(value="thong-tin-don-hang-nhap", method=RequestMethod.POST)
-	public String themThongTin(ModelMap model,
+	@PostMapping(value="", params="linkPinDonHang")		//ghim thông tin đơn hàng để modelAttribute donHangNhapMoi không bị reload
+	public String pinThongTin(ModelMap model,
 			@ModelAttribute("donHangNhapMoi") ImportOrder importOrder) {
 		if(importOrder.getThoiGian() == null) {
 			model.addAttribute("message", "Thông tin đơn hàng nhập mới không đủ\nVui lòng nhập thời gian");
@@ -93,28 +100,28 @@ public class CreateImportOrderController {
 		return "admin/orders/createIO";
 	}
 	
-	@RequestMapping(value="them-mat-hang", method=RequestMethod.POST)
+	@PostMapping(value="", params="linkAddProduct")
 	public String themMatHang(ModelMap model,
-			@ModelAttribute("matHangChon") ProductDetail proddetail) {
+			@ModelAttribute("matHangChon") ProductDetail prodDetail) {
 		boolean flag = true;
 		for(ProductDetail i: this.selecteds) {
-			if(i.getMaMatHang().equals(proddetail.getMaMatHang())) {
-				i.setSoLuong(i.getSoLuong() + proddetail.getSoLuong());
+			if(i.getMaMatHang().equals(prodDetail.getMaMatHang())) {
+				i.setSoLuong(i.getSoLuong() + prodDetail.getSoLuong());
 				flag = false;
 				break;
 			}
 		}
 		if(flag) {
-			selecteds.add(proddetail);
+			selecteds.add(prodDetail);
 		}
-		model.addAttribute("danhSachMatHangDaChon", this.selecteds);
+		this.reloadModel(model);
 		/* model.addAttribute("matHangChon", new ProductDetail()); */
 		return "admin/orders/createIO";
 	}
 	
-	@RequestMapping(value="xoa-mat-hang/{id}", method=RequestMethod.POST)
+	@PostMapping(value="", params="linkDeleteProductId")
 	public String xoaMatHang(ModelMap model,
-			@PathVariable("id") String id) {
+			@RequestParam(value="linkDeleteProductId") String id) {
 		for(ProductDetail i: this.selecteds) {
 			if(i.getMaMatHang().equals(id)) {
 				this.selecteds.remove(i);
@@ -125,24 +132,28 @@ public class CreateImportOrderController {
 		return "admin/orders/createIO";
 	}
 	
-	@RequestMapping(value="reset", method=RequestMethod.POST)
+	@PostMapping(value="", params="linkReset")
 	public String resetMatHang(ModelMap model) {
 		this.selecteds.clear();
-		model.addAttribute("danhSachMatHangDaChon", this.selecteds);
+		this.reloadModel(model);
 		return "admin/orders/createIO";
 	}
 	
-	@RequestMapping(value="save", method=RequestMethod.POST)
+	@PostMapping(value="", params="linkSave")
 	public String saveDonHangNhap(ModelMap model,
-			@ModelAttribute("donHangNhapMoi") ImportOrder importOrder) {
+			@ModelAttribute("donHangNhapMoi") ImportOrder importOrder,
+			@ModelAttribute("user") PersonalInfo nhanVien) {
 		importOrder.setChiTiets(this.selecteds);
-		System.out.println(importOrder.getMaNhaCungCap());
-		if(ioService.add(importOrder)) {
-			model.addAttribute("message", "Thêm đơn hàng nhập thành công!");
+		importOrder.setMaNhanVien(nhanVien.getMa());
+		String maDonHang = ioService.add(importOrder);
+		if(maDonHang != null) {
+			model.addAttribute("message", "Thêm đơn hàng nhập thành công! Đơn hàng nhập vừa thêm có mã đơn hàng là " + maDonHang);
 		} else {
 			model.addAttribute("message", "Thêm đơn hàng nhập không thành công!");
 		}
-			
+		
+		this.selecteds.clear();
+		this.reloadModel(model);
 		return "admin/orders/createIO";
 	}
 }

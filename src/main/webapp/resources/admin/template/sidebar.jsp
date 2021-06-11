@@ -17,18 +17,25 @@
 				<span>Dashboard</span>
 			</a>
 		</li>
-
+		
 		<li class="item">
-			<a href="admin/mat-hang/index.htm" class="">
-				<i class="zmdi zmdi-dns"></i>
-				<span>Mặt hàng</span>
+			<a href="admin/tao-don-hang-nhap.htm" class="">
+				<i class="zmdi zmdi-plus-square"></i>
+				<span>Thêm đơn hàng nhập</span>
 			</a>
 		</li>
 		
 		<li class="item">
-			<a href="admin/loai-mat-hang/index.htm" class="">
-				<i class="zmdi zmdi-storage"></i>
-				<span>Loại mặt hàng</span>
+			<a href="admin/xac-nhan-dat-hang.htm" class="">
+				<i class="zmdi zmdi-assignment-check"></i>
+				<span>Xác nhận đặt hàng</span>
+			</a>
+		</li>
+		
+		<li class="item">
+			<a href="admin/xac-nhan-nhan-hang.htm" class="">
+				<i class="zmdi zmdi-badge-check"></i>
+				<span>Xác nhận nhận hàng</span>
 			</a>
 		</li>
 		
@@ -40,9 +47,16 @@
 		</li>
 		
 		<li class="item">
-			<a href="admin/tao-don-hang-nhap/index.htm" class="">
-				<i class="zmdi zmdi-plus-square"></i>
-				<span>Thêm đơn hàng nhập</span>
+			<a href="admin/mat-hang/index.htm" class="">
+				<i class="zmdi zmdi-dns"></i>
+				<span>Mặt hàng</span>
+			</a>
+		</li>
+		
+		<li class="item">
+			<a href="admin/loai-mat-hang/index.htm" class="">
+				<i class="zmdi zmdi-storage"></i>
+				<span>Loại mặt hàng</span>
 			</a>
 		</li>
 		
@@ -61,7 +75,7 @@
 		</li>
 		
 		<li>
-			<a href="user/index.htm">
+			<a href="index.htm">
 				<i class="zmdi zmdi-arrow-right"></i>
 				<span>Chuyển đến trang user</span>
 			</a>

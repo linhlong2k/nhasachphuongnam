@@ -14,7 +14,10 @@ import com.nhasachphuongnam.dao.MatHangDAO;
 import com.nhasachphuongnam.dao.NhaCungCapDAO;
 import com.nhasachphuongnam.dao.NhanVienDAO;
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
+import com.nhasachphuongnam.entity.CtHoaDon;
+import com.nhasachphuongnam.entity.CtHoaDonPK;
 import com.nhasachphuongnam.entity.CtPhieuNhap;
+import com.nhasachphuongnam.entity.CtPhieuNhapPK;
 import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.entity.NhaCungCap;
 import com.nhasachphuongnam.entity.NhanVien;
@@ -108,16 +111,31 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	}
 	
 	//chưa cập nhập số lượng của mặt hàng
-	public boolean add(ImportOrder var) {
-		var.setMaDonHang(this.theNextMa());
-		PhieuNhap temp1 = this.convert(var);
+	public String add(ImportOrder var) {
+		PhieuNhap temp1 = new PhieuNhap();
+		temp1.setMaPN(this.theNextMa());
+		temp1.setThoiGian(var.getThoiGian());
+		NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
+		temp1.setNhanvien(temp2);
+		NhaCungCap temp3 = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
+		temp1.setNhacungcap(temp3);
+		List<CtPhieuNhap> ctPhieuNhap = new ArrayList<>();
 		for(ProductDetail i: var.getChiTiets()) {
-			temp1.addCtPhieunhap(convert(i));
-			/* matHangDAO.changeSoLuong(i.getMaMatHang(), 0 - i.getSoLuong()); */
+			CtPhieuNhapPK pk = new CtPhieuNhapPK();
+			pk.setMapn(temp1.getMaPN());
+			pk.setMamh(i.getMaMatHang());
+			CtPhieuNhap temp4 = new CtPhieuNhap();
+			temp4.setId(pk);
+			temp4.setGiamgia(i.getGiamGia());
+			temp4.setGia(BigDecimal.valueOf(i.getGia()));
+			temp4.setSoLuong(i.getSoLuong());
+			matHangDAO.changeSoLuong(i.getMaMatHang(), i.getSoLuong());
+			ctPhieuNhap.add(temp4);
 		}
+		temp1.setCtPhieunhaps(ctPhieuNhap);
 		if(phieuNhapDAO.add(temp1))
-			return true;
-		return false;
+			return temp1.getMaPN();
+		return null;
 	}
 	
 	public boolean update(ImportOrder var) {

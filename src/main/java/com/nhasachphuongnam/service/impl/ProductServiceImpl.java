@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService{
 		if(product.getMoTa() != null)
 			matHang.setMoTa(product.getMoTa());
 		if(product.getGiamGia() != null)
-			matHang.setGiamGia(product.getGiamGia());                                             
+			matHang.setGiamGia(product.getGiamGia());
 		matHang.setSoLuong(product.getSoLuong());
 		matHang.setLoaimathang(loaiMatHangDAO.getByID(product.getMaLoai()));
 		matHang.setGia(new BigDecimal(product.getGia()));

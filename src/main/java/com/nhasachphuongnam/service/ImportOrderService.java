@@ -9,7 +9,7 @@ public interface ImportOrderService {
 	
 	ImportOrder convert(PhieuNhap var) ;
 	
-	boolean add(ImportOrder var) ;
+	String add(ImportOrder var) ;
 	
 	boolean update(ImportOrder var) ;
 	

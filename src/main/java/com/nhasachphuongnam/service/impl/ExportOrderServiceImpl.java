@@ -18,8 +18,10 @@ import com.nhasachphuongnam.entity.CtHoaDon;
 import com.nhasachphuongnam.entity.CtHoaDonPK;
 import com.nhasachphuongnam.entity.HoaDon;
 import com.nhasachphuongnam.entity.KhachHang;
+import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.model.ExportOrder;
+import com.nhasachphuongnam.model.Product;
 import com.nhasachphuongnam.model.ProductDetail;
 import com.nhasachphuongnam.service.ExportOrderService;
 
@@ -63,7 +65,10 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		res.setSdt(var.getSdt());
 		res.setMaDonHang(var.getMaHD());
 		res.setThoiGian(var.getThoiGian());
-		res.setMaNhanVien(var.getNhanvien().getMaNV());
+		res.setTinhTrang(var.getTinhtrang());
+		if(var.getNhanvien() != null) {
+			res.setMaNhanVien(var.getNhanvien().getMaNV());
+		}
 		res.setGiamGia(var.getGiamGia());
 		List<ProductDetail> temp2 = new ArrayList<ProductDetail>();
 		ProductDetail temp3;
@@ -154,5 +159,74 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 			res.add(convert(i));
 		}
 		return res;
+	}
+	
+
+	public List<ExportOrder> getDanhSachDatHang(){
+		List<ExportOrder> res = new ArrayList<ExportOrder>();
+		List<HoaDon> hoaDons = hoaDonDAO.getAll();
+		if(hoaDons == null)
+			System.out.println("hóa đơn null");
+		for(HoaDon i: hoaDons) {
+			System.out.println(i.getMaHD());
+			if(i.getTinhtrang().equals("1")) {
+				res.add(convert(i));
+			}
+		}
+		return res;
+	}
+	
+	public List<ExportOrder> getDanhSachGiaoHang(){
+		List<ExportOrder> res = new ArrayList<ExportOrder>();
+		List<HoaDon> hoaDons = hoaDonDAO.getAll();
+		if(hoaDons == null)
+			System.out.println("hóa đơn null");
+		for(HoaDon i: hoaDons) {
+			System.out.println(i.getMaHD());
+			if(i.getTinhtrang().equals("2")) {
+				res.add(convert(i));
+			}
+		}
+		return res;
+	}
+	
+	public List<Product> getDanhSachMatHangByMaHD(String ma){
+		List<Product> res = new ArrayList<>();
+		List<CtHoaDon> temp = ctHoaDonDAO.getbyMaHD(ma);
+		Product temp2;
+		if(temp != null) {
+			for(CtHoaDon i: temp) {
+				temp2 = new Product(i.getMathang().getMaMH(), i.getMathang().getTenMH(), i.getMathang().getHinhAnh(), i.getSoLuong(), "", "", i.getMathang().getAllow(), i.getGia().longValue(), Float.valueOf(0), i.getMathang().getLoaimathang().getMaLoai());
+				res.add(temp2);
+			}
+		}
+		return res;
+	}
+	
+	public String xacNhanDatHang(String ma, String maNhanVien) {
+		HoaDon temp = hoaDonDAO.getByID(ma);
+		NhanVien temp2 = nhanVienDAO.getByID(maNhanVien);
+		if(temp == null || temp2 == null) {
+			return null;
+		}
+		temp.setNhanvien(temp2);
+		temp.setTinhtrang("2");
+		if(hoaDonDAO.update(temp)) {
+			return ma;
+		}
+		return null;
+	}
+	
+	public String xacNhanNhanHang(String ma) {
+		HoaDon temp = hoaDonDAO.getByID(ma);
+		if(temp == null) {
+			return null;
+			
+		}
+		temp.setTinhtrang("3");
+		if(hoaDonDAO.update(temp)) {
+			return ma;
+		}
+		return null;
 	}
 }

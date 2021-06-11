@@ -66,9 +66,9 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 		session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		HoaDon hoaDon = (HoaDon) session.get(HoaDon.class, ma);
-		/*
-		 * if(ctHoaDon == null) return false;
-		 */
+		if(hoaDon == null) {
+			return false;
+		}
 		try {
 			session.delete(hoaDon);
 			tran.commit();

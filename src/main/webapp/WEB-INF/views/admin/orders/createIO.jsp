@@ -30,7 +30,7 @@
                 	<div class="card-body">
                 		<div class="card-title">Đơn hàng nhập</div>
                       	<hr>
-                     	<form:form action="admin/tao-don-hang-nhap/thong-tin-don-hang-nhap.htm" modelAttribute="donHangNhapMoi" method="POST">
+                     	<form:form action="admin/tao-don-hang-nhap.htm" modelAttribute="donHangNhapMoi" method="POST">
                         	<div class="form-group">
                              	<label for="input-1">Mã đơn nhập</label>
                                	<form:input path="maDonHang" type="text" class="form-control" id="input-1"
@@ -48,65 +48,55 @@
                     			<form:errors path="maNhaCungCap" class="text-danger" />
                           	</div>
                           	<div class="form-group">
-								<button type="submit" class="btn btn-light btn-round px-5">
+								<button name="linkPinDonHang" type="submit" class="btn btn-light btn-round px-5">
 									<i class="icon icon-pin" ></i>
 								</button>
 							</div>
-                    	</form:form>
-                    	<div>
-                    		<label>Mặt hàng</label>
-                       		<div class="form-group">
-	                       		<table class="table table-hover" id="table">
-	                       			<thead>
-	                       				<tr>
-	                       					<th>Mã mặt hàng</th>
-	                       					<th>Giá</th>
-	                       					<th>Số lượng</th>
-	                       					<th>Giảm giá</th>
-	                       					<th></th>
-	                       				</tr>
-	                       			</thead>
-	                       			<tbody>
-	                       					<c:forEach var="s" items="${danhSachMatHangDaChon}">
-				                       			<tr>
-				                       				<td scope="row">${s.maMatHang }</td>
-				                       				<td>${s.gia }</td>
-				                       				<td>${s.soLuong }</td>
-				                       				<td>${s.giamGia }</td>
-				                       				<td>
-				                       					<form:form action="admin/tao-don-hang-nhap/xoa-mat-hang/${s.maMatHang }.htm" method="POST">
-				                       						<button type="submit" class="btn btn-light btn-round px-5">
-				                       							<i class="icon icon-minus" style="color:red;"></i>
-				                       						</button>
-				                       					</form:form>
-				                       				</td>
+							<div>
+	                    		<label>Mặt hàng</label>
+	                       		<div class="form-group">
+		                       		<table class="table table-hover" id="table">
+		                       			<thead>
+		                       				<tr>
+		                       					<th>Mã mặt hàng</th>
+		                       					<th>Giá</th>
+		                       					<th>Số lượng</th>
+		                       					<th>Giảm giá</th>
+		                       					<th></th>
+		                       				</tr>
+		                       			</thead>
+		                       			<tbody>
+											<c:forEach var="s" items="${danhSachMatHangDaChon}">
+												<tr>
+													<td scope="row">${s.maMatHang }</td>
+													<td>${s.gia }</td>
+													<td>${s.soLuong }</td>
+													<td>${s.giamGia }</td>
+													<td>
+														<button name="linkDeleteProductId" value="${s.maMatHang }" type="submit" class="btn btn-light btn-round px-5">
+															<i class="icon icon-minus" style="color: red;"></i>
+														</button>
+													</td>
 												</tr>
-				                       		</c:forEach>
-		                       		</tbody>
-                       			</table>
-	                     	</div>		
-                    	</div>
-                    	<hr>
-                  		<div style="float: left;">
-							<form:form
-								action="admin/tao-don-hang-nhap/save.htm"
-								method="POST">
-								<button type="submit" class="btn btn-light btn-round px-5">
+											</c:forEach>
+										</tbody>
+	                       			</table>
+		                     	</div>		
+	                    	</div>
+	                    	<hr>
+	                  		<div style="float: left;"> 
+								<button name="linkSave" type="submit" class="btn btn-light btn-round px-5">
 									<i class="icon icon-saves" ></i><!-- chưa thêm icon vào đoạn này -->
 									Lưu
 								</button>
-							</form:form>
-						</div>
-						<div style="float: right;">
-							<form:form
-								action="admin/tao-don-hang-nhap/reset.htm"
-								method="POST">
-								<button type="submit" class="btn btn-light btn-round px-5">
+							</div>
+							<div style="float: right;">
+								<button name="linkReset" type="submit" class="btn btn-light btn-round px-5">
 									<i class="icon icon-reset" ></i><!-- chưa thêm icon vào đoạn này -->
 									Xóa mặt hàng đã chọn
 								</button>
-							</form:form>
-						</div>
+							</div>
+                    	</form:form>
                   	</div>
             	</div>
           	</div>
@@ -129,9 +119,7 @@
                                     <tbody>
                                         <c:forEach var="prod" items="${danhSachMatHang }">
                                             <tr>
-                                                <form:form
-                                                	action="admin/tao-don-hang-nhap/them-mat-hang.htm"
-                                                    modelAttribute="matHangChon" method="POST">
+                                                <form:form action="admin/tao-don-hang-nhap.htm" modelAttribute="matHangChon" method="POST">
                                                     <td>
                                                         <form:input path="maMatHang" value="${prod.maMatHang }"
                                                             class="form-control" readonly="true" />
@@ -147,7 +135,7 @@
                                                     	<form:input path="giamGia" class="form-control" />
                                                     </td>
                                                     <td style="padding: 0;">
-                                                        <button type="submit" class="btn btn-light btn-round px-3">
+                                                        <button name="linkAddProduct" type="submit" class="btn btn-light btn-round px-3">
                                                             <i class="zmdi zmdi-plus"></i>
                                                         </button>
                                                     </td>

@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.CtPhieuNhapDAO;
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
+import com.nhasachphuongnam.entity.CtHoaDon;
+import com.nhasachphuongnam.entity.CtPhieuNhap;
 import com.nhasachphuongnam.entity.PhieuNhap;
 
 @Repository
@@ -31,6 +33,9 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 		Transaction tran = session.beginTransaction();
 		try {
 			session.save(phieuNhap);
+			for(CtPhieuNhap i: phieuNhap.getCtPhieunhaps()) {
+				session.save(i);
+			}
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();
