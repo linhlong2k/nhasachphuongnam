@@ -1,5 +1,6 @@
 package com.nhasachphuongnam.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -8,13 +9,13 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.CtPhieuNhapDAO;
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
-import com.nhasachphuongnam.entity.CtHoaDon;
 import com.nhasachphuongnam.entity.CtPhieuNhap;
 import com.nhasachphuongnam.entity.PhieuNhap;
 
@@ -115,6 +116,13 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 		@SuppressWarnings("unchecked")
 		List<String> results = (List<String>)query.list();
 		return results.get(0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PhieuNhap> getBetweenThoiGian(Date start, Date end){
+		Criteria cr = factory.getCurrentSession().createCriteria(PhieuNhap.class);
+		cr.add(Restrictions.between("thoiGian", start, end));
+		return cr.list();
 	}
 	
 	public String getby() {

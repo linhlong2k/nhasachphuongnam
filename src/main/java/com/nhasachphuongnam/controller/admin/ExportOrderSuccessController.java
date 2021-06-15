@@ -16,7 +16,7 @@ import com.nhasachphuongnam.service.ExportOrderService;
 
 @Controller
 @RequestMapping("admin/xac-nhan-nhan-hang")
-public class SuccessOrderController {
+public class ExportOrderSuccessController {
 	@Autowired
 	ExportOrderService eoService;
 	

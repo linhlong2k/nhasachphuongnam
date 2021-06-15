@@ -13,6 +13,8 @@ public interface ProductService {
 	
 	boolean update(Product product);
 	
+	boolean updateGiamGia(String ma, Float giamGia);
+	
 	boolean delete(String maProduct);
 	
 	boolean cleanAll(String maProduct);

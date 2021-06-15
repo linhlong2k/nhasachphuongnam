@@ -1,6 +1,8 @@
 package com.nhasachphuongnam.model;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,7 +13,7 @@ public class PersonalInfo {
 	private byte[] hinhAnh;
 	private String diaChi;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date ngaySinh;
+	private LocalDate ngaySinh;
 	private String soDienThoai;
 	private String username;
 	private String maRole;
@@ -26,7 +28,7 @@ public class PersonalInfo {
 		this.ten = ten;
 		this.hinhAnh = hinhAnh;
 		this.diaChi = diaChi;
-		this.ngaySinh = ngaySinh;
+		this.ngaySinh = ngaySinh.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		this.soDienThoai = soDienThoai;
 		this.username = username;
 		this.maRole = maRole;
@@ -39,7 +41,7 @@ public class PersonalInfo {
 		this.ten = ten;
 		this.hinhAnh = hinhAnh;
 		this.diaChi = diaChi;
-		this.ngaySinh = ngaySinh;
+		this.ngaySinh = ngaySinh.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		this.soDienThoai = soDienThoai;
 		this.username = username;
 		this.maRole = maRole;
@@ -77,11 +79,11 @@ public class PersonalInfo {
 		this.diaChi = diaChi;
 	}
 
-	public Date getNgaySinh() {
+	public LocalDate getNgaySinh() {
 		return ngaySinh;
 	}
 
-	public void setNgaySinh(Date ngaySinh) {
+	public void setNgaySinh(LocalDate ngaySinh) {
 		this.ngaySinh = ngaySinh;
 	}
 
@@ -111,6 +113,10 @@ public class PersonalInfo {
 
 	/* =============================advanced=========================== */
 
+	public void setNgaySinh(Date ngaySinh) {
+		this.ngaySinh = ngaySinh.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+	
 	public String getBase64Photo() {
 		String base64DataString = null;
 		if (hinhAnh != null) {                

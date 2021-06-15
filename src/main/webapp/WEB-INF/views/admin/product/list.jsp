@@ -24,64 +24,83 @@
 <!-- 		================================================================ create button ===================================================== -->
 		
 <!--     	=================================================================== table ==================================================================== -->
+
 		<div class="card">
             <div class="card-body">
-	            <div>
-	            	<h3 class="card-title" style="float: left;"><strong>Danh sách sản phẩm</strong></h3>
-	            	<form:form action="admin/mat-hang/tao-mat-hang-moi.htm" method="GET" style="float: right; margin: 5px;" >
-	            		<button type="submit" class="btn btn-light btn-round px-3">Tạo sản phẩm mới</button>
+	           <%--  <div>
+	            	<h2 class="card-title" ><strong>Danh sách mặt hàng</strong></h2>
+	            	<form:form action="admin/tao-mat-hang-moi.htm" method="GET" style="float: right; margin: 5px;" >
+	            		<button type="submit" class="btn btn-light btn-round px-3">Tạo mặt hàngm mới</button>
 	            	</form:form>
 	            	<br><br>
-	            </div>
+	            </div> --%>
 			  	<div class="table-responsive">
               	<table class="table table-hover" id="table">
                 	<thead>
 	        			<tr>
-		             		<th scope="col">Mã mặt hàng</th>
+		             		<th scope="col">Mã mặt hàng
+		             			<button onclick="sortMaMatHang()" style="background-color: transparent; border: hidden;" >
+		             				<i class="zmdi zmdi-swap-vertical-circle" style="margin-left: 2px;color: white; font-size: 15px;"></i>
+		             			</button>
+		             		</th>
 		                    <th scope="col">Hình ảnh</th>
-		                    <th scope="col">Tên mặt hàng</th>
+		                    <th scope="col">Tên mặt hàng
+		                    	<button onclick="sortTenMatHang()" style="background-color: transparent; border: hidden;" >
+		                    		<i class="zmdi zmdi-swap-vertical-circle" style="margin-left: 2px;color: white; font-size: 15px;"></i>
+		                    	</button>
+		                    </th>
 		                    <th scope="col">Giá</th>
-		                    <th scope="col">Số lượng</th>
-		                    <th scope="col">Loại</th>
+		                    <th scope="col">Số lượng
+		                    	<!-- <button onclick="sortSoLuong()" style="background-color: transparent; border: hidden;" >
+		                    		<i class="zmdi zmdi-swap-vertical-circle" style="margin-left: 2px;color: white; font-size: 15px;"></i>
+		                    	</button> -->
+		                    </th>
+		                    <th scope="col">Mã loại
+		                    	<button onclick="sortMaLoai()" style="background-color: transparent; border: hidden;" >
+		                    		<i class="zmdi zmdi-swap-vertical-circle" style="margin-left: 2px;color: white; font-size: 15px;"></i>
+		                    	</button>
+		                    </th>
+		                    <th scope="col">Giảm giá</th>
 		                    <th scope="col"></th>
 		                    <th scope="col"></th>
 	                  	</tr>
                 	</thead>
                 	<tbody>
                 	<c:forEach var="prod" items="${danhSachMatHang}">
-	                	<tr>
-	                    	<td scope="row">${prod.maMatHang }</td>
-	                    	<c:choose>
-	                    		<c:when test="${empty prod.hinhAnh}">
-	                    			<td>
-							    		<p><img alt="image" src="resources/images/products/defaultProduct.png" style="max-height: 100px; max-width: 100px;"/></p>
-							    		<a href="admin/mat-hang/cap-nhat-hinh-anh/${prod.maMatHang}.htm">Cập nhập ảnh</a>
-							    	</td>
-								</c:when>
-								<%-- test="${not empty prod.hinhAnh }" --%>
-								<c:otherwise>
-									<td>
-										<p><img alt="image" src="data:image/jpeg;base64,${prod.getBase64Photo() }" style="max-height: 100px; max-width: 100px;"/></p>	
-										<a href="admin/mat-hang/cap-nhat-hinh-anh/${prod.maMatHang}.htm">Thay đổi ảnh</a>
-									</td>
-								</c:otherwise>
-							</c:choose>
-	                    	<td>${prod.tenMatHang }</td>
-	                    	<td>${prod.gia }</td>
-	                    	<td>${prod.soLuong }</td>
-	                    	<td>${prod.maLoai }</td>
-	                    	<td>
-	                    		<form:form action="admin/mat-hang/chinh-sua-mat-hang/${prod.maMatHang }.htm" method="GET">
-	                    			<button type="submit" class="btn btn-light btn-round px-3">Chỉnh sửa</button>
-	                    		</form:form>
-	                    	</td>
-	                    	<td>
-	                    		<form:form action="admin/mat-hang/xoa-mat-hang/${prod.maMatHang }.htm" method="GET">
-	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>
-	                    		</form:form>
-	                    	</td>
+                		<tr>
+	                		<form action="admin/mat-hang.htm" method="post">
+		                    	<td scope="row">${prod.maMatHang }</td>
+		                    	<c:choose>
+		                    		<c:when test="${empty prod.hinhAnh}">
+		                    			<td>
+								    		<p><img alt="image" src="resources/images/products/defaultProduct.png" style="max-height: 100px; max-width: 100px;"/></p>
+								    	</td>
+									</c:when>
+									<%-- test="${not empty prod.hinhAnh }" --%>
+									<c:otherwise>
+										<td>
+											<p><img alt="image" src="data:image/jpeg;base64,${prod.getBase64Photo() }" style="max-height: 100px; max-width: 100px;"/></p>	
+										</td>
+									</c:otherwise>
+								</c:choose>
+		                    	<td><p style="max-width: 250px; overflow: hidden; text-overflow: ellipsis;">${prod.tenMatHang }</p></td>
+		                    	<td><p><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value = "${prod.gia }" type = "currency"/></p></td>
+		                    	<td><p>${prod.soLuong }</p></td>
+		                    	<td><p>${prod.maLoai }</p></td>
+		                    	<td style="width: 50px;">
+			                    		<input name="giamGia" value="${prod.giamGia }" class="form-control" />
+			                    		<br>
+			                    		<button type="submit" name="btnDiscountId" value="${prod.maMatHang }" class="btn btn-light btn-round px-3">Cập nhật giảm giá</button>
+		                    	</td>
+		                    	<td>
+		                    		<button type="submit" name="btnDetailId" value="${prod.maMatHang }" class="btn btn-light btn-round px-3"><i class="zmdi zmdi-info-outline" style="font-size: 20px;"></i></button>
+		                    	</td>
+		                    	<td>
+		                    		<button type="submit" name="btnDeleteId" value="${prod.maMatHang }" class="btn btn-light btn-round px-3"><i class="zmdi zmdi-minus" style="color: red; font-size: 20px;"></i></button>
+		                    	</td>
+		                  	</form>
 	                  	</tr>
-	                </c:forEach>	
+	                </c:forEach>
                 </tbody>
             </table>
             </div>
@@ -92,6 +111,7 @@
 	</div><!--End content-wrapper-->
 	<script>
 	    /* var activeItem = document.querySelector("a[href='mat-hang/index.htm']").class += ' active'; */
+	    document.getElementById('mainLabel').innerHTML = 'Danh sách mặt hàng';
 		function myFunction() {
 			var input, filter, table, tr, i, txtValue, txtValue2, firstCol, secondCol;
 			input = document.getElementById("search");
@@ -111,6 +131,178 @@
 					}
 				}   
 		    }
+		}
+		function sortMaMatHang() {
+			var table, rows, switching, i, x, y, shouldSwitch;
+			table = document.getElementById("table");
+			switching = true;
+			if (table.rows[1].getElementsByTagName("TD")[0].innerHTML.toLowerCase() > table.rows[2].getElementsByTagName("TD")[0].innerHTML.toLowerCase()) {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("TD")[0];
+						y = rows[i + 1].getElementsByTagName("TD")[0];
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+			} else {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("TD")[0];
+						y = rows[i + 1].getElementsByTagName("TD")[0];
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+
+			}
+		}
+		function sortTenMatHang() {
+			var table, rows, switching, i, x, y, shouldSwitch;
+			table = document.getElementById("table");
+			switching = true;
+			if (table.rows[1].getElementsByTagName("TD")[2].innerHTML.toLowerCase() > table.rows[2].getElementsByTagName("TD")[2].innerHTML.toLowerCase()) {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("TD")[2];
+						y = rows[i + 1].getElementsByTagName("TD")[2];
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+			} else {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("TD")[2];
+						y = rows[i + 1].getElementsByTagName("TD")[2];
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+
+			}
+		}
+		/* function sortSoLuong() {
+			var table, rows, switching, i, x, y, shouldSwitch;
+			table = document.getElementById("table");
+			switching = true;
+			if (parseInt(table.rows[1].getElementsByTagName("TD")[4]) > parseInt(table.rows[2].getElementsByTagName("TD")[4]) {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("TD")[4];
+						y = rows[i + 1].getElementsByTagName("TD")[4];
+						if (parseInt(x.innerHTML ) > parseInt(y.innerHTML )) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+			} else {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("TD")[4];
+						y = rows[i + 1].getElementsByTagName("TD")[4];
+						if (parseInt(x.innerHTML ) < parseInt(y.innerHTML )) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+
+			}
+		} */
+		function sortMaLoai() {
+			var table, rows, switching, i, x, y, shouldSwitch;
+			table = document.getElementById("table");
+			switching = true;
+			if (table.rows[1].getElementsByTagName("TD")[5].innerHTML.toLowerCase() > table.rows[2].getElementsByTagName("TD")[5].innerHTML.toLowerCase()) {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("TD")[5];
+						y = rows[i + 1].getElementsByTagName("TD")[5];
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+			} else {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("TD")[5];
+						y = rows[i + 1].getElementsByTagName("TD")[5];
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+
+			}
 		}
 	</script>
 <!-- 	========================================================end content======================================================================= -->

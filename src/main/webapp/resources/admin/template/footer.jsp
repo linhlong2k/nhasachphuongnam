@@ -26,10 +26,5 @@
   <script src="resources/admin/assets/js/jquery.loading-indicator.js"></script>
   <!-- Custom scripts -->
   <script src="resources/admin/assets/js/app-script.js"></script>
-  <!-- Chart js -->
-  <script src="resources/admin/assets/plugins/Chart.js/Chart.min.js"></script>
- 
-  <!-- Index js -->
-  <script src="resources/admin/assets/js/index.js"></script>
 </body>
 </html>

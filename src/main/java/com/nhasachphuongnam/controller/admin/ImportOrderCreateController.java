@@ -23,7 +23,7 @@ import com.nhasachphuongnam.service.SupplierService;
 
 @Controller
 @RequestMapping("admin/tao-don-hang-nhap")
-public class CreateImportOrderController {
+public class ImportOrderCreateController {
 	
 	private List<ProductDetail> selecteds = new ArrayList<ProductDetail>();
 	private ImportOrder newImportOrder = new ImportOrder();

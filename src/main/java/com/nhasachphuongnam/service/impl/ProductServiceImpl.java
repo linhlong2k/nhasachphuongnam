@@ -13,6 +13,7 @@ import com.nhasachphuongnam.dao.MatHangDAO;
 import com.nhasachphuongnam.entity.LoaiMatHang;
 import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.model.Product;
+import com.nhasachphuongnam.model.ProductType;
 import com.nhasachphuongnam.service.ProductService;
 
 @Repository
@@ -71,6 +72,7 @@ public class ProductServiceImpl implements ProductService{
 		MatHang matHang = convert(product);
 		matHang.setMaMH(theNextMaMH());
 		matHang.setAllow(true);
+		matHang.setGiamGia(Float.valueOf(0));
 		if(matHangDAO.add(matHang))
 			return true;
 		return false;
@@ -100,7 +102,11 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	public Product getByID(String maProduct) {
-		return convert(matHangDAO.getByID(maProduct));
+		MatHang temp = matHangDAO.getByID(maProduct);
+		if(temp == null)
+			return null;
+		Product res = convert(temp);
+		return res;
 	}
 	
 	//==============================advanced=========================================
@@ -125,5 +131,17 @@ public class ProductServiceImpl implements ProductService{
 			}
 		}
 		return productList;
+	}
+	
+	public boolean updateGiamGia(String ma, Float giamGia) {
+		MatHang temp = matHangDAO.getByID(ma);
+		if(temp == null) {
+			return false;
+		}
+		temp.setGiamGia(giamGia);
+		if(matHangDAO.update(temp)) {
+			return true;
+		}
+		return false;
 	}
 }

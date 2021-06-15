@@ -135,7 +135,7 @@
                   					<p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
                 				</a>-->
 								<!-- img based logo -->
-								<a href="/"><img
+								<a href=".htm"><img
 									src="resources/images/Logonhasachphuongnam.png" alt="logo img" width="100%"></a>
 							</div>
 							<!-- / logo  -->

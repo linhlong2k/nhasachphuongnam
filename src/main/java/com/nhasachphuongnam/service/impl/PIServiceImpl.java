@@ -1,6 +1,8 @@
 package com.nhasachphuongnam.service.impl;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +57,7 @@ public class PIServiceImpl implements PIService{
 		if(pi.getDiaChi() != null)
 			khachHang.setDiaChi(pi.getDiaChi());
 		if(pi.getNgaySinh() != null)
-			khachHang.setNgaySinh(pi.getNgaySinh());
+			khachHang.setNgaySinh(Date.from(pi.getNgaySinh().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		khachHang.setTaikhoan(taiKhoanDAO.getByID(pi.getUsername()));
 		return khachHang;
 	}
@@ -73,7 +75,7 @@ public class PIServiceImpl implements PIService{
 		if(pi.getDiaChi() != null)
 			nhanVien.setDiaChi(pi.getDiaChi());
 		if(pi.getNgaySinh() != null)
-			nhanVien.setNgaySinh(pi.getNgaySinh());
+			nhanVien.setNgaySinh(Date.from(pi.getNgaySinh().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		nhanVien.setTaikhoan(taiKhoanDAO.getByID(pi.getUsername()));
 		return nhanVien;
 	}

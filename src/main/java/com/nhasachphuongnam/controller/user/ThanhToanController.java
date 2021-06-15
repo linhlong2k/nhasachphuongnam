@@ -1,9 +1,7 @@
 package com.nhasachphuongnam.controller.user;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -74,8 +72,7 @@ public class ThanhToanController {
 		res.setGiamGia(Float.valueOf(0));
 		res.setMaKhachHang(khachHang.getMa());
 		res.setSdt(soDienThoai);
-		LocalDate now = LocalDate.now();
-		res.setThoiGian(Date.from(now.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		res.setThoiGian(LocalDate.now());
 		res.setTinhTrang("1");
 		List<ProductDetail> temp = new ArrayList<ProductDetail>();
 		ProductDetail temp2;
@@ -85,7 +82,7 @@ public class ThanhToanController {
 			temp2.setSoLuong(i.getSoLuong());
 			Product temp3 = productService.getByID(i.getMaMatHang());
 			if(temp3 == null) {
-				model.addAttribute("message", "Không tìm thấy mặt hàng " + temp3.getTenMatHang() + "!");
+				model.addAttribute("message", "Không tìm thấy mặt hàng " + i.getMaMatHang() + "!");
 				return "user/payment";
 			} else if(temp3.getSoLuong() < i.getSoLuong()) {
 				model.addAttribute("message", "Thanh toán không thành công, mặt hàng " + temp3.getTenMatHang() + " có số lượng quá nhiều!");

@@ -1,7 +1,10 @@
 package com.nhasachphuongnam.service.impl;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +17,14 @@ import com.nhasachphuongnam.dao.MatHangDAO;
 import com.nhasachphuongnam.dao.NhaCungCapDAO;
 import com.nhasachphuongnam.dao.NhanVienDAO;
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
-import com.nhasachphuongnam.entity.CtHoaDon;
-import com.nhasachphuongnam.entity.CtHoaDonPK;
 import com.nhasachphuongnam.entity.CtPhieuNhap;
 import com.nhasachphuongnam.entity.CtPhieuNhapPK;
+import com.nhasachphuongnam.entity.HoaDon;
 import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.entity.NhaCungCap;
 import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.entity.PhieuNhap;
+import com.nhasachphuongnam.model.ExportOrder;
 import com.nhasachphuongnam.model.ImportOrder;
 import com.nhasachphuongnam.model.ProductDetail;
 import com.nhasachphuongnam.service.ImportOrderService;
@@ -70,7 +73,7 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	public ImportOrder convert(PhieuNhap var) {
 		ImportOrder res = new ImportOrder();
 		res.setMaDonHang(var.getMaPN());
-		res.setThoiGian(var.getThoiGian());
+		res.setThoiGian(var.getThoiGian().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		res.setMaNhanVien(var.getNhanvien().getMaNV());
 		res.setMaNhaCungCap(var.getNhacungcap().getMaNCC());
 		List<ProductDetail> temp3 = new ArrayList<ProductDetail>();
@@ -96,7 +99,7 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 		res.setNhacungcap(temp1);
 		NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
 		res.setNhanvien(temp2);
-		res.setThoiGian(var.getThoiGian());
+		res.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		return res;
 	}
 	
@@ -114,7 +117,7 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	public String add(ImportOrder var) {
 		PhieuNhap temp1 = new PhieuNhap();
 		temp1.setMaPN(this.theNextMa());
-		temp1.setThoiGian(var.getThoiGian());
+		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
 		temp1.setNhanvien(temp2);
 		NhaCungCap temp3 = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
@@ -163,6 +166,15 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 		List<ImportOrder> res = new ArrayList<ImportOrder>();
 		List<PhieuNhap> phieuNhaps = phieuNhapDAO.getAll();
 		for(PhieuNhap i: phieuNhaps) {
+			res.add(convert(i));
+		}
+		return res;
+	}
+	
+	public List<ImportOrder> GetAllBetweenDate(LocalDate start, LocalDate end){
+		List<ImportOrder>  res = new ArrayList<ImportOrder>();
+		List<PhieuNhap> temp = phieuNhapDAO.getBetweenThoiGian(Date.from(start.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), Date.from(end.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+		for(PhieuNhap i: temp) {
 			res.add(convert(i));
 		}
 		return res;

@@ -1,5 +1,6 @@
 package com.nhasachphuongnam.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.nhasachphuongnam.entity.PhieuNhap;
@@ -18,4 +19,6 @@ public interface ImportOrderService {
 	ImportOrder getByID(String ma);
 	
 	List<ImportOrder> getAll() ;
+	
+	List<ImportOrder> GetAllBetweenDate(LocalDate start, LocalDate end);
 }

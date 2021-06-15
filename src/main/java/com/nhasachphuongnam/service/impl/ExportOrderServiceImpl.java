@@ -1,7 +1,10 @@
 package com.nhasachphuongnam.service.impl;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,6 @@ import com.nhasachphuongnam.entity.CtHoaDon;
 import com.nhasachphuongnam.entity.CtHoaDonPK;
 import com.nhasachphuongnam.entity.HoaDon;
 import com.nhasachphuongnam.entity.KhachHang;
-import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.model.ExportOrder;
 import com.nhasachphuongnam.model.Product;
@@ -64,7 +66,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		res.setDiaChi(var.getDiaChi());
 		res.setSdt(var.getSdt());
 		res.setMaDonHang(var.getMaHD());
-		res.setThoiGian(var.getThoiGian());
+		res.setThoiGian(var.getThoiGian().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		res.setTinhTrang(var.getTinhtrang());
 		if(var.getNhanvien() != null) {
 			res.setMaNhanVien(var.getNhanvien().getMaNV());
@@ -96,7 +98,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		NhanVien temp3 = nhanVienDAO.getByID(var.getMaNhanVien());
 		temp1.setNhanvien(temp3);
 		temp1.setSdt(var.getSdt());
-		temp1.setThoiGian(var.getThoiGian());
+		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		temp1.setGiamGia(var.getGiamGia());
 		temp1.setTinhtrang(var.getTinhTrang());
 		return temp1;
@@ -109,7 +111,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		temp1.setMaHD(this.theNextMa());
 		temp1.setKhachhang(khachHangDAO.getByID(var.getMaKhachHang()));
 		temp1.setSdt(var.getSdt());
-		temp1.setThoiGian(var.getThoiGian());
+		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		temp1.setGiamGia(var.getGiamGia());
 		temp1.setTinhtrang(var.getTinhTrang());
 		temp1.setDiaChi(var.getDiaChi());
@@ -161,14 +163,20 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
+	public List<ExportOrder> GetAllBetweenDate(LocalDate start, LocalDate end) {
+		List<ExportOrder>  res = new ArrayList<ExportOrder>();
+		List<HoaDon> temp = hoaDonDAO.getBetweenThoiGian(Date.from(start.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), Date.from(end.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+		for(HoaDon i: temp) {
+			res.add(convert(i));
+		}
+		return res;
+	}
+	
 
 	public List<ExportOrder> getDanhSachDatHang(){
 		List<ExportOrder> res = new ArrayList<ExportOrder>();
 		List<HoaDon> hoaDons = hoaDonDAO.getAll();
-		if(hoaDons == null)
-			System.out.println("hóa đơn null");
 		for(HoaDon i: hoaDons) {
-			System.out.println(i.getMaHD());
 			if(i.getTinhtrang().equals("1")) {
 				res.add(convert(i));
 			}
@@ -179,10 +187,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	public List<ExportOrder> getDanhSachGiaoHang(){
 		List<ExportOrder> res = new ArrayList<ExportOrder>();
 		List<HoaDon> hoaDons = hoaDonDAO.getAll();
-		if(hoaDons == null)
-			System.out.println("hóa đơn null");
 		for(HoaDon i: hoaDons) {
-			System.out.println(i.getMaHD());
 			if(i.getTinhtrang().equals("2")) {
 				res.add(convert(i));
 			}
@@ -220,8 +225,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	public String xacNhanNhanHang(String ma) {
 		HoaDon temp = hoaDonDAO.getByID(ma);
 		if(temp == null) {
-			return null;
-			
+			return null;	
 		}
 		temp.setTinhtrang("3");
 		if(hoaDonDAO.update(temp)) {

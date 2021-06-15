@@ -1,6 +1,6 @@
 package com.nhasachphuongnam.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,7 +10,7 @@ public class ImportOrder {
 	// định dạng lưu trữ: mã mặt hàng:tên mặt hàng:số lượng:giá tiền
 	private List<ProductDetail> chiTiets;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date thoiGian;
+	private LocalDate thoiGian;
 	private String maNhanVien;
 	private String maNhaCungCap;
 
@@ -18,7 +18,7 @@ public class ImportOrder {
 		super();
 	}
 
-	public ImportOrder(List<ProductDetail> chiTiets, Date thoiGian, String maNhanVien, String maNhaCungCap) {
+	public ImportOrder(List<ProductDetail> chiTiets, LocalDate thoiGian, String maNhanVien, String maNhaCungCap) {
 		super();
 		this.chiTiets = chiTiets;
 		this.thoiGian = thoiGian;
@@ -26,7 +26,7 @@ public class ImportOrder {
 		this.maNhaCungCap = maNhaCungCap;
 	}
 
-	public ImportOrder(String maDonHang, List<ProductDetail> chiTiets, Date thoiGian, String maNhanVien,
+	public ImportOrder(String maDonHang, List<ProductDetail> chiTiets, LocalDate thoiGian, String maNhanVien,
 			String maNhaCungCap) {
 		super();
 		this.maDonHang = maDonHang;
@@ -52,11 +52,11 @@ public class ImportOrder {
 		this.chiTiets = chiTiets;
 	}
 
-	public Date getThoiGian() {
+	public LocalDate getThoiGian() {
 		return thoiGian;
 	}
 
-	public void setThoiGian(Date thoiGian) {
+	public void setThoiGian(LocalDate thoiGian) {
 		this.thoiGian = thoiGian;
 	}
 

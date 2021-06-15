@@ -1,12 +1,16 @@
 package com.nhasachphuongnam.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="PHIEUNHAP")
@@ -18,9 +22,7 @@ public class PhieuNhap implements Serializable {
 	@Column(name="MAPN")
 	private String maPN;
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name="THOIGIAN")
+	@Column(name="THOIGIAN")//, columnDefinition = "DATE")
 	private Date thoiGian;
 
 	//bi-directional many-to-one association to CtPhieunhap

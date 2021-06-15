@@ -25,7 +25,7 @@
 		
 <!--     	=================================================================== table ==================================================================== -->
 		<div class="row">
-        	<div class="col-12 col-lg-7 col-xl-7">
+        	<div class="col-12 col-lg-6 col-xl-6">
             	<div class="card">
                 	<div class="card-body">
                 		<div class="card-title">Đơn hàng nhập</div>
@@ -100,7 +100,7 @@
                   	</div>
             	</div>
           	</div>
-       		<div class="col-12 col-lg-5 col-xl-5">
+       		<div class="col-12 col-lg-6 col-xl-6">
                         <div class="card">
                             <div class="card-header">
                                 <h3><strong>Danh sách mặt hàng</strong></h3>

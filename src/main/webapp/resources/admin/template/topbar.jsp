@@ -6,6 +6,9 @@
 			<li class="nav-item">
 				<a class="nav-link toggle-menu" href="javascript:void();"><i class="icon-menu menu-icon"></i></a>
 			</li>
+			<li class="nav-item" style="width: 300px; overflow: hidden;">
+				<strong>&nbsp;&nbsp;<label id="mainLabel"></label></strong>
+			</li>
 			<li class="nav-item">
 				<form class="search-bar">
 					<input type="text" class="form-control" placeholder="Tìm kiếm" id="search" onkeyup="myFunction()">

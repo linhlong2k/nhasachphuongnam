@@ -1,5 +1,6 @@
 package com.nhasachphuongnam.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.nhasachphuongnam.entity.HoaDon;
@@ -17,4 +18,6 @@ public interface HoaDonDAO {
 	List<HoaDon> getAll();
 
 	String getLastMa();
+	
+	List<HoaDon> getBetweenThoiGian(Date start, Date end);
 }
