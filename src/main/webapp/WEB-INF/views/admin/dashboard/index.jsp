@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
 <%@ include file="/resources/taglib.jsp"%>
 <%@ include file="/resources/admin/template/header.jsp"%>
 <%@ include file="/resources/admin/template/sidebar.jsp"%>
@@ -15,7 +16,8 @@
 				<div class="row row-group m-0">
 					<div class="col-12 col-lg-6 col-xl-3 border-light">
 						<div class="card-body">
-							<h5 class="text-white mb-0">9526
+							<h5 class="text-white mb-0">
+								${tongDon }
 								<span class="float-right">
 									<i class="fa fa-shopping-cart"></i>
 								</span>
@@ -24,50 +26,55 @@
 								<div class="progress-bar" style="width: 55%"></div>
 							</div>
 							<p class="mb-0 text-white small-font">
-								Total Orders <span class="float-right">+4.2% 
-								<i class="zmdi zmdi-long-arrow-up"></i></span>
+								Tổng đơn <span class="float-right">
+								<!-- +4.2% <i class="zmdi zmdi-long-arrow-up"></i> -->
+								</span>
 							</p>
 						</div>
 					</div>
 					<div class="col-12 col-lg-6 col-xl-3 border-light">
 						<div class="card-body">
 							<h5 class="text-white mb-0">
-								8323 <span class="float-right">
-								<i class="fa fa-usd"></i></span>
+								${donNhap }
+								<span class="float-right"><i class="fa fa-envira"></i></span>
 							</h5>
 							<div class="progress my-3" style="height: 3px;">
 								<div class="progress-bar" style="width: 55%"></div>
 							</div>
 							<p class="mb-0 text-white small-font">
-								Total Revenue <span class="float-right">
-								+1.2% <i class="zmdi zmdi-long-arrow-up"></i></span>
+								Đơn nhập <span class="float-right">
+								<!-- +1.2% <i class="zmdi zmdi-long-arrow-up"></i> -->
+								</span>
 							</p>
 						</div>
 					</div>
 					<div class="col-12 col-lg-6 col-xl-3 border-light">
 						<div class="card-body">
 							<h5 class="text-white mb-0">
-								6200 <span class="float-right"><i class="fa fa-eye"></i></span>
+								${donXuat }
+								<span class="float-right"><i class="fa fa-usd"></i></span>
 							</h5>
 							<div class="progress my-3" style="height: 3px;">
 								<div class="progress-bar" style="width: 55%"></div>
 							</div>
 							<p class="mb-0 text-white small-font">
-								Visitors <span class="float-right">+5.2% <i
-									class="zmdi zmdi-long-arrow-up"></i></span>
+								Đơn xuất <span class="float-right">
+								<!-- +5.2% <i class="zmdi zmdi-long-arrow-up"></i> -->
+								</span>
 							</p>
 						</div>
 					</div>
 					<div class="col-12 col-lg-6 col-xl-3 border-light">
 						<div class="card-body">
 							<h5 class="text-white mb-0">
-								5630 <span class="float-right"><i class="fa fa-envira"></i></span>
+								250620 
+								<span class="float-right"><i class="fa fa-eye"></i></span>
 							</h5>
 							<div class="progress my-3" style="height: 3px;">
 								<div class="progress-bar" style="width: 55%"></div>
 							</div>
 							<p class="mb-0 text-white small-font">
-								Messages <span class="float-right">+2.2% <i
+								abc <span class="float-right">+2.2% <i
 									class="zmdi zmdi-long-arrow-up"></i></span>
 							</p>
 						</div>
@@ -185,30 +192,29 @@
 						class="row m-0 row-group text-center border-top border-light-3">
 						<div class="col-12 col-lg-4">
 							<div class="p-3">
-								<h5 class="mb-0">45.87M</h5>
-								<small class="mb-0">Overall Visitor <span> <i
-										class="fa fa-arrow-up"></i> 2.43%
+								<h5 class="mb-0"><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value = "${chart1LabelTongThu }" type = "currency"/></h5>
+								<small class="mb-0">Tổng thu <span>
+								<!--  <i class="fa fa-arrow-up"></i> 2.43% -->
 								</span></small>
 							</div>
 						</div>
 						<div class="col-12 col-lg-4">
 							<div class="p-3">
-								<h5 class="mb-0">15:48</h5>
-								<small class="mb-0">Visitor Duration <span> <i
-										class="fa fa-arrow-up"></i> 12.65%
+								<h5 class="mb-0"><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value = "${chart1LabelTongChi }" type = "currency"/></h5>
+								<small class="mb-0">Tổng chi <span>
+								<!-- <i class="fa fa-arrow-up"></i> 12.65% -->
 								</span></small>
 							</div>
 						</div>
 						<div class="col-12 col-lg-4">
 							<div class="p-3">
-								<h5 class="mb-0">245.65</h5>
-								<small class="mb-0">Pages/Visit <span> <i
-										class="fa fa-arrow-up"></i> 5.62%
+								<h5 class="mb-0"><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value = "${chart1LabelDoanhThu }" type = "currency"/></h5>
+								<small class="mb-0">Doanh thu <span>
+								<!-- <i class="fa fa-arrow-up"></i> 5.62% -->
 								</span></small>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 
@@ -275,8 +281,14 @@
 					<div class="table-responsive">
 						<table class="table align-items-center">
 							<tbody>
+							<c:forEach var="item" items="${chart2Map }" varStatus="i">
 								<tr>
-									<td><i class="fa fa-circle text-white mr-2"></i> Direct</td>
+									<td><i class="fa fa-circle text-white mr-2"></i> ${item.key }</td>
+									<td><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value = "${item.value }" type = "currency"/></td>
+								</tr>
+							</c:forEach>
+								<!-- <tr>
+									<td><i class="fa fa-circle  mr-2"></i> Direct</td>
 									<td>$5856</td>
 									<td>+55%</td>
 								</tr>
@@ -294,7 +306,7 @@
 									<td><i class="fa fa-circle text-light-3 mr-2"></i>Other</td>
 									<td>$1105</td>
 									<td>+5%</td>
-								</tr>
+								</tr> -->
 							</tbody>
 						</table>
 					</div>

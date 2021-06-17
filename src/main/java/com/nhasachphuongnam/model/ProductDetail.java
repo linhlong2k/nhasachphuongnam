@@ -49,5 +49,8 @@ public class ProductDetail {
 	public void setGiamGia(float giamGia) {
 		this.giamGia = giamGia;
 	}
+	
+	//==================================advanced=======================================
+	
 
 }

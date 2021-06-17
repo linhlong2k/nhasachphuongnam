@@ -124,7 +124,7 @@ public class LoginController {
 	 */
 	
 	@RequestMapping("dang-xuat")
-	public String dangXuat(HttpServletResponse response) {
+	public String dangXuat(ModelMap model,HttpServletResponse response) {
 		Cookie cookie = new Cookie("user", null); // Not necessary, but saves bandwidth.
 		cookie.setMaxAge(0); // Don't set to -1 or it will become a session cookie!
 		response.addCookie(cookie);
@@ -134,6 +134,7 @@ public class LoginController {
 		cookie = new Cookie("gioHang", null); // Not necessary, but saves bandwidth.
 		cookie.setMaxAge(0); // Don't set to -1 or it will become a session cookie!
 		response.addCookie(cookie);
+		model.addAttribute("user", null);
 		return "user/index";
 	}
 }

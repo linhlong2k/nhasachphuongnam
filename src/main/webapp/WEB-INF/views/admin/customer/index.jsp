@@ -62,7 +62,7 @@
 							</c:choose>
 	                    	<td>${khachHang.ten }</td>
 	                    	<td>${khachHang.diaChi }</td>
-	                    	<td><fmt:formatDate value="${khachHang.ngaySinh }" pattern="yyyy-MM-dd" /></td>
+	                    	<td>${khachHang.ngaySinh }</td>
 	                    	<td>
 	                    		<form:form action="admin/khach-hang/xoa-khach-hang/${khachHang.ma }.htm" method="GET">
 	                    			<button type="submit" class="btn btn-light btn-round px-3">Xóa</button>

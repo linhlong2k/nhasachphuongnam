@@ -7,7 +7,7 @@
 <!-- catg header banner section -->
 <section id="aa-catg-head-banner">
 	<img style="height: 305px; width: 100%; object-fit: cover;"
-		src="resources/user/assets/images/banner-website.jpg"
+		src="resources/images/users/banner/sanpham.jpg"
 		alt="banner sản phẩm">
 	<div class="aa-catg-head-banner-area">
 		<div class="container">
@@ -85,7 +85,6 @@
 								</li>
 							</c:forEach>
 						</ul>
-
 						<!-- / quick view modal -->
 					</div>
 
@@ -98,7 +97,9 @@
 						<h3>Danh mục</h3>
 						<ul class="aa-catg-nav">
 							<c:forEach items="${danhSachLoaiSanPham}" var="loai">
-								<li><a href="san-pham.htm?product-type=${loai.maLoai}">${loai.tenLoai}</a></li>
+								<li style="border-bottom: 1px solid #999966;">
+									<a href="san-pham.htm?product-type=${loai.maLoai}">${loai.tenLoai}</a>
+								</li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -109,7 +110,7 @@
 						<h3>Sản phẩm gần đây</h3>
 						<div class="aa-recently-views">
 							<ul>
-								<c:forEach items="${danhSachSanPham}" var="prod" end="10">
+								<c:forEach items="${danhSachSanPham}" var="prod" end="9">
 									<li><a href="chi-tiet-san-pham.htm?id=${prod.maMatHang}"
 										class="aa-cartbox-img"> <c:choose>
 												<c:when test="${empty prod.hinhAnh}">

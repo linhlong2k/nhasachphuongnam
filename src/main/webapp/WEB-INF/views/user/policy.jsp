@@ -3,7 +3,7 @@
 <%@ include file="/resources/user/template/header.jsp" %>
   <!-- / header section -->
   <section id="aa-catg-head-banner">
-   <img style="height: 305px; width: 100%; object-fit: cover;" src="resources/user/assets/images/banner-website.jpg" alt="banner sản phẩm">
+   <img style="width: 100%;" src="resources/images/users/banner/chinhsach.jpg" alt="banner chính sách">
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
@@ -92,7 +92,7 @@
     </div>
       	<div>
       		 <p style="text-align: center; font-size: 2rem;"><i>Chân thành cảm ơn Quý khách hàng đã tin tưởng & lựa chọn nhasachphuongnam.com!</i></p>	
-      		 <img style="display: flex; margin: 0 auto;" src="resources/user/assets/images/jewelry-banner.jpg" alt="nhasachphuongnam"/> <br/> <br>
+      		 <!-- <img style="display: flex; margin: 0 auto;" src="" alt="nhasachphuongnam"/> --> <br/> <br>
       	</div>
       	</div>
       </div>

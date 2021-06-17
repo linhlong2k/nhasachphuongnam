@@ -119,6 +119,7 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 	public List<HoaDon> getBetweenThoiGian(Date start, Date end) {
 		Criteria cr = factory.getCurrentSession().createCriteria(HoaDon.class);
 		cr.add(Restrictions.between("thoiGian", start, end));
+		cr.add(Restrictions.eq("tinhtrang", "3"));
 		return cr.list();
 	}
 	

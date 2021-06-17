@@ -40,7 +40,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #f5f5f0">
 <!-- ========================chưa biết tác dụng =================== -->
 	<!--Start of Tawk.to Script-->
 	<!--Start of Tawk.to Script-->
@@ -106,7 +106,7 @@
 											</li>
 										</c:when>
 										<c:otherwise>
-											<li><a><strong>Chào</strong> ${user.ten }</a></li>
+											<li><a href="thong-tin-ca-nhan.htm"><strong>Chào</strong> ${user.ten }</a></li>
 											<li class="hidden-xs">
 												<a href="dang-xuat.htm">Đăng xuất</a>
 											</li>
@@ -237,9 +237,9 @@
 							<li>
 								<a href="san-pham.htm">SẢN PHẨM </a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="tin-tuc.htm">TIN TỨC</a>
-							</li>
+							</li> -->
 							<li>
 								<a href="chinh-sach.htm">CHÍNH SÁCH</a>
 							</li>

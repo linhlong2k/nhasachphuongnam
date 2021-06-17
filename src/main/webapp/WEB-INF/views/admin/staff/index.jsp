@@ -66,7 +66,7 @@
 							</c:choose>
 	                    	<td>${nhanvien.ten }</td>
 	                    	<td>${nhanvien.diaChi }</td>
-	                    	<td><fmt:formatDate value="${nhanvien.ngaySinh }" pattern="yyyy-MM-dd" /></td>
+	                    	<td>${nhanvien.ngaySinh }</td>
 	                    	<td>
 	                    		<c:choose>
 	                    			<c:when test="${nhanvien.maRole == '0' }">

@@ -2,11 +2,12 @@ package com.nhasachphuongnam.controller.admin;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +30,10 @@ public class DashboardController {
 	private int type = 1; // type = 0: giữa các năm, type = 1: giữa các tháng, 
 	//private List<String> danhSachThang = new ArrayList<String> (Arrays.asList("0", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"));
 	private String[] danhSachThang = new String[] {"0", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-	private Map<String, Integer> danhSachMatHangXuat; // map < mã mặt hàng, tổng tiền>
+	private Map<String, Integer> danhSachMatHangXuat;		// map < mã mặt hàng, tổng tiền>
 	private long[] donXuat, donNhap, doanhThu;
-	
+	private long chart1LabelTongThu, chart1LabelTongChi, chart1LabelDoanhThu;
+	private int soDonNhap, soDonXuat;
 	
 	@Autowired
 	ExportOrderService eoService;
@@ -42,11 +44,18 @@ public class DashboardController {
 	private long[] doanhThuTheoThang(){
 		this.doanhThu = new long [] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		this.donXuat = new long [] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		this.chart1LabelTongChi = 0;
+		this.chart1LabelTongThu = 0;
+		this.soDonNhap = 0;
+		this.soDonXuat = 0;
+			//Đơn hàng xuất - khách hàng mua
 		List<ExportOrder> temp = eoService.GetAllBetweenDate(start, end);
 		this.danhSachMatHangXuat = new HashMap<String, Integer>();
 		for(ExportOrder i: temp) {
+			this.soDonXuat++;
 			for(ProductDetail j: i.getChiTiets()) {
 				this.donXuat[i.getThoiGian().getMonthValue() - 1] += j.getSoLuong() * j.getGia();
+				this.chart1LabelTongThu += j.getSoLuong() * j.getGia();
 				var prev = this.danhSachMatHangXuat.get(j.getMaMatHang());
 			    if (prev == null) {
 			        this.danhSachMatHangXuat.put(j.getMaMatHang(), Integer.valueOf(j.getSoLuong() * (int)j.getGia()));
@@ -56,15 +65,20 @@ public class DashboardController {
 			}
 		}
 		this.donNhap = new long [] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+			//Đơn hàng nhập - mua từ nhà cung cấp
 		List<ImportOrder> temp2 = ioService.GetAllBetweenDate(start, end);
 		for(ImportOrder i: temp2) {
+			this.soDonNhap++;
 			for(ProductDetail j: i.getChiTiets()) {
 				this.donNhap[i.getThoiGian().getMonthValue() - 1] += j.getSoLuong() * j.getGia() * j.getGiamGia();
+				this.chart1LabelTongChi += j.getSoLuong() * j.getGia() * j.getGiamGia();
 			}
 		}
+			//Tính doanh thu
 		for(int i = 0; i < 12; i++) {
 			this.doanhThu[i] = this.donXuat[i] - this.donNhap[i];
 		}
+		this.chart1LabelDoanhThu = this.chart1LabelTongThu - this.chart1LabelTongChi;
 		return donXuat;
 	}
 	
@@ -72,29 +86,58 @@ public class DashboardController {
 	public int chart1(ModelMap model) {
 		int doanhThu = 0;
 		List <String> chart1Label = new ArrayList<String>();
-		int i, j;
+		int i;
 		if(type == 0) {
 			
 		} else if(type == 1) {
 			for(i = (start.getMonthValue() + 1) % 12; i <= end.getMonthValue(); i++) {
 				chart1Label.add(this.danhSachThang[i]);
 			}
+			this.doanhThuTheoThang();
+				//top row
+			model.addAttribute("tongDon", this.soDonNhap + this.soDonXuat);
+			model.addAttribute("donNhap", this.soDonNhap);
+			model.addAttribute("donXuat", this.soDonXuat);
 				//chart1
 			StringBuilder json = new StringBuilder(new Gson().toJson(chart1Label ));
 			model.addAttribute("chart1Label", json);
-			this.doanhThuTheoThang();
 			json = new StringBuilder(new Gson().toJson(this.donXuat));
 			model.addAttribute("chart1TongThu", json);
 			json = new StringBuilder(new Gson().toJson(this.donNhap));
 			model.addAttribute("chart1TongChi", json);
 			json = new StringBuilder(new Gson().toJson(this.doanhThu));
 			model.addAttribute("chart1DoanhThu", json);
+			model.addAttribute("chart1LabelTongThu", this.chart1LabelTongThu);
+			model.addAttribute("chart1LabelTongChi", this.chart1LabelTongChi);
+			model.addAttribute("chart1LabelDoanhThu", this.chart1LabelDoanhThu);
 				//chart2
-			List<String> temp = this.danhSachMatHangXuat.keySet().stream().collect(Collectors.toList());
-			json = new StringBuilder(new Gson().toJson(temp));
-			model.addAttribute("chart2Label", json);
-			List<Integer> temp2 = this.danhSachMatHangXuat.values().stream().collect(Collectors.toList());
-			model.addAttribute("chart2Data", temp2);
+			LinkedHashMap<String, Integer> sortedDanhSachMatHang = new LinkedHashMap<>();
+			this.danhSachMatHangXuat.entrySet()
+				.stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) 
+				.forEachOrdered(x -> sortedDanhSachMatHang.put(x.getKey(), x.getValue()));
+			if(sortedDanhSachMatHang.size() > 4) {
+				this.danhSachMatHangXuat = new TreeMap<String, Integer>();
+				int m = 0;
+				for(String k: sortedDanhSachMatHang.keySet()) {
+					m++;
+					if(m > 4) {
+						break;
+					}
+					this.danhSachMatHangXuat.put(k, sortedDanhSachMatHang.get(k));
+				}
+				json = new StringBuilder(new Gson().toJson(this.danhSachMatHangXuat.keySet()));
+				model.addAttribute("chart2Label", json);
+				model.addAttribute("chart2Data", this.danhSachMatHangXuat.values());
+				model.addAttribute("chart2Map", this.danhSachMatHangXuat);
+			} else {
+				json = new StringBuilder(new Gson().toJson(sortedDanhSachMatHang.keySet()));
+				model.addAttribute("chart2Label", json);
+				model.addAttribute("chart2Data", sortedDanhSachMatHang.values());
+				model.addAttribute("chart2Map", sortedDanhSachMatHang);
+			}
+			
+			
 		} else {
 			
 		}
