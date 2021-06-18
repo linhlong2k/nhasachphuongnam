@@ -5,16 +5,32 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class PersonalInfo {
 	private String ma;
+	@NotNull(message = "Tên không được để trống")
+	@Size(min = 1,max = 50, message = "Tên không được quá dài hoặc quá ngắn")
 	private String ten;
 	private byte[] hinhAnh;
+	@NotEmpty(message = "Địa chỉ không được để trống")
 	private String diaChi;
+	/*
+	 * @NotEmpty(message = "Ngày sinh không được để trống")
+	 * 
+	 * @NotNull(message = "Ngày sinh không được để trống")
+	 * 
+	 * @Past(message = "Ngày sinh phải là ngày trong quá khứ")
+	 */
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate ngaySinh;
 	private String soDienThoai;
+	@NotEmpty(message = "Tên đăng nhập không được để trống")
+	@Size(max = 25, message = "Tên đăng nhập không được quá dài")
 	private String username;
 	private String maRole;
 

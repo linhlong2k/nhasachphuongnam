@@ -1,7 +1,15 @@
 package com.nhasachphuongnam.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ProductType {
 	private String maLoai;
+	@NotNull(message = "Tên loại mặt hàng không được để trống")
+	@NotEmpty(message = "Tên loại mặt hàng không được để trống")
+	@Size(max = 50, message = "Tên loại mặt hàng quá dài")
 	private String tenLoai;
 
 	public ProductType() {

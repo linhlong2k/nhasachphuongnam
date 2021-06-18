@@ -1,8 +1,18 @@
 package com.nhasachphuongnam.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Supplier {
 	private String maNhaCungCap;
+	@NotEmpty(message = "Tên nhà cung cấp không được để trống")
+	@NotNull(message = "Tên nhà cung cấp không được để trống")
+	@Size(max = 50, message = "Tên nhà cung cấp quá dài")
 	private String tenNhaCungCap;
+	@NotEmpty(message = "Địa chỉ không được để trống")
+	@NotNull(message = "Địa chỉ không được để trống")
 	private String diaChi;
 	private String soDienThoai;
 

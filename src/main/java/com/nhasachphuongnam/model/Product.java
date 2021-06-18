@@ -6,28 +6,39 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Product {
 	private String maMatHang;
-	@NotNull(message="Tên mặt hàng không được để trống!")
+	/*
+	 * @NotEmpty(message = "Tên mặt hàng không được để trống")
+	 * 
+	 * @NotNull(message="Tên mặt hàng không được để trống!")
+	 */
 	@Size(max = 50, message="Tên mặt hàng quá dài")
 	private String tenMatHang;
 	private byte[] hinhAnh;
-	@NotNull(message="Số lượng mặt hàng không được để trống")
+	/*
+	 * @NotEmpty(message = "Số lượng mặt hàng không được để trống")
+	 * 
+	 * @NotNull(message="Số lượng mặt hàng không được để trống")
+	 */
 	@Min(value = 0, message="Số lượng mặt hàng không được âm")
 	@Max(value = 2147483646, message="Số lượng mặt hàng quá lớn")
 	private int soLuong;
 	private String moTaNgan;
 	private String moTa;
 	private boolean daXoa;
-	@NotNull(message="Giá tiền không được để trống")
+	/*
+	 * @NotEmpty(message = "Giá tiền không được để trống")
+	 * 
+	 * @NotNull(message="Giá tiền không được để trống")
+	 */
 	@DecimalMin(value = "0", message="Giá tiền mặt hàng không được âm")
 	@DecimalMax(value = "922337203685476", message = "Giá tiền mặt hàng quá lớn")
 	private long gia;
 	private Float giamGia;
-	@NotNull(message="Vui lòng chọn 1 loại mặt hàng")
+	/* @NotNull(message="Vui lòng chọn 1 loại mặt hàng") */
 	private String maLoai;
 
 	public Product() {

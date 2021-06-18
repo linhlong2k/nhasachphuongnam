@@ -19,16 +19,42 @@
 		</div>
 	</div>
 </section>
-<!-- / catg header banner section -->
-<!-- start contact section -->
-<section id="aa-contact">
+<section>
 	<div class="container">
-	<br>
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad">
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h3 class="panel-title">Thành viên: ${user.ten }</h3>
+			<div class="col-md-5 col-lg-3">
+				<div class="" style="background-color: #fff; margin: 20px;">
+					<div class="" style="background-color: #ced4da; padding: 0; margin: 0px;">
+						<h3 class="" style="background-color: #ced4da; margin: 0px; padding: 10px;">
+							<i class="fas fa-cog fa-fw"></i>&nbsp;&nbsp; Cài đặt
+						</h3>
+					</div>
+					<br>
+					<div class="" style="display: block; margin-left: 10px;">
+						<ul class="">
+							<li class="nav-item">
+								<a class="nav-link d-flex align-items-center justify-content-between active" id="u-vnav-edit" href="thong-tin-ca-nhan.htm" >
+								<span><i class="far fa-fw fa-address-card mr-5"></i> Hồ sơ</span></a>
+							</li>
+							<br>
+							<li class="nav-item">
+								<a class="nav-link d-flex align-items-center justify-content-between" id="u-vnav-email" href="thong-tin-don-hang.htm">
+								<span><i class="fas fa-shopping-cart mr-5"></i> Đơn hàng</span></a>
+							</li>
+							<br>
+							<li class="nav-item">
+								<a class="nav-link d-flex align-items-center justify-content-between" id="u-vnav-password" href="thay-doi-mat-khau.htm">
+								<span><i class="fa fa-fw fa-key mr-5"></i> Mật khẩu</span></a>
+							</li>
+							<br>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7 col-lg-9">
+				<div class="panel panel-info" style="background-color: #fff; margin-top: 20px;">
+					<div class="block-header block-header-default" style="background-color: #ced4da; padding: 0; margin: 0px;">
+						<h3 class="block-title font-w600" style="background-color: #ced4da; margin: 0px; padding: 10px;"> Thành viên: ${user.ten }</h3>
 					</div>
 					<div class="panel-body">
 						<div class="row">
@@ -41,15 +67,27 @@
 										<img class="img-circle img-responsive" alt="image" src="data:image/jpeg;base64,${user.getBase64Photo() }" />	
 									</c:otherwise>
 								</c:choose>
-								<a href="thong-tin-ca-nhan/cap-nhat-hinh-anh/${user.ma}.htm" >Cập nhập ảnh</a>
-								<br><br>
-								<a data-original-title="Lưu hình ảnh" data-toggle="tooltip" type="button" class="btn btn-sm btn-round btn-primary" style="color: #19334d">
-									<i class="glyphicon glyphicon-floppy-disk"></i>
-								</a>
+								<form action="thong-tin-ca-nhan.htm?" method="post" enctype="multipart/form-data">
+									<br>
+									<div class="card-body text-primary">
+									   	<div class="mb-3">
+										  	<input class="form-control" type="file" id="formFile" name="photo">
+										</div>
+								 	</div>
+								 	<br>
+									<button type="submit" class="btn btn-light btn-round px-5" name="uploadPhotoId" value="${user.ma }" >
+						               	Cập nhật ảnh
+						            </button>
+								</form>
 							</div>
 							<div class=" col-md-8 col-lg-8 ">
 								<table class="table table-user-information">
 									<tbody>
+									<form:form aciton="thong-tin-ca-nhan.htm" method="post" modelAttribute="user">
+										<tr>
+											<td>Họ và tên:</td>
+											<td><form:input path="ten" required="required" value="${user.ten }" pattern="[A-Za-z0-9]{0-50}" /></td>
+										</tr>
 										<tr>
 											<td>Loại tài khoản:</td>
 											<td>
@@ -62,85 +100,50 @@
 										</tr>
 										<tr>
 											<td>Ngày sinh:</td>
-											<td>${user.ngaySinh }</td>
+											<td><form:input path="ngaySinh" type="date" required="required" value="${user.ngaySinh }" /></td>
 										</tr>
 										<tr>
 											<td>Địa chỉ:</td>
-											<td>${user.diaChi }</td>
+											<td><form:input path="diaChi" required="required" value="${user.diaChi }" /></td>
 										</tr>
 
 										<tr>
 										<tr>
 											<td>Số điện thoại:</td>
-											<td>${user.soDienThoai }</td>
+											<td><form:input path="soDienThoai" required="required" value="${user.soDienThoai }" pattern="[0-9]{10}" /></td>
 										</tr>
 										<tr>
 											<td>Tên đăng nhập:</td>
 											<td>
 												${user.username }
 												<br>
-												<p><a href="thong-tin-ca-nhan.htm?password" style="color: blue;">Đổi mật khẩu</a></p>
+												<p><a href="thay-doi-mat-khau.htm" style="color: blue;">Đổi mật khẩu</a></p>
 											</td>
-											
 										</tr>
+										<tr>
+										<td></td>
+										<td>
+											<button type="submit" class="btn btn-light btn-round" name="editInfo" style="margin: 0 auto;">
+								               	<i class="glyphicon glyphicon-edit"></i>
+								               	Lưu chỉnh sửa
+								            </button>
+								        </td>
+										</tr>
+									</form:form>
 									</tbody>
 								</table>
-								<a href="thong-tin-ca-nhan.html?edit" data-original-title="Chỉnh sửa thông tin cá nhân" data-toggle="tooltip" type="button" class="btn btn-light btn-round px-3" >
-									<i class="glyphicon glyphicon-edit"></i>
-								</a>
+								<!-- <a href="thong-tin-ca-nhan.html?edit" data-original-title="Chỉnh sửa thông tin cá nhân" data-toggle="tooltip" type="button" class="btn btn-light btn-round px-3" >
+									
+								</a> -->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<br>
-		<div class="row" style="padding: 10px; border: 3px solid #000080; border-radius: 10px;">
-			<div class="card">
-	            <div class="card-header">
-	                <h3><strong>DANH SÁCH ĐƠN HÀNG</strong></h3>
-	                <br>
-	                <div>
-	                	<form class="search">
-							<input type="text" class="form-control" placeholder="Tìm kiếm" id="search-hoa-don" onkeyup="hoaDonSearch()">
-						</form>
-	                </div>
-	            </div>
-	            <div class="table-responsive">
-	                <table class="table align-items-center" id="table-hoa-don">
-	                	<thead>
-	                		<tr>
-	                            <th style="margin: 0; padding: 10px 10px;"><i class="text-white mr-2"></i>Mã đơn</th>
-	                            <th style="margin: 0; padding: 10px 10px;">Thời gian</th>
-	                            <th style="margin: 0; padding: 10px 10px;">Giảm giá</th>
-	                            <th style="margin: 0; padding: 10px 10px;">Tình trạng</th>
-	                            <th style="margin: 0; padding: 10px 10px;">Địa chỉ nhận hàng</th>
-	                            <th style="margin: 0; padding: 10px 10px;">Chi tiết đơn hàng</th>
-	                        </tr>
-	                	</thead>
-	                    <tbody>
-	                        <c:forEach var="eo" items="${danhSachDonHang }">
-	                        <tr>
-								<td scope="row" style="margin: 0; padding: 10px;">${eo.maDonHang }</td>
-		                    	<td style="margin: 0; padding: 10px;">${eo.thoiGian }</td>
-		                    	<td style="margin: 0; padding: 10px;">${eo.giamGia }</td>
-		                    	<td style="margin: 0; padding: 10px;">${eo.tinhTrang }</td>
-		                    	<td style="margin: 0; padding: 10px;">${eo.diaChi }</td>
-		                    	<td style="margin: 0; padding: 10px;">
-		                    		<c:forEach var="item" items="${eo.chiTiets }">
-		                    			<p>${item.maMatHang }&nbsp;&nbsp;${item.soLuong }&nbsp;&nbsp;<fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value="${item.gia }" type="currency" /></p>
-		                    		</c:forEach>
-		                    	</td>
-		                    </tr>
-	                        </c:forEach>
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-		</div>
-		<br><br><br>
 	</div>
 </section>
+<br><br><br>
 <!-- / product category -->
 <!--  end content-->
 

@@ -7,8 +7,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class ImportOrder {
 	private String maDonHang;
-	// định dạng lưu trữ: mã mặt hàng:tên mặt hàng:số lượng:giá tiền
 	private List<ProductDetail> chiTiets;
+	/*
+	 * @NotEmpty(message = "Thời gian không được để trống")
+	 * 
+	 * @NotNull(message = "Thời gian không được để trống")
+	 */
+	//không thể dúng được annonitation @pastorpresent
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate thoiGian;
 	private String maNhanVien;

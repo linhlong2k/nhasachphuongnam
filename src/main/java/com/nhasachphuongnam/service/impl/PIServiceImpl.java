@@ -14,6 +14,8 @@ import com.nhasachphuongnam.dao.NhanVienDAO;
 import com.nhasachphuongnam.dao.TaiKhoanDAO;
 import com.nhasachphuongnam.entity.KhachHang;
 import com.nhasachphuongnam.entity.NhanVien;
+import com.nhasachphuongnam.entity.TaiKhoan;
+import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.service.PIService;
 
@@ -46,9 +48,10 @@ public class PIServiceImpl implements PIService{
 	//không chỉnh các thông tin như username, role của người dùng
 	public KhachHang convert2KhachHang(PersonalInfo pi) {
 		KhachHang khachHang = khachHangDAO.getByID(pi.getMa());
-		if(khachHang == null)
+		if(khachHang == null) {
 			khachHang = new KhachHang();
-		khachHang.setMaKH(pi.getMa());
+			khachHang.setMaKH(pi.getMa());
+		}
 		khachHang.setTenKH(pi.getTen());
 		if(pi.getHinhAnh() != null)
 			khachHang.setHinhAnh(pi.getHinhAnh());
@@ -64,9 +67,10 @@ public class PIServiceImpl implements PIService{
 	
 	public NhanVien convert2NhanVien(PersonalInfo pi) {
 		NhanVien nhanVien =  nhanVienDAO.getByID(pi.getMa());
-		if(nhanVien == null)
+		if(nhanVien == null) {
 			nhanVien = new NhanVien();
-		nhanVien.setMaNV(pi.getMa());
+			nhanVien.setMaNV(pi.getMa());
+		}
 		nhanVien.setTenNV(pi.getTen());
 		if(pi.getHinhAnh() != null)
 			nhanVien.setHinhAnh(pi.getHinhAnh());
@@ -102,20 +106,40 @@ public class PIServiceImpl implements PIService{
 		return newma;
 	}
 	
-	public boolean add(PersonalInfo pi) {
+	public boolean add(PersonalInfo pi, Login login) {
 		if(pi.getMaRole().equals("2")) {
-			/*pi.setMa(theNextMaKH());*/
-			KhachHang khachHang = convert2KhachHang(pi);
-			khachHang.setMaKH(theNextMaKH());
-			if(khachHangDAO.add(khachHang))
+			KhachHang khachHang = new KhachHang();
+			khachHang.setMaKH(this.theNextMaKH());
+			khachHang.setTenKH(pi.getTen());
+			khachHang.setHinhAnh(pi.getHinhAnh());
+			khachHang.setDiaChi(pi.getDiaChi());
+			khachHang.setNgaySinh(Date.from(pi.getNgaySinh().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+			khachHang.setSdt(pi.getSoDienThoai());
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setUsername(login.getUsername());
+			taiKhoan.setPassword(login.getPassword());
+			taiKhoan.setRole(login.getRole().toRole());
+			khachHang.setTaikhoan(taiKhoan);
+			if(khachHangDAO.add(khachHang)) {
 				return true;
+			}
 			return false;
 		} else {
-			/*pi.setMa(theNextMaNV());*/
-			NhanVien nhanVien = convert2NhanVien(pi);
-			nhanVien.setMaNV(theNextMaNV());
-			if(nhanVienDAO.add(nhanVien))
+			NhanVien nhanVien = new NhanVien();
+			nhanVien.setMaNV(this.theNextMaNV());
+			nhanVien.setDiaChi(pi.getDiaChi());
+			nhanVien.setHinhAnh(pi.getHinhAnh());
+			nhanVien.setNgaySinh(Date.from(pi.getNgaySinh().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+			nhanVien.setSdt(pi.getSoDienThoai());
+			nhanVien.setTenNV(pi.getTen());
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setUsername(login.getUsername());
+			taiKhoan.setPassword(login.getPassword());
+			taiKhoan.setRole(login.getRole().toRole());
+			nhanVien.setTaikhoan(taiKhoan);
+			if(nhanVienDAO.add(nhanVien)) {
 				return true;
+			}
 			return false;
 		}
 	}
@@ -176,5 +200,28 @@ public class PIServiceImpl implements PIService{
 		for(NhanVien i: nhanViens)
 			pis.add(convert(i));
 		return pis;
+	}
+	
+	public boolean capNhapAnh(String id, byte[] photo) {
+		if(id.substring(0, 2).equals("KH")) {
+			KhachHang khachHang = khachHangDAO.getByID(id);
+			if(khachHang == null) {
+				return false;
+			}
+			khachHang.setHinhAnh(photo);
+			if(khachHangDAO.update(khachHang)) {
+				return true;
+			}
+		} else {
+			NhanVien nhanVien = nhanVienDAO.getByID(id);
+			if(nhanVien == null) {
+				return false;
+			}
+			nhanVien.setHinhAnh(photo);
+			if(nhanVienDAO.update(nhanVien)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

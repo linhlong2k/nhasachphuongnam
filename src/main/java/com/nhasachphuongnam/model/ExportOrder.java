@@ -3,6 +3,9 @@ package com.nhasachphuongnam.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class ExportOrder {
@@ -10,10 +13,18 @@ public class ExportOrder {
 	private String maDonHang;
 	// định dạng lưu trữ: mã mặt hàng:tên mặt hàng:số lượng:giá tiền
 	private List<ProductDetail> chiTiets;
+	/*
+	 * @NotEmpty(message = "Thời gian không được để trống")
+	 * 
+	 * @NotNull(message = "Thời gian không được để trống")
+	 */
+	//không thể dùng annonitation @PastOrPresent
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate thoiGian;
 	private String maNhanVien;
 	private String maKhachHang;
+	@NotEmpty(message = "Địa chỉ không được để trống")
+	@NotNull(message = "Địa chỉ không được để trống")
 	private String diaChi;
 	private String sdt;
 	private Float giamGia;

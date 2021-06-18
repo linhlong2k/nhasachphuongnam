@@ -28,7 +28,7 @@
           <div class="col-lg-6">
             <div class="card">
             	<div class="card-header">
-            		<div class="card-title"><strong>Thêm nhân viên</strong>&nbsp;&nbsp;<a href="nhan-vien/index.htm" style="float: right;">Hủy</a></div>
+            		<div class="card-title"><strong>Thêm nhân viên</strong>&nbsp;&nbsp;<a href="admin/nhan-vien/index.htm" style="float: right;">Hủy</a></div>
             	</div>
               <div class="card-body">
                 <form:form action="admin/nhan-vien/them-nhan-vien-moi.htm" method="post" modelAttribute="nhanVienMoi">

@@ -13,3 +13,5 @@
 	3 - thành công
 * /nhasachphuongnam/src/main/webapp/WEB-INF/views/user/product.jsp line:62 : không thể so sánh float = 0
 * mã nhân viên lưu trên cơ sở dữ liệu là mã nhân viên xác nhận đơn hàng của client, nhân viên xác nhận đơn hàng giao thành công không lưu trên database;
+* lỗi khi thêm nhân viên mà để trống tên hoặc địa chỉ (một số đối tượng tương tự lỗi tương tự @NotEmpty, @NotNull)
+* 

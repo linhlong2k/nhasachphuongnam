@@ -1,5 +1,7 @@
 package com.nhasachphuongnam.model;
 
+import com.nhasachphuongnam.entity.Role;
+
 public class RoleDTO {
 	private String maRole;
 	private String tenRole;
@@ -28,6 +30,15 @@ public class RoleDTO {
 
 	public void setTenRole(String tenRole) {
 		this.tenRole = tenRole;
+	}
+	
+	//======================advanced==============
+	
+	public Role toRole() {
+		Role res = new Role();
+		res.setTenRole(this.tenRole);
+		res.setMaRole(this.maRole);
+		return res;
 	}
 
 }

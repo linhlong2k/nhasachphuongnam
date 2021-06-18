@@ -90,10 +90,16 @@
 		
 		<!-- 		============================================================================ -->
 		<li class="sidebar-header">Admin</li>
-	      <li class="item">
+	 	<li class="item">
 			<a href="admin/nhan-vien/index.htm" class="">
 				<i class="zmdi zmdi-accounts-alt"></i>
 				<span>Nhân viên</span>
+			</a>
+		</li>
+		<li class="item">
+			<a href="admin/them-nhan-vien.htm" class="">
+				<i class="zmdi zmdi-accounts-add"></i>
+				<span>Thêm nhân viên</span>
 			</a>
 		</li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>

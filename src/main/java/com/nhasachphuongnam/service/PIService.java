@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.nhasachphuongnam.entity.KhachHang;
 import com.nhasachphuongnam.entity.NhanVien;
+import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.model.PersonalInfo;
 
 public interface PIService {
@@ -12,7 +13,7 @@ public interface PIService {
 	
 	PersonalInfo convert(NhanVien nhanVien);
 	
-	boolean add(PersonalInfo pi);
+	boolean add(PersonalInfo pi, Login login);
 	
 	boolean update(PersonalInfo pi);
 	
@@ -23,4 +24,6 @@ public interface PIService {
 	List<PersonalInfo> getAllKhachHang();
 	
 	List<PersonalInfo> getAllNhanVien();
+	
+	boolean capNhapAnh(String id, byte[] photo);
 }

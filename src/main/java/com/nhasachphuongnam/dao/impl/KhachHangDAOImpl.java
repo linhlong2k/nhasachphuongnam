@@ -26,6 +26,7 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
+			session.save(khachHang.getTaikhoan());
 			session.save(khachHang);
 			tran.commit();
 		} catch(HibernateException ex) {
