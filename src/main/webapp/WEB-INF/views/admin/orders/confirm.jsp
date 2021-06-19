@@ -46,8 +46,8 @@
 								<p>Giảm giá: ${donHang.giamGia }</p>
 								<p>
 									Thời gian đặt hàng:
-									<fmt:formatDate value="${donHang.thoiGian }"
-										pattern="dd-MM-yyyy" />
+									<%-- <fmt:formatDate value="${donHang.thoiGian }" pattern="dd-MM-yyyy" /> --%>
+									${donHang.thoiGian }
 								</p>
 							</div>
 							<div class="col-md-12">

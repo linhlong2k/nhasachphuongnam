@@ -61,4 +61,42 @@
 	 	<!-- maxUploadSize=20MB -->
 	 	<property name="maxUploadSize" value="200971520"/>
 	</bean>
+	
+	<!-- Cấu hình interceptor --> 
+	<mvc:interceptors>  
+		<!-- Lọc tất cả các URL -->
+		<!-- <bean class="com.dongho.interceptor.LoginInterceptor" /> -->
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<mvc:exclude-mapping path="/admin/nhan-vien/**" />
+			<mvc:exclude-mapping path="/admin/nhan-vien.htm" />
+			<mvc:exclude-mapping path="/admin/them-nhan-vien.htm" />
+			<mvc:exclude-mapping path="/admin/them-nhan-vien/**"/>
+			<bean class="com.nhasachphuongnam.interceptor.NhanVienInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/nhan-vien/**" />
+			<mvc:mapping path="/admin/nhan-vien.htm" />
+			<mvc:mapping path="/admin/them-nhan-vien.htm" />
+			<mvc:mapping path="/admin/them-nhan-vien/**"/>
+			<bean class="com.nhasachphuongnam.interceptor.AdminInterceptor"></bean>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/gio-hang.htm" />
+			<mvc:mapping path="/gio-hang/**" />
+			<mvc:mapping path="/thanh-toan.htm" />
+			<mvc:mapping path="/thanh-toan/**" />
+			<mvc:mapping path="/thong-tin-ca-nhan.htm" />
+			<mvc:mapping path="/thong-tin-ca-nhan/**" />
+			<mvc:mapping path="/thay-doi-mat-khau.htm" />
+			<mvc:mapping path="/thay-doi-mat-khau/**" />
+			<mvc:mapping path="/thong-tin-don-hang.htm" />
+			<mvc:mapping path="/thong-tin-don-hang/**" />
+			<bean class="com.nhasachphuongnam.interceptor.KhachHangInterceptor" />
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
 </beans>

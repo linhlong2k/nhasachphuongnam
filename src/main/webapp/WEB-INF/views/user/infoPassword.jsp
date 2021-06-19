@@ -19,6 +19,36 @@
 		</div>
 	</div>
 </section>
+<style>
+	.nav-link {
+		padding: 10px;
+		margin: 15px;
+		display: block;
+		border-radius: 2%;
+	}
+	.nav-item:hover {
+		background-color: #d1e0e0;
+		color: blue;
+	}
+	.nav-item	.active {
+		background-color: #42a5f5;
+		color: #fff;
+	}
+	.card {
+		background-color: #fff;
+		margin: 20px;
+	}
+	.card-header {
+		background-color: #ced4da;
+		padding: 0;
+		margin: 0px;
+	}
+	.card-header-main {
+		 background-color: #ced4da;
+		 margin: 0px;
+		 padding: 10px;"
+	}
+</style>
 <section>
 	<div class="container">
 		<div class="row">
@@ -36,12 +66,10 @@
 								<a class="nav-link d-flex align-items-center justify-content-between" id="u-vnav-edit" href="thong-tin-ca-nhan.htm" >
 								<span><i class="far fa-fw fa-address-card mr-5"></i> Hồ sơ</span></a>
 							</li>
-							<br>
 							<li class="nav-item">
 								<a class="nav-link d-flex align-items-center justify-content-between" id="u-vnav-email" href="thong-tin-don-hang.htm">
 								<span><i class="fas fa-shopping-cart mr-5"></i> Đơn hàng</span></a>
 							</li>
-							<br>
 							<li class="nav-item">
 								<a class="nav-link d-flex align-items-center justify-content-between active" id="u-vnav-password" href="thay-doi-mat-khau.htm">
 								<span><i class="fa fa-fw fa-key mr-5"></i> Mật khẩu</span></a>
@@ -58,7 +86,7 @@
 					</div>
 						<div class="panel-body">
 						<c:if test="${not empty notification }">
-							<label id="message" class="form-text text-muted" style="color: blue; background-color: #d1e0e0; width: 100%; padding: 5px;">${notification }<br></label>
+							<label id="notification" class="form-text text-muted" style="color: blue; background-color: #d1e0e0; width: 100%; padding: 5px;">${notification }<br></label>
 						</c:if>
 							<div class="row" style="padding: 10px 100px;">
 								<div class="card">

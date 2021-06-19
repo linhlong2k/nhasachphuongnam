@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="KHACHHANG")
-/* @NamedQuery(name="Khachhang.findAll", query="SELECT k FROM Khachhang k") */
+@Table(name="KhachHang")
+/* @NamedQuery(name="KhachHang.findAll", query="SELECT k FROM KhachHang k") */
 public class KhachHang implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -40,13 +40,13 @@ public class KhachHang implements Serializable {
 	private String tenKH;
 
 	//bi-directional many-to-one association to Hoadon
-	@OneToMany(mappedBy="khachhang")
+	@OneToMany(mappedBy="khachHang")
 	private List<HoaDon> hoadons;
 
-	//bi-directional many-to-one association to Taikhoan
+	//bi-directional many-to-one association to TaiKhoan
 	@ManyToOne
 	@JoinColumn(name="USERNAME")
-	private TaiKhoan taikhoan;
+	private TaiKhoan taiKhoan;
 
 	public KhachHang() {
 	}
@@ -109,24 +109,24 @@ public class KhachHang implements Serializable {
 
 	public HoaDon addHoadon(HoaDon hoadon) {
 		getHoadons().add(hoadon);
-		hoadon.setKhachhang(this);
+		hoadon.setKhachHang(this);
 
 		return hoadon;
 	}
 
 	public HoaDon removeHoadon(HoaDon hoadon) {
 		getHoadons().remove(hoadon);
-		hoadon.setKhachhang(null);
+		hoadon.setKhachHang(null);
 
 		return hoadon;
 	}
 
-	public TaiKhoan getTaikhoan() {
-		return this.taikhoan;
+	public TaiKhoan getTaiKhoan() {
+		return this.taiKhoan;
 	}
 
-	public void setTaikhoan(TaiKhoan taikhoan) {
-		this.taikhoan = taikhoan;
+	public void setTaiKhoan(TaiKhoan taiKhoan) {
+		this.taiKhoan = taiKhoan;
 	}
 
 }

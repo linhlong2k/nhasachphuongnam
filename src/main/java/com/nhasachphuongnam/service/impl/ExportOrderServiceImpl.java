@@ -52,24 +52,24 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	public String theNextMa() {
 		String ma = hoaDonDAO.getLastMa();
 		int index = Integer.parseInt(ma.substring(2, ma.length()));
-		String newmamh = "HD";
+		String newmaMH = "HD";
 		index++;
 		for(int i = 0; i < 8 - String.valueOf(index).length(); i++)
-			newmamh += '0';
-		newmamh += String.valueOf(index);
-		return newmamh;
+			newmaMH += '0';
+		newmaMH += String.valueOf(index);
+		return newmaMH;
 	}
 	
 	public ExportOrder convert(HoaDon var) {
 		ExportOrder res = new ExportOrder();
-		res.setMaKhachHang(var.getKhachhang().getMaKH());
+		res.setMaKhachHang(var.getKhachHang().getMaKH());
 		res.setDiaChi(var.getDiaChi());
 		res.setSdt(var.getSdt());
 		res.setMaDonHang(var.getMaHD());
 		res.setThoiGian(var.getThoiGian().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-		res.setTinhTrang(var.getTinhtrang());
-		if(var.getNhanvien() != null) {
-			res.setMaNhanVien(var.getNhanvien().getMaNV());
+		res.setTinhTrang(var.getTinhTrang());
+		if(var.getNhanVien() != null) {
+			res.setMaNhanVien(var.getNhanVien().getMaNV());
 		}
 		res.setGiamGia(var.getGiamGia());
 		List<ProductDetail> temp2 = new ArrayList<ProductDetail>();
@@ -77,7 +77,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		List<CtHoaDon> temp4 = ctHoaDonDAO.getbyMaHD(var.getMaHD());
 		for(CtHoaDon i: temp4) {
 			temp3 = new ProductDetail();
-			temp3.setMaMatHang(i.getMathang().getMaMH());
+			temp3.setMaMatHang(i.getMatHang().getMaMH());
 			temp3.setSoLuong(i.getSoLuong());
 			temp3.setGia(i.getGia().longValue());
 			/* temp3.setGiamGia(i.getGiamgia()); */
@@ -94,13 +94,13 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 			temp1 = new HoaDon();
 		temp1.setDiaChi(var.getDiaChi());
 		KhachHang temp2 = khachHangDAO.getByID(var.getMaKhachHang());
-		temp1.setKhachhang(temp2);
+		temp1.setKhachHang(temp2);
 		NhanVien temp3 = nhanVienDAO.getByID(var.getMaNhanVien());
-		temp1.setNhanvien(temp3);
+		temp1.setNhanVien(temp3);
 		temp1.setSdt(var.getSdt());
 		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		temp1.setGiamGia(var.getGiamGia());
-		temp1.setTinhtrang(var.getTinhTrang());
+		temp1.setTinhTrang(var.getTinhTrang());
 		return temp1;
 	}
 	
@@ -109,17 +109,17 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		/* HoaDon temp1 = this.convert(var); */
 		HoaDon temp1 = new HoaDon();
 		temp1.setMaHD(this.theNextMa());
-		temp1.setKhachhang(khachHangDAO.getByID(var.getMaKhachHang()));
+		temp1.setKhachHang(khachHangDAO.getByID(var.getMaKhachHang()));
 		temp1.setSdt(var.getSdt());
 		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		temp1.setGiamGia(var.getGiamGia());
-		temp1.setTinhtrang(var.getTinhTrang());
+		temp1.setTinhTrang(var.getTinhTrang());
 		temp1.setDiaChi(var.getDiaChi());
 		List<CtHoaDon> CTHoaDons = new ArrayList<CtHoaDon>();
 		for(ProductDetail i: var.getChiTiets()) {
 			CtHoaDonPK pk = new CtHoaDonPK();
-			pk.setMahd(temp1.getMaHD());
-			pk.setMamh(i.getMaMatHang());
+			pk.setMaHD(temp1.getMaHD());
+			pk.setMaMH(i.getMaMatHang());
 			CtHoaDon temp2 = new CtHoaDon();
 			temp2.setId(pk);
 			temp2.setSoLuong(i.getSoLuong());
@@ -127,7 +127,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 			matHangDAO.changeSoLuong(i.getMaMatHang(), 0 - i.getSoLuong());
 			CTHoaDons.add(temp2);
 		}
-		temp1.setCtHoadons(CTHoaDons);
+		temp1.setCtHoaDons(CTHoaDons);
 		if(hoaDonDAO.add(temp1))
 			return temp1.getMaHD();
 		return null;
@@ -163,6 +163,24 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
+	public List<ExportOrder> GetAllByMaKH(String id){
+		List<ExportOrder> res = new ArrayList<ExportOrder>();
+		List<HoaDon> temp = hoaDonDAO.getHoaDonByMaKhachHang(id);
+		for(HoaDon i: temp) {
+			res.add(convert(i));
+		}
+		return res;
+	}
+	
+	public List<ExportOrder> getAllByMaNV(String id){
+		List<ExportOrder> res = new ArrayList<ExportOrder>();
+		List<HoaDon> temp = hoaDonDAO.getHoaDonByMaNhanVien(id);
+		for(HoaDon i: temp) {
+			res.add(convert(i));
+		}
+		return res;
+	}
+	
 	public List<ExportOrder> GetAllBetweenDate(LocalDate start, LocalDate end) {
 		List<ExportOrder>  res = new ArrayList<ExportOrder>();
 		List<HoaDon> temp = hoaDonDAO.getBetweenThoiGian(Date.from(start.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), Date.from(end.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
@@ -177,7 +195,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		List<ExportOrder> res = new ArrayList<ExportOrder>();
 		List<HoaDon> hoaDons = hoaDonDAO.getAll();
 		for(HoaDon i: hoaDons) {
-			if(i.getTinhtrang().equals("1")) {
+			if(i.getTinhTrang().equals("1")) {
 				res.add(convert(i));
 			}
 		}
@@ -188,7 +206,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		List<ExportOrder> res = new ArrayList<ExportOrder>();
 		List<HoaDon> hoaDons = hoaDonDAO.getAll();
 		for(HoaDon i: hoaDons) {
-			if(i.getTinhtrang().equals("2")) {
+			if(i.getTinhTrang().equals("2")) {
 				res.add(convert(i));
 			}
 		}
@@ -201,7 +219,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		Product temp2;
 		if(temp != null) {
 			for(CtHoaDon i: temp) {
-				temp2 = new Product(i.getMathang().getMaMH(), i.getMathang().getTenMH(), i.getMathang().getHinhAnh(), i.getSoLuong(), "", "", i.getMathang().getAllow(), i.getGia().longValue(), Float.valueOf(0), i.getMathang().getLoaimathang().getMaLoai());
+				temp2 = new Product(i.getMatHang().getMaMH(), i.getMatHang().getTenMH(), i.getMatHang().getHinhAnh(), i.getSoLuong(), "", "", i.getMatHang().getAllow(), i.getGia().longValue(), Float.valueOf(0), i.getMatHang().getLoaiMatHang().getMaLoai());
 				res.add(temp2);
 			}
 		}
@@ -214,8 +232,8 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		if(temp == null || temp2 == null) {
 			return null;
 		}
-		temp.setNhanvien(temp2);
-		temp.setTinhtrang("2");
+		temp.setNhanVien(temp2);
+		temp.setTinhTrang("2");
 		if(hoaDonDAO.update(temp)) {
 			return ma;
 		}
@@ -227,7 +245,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		if(temp == null) {
 			return null;	
 		}
-		temp.setTinhtrang("3");
+		temp.setTinhTrang("3");
 		if(hoaDonDAO.update(temp)) {
 			return ma;
 		}

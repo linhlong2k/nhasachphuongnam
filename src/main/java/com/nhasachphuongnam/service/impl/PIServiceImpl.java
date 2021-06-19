@@ -36,12 +36,12 @@ public class PIServiceImpl implements PIService{
 	TaiKhoanDAO taiKhoanDAO;
 	
 	public PersonalInfo convert(KhachHang khachHang) {
-		PersonalInfo pi = new PersonalInfo(khachHang.getMaKH(), khachHang.getTenKH(), khachHang.getHinhAnh(), khachHang.getDiaChi(), khachHang.getNgaySinh(), khachHang.getSdt(), khachHang.getTaikhoan().getUsername(), khachHang.getTaikhoan().getRole().getMaRole());
+		PersonalInfo pi = new PersonalInfo(khachHang.getMaKH(), khachHang.getTenKH(), khachHang.getHinhAnh(), khachHang.getDiaChi(), khachHang.getNgaySinh(), khachHang.getSdt(), khachHang.getTaiKhoan().getUsername(), khachHang.getTaiKhoan().getRole().getMaRole());
 		return pi;
 	}
 	
 	public PersonalInfo convert(NhanVien nhanVien) {
-		PersonalInfo pi = new PersonalInfo(nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getHinhAnh(), nhanVien.getDiaChi(), nhanVien.getNgaySinh(), nhanVien.getSdt(), nhanVien.getTaikhoan().getUsername(), nhanVien.getTaikhoan().getRole().getMaRole());
+		PersonalInfo pi = new PersonalInfo(nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getHinhAnh(), nhanVien.getDiaChi(), nhanVien.getNgaySinh(), nhanVien.getSdt(), nhanVien.getTaiKhoan().getUsername(), nhanVien.getTaiKhoan().getRole().getMaRole());
 		return pi;
 	}
 	
@@ -61,7 +61,7 @@ public class PIServiceImpl implements PIService{
 			khachHang.setDiaChi(pi.getDiaChi());
 		if(pi.getNgaySinh() != null)
 			khachHang.setNgaySinh(Date.from(pi.getNgaySinh().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-		khachHang.setTaikhoan(taiKhoanDAO.getByID(pi.getUsername()));
+		khachHang.setTaiKhoan(taiKhoanDAO.getByID(pi.getUsername()));
 		return khachHang;
 	}
 	
@@ -80,7 +80,7 @@ public class PIServiceImpl implements PIService{
 			nhanVien.setDiaChi(pi.getDiaChi());
 		if(pi.getNgaySinh() != null)
 			nhanVien.setNgaySinh(Date.from(pi.getNgaySinh().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-		nhanVien.setTaikhoan(taiKhoanDAO.getByID(pi.getUsername()));
+		nhanVien.setTaiKhoan(taiKhoanDAO.getByID(pi.getUsername()));
 		return nhanVien;
 	}
 	
@@ -119,7 +119,7 @@ public class PIServiceImpl implements PIService{
 			taiKhoan.setUsername(login.getUsername());
 			taiKhoan.setPassword(login.getPassword());
 			taiKhoan.setRole(login.getRole().toRole());
-			khachHang.setTaikhoan(taiKhoan);
+			khachHang.setTaiKhoan(taiKhoan);
 			if(khachHangDAO.add(khachHang)) {
 				return true;
 			}
@@ -136,7 +136,7 @@ public class PIServiceImpl implements PIService{
 			taiKhoan.setUsername(login.getUsername());
 			taiKhoan.setPassword(login.getPassword());
 			taiKhoan.setRole(login.getRole().toRole());
-			nhanVien.setTaikhoan(taiKhoan);
+			nhanVien.setTaiKhoan(taiKhoan);
 			if(nhanVienDAO.add(nhanVien)) {
 				return true;
 			}

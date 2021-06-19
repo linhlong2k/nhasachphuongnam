@@ -66,8 +66,8 @@ public class LoaiMatHangDAOImpl implements LoaiMatHangDAO {
 		if(loai == null)
 			return false;
 		try {
-			for(MatHang i: loai.getMathangs()) {
-				i.setLoaimathang(loaiNull);
+			for(MatHang i: loai.getMatHangs()) {
+				i.setLoaiMatHang(loaiNull);
 				session.update(i);
 			}
 			session.delete(loai);

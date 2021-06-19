@@ -19,29 +19,57 @@
 		</div>
 	</div>
 </section>
+<style>
+	.nav-link {
+		padding: 10px;
+		margin: 15px;
+		display: block;
+		border-radius: 2%;
+	}
+	.nav-item:hover {
+		background-color: #d1e0e0;
+		color: blue;
+	}
+	.nav-item	.active {
+		background-color: #42a5f5;
+		color: #fff;
+	}
+	.card {
+		background-color: #fff;
+		margin: 20px;
+	}
+	.card-header {
+		background-color: #ced4da;
+		padding: 0;
+		margin: 0px;
+	}
+	.card-header-main {
+		 background-color: #ced4da;
+		 margin: 0px;
+		 padding: 10px;"
+	}
+</style>
 <section>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-5 col-lg-3">
-				<div class="" style="background-color: #fff; margin: 20px;">
-					<div class="" style="background-color: #ced4da; padding: 0; margin: 0px;">
-						<h3 class="" style="background-color: #ced4da; margin: 0px; padding: 10px;">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-header-main">
 							<i class="fas fa-cog fa-fw"></i>&nbsp;&nbsp; Cài đặt
 						</h3>
 					</div>
 					<br>
-					<div class="" style="display: block; margin-left: 10px;">
+					<div class="">
 						<ul class="">
 							<li class="nav-item">
 								<a class="nav-link d-flex align-items-center justify-content-between active" id="u-vnav-edit" href="thong-tin-ca-nhan.htm" >
 								<span><i class="far fa-fw fa-address-card mr-5"></i> Hồ sơ</span></a>
 							</li>
-							<br>
 							<li class="nav-item">
 								<a class="nav-link d-flex align-items-center justify-content-between" id="u-vnav-email" href="thong-tin-don-hang.htm">
 								<span><i class="fas fa-shopping-cart mr-5"></i> Đơn hàng</span></a>
 							</li>
-							<br>
 							<li class="nav-item">
 								<a class="nav-link d-flex align-items-center justify-content-between" id="u-vnav-password" href="thay-doi-mat-khau.htm">
 								<span><i class="fa fa-fw fa-key mr-5"></i> Mật khẩu</span></a>
@@ -52,11 +80,14 @@
 				</div>
 			</div>
 			<div class="col-md-7 col-lg-9">
-				<div class="panel panel-info" style="background-color: #fff; margin-top: 20px;">
-					<div class="block-header block-header-default" style="background-color: #ced4da; padding: 0; margin: 0px;">
-						<h3 class="block-title font-w600" style="background-color: #ced4da; margin: 0px; padding: 10px;"> Thành viên: ${user.ten }</h3>
+				<div class="panel panel-info card">
+					<div class="block-header block-header-default card-header">
+						<h3 class="block-title font-w600 card-header-main"> Thành viên: ${user.ten }</h3>
 					</div>
 					<div class="panel-body">
+					<c:if test="${not empty notification }">
+						<label id="notification" class="form-text text-muted" style="color: blue; background-color: #d1e0e0; width: 100%; padding: 5px;">${notification }<br></label>
+					</c:if>
 						<div class="row">
 							<div class="col-md-4 col-lg-4 " align="center">
 								<c:choose>
@@ -74,6 +105,9 @@
 										  	<input class="form-control" type="file" id="formFile" name="photo">
 										</div>
 								 	</div>
+								 	<c:if test="${not empty messagePhoto }">
+										<small id="messagePhoto" class="form-text text-muted" style="color: red; background-color: #d1e0e0; width: 100%; padding: 5px;">${messagePhoto }<br></small>
+									</c:if>
 								 	<br>
 									<button type="submit" class="btn btn-light btn-round px-5" name="uploadPhotoId" value="${user.ma }" >
 						               	Cập nhật ảnh
@@ -121,7 +155,11 @@
 											</td>
 										</tr>
 										<tr>
-										<td></td>
+										<td>	
+											<c:if test="${not empty message }">
+												<small id="message" class="form-text text-muted" style="color: red; background-color: #d1e0e0; width: 100%; padding: 5px;">${message }<br></small>
+											</c:if>
+										</td>
 										<td>
 											<button type="submit" class="btn btn-light btn-round" name="editInfo" style="margin: 0 auto;">
 								               	<i class="glyphicon glyphicon-edit"></i>

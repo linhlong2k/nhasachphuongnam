@@ -62,29 +62,29 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	public String theNextMa() {
 		String ma = phieuNhapDAO.getLastMa();
 		int index = Integer.parseInt(ma.substring(2, ma.length()));
-		String newmamh = "PN";
+		String newmaMH = "PN";
 		index++;
 		for(int i = 0; i < 8 - String.valueOf(index).length(); i++)
-			newmamh += '0';
-		newmamh += String.valueOf(index);
-		return newmamh;
+			newmaMH += '0';
+		newmaMH += String.valueOf(index);
+		return newmaMH;
 	}
 	
 	public ImportOrder convert(PhieuNhap var) {
 		ImportOrder res = new ImportOrder();
 		res.setMaDonHang(var.getMaPN());
 		res.setThoiGian(var.getThoiGian().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-		res.setMaNhanVien(var.getNhanvien().getMaNV());
-		res.setMaNhaCungCap(var.getNhacungcap().getMaNCC());
+		res.setMaNhanVien(var.getNhanVien().getMaNV());
+		res.setMaNhaCungCap(var.getNhaCungCap().getMaNCC());
 		List<ProductDetail> temp3 = new ArrayList<ProductDetail>();
 		ProductDetail temp4;
 		List<CtPhieuNhap> temp5 = ctPhieuNhapDAO.getbyMaPN(var.getMaPN());
 		for(CtPhieuNhap i: temp5) {
 			temp4 = new ProductDetail();
-			temp4.setMaMatHang(i.getMathang().getMaMH());
+			temp4.setMaMatHang(i.getMatHang().getMaMH());
 			temp4.setSoLuong(i.getSoLuong());
 			temp4.setGia(i.getGia().longValue());
-			temp4.setGiamGia(i.getGiamgia());
+			temp4.setGiamGia(i.getGiamGia());
 			temp3.add(temp4);
 		}
 		res.setChiTiets(temp3);
@@ -96,9 +96,9 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 		if(res == null)
 			res = new PhieuNhap();
 		NhaCungCap temp1 = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
-		res.setNhacungcap(temp1);
+		res.setNhaCungCap(temp1);
 		NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
-		res.setNhanvien(temp2);
+		res.setNhanVien(temp2);
 		res.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		return res;
 	}
@@ -106,10 +106,10 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	public CtPhieuNhap convert(ProductDetail var) {
 		CtPhieuNhap res = new CtPhieuNhap();
 		MatHang temp = matHangDAO.getByID(var.getMaMatHang());
-		res.setMathang(temp);
+		res.setMatHang(temp);
 		res.setSoLuong(var.getSoLuong());
 		res.setGia(BigDecimal.valueOf(var.getGia()));
-		res.setGiamgia(var.getGiamGia());
+		res.setGiamGia(var.getGiamGia());
 		return res;
 	}
 	
@@ -119,23 +119,23 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 		temp1.setMaPN(this.theNextMa());
 		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
-		temp1.setNhanvien(temp2);
+		temp1.setNhanVien(temp2);
 		NhaCungCap temp3 = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
-		temp1.setNhacungcap(temp3);
+		temp1.setNhaCungCap(temp3);
 		List<CtPhieuNhap> ctPhieuNhap = new ArrayList<>();
 		for(ProductDetail i: var.getChiTiets()) {
 			CtPhieuNhapPK pk = new CtPhieuNhapPK();
-			pk.setMapn(temp1.getMaPN());
-			pk.setMamh(i.getMaMatHang());
+			pk.setMaPN(temp1.getMaPN());
+			pk.setMaMH(i.getMaMatHang());
 			CtPhieuNhap temp4 = new CtPhieuNhap();
 			temp4.setId(pk);
-			temp4.setGiamgia(i.getGiamGia());
+			temp4.setGiamGia(i.getGiamGia());
 			temp4.setGia(BigDecimal.valueOf(i.getGia()));
 			temp4.setSoLuong(i.getSoLuong());
 			matHangDAO.changeSoLuong(i.getMaMatHang(), i.getSoLuong());
 			ctPhieuNhap.add(temp4);
 		}
-		temp1.setCtPhieunhaps(ctPhieuNhap);
+		temp1.setCtPhieuNhaps(ctPhieuNhap);
 		if(phieuNhapDAO.add(temp1))
 			return temp1.getMaPN();
 		return null;

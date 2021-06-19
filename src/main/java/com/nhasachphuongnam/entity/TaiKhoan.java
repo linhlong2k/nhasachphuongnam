@@ -5,8 +5,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="TAIKHOAN")
-/* @NamedQuery(name="Taikhoan.findAll", query="SELECT t FROM Taikhoan t") */
+@Table(name="TaiKhoan")
+/* @NamedQuery(name="TaiKhoan.findAll", query="SELECT t FROM TaiKhoan t") */
 public class TaiKhoan implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -17,13 +17,13 @@ public class TaiKhoan implements Serializable {
 	@Column(name="PASSWORD")
 	private String password;
 
-	//bi-directional many-to-one association to Khachhang
-	@OneToMany(mappedBy="taikhoan")
-	private List<KhachHang> khachhangs;
+	//bi-directional many-to-one association to KhachHang
+	@OneToMany(mappedBy="taiKhoan")
+	private List<KhachHang> khachHangs;
 
-	//bi-directional many-to-one association to Nhanvien
-	@OneToMany(mappedBy="taikhoan")
-	private List<NhanVien> nhanviens;
+	//bi-directional many-to-one association to NhanVien
+	@OneToMany(mappedBy="taiKhoan")
+	private List<NhanVien> nhanViens;
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne
@@ -49,48 +49,48 @@ public class TaiKhoan implements Serializable {
 		this.password = password;
 	}
 
-	public List<KhachHang> getKhachhangs() {
-		return this.khachhangs;
+	public List<KhachHang> getKhachHangs() {
+		return this.khachHangs;
 	}
 
-	public void setKhachhangs(List<KhachHang> khachhangs) {
-		this.khachhangs = khachhangs;
+	public void setKhachHangs(List<KhachHang> khachHangs) {
+		this.khachHangs = khachHangs;
 	}
 
-	public KhachHang addKhachhang(KhachHang khachhang) {
-		getKhachhangs().add(khachhang);
-		khachhang.setTaikhoan(this);
+	public KhachHang addKhachHang(KhachHang khachHang) {
+		getKhachHangs().add(khachHang);
+		khachHang.setTaiKhoan(this);
 
-		return khachhang;
+		return khachHang;
 	}
 
-	public KhachHang removeKhachhang(KhachHang khachhang) {
-		getKhachhangs().remove(khachhang);
-		khachhang.setTaikhoan(null);
+	public KhachHang removeKhachHang(KhachHang khachHang) {
+		getKhachHangs().remove(khachHang);
+		khachHang.setTaiKhoan(null);
 
-		return khachhang;
+		return khachHang;
 	}
 
-	public List<NhanVien> getNhanviens() {
-		return this.nhanviens;
+	public List<NhanVien> getNhanViens() {
+		return this.nhanViens;
 	}
 
-	public void setNhanviens(List<NhanVien> nhanviens) {
-		this.nhanviens = nhanviens;
+	public void setNhanViens(List<NhanVien> nhanViens) {
+		this.nhanViens = nhanViens;
 	}
 
-	public NhanVien addNhanvien(NhanVien nhanvien) {
-		getNhanviens().add(nhanvien);
-		nhanvien.setTaikhoan(this);
+	public NhanVien addNhanVien(NhanVien nhanVien) {
+		getNhanViens().add(nhanVien);
+		nhanVien.setTaiKhoan(this);
 
-		return nhanvien;
+		return nhanVien;
 	}
 
-	public NhanVien removeNhanvien(NhanVien nhanvien) {
-		getNhanviens().remove(nhanvien);
-		nhanvien.setTaikhoan(null);
+	public NhanVien removeNhanVien(NhanVien nhanVien) {
+		getNhanViens().remove(nhanVien);
+		nhanVien.setTaiKhoan(null);
 
-		return nhanvien;
+		return nhanVien;
 	}
 
 	public Role getRole() {

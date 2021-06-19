@@ -34,7 +34,7 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 		Transaction tran = session.beginTransaction();
 		try {
 			session.save(phieuNhap);
-			for(CtPhieuNhap i: phieuNhap.getCtPhieunhaps()) {
+			for(CtPhieuNhap i: phieuNhap.getCtPhieuNhaps()) {
 				session.save(i);
 			}
 			tran.commit();
@@ -110,7 +110,7 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO{
 	 * ===================================advanced==================================
 	 */
 	public String getLastMa() {
-		String sql = "SELECT top 1 MAPN FROM PHIEUNHAP ORDER BY MAPN DESC";
+		String sql = "SELECT top 1 MAPN FROM PhieuNhap ORDER BY MAPN DESC";
 		Session session = factory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(sql);
 		@SuppressWarnings("unchecked")

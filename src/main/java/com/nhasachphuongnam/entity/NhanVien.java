@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="NHANVIEN")
-/* @NamedQuery(name="Nhanvien.findAll", query="SELECT n FROM Nhanvien n") */
+@Table(name="NhanVien")
+/* @NamedQuery(name="NhanVien.findAll", query="SELECT n FROM NhanVien n") */
 public class NhanVien implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -39,22 +39,22 @@ public class NhanVien implements Serializable {
 	@Column(name="TENNV")
 	private String tenNV;
 
-	//bi-directional many-to-one association to Hoadon
-	@OneToMany(mappedBy="nhanvien")
-	private List<HoaDon> hoadons;
+	//bi-directional many-to-one association to HoaDon
+	@OneToMany(mappedBy="nhanVien")
+	private List<HoaDon> hoaDons;
 
-	//bi-directional many-to-one association to Hoatdong
-	@OneToMany(mappedBy="nhanvien")
-	private List<HoatDong> hoatdongs;
+	//bi-directional many-to-one association to HoatDong
+	@OneToMany(mappedBy="nhanVien")
+	private List<HoatDong> hoatDongs;
 
-	//bi-directional many-to-one association to Taikhoan
+	//bi-directional many-to-one association to TaiKhoan
 	@ManyToOne
 	@JoinColumn(name="USERNAME")
-	private TaiKhoan taikhoan;
+	private TaiKhoan taiKhoan;
 
-	//bi-directional many-to-one association to Phieunhap
-	@OneToMany(mappedBy="nhanvien")
-	private List<PhieuNhap> phieunhaps;
+	//bi-directional many-to-one association to PhieuNhap
+	@OneToMany(mappedBy="nhanVien")
+	private List<PhieuNhap> phieuNhaps;
 
 	public NhanVien() {
 	}
@@ -107,78 +107,77 @@ public class NhanVien implements Serializable {
 		this.tenNV = tenNV;
 	}
 
-	public List<HoaDon> getHoadons() {
-		return this.hoadons;
+	public List<HoaDon> getHoaDons() {
+		return this.hoaDons;
 	}
 
-	public void setHoadons(List<HoaDon> hoadons) {
-		this.hoadons = hoadons;
+	public void setHoaDons(List<HoaDon> hoaDons) {
+		this.hoaDons = hoaDons;
 	}
 
-	public HoaDon addHoadon(HoaDon hoadon) {
-		getHoadons().add(hoadon);
-		hoadon.setNhanvien(this);
+	public HoaDon addHoaDon(HoaDon hoaDon) {
+		getHoaDons().add(hoaDon);
+		hoaDon.setNhanVien(this);
 
-		return hoadon;
+		return hoaDon;
 	}
 
-	public HoaDon removeHoadon(HoaDon hoadon) {
-		getHoadons().remove(hoadon);
-		hoadon.setNhanvien(null);
+	public HoaDon removeHoaDon(HoaDon hoaDon) {
+		getHoaDons().remove(hoaDon);
+		hoaDon.setNhanVien(null);
 
-		return hoadon;
+		return hoaDon;
 	}
 
-	public List<HoatDong> getHoatdongs() {
-		return this.hoatdongs;
+	public List<HoatDong> getHoatDongs() {
+		return this.hoatDongs;
 	}
 
-	public void setHoatdongs(List<HoatDong> hoatdongs) {
-		this.hoatdongs = hoatdongs;
+	public void setHoatDongs(List<HoatDong> hoatDongs) {
+		this.hoatDongs = hoatDongs;
 	}
 
-	public HoatDong addHoatdong(HoatDong hoatdong) {
-		getHoatdongs().add(hoatdong);
-		hoatdong.setNhanvien(this);
-
-		return hoatdong;
+	public HoatDong addHoatDong(HoatDong hoatDong) {
+		getHoatDongs().add(hoatDong);
+		hoatDong.setNhanVien(this);
+		return hoatDong;
 	}
 
-	public HoatDong removeHoatdong(HoatDong hoatdong) {
-		getHoatdongs().remove(hoatdong);
-		hoatdong.setNhanvien(null);
+	public HoatDong removeHoatDong(HoatDong hoatDong) {
+		getHoatDongs().remove(hoatDong);
+		hoatDong.setNhanVien(null);
 
-		return hoatdong;
+		return hoatDong;
 	}
 
-	public TaiKhoan getTaikhoan() {
-		return this.taikhoan;
+	public TaiKhoan getTaiKhoan() {
+		return this.taiKhoan;
 	}
 
-	public void setTaikhoan(TaiKhoan taikhoan) {
-		this.taikhoan = taikhoan;
+	public void setTaiKhoan(TaiKhoan taiKhoan) {
+		this.taiKhoan = taiKhoan;
 	}
 
-	public List<PhieuNhap> getPhieunhaps() {
-		return this.phieunhaps;
+	public List<PhieuNhap> getPhieuNhaps() {
+		return this.phieuNhaps;
 	}
 
-	public void setPhieunhaps(List<PhieuNhap> phieunhaps) {
-		this.phieunhaps = phieunhaps;
+	public void setPhieuNhaps(List<PhieuNhap> phieuNhaps) {
+		this.phieuNhaps = phieuNhaps;
 	}
 
-	public PhieuNhap addPhieunhap(PhieuNhap phieunhap) {
-		getPhieunhaps().add(phieunhap);
-		phieunhap.setNhanvien(this);
+	public PhieuNhap addPhieuNhap(PhieuNhap phieuNhap) {
+		getPhieuNhaps().add(phieuNhap);
+		phieuNhap.setNhanVien(this);
 
-		return phieunhap;
+		return phieuNhap;
 	}
 
-	public PhieuNhap removePhieunhap(PhieuNhap phieunhap) {
-		getPhieunhaps().remove(phieunhap);
-		phieunhap.setNhanvien(null);
+	public PhieuNhap removePhieuNhap(PhieuNhap phieuNhap) {
+		getPhieuNhaps().remove(phieuNhap);
+		phieuNhap.setNhanVien(null);
 
-		return phieunhap;
+		return phieuNhap;
 	}
 
 }

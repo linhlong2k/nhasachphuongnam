@@ -15,8 +15,7 @@
 	<!-- set Icon browser -->
 	<link rel="icon" href="resources/images/logo.png">
 	<!-- Font awesome -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
-		integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" >
 	<link href="resources/user/assets/css/font-awesome.css" rel="stylesheet">
 	<!-- Bootstrap -->
 	<link href="resources/user/assets/css/bootstrap.css" rel="stylesheet">

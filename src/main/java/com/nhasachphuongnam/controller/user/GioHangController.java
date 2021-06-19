@@ -56,9 +56,8 @@ public class GioHangController {
 	}
 	
 	@PostMapping(value="", params = "btnDelete")
-	public String deleteProductFormCart(ModelMap model,
+	public String deleteProductFormCart(ModelMap model, HttpServletResponse response,
 			@RequestParam(value="productId", required = false) String maMatHang,
-			HttpServletResponse response,
 			@ModelAttribute("gioHang") List<GioHang> gioHangs) {
 		if(gioHangs.isEmpty() || gioHangs == null || maMatHang == null) {
 			model.addAttribute("message", "Không tìm thấy mặt hàng trong giỏ hàng");

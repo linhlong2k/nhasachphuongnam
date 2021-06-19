@@ -17,9 +17,9 @@ public class Role implements Serializable {
 	@Column(name="TENROLE")
 	private String tenRole;
 
-	//bi-directional many-to-one association to Taikhoan
+	//bi-directional many-to-one association to TaiKhoan
 	@OneToMany(mappedBy="role")
-	private List<TaiKhoan> taikhoans;
+	private List<TaiKhoan> taiKhoans;
 
 	public Role() {
 	}
@@ -40,26 +40,26 @@ public class Role implements Serializable {
 		this.tenRole = tenRole;
 	}
 
-	public List<TaiKhoan> getTaikhoans() {
-		return this.taikhoans;
+	public List<TaiKhoan> getTaiKhoans() {
+		return this.taiKhoans;
 	}
 
-	public void setTaikhoans(List<TaiKhoan> taikhoans) {
-		this.taikhoans = taikhoans;
+	public void setTaiKhoans(List<TaiKhoan> taiKhoans) {
+		this.taiKhoans = taiKhoans;
 	}
 
-	public TaiKhoan addTaikhoan(TaiKhoan taikhoan) {
-		getTaikhoans().add(taikhoan);
-		taikhoan.setRole(this);
+	public TaiKhoan addTaiKhoan(TaiKhoan taiKhoan) {
+		getTaiKhoans().add(taiKhoan);
+		taiKhoan.setRole(this);
 
-		return taikhoan;
+		return taiKhoan;
 	}
 
-	public TaiKhoan removeTaikhoan(TaiKhoan taikhoan) {
-		getTaikhoans().remove(taikhoan);
-		taikhoan.setRole(null);
+	public TaiKhoan removeTaiKhoan(TaiKhoan taiKhoan) {
+		getTaiKhoans().remove(taiKhoan);
+		taiKhoan.setRole(null);
 
-		return taikhoan;
+		return taiKhoan;
 	}
 
 }

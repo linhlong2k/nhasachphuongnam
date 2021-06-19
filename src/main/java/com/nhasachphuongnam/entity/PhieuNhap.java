@@ -13,8 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PHIEUNHAP")
-/* @NamedQuery(name="Phieunhap.findAll", query="SELECT p FROM Phieunhap p") */
+@Table(name="PhieuNhap")
+/* @NamedQuery(name="PhieuNhap.findAll", query="SELECT p FROM PhieuNhap p") */
 public class PhieuNhap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -25,19 +25,19 @@ public class PhieuNhap implements Serializable {
 	@Column(name="THOIGIAN")//, columnDefinition = "DATE")
 	private Date thoiGian;
 
-	//bi-directional many-to-one association to CtPhieunhap
-	@OneToMany(mappedBy="phieunhap")
-	private List<CtPhieuNhap> ctPhieunhaps;
+	//bi-directional many-to-one association to CtPhieuNhap
+	@OneToMany(mappedBy="phieuNhap")
+	private List<CtPhieuNhap> ctPhieuNhaps;
 
-	//bi-directional many-to-one association to Nhacungcap
+	//bi-directional many-to-one association to NhaCungCap
 	@ManyToOne
 	@JoinColumn(name="MANCC")
-	private NhaCungCap nhacungcap;
+	private NhaCungCap nhaCungCap;
 
-	//bi-directional many-to-one association to Nhanvien
+	//bi-directional many-to-one association to NhanVien
 	@ManyToOne
 	@JoinColumn(name="MANV")
-	private NhanVien nhanvien;
+	private NhanVien nhanVien;
 
 	public PhieuNhap() {
 	}
@@ -58,42 +58,42 @@ public class PhieuNhap implements Serializable {
 		this.thoiGian = thoiGian;
 	}
 
-	public List<CtPhieuNhap> getCtPhieunhaps() {
-		return this.ctPhieunhaps;
+	public List<CtPhieuNhap> getCtPhieuNhaps() {
+		return this.ctPhieuNhaps;
 	}
 
-	public void setCtPhieunhaps(List<CtPhieuNhap> ctPhieunhaps) {
-		this.ctPhieunhaps = ctPhieunhaps;
+	public void setCtPhieuNhaps(List<CtPhieuNhap> ctPhieuNhaps) {
+		this.ctPhieuNhaps = ctPhieuNhaps;
 	}
 
-	public CtPhieuNhap addCtPhieunhap(CtPhieuNhap ctPhieunhap) {
-		getCtPhieunhaps().add(ctPhieunhap);
-		ctPhieunhap.setPhieunhap(this);
+	public CtPhieuNhap addCtPhieuNhap(CtPhieuNhap ctPhieuNhap) {
+		getCtPhieuNhaps().add(ctPhieuNhap);
+		ctPhieuNhap.setPhieuNhap(this);
 
-		return ctPhieunhap;
+		return ctPhieuNhap;
 	}
 
-	public CtPhieuNhap removeCtPhieunhap(CtPhieuNhap ctPhieunhap) {
-		getCtPhieunhaps().remove(ctPhieunhap);
-		ctPhieunhap.setPhieunhap(null);
+	public CtPhieuNhap removeCtPhieuNhap(CtPhieuNhap ctPhieuNhap) {
+		getCtPhieuNhaps().remove(ctPhieuNhap);
+		ctPhieuNhap.setPhieuNhap(null);
 
-		return ctPhieunhap;
+		return ctPhieuNhap;
 	}
 
-	public NhaCungCap getNhacungcap() {
-		return this.nhacungcap;
+	public NhaCungCap getNhaCungCap() {
+		return this.nhaCungCap;
 	}
 
-	public void setNhacungcap(NhaCungCap nhacungcap) {
-		this.nhacungcap = nhacungcap;
+	public void setNhaCungCap(NhaCungCap nhaCungCap) {
+		this.nhaCungCap = nhaCungCap;
 	}
 
-	public NhanVien getNhanvien() {
-		return this.nhanvien;
+	public NhanVien getNhanVien() {
+		return this.nhanVien;
 	}
 
-	public void setNhanvien(NhanVien nhanvien) {
-		this.nhanvien = nhanvien;
+	public void setNhanVien(NhanVien nhanVien) {
+		this.nhanVien = nhanVien;
 	}
 
 }

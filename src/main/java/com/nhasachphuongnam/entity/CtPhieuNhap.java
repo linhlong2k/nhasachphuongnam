@@ -5,9 +5,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name="CT_PHIEUNHAP")
+@Table(name="CT_PhieuNhap")
 /*
- * @NamedQuery(name="CtPhieunhap.findAll", query="SELECT c FROM CtPhieunhap c")
+ * @NamedQuery(name="CtPhieuNhap.findAll", query="SELECT c FROM CtPhieuNhap c")
  */
 public class CtPhieuNhap implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,20 +19,20 @@ public class CtPhieuNhap implements Serializable {
 	private BigDecimal gia;
 
 	@Column(name="GIAMGIA")
-	private Float giamgia;
+	private Float giamGia;
 
 	@Column(name="SOLUONG")
 	private int soLuong;
 
-	//bi-directional many-to-one association to Mathang
+	//bi-directional many-to-one association to MatHang
 	@ManyToOne
 	@JoinColumn(name="MAMH", insertable=false, updatable=false)
-	private MatHang mathang;
+	private MatHang matHang;
 
-	//bi-directional many-to-one association to Phieunhap
+	//bi-directional many-to-one association to PhieuNhap
 	@ManyToOne
 	@JoinColumn(name="MAPN", insertable=false, updatable=false)
-	private PhieuNhap phieunhap;
+	private PhieuNhap phieuNhap;
 
 	public CtPhieuNhap() {
 	}
@@ -53,12 +53,12 @@ public class CtPhieuNhap implements Serializable {
 		this.gia = gia;
 	}
 
-	public Float getGiamgia() {
-		return this.giamgia;
+	public Float getGiamGia() {
+		return this.giamGia;
 	}
 
-	public void setGiamgia(Float giamgia) {
-		this.giamgia = giamgia;
+	public void setGiamGia(Float giamGia) {
+		this.giamGia = giamGia;
 	}
 
 	public int getSoLuong() {
@@ -69,20 +69,20 @@ public class CtPhieuNhap implements Serializable {
 		this.soLuong = soLuong;
 	}
 
-	public MatHang getMathang() {
-		return this.mathang;
+	public MatHang getMatHang() {
+		return this.matHang;
 	}
 
-	public void setMathang(MatHang mathang) {
-		this.mathang = mathang;
+	public void setMatHang(MatHang matHang) {
+		this.matHang = matHang;
 	}
 
-	public PhieuNhap getPhieunhap() {
-		return this.phieunhap;
+	public PhieuNhap getPhieuNhap() {
+		return this.phieuNhap;
 	}
 
-	public void setPhieunhap(PhieuNhap phieunhap) {
-		this.phieunhap = phieunhap;
+	public void setPhieuNhap(PhieuNhap phieuNhap) {
+		this.phieuNhap = phieuNhap;
 	}
 
 }

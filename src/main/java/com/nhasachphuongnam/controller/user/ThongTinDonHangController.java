@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nhasachphuongnam.model.ExportOrder;
+import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.service.ExportOrderService;
 
 @Controller
@@ -19,8 +20,8 @@ public class ThongTinDonHangController {
 	ExportOrderService eoService;
 	
 	@ModelAttribute("danhSachDonHang")
-	public List<ExportOrder> danhSachDonHang(){
-		return eoService.getAll();
+	public List<ExportOrder> danhSachDonHang(@ModelAttribute("user") PersonalInfo user){
+		return eoService.GetAllByMaKH(user.getMa());
 	}
 	
 	@GetMapping(value="")

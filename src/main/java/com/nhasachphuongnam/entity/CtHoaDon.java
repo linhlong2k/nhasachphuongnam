@@ -5,8 +5,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name="CT_HOADON")
-/* @NamedQuery(name="CtHoadon.findAll", query="SELECT c FROM CtHoadon c") */
+@Table(name="CT_HoaDon")
+/* @NamedQuery(name="CtHoaDon.findAll", query="SELECT c FROM CtHoaDon c") */
 public class CtHoaDon implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,15 +19,15 @@ public class CtHoaDon implements Serializable {
 	@Column(name="SOLUONG")
 	private int soLuong;
 
-	//bi-directional many-to-one association to Hoadon
+	//bi-directional many-to-one association to HoaDon
 	@ManyToOne
 	@JoinColumn(name="MAHD", insertable=false, updatable=false)
-	private HoaDon hoadon;
+	private HoaDon hoaDon;
 
-	//bi-directional many-to-one association to Mathang
+	//bi-directional many-to-one association to MatHang
 	@ManyToOne
 	@JoinColumn(name="MAMH", insertable=false, updatable=false)
-	private MatHang mathang;
+	private MatHang matHang;
 
 	public CtHoaDon() {
 	}
@@ -56,20 +56,20 @@ public class CtHoaDon implements Serializable {
 		this.soLuong = soLuong;
 	}
 
-	public HoaDon getHoadon() {
-		return this.hoadon;
+	public HoaDon getHoaDon() {
+		return this.hoaDon;
 	}
 
-	public void setHoadon(HoaDon hoadon) {
-		this.hoadon = hoadon;
+	public void setHoaDon(HoaDon hoaDon) {
+		this.hoaDon = hoaDon;
 	}
 
-	public MatHang getMathang() {
-		return this.mathang;
+	public MatHang getMatHang() {
+		return this.matHang;
 	}
 
-	public void setMathang(MatHang mathang) {
-		this.mathang = mathang;
+	public void setMatHang(MatHang matHang) {
+		this.matHang = matHang;
 	}
 
 }

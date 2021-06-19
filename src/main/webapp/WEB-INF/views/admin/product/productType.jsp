@@ -10,13 +10,13 @@
 		<c:if test="${message != null}">
 			<c:choose>
 				<c:when test="${fn:contains(message, 'không')}">
-					<div class="alert alert-danger" role="alert"><i class="zmdi zmdi-case-check"></i>${message }</div>
+					<div class="alert alert-danger" role="alert" style="padding: 5px;"><i class="zmdi zmdi-case-check"></i>${message }</div>
 					<!-- <script type="text/javascript">
 						alert("${message}");
 					</script> -->
 				</c:when>
 				<c:otherwise>
-					<div class="alert alert-success" role="alert"><i class="zmdi zmdi-alert-triangle"></i>${message }</div>
+					<div class="alert alert-success" role="alert" style="padding: 5px;"><i class="zmdi zmdi-alert-triangle"></i>${message }</div>
 				</c:otherwise>
 			</c:choose>
 		</c:if>

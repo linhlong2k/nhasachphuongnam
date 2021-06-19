@@ -31,7 +31,7 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 		Transaction tran = session.beginTransaction();
 		try {
 			session.save(hoaDon);
-			for(CtHoaDon i: hoaDon.getCtHoadons()) {
+			for(CtHoaDon i: hoaDon.getCtHoaDons()) {
 				session.save(i);
 			}
 			tran.commit();
@@ -107,7 +107,7 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 	 * ===================================advanced==================================
 	 */
 	public String getLastMa() {
-		String sql = "SELECT top 1 MAHD FROM HOADON ORDER BY MAHD DESC";
+		String sql = "SELECT top 1 MAHD FROM HoaDon ORDER BY MAHD DESC";
 		Session session = factory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(sql);
 		@SuppressWarnings("unchecked")
@@ -119,7 +119,23 @@ public class HoaDonDAOImpl implements HoaDonDAO {
 	public List<HoaDon> getBetweenThoiGian(Date start, Date end) {
 		Criteria cr = factory.getCurrentSession().createCriteria(HoaDon.class);
 		cr.add(Restrictions.between("thoiGian", start, end));
-		cr.add(Restrictions.eq("tinhtrang", "3"));
+		cr.add(Restrictions.eq("tinhTrang", "3"));
+		return cr.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<HoaDon> getHoaDonByMaKhachHang(String id){
+		Criteria cr = factory.getCurrentSession().createCriteria(HoaDon.class);
+		cr.add(Restrictions.eq("khachHang.maKH", id));
+		
+		return cr.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<HoaDon> getHoaDonByMaNhanVien(String id){
+		Criteria cr = factory.getCurrentSession().createCriteria(HoaDon.class);
+		cr.add(Restrictions.eq("nhanVien.maNV", id));
+		
 		return cr.list();
 	}
 	

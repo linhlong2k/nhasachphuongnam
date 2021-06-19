@@ -5,8 +5,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="NHACUNGCAP")
-/* @NamedQuery(name="Nhacungcap.findAll", query="SELECT n FROM Nhacungcap n") */
+@Table(name="NhaCungCap")
+/* @NamedQuery(name="NhaCungCap.findAll", query="SELECT n FROM NhaCungCap n") */
 public class NhaCungCap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,9 +23,9 @@ public class NhaCungCap implements Serializable {
 	@Column(name="TENNCC")
 	private String tenNCC;
 
-	//bi-directional many-to-one association to Phieunhap
-	@OneToMany(mappedBy="nhacungcap")
-	private List<PhieuNhap> phieunhaps;
+	//bi-directional many-to-one association to PhieuNhap
+	@OneToMany(mappedBy="nhaCungCap")
+	private List<PhieuNhap> phieuNhaps;
 
 	public NhaCungCap() {
 	}
@@ -62,26 +62,26 @@ public class NhaCungCap implements Serializable {
 		this.tenNCC = tenNCC;
 	}
 
-	public List<PhieuNhap> getPhieunhaps() {
-		return this.phieunhaps;
+	public List<PhieuNhap> getPhieuNhaps() {
+		return this.phieuNhaps;
 	}
 
-	public void setPhieunhaps(List<PhieuNhap> phieunhaps) {
-		this.phieunhaps = phieunhaps;
+	public void setPhieuNhaps(List<PhieuNhap> phieuNhaps) {
+		this.phieuNhaps = phieuNhaps;
 	}
 
-	public PhieuNhap addPhieunhap(PhieuNhap phieunhap) {
-		getPhieunhaps().add(phieunhap);
-		phieunhap.setNhacungcap(this);
+	public PhieuNhap addPhieuNhap(PhieuNhap phieuNhap) {
+		getPhieuNhaps().add(phieuNhap);
+		phieuNhap.setNhaCungCap(this);
 
-		return phieunhap;
+		return phieuNhap;
 	}
 
-	public PhieuNhap removePhieunhap(PhieuNhap phieunhap) {
-		getPhieunhaps().remove(phieunhap);
-		phieunhap.setNhacungcap(null);
+	public PhieuNhap removePhieuNhap(PhieuNhap phieuNhap) {
+		getPhieuNhaps().remove(phieuNhap);
+		phieuNhap.setNhaCungCap(null);
 
-		return phieunhap;
+		return phieuNhap;
 	}
 
 }

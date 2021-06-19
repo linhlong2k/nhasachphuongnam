@@ -13,8 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="HOADON")
-/* @NamedQuery(name="Hoadon.findAll", query="SELECT h FROM Hoadon h") */
+@Table(name="HoaDon")
+/* @NamedQuery(name="HoaDon.findAll", query="SELECT h FROM HoaDon h") */
 public class HoaDon implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class HoaDon implements Serializable {
 	@Column(name="MAHD")
 	private String maHD;
 
-	@Column(name="DiaChi")
+	@Column(name="DIACHI")
 	private String diaChi;
 
 	@Column(name="GIAMGIA")
@@ -35,21 +35,21 @@ public class HoaDon implements Serializable {
 	private Date thoiGian;
 
 	@Column(name="TINHTRANG")
-	private String tinhtrang;
+	private String tinhTrang;
 
-	//bi-directional many-to-one association to CtHoadon
-	@OneToMany(mappedBy="hoadon")
-	private List<CtHoaDon> ctHoadons;
+	//bi-directional many-to-one association to CtHoaDon
+	@OneToMany(mappedBy="hoaDon")
+	private List<CtHoaDon> ctHoaDons;
 
-	//bi-directional many-to-one association to Khachhang
+	//bi-directional many-to-one association to KhachHang
 	@ManyToOne
 	@JoinColumn(name="MAKH")
-	private KhachHang khachhang;
+	private KhachHang khachHang;
 
-	//bi-directional many-to-one association to Nhanvien
+	//bi-directional many-to-one association to NhanVien
 	@ManyToOne
 	@JoinColumn(name="MANV")
-	private NhanVien nhanvien;
+	private NhanVien nhanVien;
 
 	public HoaDon() {
 	}
@@ -94,50 +94,50 @@ public class HoaDon implements Serializable {
 		this.thoiGian = thoiGian;
 	}
 
-	public String getTinhtrang() {
-		return this.tinhtrang;
+	public String getTinhTrang() {
+		return this.tinhTrang;
 	}
 
-	public void setTinhtrang(String tinhtrang) {
-		this.tinhtrang = tinhtrang;
+	public void setTinhTrang(String tinhTrang) {
+		this.tinhTrang = tinhTrang;
 	}
 
-	public List<CtHoaDon> getCtHoadons() {
-		return this.ctHoadons;
+	public List<CtHoaDon> getCtHoaDons() {
+		return this.ctHoaDons;
 	}
 
-	public void setCtHoadons(List<CtHoaDon> ctHoadons) {
-		this.ctHoadons = ctHoadons;
+	public void setCtHoaDons(List<CtHoaDon> ctHoaDons) {
+		this.ctHoaDons = ctHoaDons;
 	}
 
-	public CtHoaDon addCtHoadon(CtHoaDon ctHoadon) {
-		getCtHoadons().add(ctHoadon);
-		ctHoadon.setHoadon(this);
+	public CtHoaDon addCtHoaDon(CtHoaDon ctHoaDon) {
+		getCtHoaDons().add(ctHoaDon);
+		ctHoaDon.setHoaDon(this);
 
-		return ctHoadon;
+		return ctHoaDon;
 	}
 
-	public CtHoaDon removeCtHoadon(CtHoaDon ctHoadon) {
-		getCtHoadons().remove(ctHoadon);
-		ctHoadon.setHoadon(null);
+	public CtHoaDon removeCtHoaDon(CtHoaDon ctHoaDon) {
+		getCtHoaDons().remove(ctHoaDon);
+		ctHoaDon.setHoaDon(null);
 
-		return ctHoadon;
+		return ctHoaDon;
 	}
 
-	public KhachHang getKhachhang() {
-		return this.khachhang;
+	public KhachHang getKhachHang() {
+		return this.khachHang;
 	}
 
-	public void setKhachhang(KhachHang khachhang) {
-		this.khachhang = khachhang;
+	public void setKhachHang(KhachHang khachHang) {
+		this.khachHang = khachHang;
 	}
 
-	public NhanVien getNhanvien() {
-		return this.nhanvien;
+	public NhanVien getNhanVien() {
+		return this.nhanVien;
 	}
 
-	public void setNhanvien(NhanVien nhanvien) {
-		this.nhanvien = nhanvien;
+	public void setNhanVien(NhanVien nhanVien) {
+		this.nhanVien = nhanVien;
 	}
 
 }

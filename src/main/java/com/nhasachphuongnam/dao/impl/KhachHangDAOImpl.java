@@ -26,7 +26,7 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(khachHang.getTaikhoan());
+			session.save(khachHang.getTaiKhoan());
 			session.save(khachHang);
 			tran.commit();
 		} catch(HibernateException ex) {
@@ -67,7 +67,7 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 		 */
 		try {
 			session.delete(khachHang);
-			session.delete(khachHang.getTaikhoan());
+			session.delete(khachHang.getTaiKhoan());
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

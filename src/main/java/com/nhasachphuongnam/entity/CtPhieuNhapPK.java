@@ -9,24 +9,24 @@ public class CtPhieuNhapPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="MAMH", insertable=false, updatable=false)
-	private String mamh;
+	private String maMH;
 
 	@Column(name="MAPN", insertable=false, updatable=false)
-	private String mapn;
+	private String maPN;
 
 	public CtPhieuNhapPK() {
 	}
-	public String getMamh() {
-		return this.mamh;
+	public String getMaMH() {
+		return this.maMH;
 	}
-	public void setMamh(String mamh) {
-		this.mamh = mamh;
+	public void setMaMH(String maMH) {
+		this.maMH = maMH;
 	}
-	public String getMapn() {
-		return this.mapn;
+	public String getMaPN() {
+		return this.maPN;
 	}
-	public void setMapn(String mapn) {
-		this.mapn = mapn;
+	public void setMaPN(String maPN) {
+		this.maPN = maPN;
 	}
 
 	public boolean equals(Object other) {
@@ -38,15 +38,15 @@ public class CtPhieuNhapPK implements Serializable {
 		}
 		CtPhieuNhapPK castOther = (CtPhieuNhapPK)other;
 		return 
-			this.mamh.equals(castOther.mamh)
-			&& this.mapn.equals(castOther.mapn);
+			this.maMH.equals(castOther.maMH)
+			&& this.maPN.equals(castOther.maPN);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.mamh.hashCode();
-		hash = hash * prime + this.mapn.hashCode();
+		hash = hash * prime + this.maMH.hashCode();
+		hash = hash * prime + this.maPN.hashCode();
 		
 		return hash;
 	}

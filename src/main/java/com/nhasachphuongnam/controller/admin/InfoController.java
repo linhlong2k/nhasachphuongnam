@@ -1,6 +1,7 @@
 package com.nhasachphuongnam.controller.admin;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.model.PersonalInfo;
+import com.nhasachphuongnam.model.RoleDTO;
 import com.nhasachphuongnam.service.LoginService;
 import com.nhasachphuongnam.service.PIService;
+import com.nhasachphuongnam.service.RoleService;
 
 @Controller
 @RequestMapping("admin/thong-tin-ca-nhan/")
@@ -26,6 +29,15 @@ public class InfoController {
 	
 	@Autowired(required = true)
 	LoginService loginService;
+	
+	@Autowired
+	RoleService roleService;
+
+	@ModelAttribute("roles")
+	public List<RoleDTO> getAll() {
+		List<RoleDTO> res = roleService.getAll();
+		return res;
+	}
 	
 	@ModelAttribute("thongTinCaNhan")
 	public PersonalInfo thongTinCaNhan(@ModelAttribute("user") PersonalInfo info) {

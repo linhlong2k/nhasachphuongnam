@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name="MATHANG")
-/* @NamedQuery(name="Mathang.findAll", query="SELECT m FROM Mathang m") */
+@Table(name="MatHang")
+/* @NamedQuery(name="MatHang.findAll", query="SELECT m FROM MatHang m") */
 public class MatHang implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -40,18 +40,18 @@ public class MatHang implements Serializable {
 	@Column(name="TENMH")
 	private String tenMH;
 
-	//bi-directional many-to-one association to CtHoadon
-	@OneToMany(mappedBy="mathang")
-	private List<CtHoaDon> ctHoadons;
+	//bi-directional many-to-one association to CtHoaDon
+	@OneToMany(mappedBy="matHang")
+	private List<CtHoaDon> ctHoaDons;
 
 	//bi-directional many-to-one association to CtPhieunhap
-	@OneToMany(mappedBy="mathang")
+	@OneToMany(mappedBy="matHang")
 	private List<CtPhieuNhap> ctPhieunhaps;
 
-	//bi-directional many-to-one association to Loaimathang
+	//bi-directional many-to-one association to LoaiMatHang
 	@ManyToOne
 	@JoinColumn(name="MALOAI")
-	private LoaiMatHang loaimathang;
+	private LoaiMatHang loaiMatHang;
 
 	public MatHang() {
 	}
@@ -128,26 +128,26 @@ public class MatHang implements Serializable {
 		this.tenMH = tenMH;
 	}
 
-	public List<CtHoaDon> getCtHoadons() {
-		return this.ctHoadons;
+	public List<CtHoaDon> getCtHoaDons() {
+		return this.ctHoaDons;
 	}
 
-	public void setCtHoadons(List<CtHoaDon> ctHoadons) {
-		this.ctHoadons = ctHoadons;
+	public void setCtHoaDons(List<CtHoaDon> ctHoaDons) {
+		this.ctHoaDons = ctHoaDons;
 	}
 
-	public CtHoaDon addCtHoadon(CtHoaDon ctHoadon) {
-		getCtHoadons().add(ctHoadon);
-		ctHoadon.setMathang(this);
+	public CtHoaDon addCtHoaDon(CtHoaDon ctHoaDon) {
+		getCtHoaDons().add(ctHoaDon);
+		ctHoaDon.setMatHang(this);
 
-		return ctHoadon;
+		return ctHoaDon;
 	}
 
-	public CtHoaDon removeCtHoadon(CtHoaDon ctHoadon) {
-		getCtHoadons().remove(ctHoadon);
-		ctHoadon.setMathang(null);
+	public CtHoaDon removeCtHoaDon(CtHoaDon ctHoaDon) {
+		getCtHoaDons().remove(ctHoaDon);
+		ctHoaDon.setMatHang(null);
 
-		return ctHoadon;
+		return ctHoaDon;
 	}
 
 	public List<CtPhieuNhap> getCtPhieunhaps() {
@@ -160,24 +160,24 @@ public class MatHang implements Serializable {
 
 	public CtPhieuNhap addCtPhieunhap(CtPhieuNhap ctPhieunhap) {
 		getCtPhieunhaps().add(ctPhieunhap);
-		ctPhieunhap.setMathang(this);
+		ctPhieunhap.setMatHang(this);
 
 		return ctPhieunhap;
 	}
 
 	public CtPhieuNhap removeCtPhieunhap(CtPhieuNhap ctPhieunhap) {
 		getCtPhieunhaps().remove(ctPhieunhap);
-		ctPhieunhap.setMathang(null);
+		ctPhieunhap.setMatHang(null);
 
 		return ctPhieunhap;
 	}
 
-	public LoaiMatHang getLoaimathang() {
-		return this.loaimathang;
+	public LoaiMatHang getLoaiMatHang() {
+		return this.loaiMatHang;
 	}
 
-	public void setLoaimathang(LoaiMatHang loaimathang) {
-		this.loaimathang = loaimathang;
+	public void setLoaiMatHang(LoaiMatHang loaiMatHang) {
+		this.loaiMatHang = loaiMatHang;
 	}
 
 }

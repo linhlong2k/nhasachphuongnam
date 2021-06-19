@@ -26,7 +26,7 @@ public class NhanVienDAOImpl implements NhanVienDAO {
 		Session session = factory.openSession();
 		Transaction tran = session.beginTransaction();
 		try {
-			session.save(nhanVien.getTaikhoan());
+			session.save(nhanVien.getTaiKhoan());
 			session.save(nhanVien);
 			tran.commit();
 		} catch(HibernateException ex) {
@@ -67,7 +67,7 @@ public class NhanVienDAOImpl implements NhanVienDAO {
 		 */
 		try {
 			session.delete(nhanVien);
-			session.delete(nhanVien.getTaikhoan()); 
+			session.delete(nhanVien.getTaiKhoan()); 
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();

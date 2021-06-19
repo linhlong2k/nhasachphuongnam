@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	public Product convert(MatHang matHang) {
-		Product res = new Product(matHang.getMaMH(), matHang.getTenMH(), matHang.getHinhAnh(), matHang.getSoLuong(), matHang.getMoTaNgan(), matHang.getMoTa(), matHang.getAllow(), matHang.getGia().longValue(), matHang.getGiamGia(), matHang.getLoaimathang().getMaLoai());
+		Product res = new Product(matHang.getMaMH(), matHang.getTenMH(), matHang.getHinhAnh(), matHang.getSoLuong(), matHang.getMoTaNgan(), matHang.getMoTa(), matHang.getAllow(), matHang.getGia().longValue(), matHang.getGiamGia(), matHang.getLoaiMatHang().getMaLoai());
 		return res;
 	}
 	
@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService{
 		if(product.getGiamGia() != null)
 			matHang.setGiamGia(product.getGiamGia());
 		matHang.setSoLuong(product.getSoLuong());
-		matHang.setLoaimathang(loaiMatHangDAO.getByID(product.getMaLoai()));
+		matHang.setLoaiMatHang(loaiMatHangDAO.getByID(product.getMaLoai()));
 		matHang.setGia(new BigDecimal(product.getGia()));
 		return matHang;
 	}
@@ -115,7 +115,7 @@ public class ProductServiceImpl implements ProductService{
 		LoaiMatHang loai = loaiMatHangDAO.getByID(ma);
 		if(loai == null)
 			return null;
-		List<MatHang> matHangList = loai.getMathangs();
+		List<MatHang> matHangList = loai.getMatHangs();
 		List<Product> res = new ArrayList<Product>();
 		for(MatHang i: matHangList)
 			res.add(convert(i));

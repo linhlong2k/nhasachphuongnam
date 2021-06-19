@@ -26,10 +26,10 @@ public class HoatDong implements Serializable {
 	@Column(name="THOIGIAN")//, columnDefinition = "DATE")
 	private Date thoiGian;
 
-	//bi-directional many-to-one association to Nhanvien
+	//bi-directional many-to-one association to NhanVien
 	@ManyToOne
 	@JoinColumn(name="MANV")
-	private NhanVien nhanvien;
+	private NhanVien nhanVien;
 
 	public HoatDong() {
 	}
@@ -58,12 +58,12 @@ public class HoatDong implements Serializable {
 		this.thoiGian = thoiGian;
 	}
 
-	public NhanVien getNhanvien() {
-		return this.nhanvien;
+	public NhanVien getNhanVien() {
+		return this.nhanVien;
 	}
 
-	public void setNhanvien(NhanVien nhanvien) {
-		this.nhanvien = nhanvien;
+	public void setNhanVien(NhanVien nhanVien) {
+		this.nhanVien = nhanVien;
 	}
 
 }

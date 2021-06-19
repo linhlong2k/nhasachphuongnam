@@ -11,8 +11,7 @@
     <title>Balo Thời Trang - BigBag.vn</title>
     
     <!-- Font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
-          integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" >
     <link href="${url}/css/font-awesome.css" rel="stylesheet">
     
     <!-- Bootstrap -->

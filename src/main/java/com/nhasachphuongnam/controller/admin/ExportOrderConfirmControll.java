@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,7 +65,7 @@ class ExportOrderConfirmControll {
 	@PostMapping(value="", params="ok")
 	public String ok(ModelMap model,
 			@RequestParam(value="id", required = false) String id,
-			@RequestAttribute("user") PersonalInfo nhanVien) {
+			@ModelAttribute("user") PersonalInfo nhanVien) {
 		if(id.isEmpty()) {
 			model.addAttribute("message", "Bạn chưa lựa chọn đơn hàng!");
 		} else if(eoService.xacNhanDatHang(id, nhanVien.getMa()) == null) {

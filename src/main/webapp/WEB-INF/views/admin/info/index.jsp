@@ -92,22 +92,22 @@
 	                    <div class="row">
 	                        <div class="col-md-6">
 	                            <h6>Thông tin chi tiết</h6>
-	                            <p>Tên: ${thongTinCaNhan.ten }</p>
-	                            <p>Địa chỉ: ${thongTinCaNhan.diaChi }</p>
-	                            <p>Số điện thoại: ${thongTinCaNhan.soDienThoai }</p>
-	                            <p>Ngày sinh: <fmt:formatDate value="${thongTinCaNhan.ngaySinh }" pattern="dd-MM-yyyy" /></p>
+	                            <p>&nbsp;Tên: ${thongTinCaNhan.ten }</p>
+	                            <p>&nbsp;Địa chỉ: ${thongTinCaNhan.diaChi }</p>
+	                            <p>&nbsp;Số điện thoại: ${thongTinCaNhan.soDienThoai }</p>
+	                            <p>&nbsp;Ngày sinh: ${thongTinCaNhan.ngaySinh }<%-- <fmt:formatDate value="${thongTinCaNhan.ngaySinh }" pattern="dd-MM-yyyy" /> --%></p>
 	                        </div>
 	                        <div class="col-md-6">
 <!-- 	                            chỗ này là bên phải của trang profile -->
 								<h6>Chức vụ:</h6>
 	                            <c:forEach var="i" items="${roles }">
 	                            	<c:if test="${thongTinCaNhan.maRole eq i.maRole}">
-	                            		<p>${i.tenRole }</p>
+	                            		<p>&nbsp;${i.tenRole }</p>
 	                            	</c:if>
 	                            </c:forEach>
 	                            <h6>Thông tin đăng nhập</h6>
-	                            <p>Username: ${thongTinCaNhan.username }</p>
-	                            <p><a href="admin/thong-tin-ca-nhan/thay-doi-mat-khau.htm" style="color: blue;">Đổi mật khẩu</a></p>
+	                            <p>&nbsp;Username: ${thongTinCaNhan.username }</p>
+	                            <p>&nbsp;<a href="admin/thong-tin-ca-nhan/thay-doi-mat-khau.htm" style="color: blue;">Đổi mật khẩu</a></p>
 	                        </div>
 	                        <div class="col-md-12">
 	                            <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Hoạt động gần đây</h5>

@@ -33,11 +33,11 @@
 					<span class="user-profile">
 						<c:choose>
 	                    	<c:when test="${empty user.hinhAnh}">
-	                    		<img src="resources/images/users/defaultUser.jpg" class="img-circle" alt="user avatar"/></p>	
+	                    		<img src="resources/images/users/defaultUser.jpg" class="img-circle" alt="user avatar"/>	
 							</c:when>
 							<%-- test="${not empty prod.hinhAnh }" --%>
 							<c:otherwise>
-								<img src="data:image/jpeg;base64,${user.getBase64Photo() }" class="img-circle" alt="user avatar"/></p>	
+								<img src="data:image/jpeg;base64,${user.getBase64Photo() }" class="img-circle" alt="user avatar"/>	
 							</c:otherwise>
 						</c:choose>
 					</span>
@@ -48,12 +48,12 @@
 							<div class="media">
 								<div class="avatar">
 									<c:choose>
-				                    	<c:when test="${empty user.hinhAnh}">
-				                    		<img class="align-self-start mr-3" alt="user avatar" src="resources/images/users/defaultUser.jpg" class="img-circle" alt="user avatar"/></p>	
+				                    	<c:when test="${empty user.hinhAnh}" >
+				                    		<img class="align-self-start mr-3" alt="user avatar" src="resources/images/users/defaultUser.jpg" class="img-circle" alt="user avatar"/>	
 										</c:when>
 										<%-- test="${not empty prod.hinhAnh }" --%>
 										<c:otherwise>
-											<img class="align-self-start mr-3" alt="user avatar" src="data:image/jpeg;base64,${user.getBase64Photo() }" class="img-circle" alt="user avatar"/></p>	
+											<img class="align-self-start mr-3" alt="user avatar" src="data:image/jpeg;base64,${user.getBase64Photo() }" class="img-circle" alt="user avatar"/>	
 										</c:otherwise>
 									</c:choose>
 								</div>

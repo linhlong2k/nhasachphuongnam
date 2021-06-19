@@ -48,7 +48,7 @@ public class ThongTinController {
 			@RequestParam(value="uploadPhotoId", required = false) String id,
 			@RequestParam(value="photo", required = false) MultipartFile file) {
 		if(file.isEmpty()) {
-			model.addAttribute("message", "Cập nhập ảnh không thành công, Vui lòng chọn ảnh trước khi nhấn cập nhập");
+			model.addAttribute("messagePhoto", "Vui lòng chọn ảnh trước khi cập nhập");
 			return "user/info";
 		}
 		byte[] image = null;
@@ -58,7 +58,7 @@ public class ThongTinController {
 			e.printStackTrace();
 		}
 		if(piService.capNhapAnh(id, image)) {
-			model.addAttribute("message", "Cập nhập ảnh thành công!");
+			model.addAttribute("notification", "Cập nhập ảnh thành công!");
 			model.addAttribute("user", piService.getByID(id));
 		} else {
 			model.addAttribute("message", "Cập nhập ảnh không thành công!");
@@ -74,7 +74,7 @@ public class ThongTinController {
 			model.addAttribute("message", "Thông tin mới không hợp lệ");
 		} else {
 			if(piService.update(user)) {
-				model.addAttribute("message", "Cập nhật thông tin cá nhân mới thành công!");
+				model.addAttribute("notification", "Cập nhật thông tin cá nhân mới thành công!");
 			} else {
 				model.addAttribute("message", "Cập nhật thông tin cá nhân mới không thành công!");
 			}

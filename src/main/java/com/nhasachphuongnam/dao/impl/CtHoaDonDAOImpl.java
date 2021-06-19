@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.CtHoaDonDAO;
 import com.nhasachphuongnam.entity.CtHoaDon;
-import com.nhasachphuongnam.entity.CtPhieuNhap;
 
 @Repository
 @Transactional

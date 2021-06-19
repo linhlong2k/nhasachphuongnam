@@ -5,9 +5,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="LOAIMATHANG")
+@Table(name="LoaiMatHang")
 /*
- * @NamedQuery(name="Loaimathang.findAll", query="SELECT l FROM Loaimathang l")
+ * @NamedQuery(name="LoaiMatHang.findAll", query="SELECT l FROM LoaiMatHang l")
  */
 public class LoaiMatHang implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,9 +19,9 @@ public class LoaiMatHang implements Serializable {
 	@Column(name="TENLOAI")
 	private String tenLoai;
 
-	//bi-directional many-to-one association to Mathang
-	@OneToMany(mappedBy="loaimathang")
-	private List<MatHang> mathangs;
+	//bi-directional many-to-one association to MatHang
+	@OneToMany(mappedBy="loaiMatHang")
+	private List<MatHang> matHangs;
 
 	public LoaiMatHang() {
 	}
@@ -42,26 +42,26 @@ public class LoaiMatHang implements Serializable {
 		this.tenLoai = tenLoai;
 	}
 
-	public List<MatHang> getMathangs() {
-		return this.mathangs;
+	public List<MatHang> getMatHangs() {
+		return this.matHangs;
 	}
 
-	public void setMathangs(List<MatHang> mathangs) {
-		this.mathangs = mathangs;
+	public void setMatHangs(List<MatHang> matHangs) {
+		this.matHangs = matHangs;
 	}
 
-	public MatHang addMathang(MatHang mathang) {
-		getMathangs().add(mathang);
-		mathang.setLoaimathang(this);
+	public MatHang addMatHang(MatHang matHang) {
+		getMatHangs().add(matHang);
+		matHang.setLoaiMatHang(this);
 
-		return mathang;
+		return matHang;
 	}
 
-	public MatHang removeMathang(MatHang mathang) {
-		getMathangs().remove(mathang);
-		mathang.setLoaimathang(null);
+	public MatHang removeMatHang(MatHang matHang) {
+		getMatHangs().remove(matHang);
+		matHang.setLoaiMatHang(null);
 
-		return mathang;
+		return matHang;
 	}
 
 }

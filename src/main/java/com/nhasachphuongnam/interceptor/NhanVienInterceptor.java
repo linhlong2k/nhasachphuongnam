@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class AdminInterceptor extends HandlerInterceptorAdapter {
+public class NhanVienInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -14,7 +14,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("role")) {
-					if(cookie.getValue().equals("0")) {
+					if(cookie.getValue().equals("0") || cookie.getValue().equals("1")) {
 						return true;
 					} else {
 						response.sendRedirect(request.getContextPath() + "/403.htm");

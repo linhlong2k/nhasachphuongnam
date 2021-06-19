@@ -20,7 +20,12 @@
    </div>
   </section>
   <!-- / catg header banner section -->
-
+<c:if test="${not empty notification }">
+	<label id="notification" class="form-text text-muted" style="color: blue; background-color: #d1e0e0; width: 100%; padding: 5px;">${notification }<br></label>
+</c:if>
+<c:if test="${not empty message }">
+	<small id="message" class="form-text text-muted" style="color: red; background-color: #d1e0e0; width: 100%; padding: 5px;">${message }<br></small>
+</c:if>
  <!-- Cart view section -->
  <section id="cart-view">
    <div class="container">

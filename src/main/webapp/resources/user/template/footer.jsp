@@ -15,10 +15,8 @@
 										<ul class="aa-footer-nav">
 	
 											<li><p
-													style="color: #888; text-align: justify; width: 95%">Là
-													nơi chuyên buôn bán tất cả các mặt hàng về balo, vali,..
-													chất lượng. Chúng tôi luôn đặt tiêu chí về chất lượng và uy
-													tín lên hàng đầu.</p></li>
+													style="color: #888; text-align: justify; width: 95%">
+													Nhasachphuongnam.com là trang thương mại điện tử của Nhà Sách Phương Nam.<br>Hàng hóa phong phú, nhiều sản phẩm độc quyền, được chọn lọc kỹ càng đã tạo nên sự khác biệt của Nhà Sách Phương Nam và tạo dựng được lòng tin yêu từ khách hàng.</p></li>
 											<li><img
 												src="resources/user/assets/images/dadangky.png"
 												alt="logo img" width="40%"></li>
@@ -31,7 +29,7 @@
 											<h3>HỖ TRỢ KHÁCH HÀNG</h3>
 											<ul class="aa-footer-nav">
 												<li><a
-													href="huong-san-dat-hang.htm">Hướng dẫn đặt hàng</a></li>
+													href="huong-dan-dat-hang.htm">Hướng dẫn đặt hàng</a></li>
 												<li><a
 													href="huong-dan-thanh-toan.htm">Hướng dẫn thanh toán</a></li>
 												<li><a
