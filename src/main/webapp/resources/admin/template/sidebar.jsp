@@ -33,6 +33,13 @@
 		</li>
 		
 		<li class="item">
+			<a href="admin/tao-don-hang-xuat.htm" class="">
+				<i class="zmdi zmdi-plus-square"></i>
+				<span>Thêm hóa đơn</span>
+			</a>
+		</li>
+		
+		<li class="item">
 			<a href="admin/xac-nhan-dat-hang.htm" class="">
 				<i class="zmdi zmdi-assignment-check"></i>
 				<span>Xác nhận đặt hàng</span>
@@ -46,10 +53,24 @@
 			</a>
 		</li>
 		
-		<li class="item">
+		<!-- <li class="item">
 			<a href="admin/don-hang/index.htm" class="">
 				<i class="zmdi zmdi-shopping-basket"></i>
 				<span>Đơn hàng</span>
+			</a>
+		</li> -->
+		
+		<li class="item">
+			<a href="admin/don-hang-nhap.htm" class="">
+				<i class="zmdi zmdi-shopping-basket"></i>
+				<span>Đơn hàng nhập</span>
+			</a>
+		</li>
+		
+		<li class="item">
+			<a href="admin/don-hang-xuat.htm" class="">
+				<i class="zmdi zmdi-shopping-basket"></i>
+				<span>Đơn hàng xuất</span>
 			</a>
 		</li>
 		
@@ -102,9 +123,9 @@
 				<span>Thêm nhân viên</span>
 			</a>
 		</li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
+      <!-- <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>
+      <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li> -->
 
     </ul>
    

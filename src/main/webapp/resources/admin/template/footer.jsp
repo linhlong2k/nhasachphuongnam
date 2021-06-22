@@ -1,4 +1,8 @@
 <%@ page pageEncoding="UTF-8"%>
+	<!--Start Back To Top Button-->
+		<a href="javaScript:void();" class="back-to-top"><i
+			class="fa fa-angle-double-up"></i> </a>
+	<!--End Back To Top Button-->
 	<br><br>
     <!--Start footer-->
 	<footer class="footer" style="margin-top:43px;">

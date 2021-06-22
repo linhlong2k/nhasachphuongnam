@@ -78,6 +78,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		for(CtHoaDon i: temp4) {
 			temp3 = new ProductDetail();
 			temp3.setMaMatHang(i.getMatHang().getMaMH());
+			temp3.setTenMatHang(i.getMatHang().getTenMH());
 			temp3.setSoLuong(i.getSoLuong());
 			temp3.setGia(i.getGia().longValue());
 			/* temp3.setGiamGia(i.getGiamgia()); */
@@ -103,33 +104,41 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		temp1.setTinhTrang(var.getTinhTrang());
 		return temp1;
 	}
-	
+
 	public String add(ExportOrder var) {
-		/*var.setMaDonHang(this.theNextMa());*/
-		/* HoaDon temp1 = this.convert(var); */
-		HoaDon temp1 = new HoaDon();
-		temp1.setMaHD(this.theNextMa());
-		temp1.setKhachHang(khachHangDAO.getByID(var.getMaKhachHang()));
-		temp1.setSdt(var.getSdt());
+		HoaDon temp1 = new HoaDon();	//tọa HoaDon mới
+		temp1.setMaHD(this.theNextMa());	//Thêm mã đơn hàng cho hóa đơn vừa tạo
+		try {
+			//cập nhật mã khách hàng cho đơn hàng
+			temp1.setKhachHang(khachHangDAO.getByID(var.getMaKhachHang()));	
+		} catch (NullPointerException e) {	//kiểm tra null
+			e.printStackTrace();
+			return null;
+		}
+		temp1.setSdt(var.getSdt());		//thêm số điện thoại cho đơn hàng
+		//thêm thông tin thời gian cho đơn hàng và convert thời gian từ LocalDate sang Date để phù hợp với jpa hibernate 4
 		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-		temp1.setGiamGia(var.getGiamGia());
-		temp1.setTinhTrang(var.getTinhTrang());
-		temp1.setDiaChi(var.getDiaChi());
+		temp1.setGiamGia(var.getGiamGia());		//thêm thông tin giảm giá cho đơn hàng
+		temp1.setTinhTrang(var.getTinhTrang());	//Chuyển đơn hàng sang trạng thái đặt hàng
+		temp1.setDiaChi(var.getDiaChi());	//thêm thông tin địa chỉ nhận hàng
 		List<CtHoaDon> CTHoaDons = new ArrayList<CtHoaDon>();
+		CtHoaDon temp2;
+		//thêm CtHoaDon vào trong đơn hàng
 		for(ProductDetail i: var.getChiTiets()) {
-			CtHoaDonPK pk = new CtHoaDonPK();
+			CtHoaDonPK pk = new CtHoaDonPK();	//khóa chính của CtHoaDon
 			pk.setMaHD(temp1.getMaHD());
 			pk.setMaMH(i.getMaMatHang());
-			CtHoaDon temp2 = new CtHoaDon();
-			temp2.setId(pk);
-			temp2.setSoLuong(i.getSoLuong());
-			temp2.setGia(BigDecimal.valueOf(i.getGia()));
+			temp2 = new CtHoaDon();	//CtHoaDon
+			temp2.setId(pk);	//set khóa chính cho CtHoaDon
+			temp2.setSoLuong(i.getSoLuong());	//set số lượng cho CtHoaDon
+			temp2.setGia(BigDecimal.valueOf(i.getGia()));	//set giá tiền cho CtHoaDon
+			//thay đổi số lượng của mặt hàng
 			matHangDAO.changeSoLuong(i.getMaMatHang(), 0 - i.getSoLuong());
-			CTHoaDons.add(temp2);
+			CTHoaDons.add(temp2);	//Thêm CtHoaDon vào trong đơn hàng
 		}
-		temp1.setCtHoaDons(CTHoaDons);
-		if(hoaDonDAO.add(temp1))
-			return temp1.getMaHD();
+		temp1.setCtHoaDons(CTHoaDons);	//Thêm CtHoaDon vào trong đơn hàng
+		if(hoaDonDAO.add(temp1))	//Thêm đơn hàng
+			return temp1.getMaHD();		//trả về mã đơn hàng của đơn hàng vừa tạo
 		return null;
 	}
 	
@@ -182,14 +191,15 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	}
 	
 	public List<ExportOrder> GetAllBetweenDate(LocalDate start, LocalDate end) {
-		List<ExportOrder>  res = new ArrayList<ExportOrder>();
+		List<ExportOrder>  res = new ArrayList<ExportOrder>();	//tạo danh sách đơn hàng
+		//Lấy danh sách các đơn hàng có trong khoảng thời gian cho nhập vào đồng thời chuyển đổi kiểu dữ liệu từ LocalDate sang Date cho phù hợp
 		List<HoaDon> temp = hoaDonDAO.getBetweenThoiGian(Date.from(start.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), Date.from(end.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		for(HoaDon i: temp) {
-			res.add(convert(i));
+			res.add(convert(i));	//thêm các đơn hàng vừa lấy được vào danh sách các đơn hàng trả về
 		}
-		return res;
+		return res;	//trả về danh sách cách đơn hàng vừa lấy được
 	}
-	
+
 
 	public List<ExportOrder> getDanhSachDatHang(){
 		List<ExportOrder> res = new ArrayList<ExportOrder>();

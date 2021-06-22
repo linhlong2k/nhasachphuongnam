@@ -26,10 +26,10 @@
 <!--     	=================================================================== table ==================================================================== -->
 		<div class="card">
             <div class="card-body">
-	            <div>
+	            <!-- <div>
 	            	<h3 class="card-title" style="float: left;"><strong>Danh sách khách hàng</strong></h3>
 	            	<br><br>
-	            </div>
+	            </div> -->
 			  	<div class="table-responsive">
               	<table class="table table-hover" id="table">
                 	<thead>
@@ -46,7 +46,7 @@
                 	<tbody>
                 	<c:forEach var="khachHang" items="${danhSachKhachHang}">
 	                	<tr>
-	                    	<th scope="row">${khachHang.ma }</th>
+	                    	<td scope="row">${khachHang.ma }</td>
 	                    	<c:choose>
 	                    		<c:when test="${empty khachHang.hinhAnh}">
 	                    			<td>
@@ -78,4 +78,29 @@
     </div>
     <!-- End container-fluid-->
     </div><!--End content-wrapper-->
+<!-- 	=======================================================script==================================== -->
+	<script>
+	    document.getElementById('mainLabel').innerHTML = 'Danh sách khách hàng';
+		function myFunction() {
+			var input, filter, table, tr, i, txtValue, txtValue2, firstCol, secondCol;
+			input = document.getElementById("search");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("table");
+			tr = table.getElementsByTagName("tr");
+		    for (i = 0; i < tr.length; i++) {
+		        firstCol = tr[i].getElementsByTagName("td")[0];
+		        secondCol = tr[i].getElementsByTagName("td")[2];
+		        if (firstCol || secondCol) {
+					txtValue = firstCol.textContent || firstCol.innerText;
+					txtValue2 = secondCol.textContent || secondCol.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}   
+		    }
+		}
+	</script>
+<!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

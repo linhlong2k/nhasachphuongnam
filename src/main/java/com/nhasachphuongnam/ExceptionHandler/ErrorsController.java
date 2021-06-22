@@ -17,4 +17,6 @@ public class ErrorsController {
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect(request.getContextPath() + "/404.htm");
 	}
+	
+	
 }

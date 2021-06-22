@@ -24,23 +24,26 @@
 <div class="row">
     <div class="col-12 col-lg-6 col-xl-6">
         <div class="card">
-            <div class="card-header">
+            <!-- <div class="card-header">
                 <h3><strong>Loại mặt hàng</strong></h3>
-            </div>
+            </div> -->
             <div class="table-responsive">
                 <table class="table align-items-center" id="table">
                     <tbody>
                         <tr>
-                            <td><i class="text-white mr-2"></i>Mã</td>
-                            <td>Tên</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th><i class="text-white mr-2"></i>Mã</th>
+                            <th>Tên</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         <c:forEach var="t" items="${danhSachLoaiMatHang }">
                         <tr>
 							<form:form action="admin/loai-mat-hang/chinh-sua-loai-mat-hang/${t.maLoai }.htm" modelAttribute="loaiMatHangChinhSua" method="post">
-	                       		<td><form:input path="maLoai" value="${t.maLoai }" class="form-control" readonly="true" /></td>
+	                       		<td>
+	                       			${t.maLoai }
+	                       			<form:input path="maLoai" value="${t.maLoai }" class="form-control" readonly="true" hidden="hidden" />
+	                       		</td>
 		                        <td><form:input path="tenLoai" value="${t.tenLoai }" class="form-control" /></td>
 		                        <td style="padding: 0;">
 		                         	<button type="submit" class="btn btn-light btn-round px-3">
@@ -99,7 +102,7 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    <h5 class="card-title float-left"><strong>Mặt hàng</strong></h5>
+                    <h5 class="card-title float-left"><strong>Danh sách mặt hàng</strong></h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -130,23 +133,25 @@
 	</div><!--End content-wrapper-->
 <!-- 	============================================<script>============================================= -->
 	<script>
-			/* var input, filter, table, tr, td, i, txtValue;
-			input = document.getElementById("search");
-			filter = input.value.toUpperCase();
-			table = document.getElementById("table");
-			tr = table.getElementsByTagName("tr");
-			for (i = 0; i < tr.length; i++) {
-				td = tr[i].getElementsByTagName("td")[1];
-				if (td) {
-					txtValue = td.textContent || td.innerText;
-					if (txtValue.toUpperCase().indexOf(filter) > -1) {
-						tr[i].style.display = "";
-					} else {
-						tr[i].style.display = "none";
-					}
+	document.getElementById('mainLabel').innerHTML = 'Danh sách loại mặt hàng';
+	function myFunction() {
+		var input, filter, table, tr, i, txtValue, firstCol;
+		input = document.getElementById("search");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("table");
+		tr = table.getElementsByTagName("tr");
+	    for (i = 0; i < tr.length; i++) {
+	        firstCol = tr[i].getElementsByTagName("td")[0];
+	        if (firstCol) {
+				txtValue = firstCol.textContent || firstCol.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
 				}
-			} */
-			document.getElementById("search").style.visibility = "hidden";
+			}   
+	    }
+	}
 	</script>
 <!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

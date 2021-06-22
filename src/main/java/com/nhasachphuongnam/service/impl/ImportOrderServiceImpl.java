@@ -82,6 +82,7 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 		for(CtPhieuNhap i: temp5) {
 			temp4 = new ProductDetail();
 			temp4.setMaMatHang(i.getMatHang().getMaMH());
+			temp4.setTenMatHang(i.getMatHang().getTenMH());
 			temp4.setSoLuong(i.getSoLuong());
 			temp4.setGia(i.getGia().longValue());
 			temp4.setGiamGia(i.getGiamGia());

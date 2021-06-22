@@ -24,10 +24,89 @@
 <!-- 		================================================================ create button ===================================================== -->
 		
 <!--     	=================================================================== table ==================================================================== -->
-		<div>
-			abc
-		</div>
+		<div class="card">
+            <!-- <div class="card-header">
+                <h3><strong>DANH SÁCH ĐƠN HÀNG NHẬP</strong></h3>
+                <br>
+                <div>
+                	<form class="search">
+						<input type="text" class="form-control" placeholder="Tìm kiếm" id="search-phieu-nhap" onkeyup="phieuNhapSearch()">
+					</form>
+                </div>
+            </div> -->
+            <div class="table-responsive">
+                <table class="table align-items-center" id="table-phieu-nhap">
+                	<thead>
+                		<tr>
+                            <th rowspan="2"><i class="text-white mr-2"></i>Mã đơn</th>
+                            <th rowspan="2">Thời gian</th>
+                            <th rowspan="2">Nhân viên</th>
+                            <th rowspan="2">Nhà cung cấp</th>
+                            <th colspan="4" >Chi tiết đơn hàng</th>
+                            <th rowspan="2"></th>
+                        </tr>
+                        <tr>
+                        	<th>Mã mặt hàng</th>
+					    	<th>Số lượng</th>
+					    	<th>Giảm giá</th>
+					    	<th>Giá tiền</th>
+                        </tr>
+                	</thead>
+                    <tbody>
+                        <c:forEach var="io" items="${danhSachPhieuNhap }">
+                        <tr>
+							<td scope="row">${io.maDonHang }</td>
+	                    	<td>${io.thoiGian }</td>
+	                    	<td>${io.maNhanVien }</td>
+	                    	<td>${io.maNhaCungCap }</td>
+	                    	<td colspan="4" >
+						    	<c:forEach var="item" items="${io.chiTiets }">
+							    	${item.maMatHang } &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
+							    	${item.soLuong } &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
+							    	<fmt:formatNumber pattern="#,###.# %; -#,###.# %" value="${item.giamGia }" type="currency" />&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
+							    	<fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value="${item.gia }" type="currency" /><hr>
+							    </c:forEach>
+	                    	</td>
+	                    	<td>
+	                    		<form:form action="admin/don-hang-nhap.htm">
+	                    			<button name="deleteOrderId" value="${io.maDonHang }" type="submit" class="btn btn-light btn-round px-3">Xóa</button>
+	                    		</form:form>
+	                    	</td>
+	                    </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <!-- End container-fluid-->
     </div><!--End content-wrapper-->
+<!-- 	=======================================================script==================================== -->
+	<script>
+	    /* var activeItem = document.querySelector("a[href='mat-hang/index.htm']").class += ' active'; */
+	    document.getElementById('mainLabel').innerHTML = 'danh sách đơn hàng nhập';
+	    function myFunction() {
+			var input, filter, table, tr, i, txtValue, txtValue2, txtValue3, firstCol, secondCol, thirdCol;
+			input = document.getElementById("search");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("table-phieu-nhap");
+			tr = table.getElementsByTagName("tr");
+		    for (i = 0; i < tr.length; i++) {
+		        firstCol = tr[i].getElementsByTagName("td")[0];
+		        secondCol = tr[i].getElementsByTagName("td")[2];
+		        thirdCol = tr[i].getElementsByTagName("td")[3];
+		        if (firstCol || secondCol || thirdCol) {
+					txtValue = firstCol.textContent || firstCol.innerText;
+					txtValue2 = secondCol.textContent || secondCol.innerText;
+					txtValue3 = thirdCol.textContent || thirdCol.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}   
+		    }
+		}
+	</script>
+<!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

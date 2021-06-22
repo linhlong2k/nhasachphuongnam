@@ -15,12 +15,12 @@
 							<div class="seq-model">
 								<img data-seq src="resources/images/users/banner/bannerIndex1.jpg" alt="Ảnh Banner" />
 							</div>
-							<div class="seq-title">
-								<span data-seq style="background: transparent;"></span> <!-- Thẻ giảm giá -->
-								<h2 data-seq style="background: transparent;"></h2>	<!-- Thẻ title -->
-								<h2 data-seq style="background: transparent;"></h2>	<!-- Thẻ title -->
+							<!-- <div class="seq-title">
+								<span data-seq style="background: transparent;"></span> Thẻ giảm giá
+								<h2 data-seq style="background: transparent;"></h2>	Thẻ title
+								<h2 data-seq style="background: transparent;"></h2>	Thẻ title
 								<a data-seq href="san-pham.htm" class="aa-shop-now-btn aa-secondary-btn">Xem Sản Phẩm</a>
-							</div>
+							</div> -->
 						</li>
 						<!-- single slide item -->
 						<li>
@@ -28,36 +28,36 @@
 								<img data-seq src="resources/images/users/banner/bannerIndex2.jpg"
 									alt="Ảnh Banner" />
 							</div>
-							<div class="seq-title">
+							<!-- <div class="seq-title">
 								<span data-seq style="background: transparent;"></span>
 								<h2 data-seq style="background: transparent;"></h2>
 								<h2 data-seq style="background: transparent;"></h2>
 								<a data-seq href="san-pham.htm" class="aa-shop-now-btn aa-secondary-btn">Xem Sản Phẩm</a>
-							</div>
+							</div> -->
 						</li>
 						<!-- single slide item -->
 						<li>
 							<div class="seq-model">
 								<img data-seq src="resources/images/users/banner/bannerIndex4.jpg" alt="Ảnh Banner" />
 							</div>
-							<div class="seq-title">
+							<!-- <div class="seq-title">
 								<span data-seq style="background: transparent;"></span>
 								<h2 data-seq style="background: transparent;"></h2>
 								<h2 data-seq style="background: transparent;"></h2>
 								<a data-seq href="san-pham.htm" class="aa-shop-now-btn aa-secondary-btn">Xem Sản Phẩm</a>
-							</div>
+							</div> -->
 						</li>
 						<!-- single slide item -->
 						<li>
 							<div class="seq-model">
 								<img data-seq src="resources/images/users/banner/bannerIndex5.jpg" alt="Ảnh Banner" />
 							</div>
-							<div class="seq-title">
+							<!-- <div class="seq-title">
 								<span data-seq style="background: transparent;"></span>
 								<h2 data-seq style="background: transparent;"></h2>
 								<h2 data-seq style="background: transparent;"></h2>
 								<a data-seq href="san-pham.htm" class="aa-shop-now-btn aa-secondary-btn">Xem Sản Phẩm</a>
-							</div>
+							</div> -->
 						</li>
 					</ul>
 				</div>

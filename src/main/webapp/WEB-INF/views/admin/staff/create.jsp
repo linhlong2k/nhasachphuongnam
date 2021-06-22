@@ -28,10 +28,10 @@
           <div class="col-lg-6">
             <div class="card">
             	<div class="card-header">
-            		<div class="card-title"><strong>Thêm nhân viên</strong>&nbsp;&nbsp;<a href="admin/nhan-vien/index.htm" style="float: right;">Hủy</a></div>
+            		<div class="card-title"><strong>Thêm nhân viên</strong><!-- &nbsp;&nbsp;<a href="admin/nhan-vien/index.htm" style="float: right;">Hủy</a> --></div>
             	</div>
               <div class="card-body">
-                <form:form action="admin/nhan-vien/them-nhan-vien-moi.htm" method="post" modelAttribute="nhanVienMoi">
+                <form:form action="admin/them-nhan-vien.htm" method="post" modelAttribute="nhanVienMoi">
                   <div class="form-group">
                     <label for="input-1">Tên</label>
                     <form:input path="ten" type="text" class="form-control form-control-rounded" id="input-1" placeholder="Nhập họ và tên nhân viên" />
@@ -76,4 +76,10 @@
     </div>
     <!-- End container-fluid-->
     </div><!--End content-wrapper-->
+<!-- 	=======================================================script==================================== -->
+	<script>
+		document.getElementById('mainLabel').innerHTML = 'Thêm nhân viên';
+	    document.getElementById("search").style.visibility = "hidden";
+	</script>
+<!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

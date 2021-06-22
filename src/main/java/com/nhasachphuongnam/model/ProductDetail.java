@@ -2,6 +2,7 @@ package com.nhasachphuongnam.model;
 
 public class ProductDetail {
 	private String maMatHang;
+	private String tenMatHang;
 	private int soLuong;
 	private long gia;
 	private float giamGia;
@@ -10,9 +11,10 @@ public class ProductDetail {
 		super();
 	}
 
-	public ProductDetail(String maMatHang, int soLuong, long gia, float giamGia) {
+	public ProductDetail(String maMatHang, String tenMatHang, int soLuong, long gia, float giamGia) {
 		super();
 		this.maMatHang = maMatHang;
+		this.tenMatHang = tenMatHang;
 		this.soLuong = soLuong;
 		this.gia = gia;
 		this.giamGia = giamGia;
@@ -24,6 +26,14 @@ public class ProductDetail {
 
 	public void setMaMatHang(String maMatHang) {
 		this.maMatHang = maMatHang;
+	}
+
+	public String getTenMatHang() {
+		return tenMatHang;
+	}
+
+	public void setTenMatHang(String tenMatHang) {
+		this.tenMatHang = tenMatHang;
 	}
 
 	public int getSoLuong() {
@@ -49,8 +59,7 @@ public class ProductDetail {
 	public void setGiamGia(float giamGia) {
 		this.giamGia = giamGia;
 	}
-	
-	//==================================advanced=======================================
-	
+
+	// ==================================advanced=======================================
 
 }

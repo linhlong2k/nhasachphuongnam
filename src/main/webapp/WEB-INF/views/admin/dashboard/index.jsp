@@ -66,7 +66,7 @@
 					</div>
 					<div class="col-12 col-lg-6 col-xl-3 border-light">
 						<div class="card-body">
-							<h5 class="text-white mb-0">
+							<!-- <h5 class="text-white mb-0">
 								250620 
 								<span class="float-right"><i class="fa fa-eye"></i></span>
 							</h5>
@@ -76,7 +76,7 @@
 							<p class="mb-0 text-white small-font">
 								abc <span class="float-right">+2.2% <i
 									class="zmdi zmdi-long-arrow-up"></i></span>
-							</p>
+							</p> -->
 						</div>
 					</div>
 				</div>

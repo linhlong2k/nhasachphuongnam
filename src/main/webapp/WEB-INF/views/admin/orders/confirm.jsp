@@ -43,7 +43,7 @@
 							<div class="col-md-6">
 								<h6></h6>
 								<br>
-								<p>Giảm giá: ${donHang.giamGia }</p>
+								<p>Giảm giá: <fmt:formatNumber pattern="#,###.# %; -#,###.# %" value="${donHang.giamGia }" type="currency" /></p>
 								<p>
 									Thời gian đặt hàng:
 									<%-- <fmt:formatDate value="${donHang.thoiGian }" pattern="dd-MM-yyyy" /> --%>
@@ -70,9 +70,9 @@
 											<c:forEach items="${danhSachMatHang }" var="item">
 												<tr>
 													<td>${item.maMatHang }</td>
-													<td>${item.tenMatHang }</td>
+													<td><p style="max-width: 220px; overflow: hidden; text-overflow: ellipsis;">${item.tenMatHang }</p></td>
 													<td>${item.soLuong }</td>
-													<td>${item.gia }</td>
+													<td><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value="${item.gia }" type="currency"/></td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -84,13 +84,11 @@
 					<hr>
 					<form action="admin/xac-nhan-dat-hang.htm" method="post" >
 						<input name="id" value="${donHang.maDonHang }" hidden="hidden">
-						<button type="submit" class="btn btn-light btn-round px-3"
-							name="ok" style="float: right; margin: 10px;">
+						<button type="submit" class="btn btn-light btn-round px-3" name="ok" style="float: right; margin: 10px;">
 							<i class="icon icon-check" style="color: white; font-size: 20px;"></i>
 							Xác nhận
 						</button>
-						<button type="submit" class="btn btn-light btn-round px-3"
-							name="cancel" style="float: right; margin: 10px;">
+						<button type="submit" class="btn btn-light btn-round px-3" name="cancel" style="float: right; margin: 10px;">
 							<i class="icon icon-minus" style="color: red; font-size: 20px;"></i>
 							Hủy đơn hàng
 						</button>
@@ -99,8 +97,10 @@
 			</div>
 			<div class="col-12 col-lg-6 col-xl-6">
 				<label>Đơn hàng</label>
+				<hr>
+				<input type="text" class="form-control" placeholder="Tìm kiếm đơn hàng" id="search-don-hang" onkeyup="searchDonHang()">
 				<div class="form-group">
-					<table class="table table-hover" id="table"
+					<table class="table table-hover" id="table-don-hang"
 						style="max-height: 500px; max-length: 500px;">
 						<thead>
 							<tr>
@@ -114,14 +114,12 @@
 							<c:forEach var="item" items="${danhSachDonHang}">
 								<form action="admin/xac-nhan-dat-hang.htm" method="post">
 									<tr>
-										<td scope="row"><input name="id"
-											value="${item.maDonHang }" class="form-control"
-											readonly="readonly" /></td>
+										<td scope="row">${item.maDonHang } </td>
 										<td>${item.thoiGian }</td>
 										<td>${item.maKhachHang }</td>
+										<input name="id" value="${item.maDonHang }" class="form-control" hidden="hidden"/>
 										<td>
-											<button type="submit" class="btn btn-light btn-round px-3"
-												name="linkSelect">
+											<button type="submit" class="btn btn-light btn-round px-3" name="linkSelect">
 												<i class="icon icon-plus" style="color: white;"></i>
 											</button>
 										</td>
@@ -136,4 +134,31 @@
 	</div>
     <!-- End container-fluid-->
     </div><!--End content-wrapper-->
+<!-- 	=======================================================script==================================== -->
+	<script>
+	    /* var activeItem = document.querySelector("a[href='mat-hang/index.htm']").class += ' active'; */
+	    document.getElementById('mainLabel').innerHTML = 'Xác nhận đơn hàng';
+	    document.getElementById("search").style.visibility = "hidden";
+		function searchMatHang() {
+			var input, filter, table, tr, i, txtValue, txtValue2, firstCol, secondCol;
+			input = document.getElementById("search-don-hang");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("table-don-hang");
+			tr = table.getElementsByTagName("tr");
+		    for (i = 0; i < tr.length; i++) {
+		        firstCol = tr[i].getElementsByTagName("td")[0];
+		        secondCol = tr[i].getElementsByTagName("td")[1];
+		        if (firstCol || secondCol) {
+					txtValue = firstCol.textContent || firstCol.innerText;
+					txtValue2 = secondCol.textContent || secondCol.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}   
+		    }
+		}
+	</script>
+<!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

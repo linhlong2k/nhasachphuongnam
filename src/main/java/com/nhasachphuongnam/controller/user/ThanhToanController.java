@@ -92,13 +92,14 @@ public class ThanhToanController {
 			temp.add(temp2);
 		}
 		res.setChiTiets(temp);
-		if(eoService.add(res) == null) {
+		String id = eoService.add(res);
+		if(id == null) {
 			model.addAttribute("message", "Thanh toán không thành công!");
 			return "user/payment";
 		}
 		Cookie cookie = new Cookie("gioHang", null);
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
-		return "user/paymentSuccess";
+		return "redirect:thanh-toan/thanh-toan-thanh-cong/" + id + ".htm";
 	}
 }

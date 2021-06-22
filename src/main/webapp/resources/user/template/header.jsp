@@ -19,7 +19,7 @@
 	<link href="resources/user/assets/css/font-awesome.css" rel="stylesheet">
 	<!-- Bootstrap -->
 	<link href="resources/user/assets/css/bootstrap.css" rel="stylesheet">
-	<link rel="icon" href="resources/user/assets/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="resources/images/logo.png">
 	<!-- SmartMenus jQuery Bootstrap Addon CSS -->
 	<link href="resources/user/assets/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
 	<!-- Product view slider -->
@@ -245,8 +245,8 @@
 							<li>
 								<a href="lien-he.htm">LIÊN HỆ</a>
 							</li>
-							<li class="aa-search">
-								<!-- search box --> 
+							<!-- <li class="aa-search">
+								search box 
 								<a class="aa-search-box">
 									<form action="tim-kiem.htm" method="GET" >
 										<input type="text" name="s" id="" placeholder="Tìm kiếm sản phẩm..">
@@ -255,7 +255,7 @@
 										</button>
 									</form>
 								</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 					<!--/.nav-collapse -->

@@ -109,6 +109,7 @@
     </div>
     <!-- End container-fluid-->
 	</div><!--End content-wrapper-->
+<!-- 	=======================================================script==================================== -->
 	<script>
 	    /* var activeItem = document.querySelector("a[href='mat-hang/index.htm']").class += ' active'; */
 	    document.getElementById('mainLabel').innerHTML = 'Danh sách mặt hàng';

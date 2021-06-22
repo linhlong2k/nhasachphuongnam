@@ -51,15 +51,16 @@
 							<c:forEach var="item" items="${danhSachDonHang}">
 							<form action="admin/xac-nhan-nhan-hang.htm" method="post" >
 								<tr>
-									<td scope="row"><input name="id" value="${item.maDonHang }" readonly="readonly" class="form-control" /></td>
+									<td>${item.maDonHang }</td>
 									<td>${item.maNhanVien }</td>
 									<td>${item.maKhachHang }</td>
 									<td>${item.thoiGian }</td>
+									<input name="id" value="${item.maDonHang }" hidden="hidden" />
 									<td>
 										<button type="submit" name="ok" class="btn btn-light btn-round px-3"> Xác nhận</button>
 									</td>
 									<td>
-										 <button type="submit" name="cancel" class="btn btn-light btn-round px-3"> Xóa đơn hàng</button>
+										 <button  type="submit" name="cancel" class="btn btn-light btn-round px-3"> Xóa đơn hàng</button>
 									</td>
 								</tr>
 							</form>
@@ -72,4 +73,32 @@
 	</div>
 	<!-- End container-fluid-->
     </div><!--End content-wrapper-->
+<!-- 	=======================================================script==================================== -->
+	<script>
+	    /* var activeItem = document.querySelector("a[href='mat-hang/index.htm']").class += ' active'; */
+	    document.getElementById('mainLabel').innerHTML = 'Xác nhận đơn hàng thành công';
+	    function myFunction() {
+			var input, filter, table, tr, i, txtValue, txtValue2, txtValue3, firstCol, secondCol, thirdCol;
+			input = document.getElementById("search");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("table");
+			tr = table.getElementsByTagName("tr");
+		    for (i = 0; i < tr.length; i++) {
+		        firstCol = tr[i].getElementsByTagName("td")[0];
+		        secondCol = tr[i].getElementsByTagName("td")[1];
+		        thirdCol = tr[i].getElementsByTagName("td")[2];
+		        if (firstCol || secondCol) {
+					txtValue = firstCol.textContent || firstCol.innerText;
+					txtValue2 = secondCol.textContent || secondCol.innerText;
+					txtValue3 = thirdCol.textContent || thirdCol.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}   
+		    }
+		}
+	</script>
+<!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

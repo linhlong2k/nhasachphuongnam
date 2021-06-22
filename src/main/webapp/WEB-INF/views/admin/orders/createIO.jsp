@@ -69,11 +69,11 @@
 											<c:forEach var="s" items="${danhSachMatHangDaChon}">
 												<tr>
 													<td scope="row">${s.maMatHang }</td>
-													<td>${s.gia }</td>
+													<td><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value = "${s.gia }" type = "currency"/></td>
 													<td>${s.soLuong }</td>
-													<td>${s.giamGia }</td>
+													<td><fmt:formatNumber pattern="#,###.# %; -#,###.# %" value="${s.giamGia }" type="currency" /></td>
 													<td>
-														<button name="linkDeleteProductId" value="${s.maMatHang }" type="submit" class="btn btn-light btn-round px-5">
+														<button name="linkDeleteProductId" value="${s.maMatHang }" type="submit" class="btn btn-light btn-round px-3">
 															<i class="icon icon-minus" style="color: red;"></i>
 														</button>
 													</td>
@@ -91,7 +91,7 @@
 								</button>
 							</div>
 							<div style="float: right;">
-								<button name="linkReset" type="submit" class="btn btn-light btn-round px-5">
+								<button name="linkReset" type="submit" class="btn btn-light btn-round px-3">
 									<i class="icon icon-reset" ></i><!-- chưa thêm icon vào đoạn này -->
 									Xóa mặt hàng đã chọn
 								</button>
@@ -101,18 +101,21 @@
             	</div>
           	</div>
        		<div class="col-12 col-lg-6 col-xl-6">
-                        <div class="card">
+                        <div class="card" style="height: 650px; background-color: transparent; border: hidden;">
                             <div class="card-header">
                                 <h3><strong>Danh sách mặt hàng</strong></h3>
                             </div>
+                            <div class="card-header">
+                            	<input type="text" class="form-control" placeholder="Tìm kiếm mặt hàng" id="search-mat-hang" onkeyup="searchMatHang()">
+                            </div>
                             <div class="table-responsive">
-                                <table class="table align-items-center" id="table">
+                                <table class="table align-items-center" id="table-mat-hang">
                                 	<thead>
                                 		<tr>
                                 			<th><i class="text-white mr-2"></i>Mã</td>
                                             <th>Giá</th>
-                                            <th>Số lượng</th>
-                                            <th>Giảm giá</th>
+                                            <th style="width: 30px;">Số lượng</th>
+                                            <th style="width: 30px;">Giảm giá</th>
                                             <th></th>
                                 		</tr>
                                 	</thead>
@@ -121,18 +124,18 @@
                                             <tr>
                                                 <form:form action="admin/tao-don-hang-nhap.htm" modelAttribute="matHangChon" method="POST">
                                                     <td>
-                                                        <form:input path="maMatHang" value="${prod.maMatHang }"
-                                                            class="form-control" readonly="true" />
+                                                    	${prod.maMatHang }
+                                                        <form:input path="maMatHang" value="${prod.maMatHang }" class="form-control" readonly="true" hidden="hidden" />
                                                     </td>
                                                     <td>
-                                                        <form:input path="gia" value="${prod.gia }"
-                                                            class="form-control" readonly="true" />
+                                                    	<fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value = "${prod.gia }" type = "currency"/>
+                                                        <form:input path="gia" value="${prod.gia }" class="form-control" readonly="true" hidden="hidden"/>
                                                     </td>
                                                     <td>
-                                                    	<form:input path="soLuong" class="form-control" />
+                                                    	<form:input path="soLuong" class="form-control" required="required" pattern="[0-9]{0-8}"/>
                                                     </td>
                                                     <td>
-                                                    	<form:input path="giamGia" class="form-control" />
+                                                    	<form:input path="giamGia" class="form-control" required="required" />
                                                     </td>
                                                     <td style="padding: 0;">
                                                         <button name="linkAddProduct" type="submit" class="btn btn-light btn-round px-3">
@@ -151,4 +154,30 @@
     </div>
     <!-- End container-fluid-->
     </div><!--End content-wrapper-->
+<!-- 	=======================================================script==================================== -->
+	<script>
+	    document.getElementById('mainLabel').innerHTML = 'Thêm đơn hàng nhập';
+	    document.getElementById("search").style.visibility = "hidden";
+		function searchMatHang() {
+			var input, filter, table, tr, i, txtValue, txtValue2, firstCol, secondCol;
+			input = document.getElementById("search-mat-hang");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("table-mat-hang");
+			tr = table.getElementsByTagName("tr");
+		    for (i = 0; i < tr.length; i++) {
+		        firstCol = tr[i].getElementsByTagName("td")[0];
+		        secondCol = tr[i].getElementsByTagName("td")[1];
+		        if (firstCol || secondCol) {
+					txtValue = firstCol.textContent || firstCol.innerText;
+					txtValue2 = secondCol.textContent || secondCol.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}   
+		    }
+		}
+	</script>
+<!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

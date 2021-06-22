@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -107,6 +108,7 @@ public class ImportOrderCreateController {
 		for(ProductDetail i: this.selecteds) {
 			if(i.getMaMatHang().equals(prodDetail.getMaMatHang())) {
 				i.setSoLuong(i.getSoLuong() + prodDetail.getSoLuong());
+				i.setGiamGia(i.getGiamGia());
 				flag = false;
 				break;
 			}
@@ -142,7 +144,12 @@ public class ImportOrderCreateController {
 	@PostMapping(value="", params="linkSave")
 	public String saveDonHangNhap(ModelMap model,
 			@ModelAttribute("donHangNhapMoi") ImportOrder importOrder,
-			@ModelAttribute("user") PersonalInfo nhanVien) {
+			@ModelAttribute("user") PersonalInfo nhanVien,
+			BindingResult errors) {
+		if(importOrder == null || importOrder.getThoiGian() == null) {
+			model.addAttribute("message", "Thêm đơn hàng nhập không thành công! Vui lòng chọn thời gian");
+			return "admin/orders/createIO";
+		}
 		importOrder.setChiTiets(this.selecteds);
 		importOrder.setMaNhanVien(nhanVien.getMa());
 		String maDonHang = ioService.add(importOrder);

@@ -2,22 +2,14 @@ package com.nhasachphuongnam.controller.admin;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.model.PersonalInfo;
-import com.nhasachphuongnam.model.RoleDTO;
 import com.nhasachphuongnam.service.LoginService;
 import com.nhasachphuongnam.service.PIService;
 import com.nhasachphuongnam.service.RoleService;
@@ -26,17 +18,14 @@ import com.nhasachphuongnam.service.RoleService;
 @RequestMapping("admin/nhan-vien/")
 public class StaffController {
 	
-	@Autowired(required=true)
+	@Autowired
 	PIService piService;
 	
-	@Autowired(required = true)
+	@Autowired
 	LoginService loginService;
 	
-	@Autowired(required = true)
-	RoleService roleService;
-	
 	@Autowired
-	ServletContext context;
+	RoleService roleService;
 	
 	//===============================================Model-Attribute===================================
 	
@@ -90,43 +79,34 @@ public class StaffController {
 		return "admin/staff/index";
 	}
 	
-	@RequestMapping(value = "them-nhan-vien-moi", method = RequestMethod.GET)
-	public String insertGET(ModelMap model) {
-		return "admin/staff/create";
-	}
-	
-	@RequestMapping(value = "them-nhan-vien-moi", method = RequestMethod.POST)
-	public String insertPOST(ModelMap model,
-			@Validated @ModelAttribute("nhanVienMoi") PersonalInfo nhanVien,
-			@RequestParam(value = "password", required = false) String password,
-			@RequestParam(value = "passwordconfirm", required = false) String passwordConfirm,
-			BindingResult errors) {
-		System.out.println("qắerqwrqwer");
-		if(errors.hasErrors()) {
-			model.addAttribute("message", "Thông tin nhập vào không hợp lệ, vui lòng nhập lại");
-		} else {
-			if (loginService.getByID(nhanVien.getUsername()) != null) {
-				model.addAttribute("message", "Tên đăng nhập đã tồn tại");
-			} else if(password.trim().length() == 0) {
-				model.addAttribute("message", "Mật khẩu không được để trống!");
-			} else if(!password.equals(passwordConfirm)) {
-				model.addAttribute("message", "Mật khẩu xác nhận không trùng khớp!");
-			} else {
-				Login login = new Login();
-				login.setUsername(nhanVien.getUsername());
-				login.setPassword(password);
-				RoleDTO role = roleService.getByID("2");
-				login.setRole(role);
-				nhanVien.setMaRole("1");
-				if(piService.add(nhanVien, login)) {
-					model.addAttribute("message", "Thêm nhân viên mới thành công!");
-				} else {
-					model.addAttribute("message", "Thêm nhân viên mới không thành công!");
-				}
-			}
-		}
-		return "admin/staff/create";
-	}
+	/*
+	 * @RequestMapping(value = "them-nhan-vien-moi", method = RequestMethod.GET)
+	 * public String insertGET(ModelMap model) { return "admin/staff/create"; }
+	 * 
+	 * @RequestMapping(value = "them-nhan-vien-moi", method = RequestMethod.POST)
+	 * public String insertPOST(ModelMap model,
+	 * 
+	 * @Validated @ModelAttribute("nhanVienMoi") PersonalInfo nhanVien,
+	 * 
+	 * @RequestParam(value = "password", required = false) String password,
+	 * 
+	 * @RequestParam(value = "passwordconfirm", required = false) String
+	 * passwordConfirm, BindingResult errors) { System.out.println("qắerqwrqwer");
+	 * if(errors.hasErrors()) { model.addAttribute("message",
+	 * "Thông tin nhập vào không hợp lệ, vui lòng nhập lại"); } else { if
+	 * (loginService.getByID(nhanVien.getUsername()) != null) {
+	 * model.addAttribute("message", "Tên đăng nhập đã tồn tại"); } else
+	 * if(password.trim().length() == 0) { model.addAttribute("message",
+	 * "Mật khẩu không được để trống!"); } else
+	 * if(!password.equals(passwordConfirm)) { model.addAttribute("message",
+	 * "Mật khẩu xác nhận không trùng khớp!"); } else { Login login = new Login();
+	 * login.setUsername(nhanVien.getUsername()); login.setPassword(password);
+	 * RoleDTO role = roleService.getByID("2"); login.setRole(role);
+	 * nhanVien.setMaRole("1"); if(piService.add(nhanVien, login)) {
+	 * model.addAttribute("message", "Thêm nhân viên mới thành công!"); } else {
+	 * model.addAttribute("message", "Thêm nhân viên mới không thành công!"); } } }
+	 * return "admin/staff/create"; }
+	 */
 	
 	@RequestMapping("xoa-nhan-vien/{id}")
 	public String deleteGET(ModelMap model,

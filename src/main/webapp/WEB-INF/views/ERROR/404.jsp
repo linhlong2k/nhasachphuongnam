@@ -5,6 +5,8 @@
 <html lang="vi" class="fa-events-icons-ready">
 
 <head>
+		<!-- set Icon browser -->
+  	<link rel="icon" href="resources/images/logo.png">
     <base href="${pageContext.servletContext.contextPath }/">
     <base href="${pageContext.request.contextPath }/">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
