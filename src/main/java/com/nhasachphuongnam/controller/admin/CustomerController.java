@@ -42,10 +42,10 @@ public class CustomerController {
 			model.addAttribute("message", "Không tìm thấy khách hàng mã: " + ma + " để xóa!");
 		else if(piService.delete(ma)) {
 			model.addAttribute("message", "Xóa khách hàng mã " + ma + " thành công!");
-			model.addAttribute("danhSachNhanVien", piService.getAllKhachHang());
+			model.addAttribute("danhSachKhachHang", piService.getAllKhachHang());
 		} else
 			model.addAttribute("message", "Xóa khách hàng mã " + ma + " không thành công!");
-		return "admin/staff/index";
+		return "admin/customer/index";
 	}
 
 }

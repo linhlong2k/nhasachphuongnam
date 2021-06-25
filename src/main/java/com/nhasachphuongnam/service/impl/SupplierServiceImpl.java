@@ -21,13 +21,16 @@ public class SupplierServiceImpl implements SupplierService {
 	
 	public String theNextMa() {
 		String ma = nhaCungCapDAO.getLastMa();
-		int index = Integer.parseInt(ma.substring(3, ma.length()));
-		String newma = "NCC";
-		index++;
-		for(int i = 0; i < 7 - String.valueOf(index).length(); i++)
-			newma += '0';
-		newma += String.valueOf(index);
-		return newma;
+		if(ma == null) {
+			return "NCC0000001";
+		}
+		int index = Integer.parseInt(ma.substring(3, ma.length())) + 1;
+		StringBuilder newMaNCC = new StringBuilder("NCC");
+		for(int i = 0; i < 7 - String.valueOf(index).length(); i++) {
+			newMaNCC.append('0');
+		}
+		newMaNCC.append(index);
+		return newMaNCC.toString();
 	}
 	
 	public Supplier convert(NhaCungCap nhaCungCap) {

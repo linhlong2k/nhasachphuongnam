@@ -24,54 +24,76 @@
 <!-- 		================================================================ create button ===================================================== -->
 		
 <!--     	=================================================================== table ==================================================================== -->
-		<div class="row mt-3 justify-content-center">
-          <div class="col-lg-6">
-            <div class="card">
-            	<div class="card-header">
-            		<div class="card-title"><strong>Thêm nhân viên</strong><!-- &nbsp;&nbsp;<a href="admin/nhan-vien/index.htm" style="float: right;">Hủy</a> --></div>
-            	</div>
-              <div class="card-body">
-                <form:form action="admin/them-nhan-vien.htm" method="post" modelAttribute="nhanVienMoi">
-                  <div class="form-group">
-                    <label for="input-1">Tên</label>
-                    <form:input path="ten" type="text" class="form-control form-control-rounded" id="input-1" placeholder="Nhập họ và tên nhân viên" />
-                  	<form:errors path="ten" class="text-danger" />
-                  </div>
-                  <div class="form-group">
-                    <label for="input-2">Số điện thoại</label>
-                    <form:input path="soDienThoai" type="text" class="form-control form-control-rounded" id="input-2" placeholder="Nhập số điện thoại" />
-                  	<form:errors path="soDienThoai" class="text-danger" />
-                  </div>
-                  <div class="form-group">
-                    <label for="input-3">Địa chỉ</label>
-                    <form:input path="diaChi" type="text" class="form-control form-control-rounded" id="input-3" placeholder="Nhập địa chỉ" />
-                  	<form:errors path="diaChi" class="text-danger" />
-                  </div>
-                  <div class="form-group">
-                    <label for="input-4">Ngày sinh</label>
-                    <form:input path="ngaySinh" type="date" class="form-control form-control-rounded" id="input-4" />
-                  	<form:errors path="ngaySinh" class="text-danger" />
-                  </div>
-                  <div class="form-group">
-                    <label for="input-5">Tên đăng nhập</label>
-                    <form:input path="username" type="text" class="form-control form-control-rounded" id="input-5" placeholder="Nhập tên đăng nhập" />
-                  </div>
-                  <div class="form-group">
-                    <label for="input-6">Mật khẩu</label>
-                    <input name="password" type="password" class="form-control form-control-rounded" id="input-6" placeholder="Nhập mật khẩu">
-                  </div>
-                  <div class="form-group">
-                    <label for="input-7">Mật khẩu xác nhận</label>
-                    <input name="passwordconfirm" type="password" class="form-control form-control-rounded" id="input-7" placeholder="Nhập mật khẩu xác nhận">
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-light btn-round px-5"><i class="icon-plus"></i> Tạo nhân viên mới</button>
-                  </div>
-                </form:form>
-              </div>
-            </div>
-          </div>
-        </div>
+		<div class="card">
+			<div class="card-header text-center">
+				Nhân viên mới
+			</div>
+			<form:form action="admin/them-nhan-vien.htm" method="post" modelAttribute="nhanVienMoi">
+				<div class="card-body" >
+					<div class="row">
+						<div class="col-12 col-lg-6 col-xl-6">
+							<label>Thông tin cá nhân</label>
+							<div class="form-group">
+								<label for="input-1">Tên</label>
+								<form:input path="ten" type="text"
+									class="form-control form-control-rounded" id="input-1"
+									placeholder="Nhập họ và tên nhân viên" required="required" />
+								<form:errors path="ten" class="text-danger" />
+							</div>
+							<div class="form-group">
+								<label for="input-2">Số điện thoại</label>
+								<form:input path="soDienThoai" type="text"
+									class="form-control form-control-rounded" id="input-2"
+									placeholder="Nhập số điện thoại" required="required" pattern="[0-9]{10}" />
+								<form:errors path="soDienThoai" class="text-danger" />
+							</div>
+							<div class="form-group">
+								<label for="input-3">Địa chỉ</label>
+								<form:input path="diaChi" type="text"
+									class="form-control form-control-rounded" id="input-3"
+									placeholder="Nhập địa chỉ" required="required" />
+								<form:errors path="diaChi" class="text-danger" />
+							</div>
+							<div class="form-group">
+								<label for="input-4">Ngày sinh</label>
+								<form:input path="ngaySinh" type="date"
+									class="form-control form-control-rounded" id="input-4" />
+								<form:errors path="ngaySinh" class="text-danger" />
+							</div>
+						</div>
+						<div class="col-12 col-lg-6 col-xl-6">
+							<label>Thông tin đăng nhập</label>
+							<br><br><br>
+							<div class="form-group">
+								<label for="input-5">Tên đăng nhập</label>
+								<form:input path="username" type="text"
+									class="form-control form-control-rounded" id="input-5"
+									placeholder="Nhập tên đăng nhập" required="required" />
+							</div>
+							<div class="form-group">
+								<label for="input-6">Mật khẩu</label> <input name="password"
+									type="password" class="form-control form-control-rounded"
+									id="input-6" placeholder="Nhập mật khẩu" required="required" >
+							</div>
+							<div class="form-group">
+								<label for="input-7">Mật khẩu xác nhận</label> <input
+									name="passwordconfirm" type="password"
+									class="form-control form-control-rounded" id="input-7"
+									placeholder="Nhập mật khẩu xác nhận" required="required" >
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="form-group" style="float: right;" >
+						<button type="submit" class="btn btn-light btn-round px-5">
+							<i class="icon-plus"></i> Tạo nhân viên mới
+						</button>
+					</div>
+				</div>
+			</form:form>
+		</div>
         <!--End Row-->
     </div>
     <!-- End container-fluid-->
@@ -79,7 +101,7 @@
 <!-- 	=======================================================script==================================== -->
 	<script>
 		document.getElementById('mainLabel').innerHTML = 'Thêm nhân viên';
-	    document.getElementById("search").style.visibility = "hidden";
+		document.getElementById("search").style.visibility = "hidden";
 	</script>
 <!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

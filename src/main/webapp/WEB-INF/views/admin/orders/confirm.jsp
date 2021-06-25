@@ -147,7 +147,7 @@
 			tr = table.getElementsByTagName("tr");
 		    for (i = 0; i < tr.length; i++) {
 		        firstCol = tr[i].getElementsByTagName("td")[0];
-		        secondCol = tr[i].getElementsByTagName("td")[1];
+		        secondCol = tr[i].getElementsByTagName("td")[2];
 		        if (firstCol || secondCol) {
 					txtValue = firstCol.textContent || firstCol.innerText;
 					txtValue2 = secondCol.textContent || secondCol.innerText;

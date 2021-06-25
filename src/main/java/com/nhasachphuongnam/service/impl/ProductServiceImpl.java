@@ -27,14 +27,17 @@ public class ProductServiceImpl implements ProductService{
 	LoaiMatHangDAO loaiMatHangDAO;
 
 	public String theNextMaMH() {
-		String mamh = matHangDAO.getLastMa();
-		int index = Integer.parseInt(mamh.substring(2, mamh.length()));
-		String newmamh = "MH";
-		index++;
-		for(int i = 0; i < 10 - String.valueOf(index).length(); i++)
-			newmamh += '0';
-		newmamh += String.valueOf(index);
-		return newmamh;
+		String ma = matHangDAO.getLastMa();
+		if(ma == null) {
+			return "MH00000000001";
+		}
+		int index = Integer.parseInt(ma.substring(2, ma.length())) + 1;
+		StringBuilder newMaMH = new StringBuilder("MH");
+		for(int i = 0; i < 10 - String.valueOf(index).length(); i++) {
+			newMaMH.append('0');
+		}
+		newMaMH.append(index);
+		return newMaMH.toString();
 	}
 	
 	public Product convert(MatHang matHang) {

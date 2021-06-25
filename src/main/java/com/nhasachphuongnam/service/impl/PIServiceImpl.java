@@ -26,22 +26,46 @@ public class PIServiceImpl implements PIService{
 	 * phần service này không xử lý các thông tin liên quan đến username, passord, role
 	 */
 	
-	@Autowired(required = true)
+	@Autowired
 	KhachHangDAO khachHangDAO;
 	
-	@Autowired(required = true)
+	@Autowired
 	NhanVienDAO nhanVienDAO;
 	
-	@Autowired(required = true)
+	@Autowired
 	TaiKhoanDAO taiKhoanDAO;
 	
 	public PersonalInfo convert(KhachHang khachHang) {
-		PersonalInfo pi = new PersonalInfo(khachHang.getMaKH(), khachHang.getTenKH(), khachHang.getHinhAnh(), khachHang.getDiaChi(), khachHang.getNgaySinh(), khachHang.getSdt(), khachHang.getTaiKhoan().getUsername(), khachHang.getTaiKhoan().getRole().getMaRole());
+		PersonalInfo pi = new PersonalInfo();
+		pi.setMa(khachHang.getMaKH());
+		pi.setTen(khachHang.getTenKH());
+		pi.setHinhAnh(khachHang.getHinhAnh());
+		pi.setDiaChi(khachHang.getDiaChi());
+		pi.setNgaySinh(khachHang.getNgaySinh());
+		pi.setSoDienThoai(khachHang.getSdt());
+		if(khachHang.getTaiKhoan() != null) {
+			pi.setUsername(khachHang.getTaiKhoan().getUsername());
+			if(khachHang.getTaiKhoan().getRole() != null) {
+				pi.setMaRole(khachHang.getTaiKhoan().getRole().getMaRole());
+			}
+		}
 		return pi;
 	}
 	
 	public PersonalInfo convert(NhanVien nhanVien) {
-		PersonalInfo pi = new PersonalInfo(nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getHinhAnh(), nhanVien.getDiaChi(), nhanVien.getNgaySinh(), nhanVien.getSdt(), nhanVien.getTaiKhoan().getUsername(), nhanVien.getTaiKhoan().getRole().getMaRole());
+		PersonalInfo pi = new PersonalInfo();
+		pi.setMa(nhanVien.getMaNV());
+		pi.setTen(nhanVien.getTenNV());
+		pi.setHinhAnh(nhanVien.getHinhAnh());
+		pi.setDiaChi(nhanVien.getDiaChi());
+		pi.setNgaySinh(nhanVien.getNgaySinh());
+		pi.setSoDienThoai(nhanVien.getSdt());
+		if(nhanVien.getTaiKhoan() != null) {
+			pi.setUsername(nhanVien.getTaiKhoan().getUsername());
+			if(nhanVien.getTaiKhoan().getRole() != null) {
+				pi.setMaRole(nhanVien.getTaiKhoan().getRole().getMaRole());
+			}
+		}
 		return pi;
 	}
 	
@@ -86,24 +110,30 @@ public class PIServiceImpl implements PIService{
 	
 	public String theNextMaKH() {
 		String ma = khachHangDAO.getLastMa();
-		int index = Integer.parseInt(ma.substring(2, ma.length()));
-		String newma = "KH";
-		index++;
-		for(int i = 0; i < 8 - String.valueOf(index).length(); i++)
-			newma += '0';
-		newma += String.valueOf(index);
-		return newma;
+		if(ma == null) {
+			return "KH00000001";
+		}
+		int index = Integer.parseInt(ma.substring(2, ma.length())) + 1;
+		StringBuilder newMaKH = new StringBuilder("KH");
+		for(int i = 0; i < 8 - String.valueOf(index).length(); i++) {
+			newMaKH.append('0');
+		}
+		newMaKH.append(index);
+		return newMaKH.toString();
 	}
 	
 	public String theNextMaNV() {
 		String ma = nhanVienDAO.getLastMa();
-		int index = Integer.parseInt(ma.substring(2, ma.length()));
-		String newma = "NV";
-		index++;
-		for(int i = 0; i < 8 - String.valueOf(index).length(); i++)
-			newma += '0';
-		newma += String.valueOf(index);
-		return newma;
+		if(ma == null) {
+			return "NV00000001";
+		}
+		int index = Integer.parseInt(ma.substring(2, ma.length())) + 1;
+		StringBuilder newMaNV = new StringBuilder("NV");
+		for(int i = 0; i < 8 - String.valueOf(index).length(); i++) {
+			newMaNV.append('0');
+		}
+		newMaNV.append(index);
+		return newMaNV.toString();
 	}
 	
 	public boolean add(PersonalInfo pi, Login login) {

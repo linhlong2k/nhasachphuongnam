@@ -123,8 +123,11 @@
                                         <c:forEach var="prod" items="${danhSachMatHang }">
                                             <tr>
                                                 <form:form action="admin/tao-don-hang-nhap.htm" modelAttribute="matHangChon" method="POST">
+                                                    <td hidden="hidden">
+                                                    	${prod.tenMatHang }
+                                                    </td>
                                                     <td>
-                                                    	${prod.maMatHang }
+                                                    	<a href="admin/chi-tiet-mat-hang.htm?id=${prod.maMatHang }" >${prod.maMatHang }</a>
                                                         <form:input path="maMatHang" value="${prod.maMatHang }" class="form-control" readonly="true" hidden="hidden" />
                                                     </td>
                                                     <td>

@@ -108,7 +108,7 @@ public class ImportOrderCreateController {
 		for(ProductDetail i: this.selecteds) {
 			if(i.getMaMatHang().equals(prodDetail.getMaMatHang())) {
 				i.setSoLuong(i.getSoLuong() + prodDetail.getSoLuong());
-				i.setGiamGia(i.getGiamGia());
+				i.setGiamGia(prodDetail.getGiamGia());
 				flag = false;
 				break;
 			}

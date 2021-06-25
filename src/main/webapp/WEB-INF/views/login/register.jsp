@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/resources/taglib.jsp" %>
 <%@ include file="/resources/admin/template/header.jsp" %>
-
+	
+	<c:if test="${not empty notification }">
+		<div class="alert alert-danger" role="alert"><i class="zmdi zmdi-case-check"></i>${notification }</div>
+	</c:if>
+	<c:if test="${not empty message }">
+		<div class="alert alert-success" role="alert"><i class="zmdi zmdi-alert-triangle"></i>${message }</div>
+	</c:if>
     <!-- Start wrapper-->
 	<div id="wrapper">
 		<div class="loader-wrapper">

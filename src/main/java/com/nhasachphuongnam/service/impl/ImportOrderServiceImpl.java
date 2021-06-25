@@ -19,12 +19,10 @@ import com.nhasachphuongnam.dao.NhanVienDAO;
 import com.nhasachphuongnam.dao.PhieuNhapDAO;
 import com.nhasachphuongnam.entity.CtPhieuNhap;
 import com.nhasachphuongnam.entity.CtPhieuNhapPK;
-import com.nhasachphuongnam.entity.HoaDon;
 import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.entity.NhaCungCap;
 import com.nhasachphuongnam.entity.NhanVien;
 import com.nhasachphuongnam.entity.PhieuNhap;
-import com.nhasachphuongnam.model.ExportOrder;
 import com.nhasachphuongnam.model.ImportOrder;
 import com.nhasachphuongnam.model.ProductDetail;
 import com.nhasachphuongnam.service.ImportOrderService;
@@ -61,46 +59,58 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	
 	public String theNextMa() {
 		String ma = phieuNhapDAO.getLastMa();
-		int index = Integer.parseInt(ma.substring(2, ma.length()));
-		String newmaMH = "PN";
-		index++;
-		for(int i = 0; i < 8 - String.valueOf(index).length(); i++)
-			newmaMH += '0';
-		newmaMH += String.valueOf(index);
-		return newmaMH;
+		if(ma == null) {
+			return "PN00000001";
+		}
+		int index = Integer.parseInt(ma.substring(2, ma.length())) + 1;
+		StringBuilder newMaPN = new StringBuilder("PN");
+		for(int i = 0; i < 8 - String.valueOf(index).length(); i++) {
+			newMaPN.append('0');
+		}
+		newMaPN.append(index);
+		return newMaPN.toString();
 	}
 	
 	public ImportOrder convert(PhieuNhap var) {
 		ImportOrder res = new ImportOrder();
 		res.setMaDonHang(var.getMaPN());
 		res.setThoiGian(var.getThoiGian().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-		res.setMaNhanVien(var.getNhanVien().getMaNV());
-		res.setMaNhaCungCap(var.getNhaCungCap().getMaNCC());
-		List<ProductDetail> temp3 = new ArrayList<ProductDetail>();
-		ProductDetail temp4;
-		List<CtPhieuNhap> temp5 = ctPhieuNhapDAO.getbyMaPN(var.getMaPN());
-		for(CtPhieuNhap i: temp5) {
-			temp4 = new ProductDetail();
-			temp4.setMaMatHang(i.getMatHang().getMaMH());
-			temp4.setTenMatHang(i.getMatHang().getTenMH());
-			temp4.setSoLuong(i.getSoLuong());
-			temp4.setGia(i.getGia().longValue());
-			temp4.setGiamGia(i.getGiamGia());
-			temp3.add(temp4);
+		if(var.getNhanVien() != null) {
+			res.setMaNhanVien(var.getNhanVien().getMaNV());
 		}
-		res.setChiTiets(temp3);
+		if(var.getNhaCungCap() != null) {
+			res.setMaNhaCungCap(var.getNhaCungCap().getMaNCC());
+		}
+		List<ProductDetail> productDetailList = new ArrayList<ProductDetail>();
+		ProductDetail productDetail;
+		List<CtPhieuNhap> ctPhieuNhapList = ctPhieuNhapDAO.getbyMaPN(var.getMaPN());
+		for(CtPhieuNhap i: ctPhieuNhapList) {
+			productDetail = new ProductDetail();
+			productDetail.setMaMatHang(i.getMatHang().getMaMH());
+			productDetail.setTenMatHang(i.getMatHang().getTenMH());
+			productDetail.setSoLuong(i.getSoLuong());
+			productDetail.setGia(i.getGia().longValue());
+			productDetail.setGiamGia(i.getGiamGia());
+			productDetailList.add(productDetail);
+		}
+		res.setChiTiets(productDetailList);
 		return res;
 	}
 	
 	public PhieuNhap convert(ImportOrder var) {
 		PhieuNhap res = phieuNhapDAO.getByID(var.getMaDonHang());
-		if(res == null)
-			res = new PhieuNhap();
-		NhaCungCap temp1 = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
-		res.setNhaCungCap(temp1);
-		NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
-		res.setNhanVien(temp2);
-		res.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+		if(res == null) {
+			return null;
+		}
+		if(var.getMaNhaCungCap() != null) {
+			NhaCungCap temp1 = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
+			res.setNhaCungCap(temp1);
+		}
+		if(var.getMaNhanVien() != null) {
+			NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
+			res.setNhanVien(temp2);
+		}
+		//res.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		return res;
 	}
 	
@@ -116,29 +126,35 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	
 	//chưa cập nhập số lượng của mặt hàng
 	public String add(ImportOrder var) {
-		PhieuNhap temp1 = new PhieuNhap();
-		temp1.setMaPN(this.theNextMa());
-		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-		NhanVien temp2 = nhanVienDAO.getByID(var.getMaNhanVien());
-		temp1.setNhanVien(temp2);
-		NhaCungCap temp3 = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
-		temp1.setNhaCungCap(temp3);
-		List<CtPhieuNhap> ctPhieuNhap = new ArrayList<>();
-		for(ProductDetail i: var.getChiTiets()) {
-			CtPhieuNhapPK pk = new CtPhieuNhapPK();
-			pk.setMaPN(temp1.getMaPN());
-			pk.setMaMH(i.getMaMatHang());
-			CtPhieuNhap temp4 = new CtPhieuNhap();
-			temp4.setId(pk);
-			temp4.setGiamGia(i.getGiamGia());
-			temp4.setGia(BigDecimal.valueOf(i.getGia()));
-			temp4.setSoLuong(i.getSoLuong());
-			matHangDAO.changeSoLuong(i.getMaMatHang(), i.getSoLuong());
-			ctPhieuNhap.add(temp4);
+		PhieuNhap res = new PhieuNhap();
+		res.setMaPN(this.theNextMa());
+		res.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+		if(var.getMaNhanVien() != null) {
+			NhanVien nhanVien = nhanVienDAO.getByID(var.getMaNhanVien());
+			res.setNhanVien(nhanVien);
 		}
-		temp1.setCtPhieuNhaps(ctPhieuNhap);
-		if(phieuNhapDAO.add(temp1))
-			return temp1.getMaPN();
+		if(var.getMaNhaCungCap() != null) {
+			NhaCungCap nhaCungCap = nhaCungCapDAO.getByID(var.getMaNhaCungCap());
+			res.setNhaCungCap(nhaCungCap);
+		}
+		CtPhieuNhapPK ctPhieuNhapPK;
+		CtPhieuNhap ctPhieuNhap;
+		List<CtPhieuNhap> ctPhieuNhapList = new ArrayList<>();
+		for(ProductDetail i: var.getChiTiets()) {
+			ctPhieuNhapPK = new CtPhieuNhapPK();
+			ctPhieuNhapPK.setMaPN(res.getMaPN());
+			ctPhieuNhapPK.setMaMH(i.getMaMatHang());
+			ctPhieuNhap = new CtPhieuNhap();
+			ctPhieuNhap.setId(ctPhieuNhapPK);
+			ctPhieuNhap.setGiamGia(i.getGiamGia());
+			ctPhieuNhap.setGia(BigDecimal.valueOf(i.getGia()));
+			ctPhieuNhap.setSoLuong(i.getSoLuong());
+			matHangDAO.changeSoLuong(i.getMaMatHang(), i.getSoLuong());
+			ctPhieuNhapList.add(ctPhieuNhap);
+		}
+		res.setCtPhieuNhaps(ctPhieuNhapList);
+		if(phieuNhapDAO.add(res))
+			return res.getMaPN();
 		return null;
 	}
 	

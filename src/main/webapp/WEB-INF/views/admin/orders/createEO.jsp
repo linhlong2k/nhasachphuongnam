@@ -37,7 +37,6 @@
 									<th>Mã mặt hàng</th>
 									<th>Giá</th>
 									<th>Số lượng</th>
-									<th>Giảm giá</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -49,14 +48,14 @@
 												pattern="#,###.## VND; -#,###.## VND" value="${s.gia }"
 												type="currency" /></td>
 										<td>${s.soLuong }</td>
-										<td><fmt:formatNumber pattern="#,###.# %; -#,###.# %"
-												value="${s.giamGia }" type="currency" /></td>
-										<td>
-											<button name="linkDeleteProductId" value="${s.maMatHang }"
-												type="submit" class="btn btn-light btn-round px-3">
-												<i class="icon icon-minus" style="color: red;"></i>
-											</button>
-										</td>
+										<form action="admin/tao-don-hang-xuat.htm" method="post">
+											<td>
+												<button name="removeProductId" value="${s.maMatHang }"
+													type="submit" class="btn btn-light btn-round px-3">
+													<i class="icon icon-minus" style="color: red;"></i>
+												</button>
+											</td>
+										</form>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -64,17 +63,23 @@
 					</div>
 				</div>
 				<hr>
-				<form action="admin/tao-don-hang-xuat.htm">
+				<form action="admin/tao-don-hang-xuat.htm" method="post" >
+					<div class="row">
+						<div class="col-3"></div>
+						<label class="col-2">Giảm giá </label>
+						<input name="giamGia" class="form-control col-4" required="required" value="0" />
+						<div class="col-3" ></div>
+					</div>
+					<br>
 					<div style="float: left;">
-						<button name="linkSave" type="submit"
-							class="btn btn-light btn-round px-5">
+						<button name="save" type="submit" class="btn btn-light btn-round px-5">
 							<i class="icon icon-saves"></i>
 							<!-- chưa thêm icon vào đoạn này -->
 							Lưu
 						</button>
 					</div>
 					<div style="float: right;">
-						<button name="linkReset" type="submit"
+						<button name="reset" type="submit"
 							class="btn btn-light btn-round px-3">
 							<i class="icon icon-reset"></i>
 							<!-- chưa thêm icon vào đoạn này -->
@@ -85,20 +90,21 @@
 			</div>
 		</div>
 		<br>
-		<div class="card"
-			style="height: 650px; background-color: transparent; border: hidden;">
+		<div class="card" style="height: 650px; background-color: transparent; border: hidden;">
 			<div class="card-header text-center">
 				<h3>
 					<strong>Danh sách mặt hàng</strong>
 				</h3>
 			</div>
-			<div class="card-header">
+			<div class="card-header" style="margin: 0 200px;" >
 				<input type="text" class="form-control" placeholder="Tìm kiếm mặt hàng" id="search-mat-hang" onkeyup="searchMatHang()">
 			</div>
-			<div class="row">
+			<div class="row" id="danh-sach-mat-hang">
 				<c:forEach items="${danhSachMatHang }" var="prod">
 					<div class="col-lg-6 col-xl-3 icon" >
 						<figure>
+							<a hidden="hidden">${prod.maMatHang }</a>
+							<a hidden="hidden">${prod.tenMatHang }</a>
 							<a class="aa-product-img">
 								<c:choose>
 									<c:when test="${empty prod.hinhAnh}">
@@ -118,8 +124,9 @@
 									<span class="aa-badge aa-sale" style="float: right" > Giảm <fmt:formatNumber pattern="#,###.# %; -#,###.# %" value="${prod.giamGia}" type="currency" /></span>
 								</span>
 							</figcaption>
-							<form:form class="aa-add-card-btn row" action="admin/tao-don-hang-xuat.htm?id=${prod.maMatHang }" method="POST">
+							<form:form class="aa-add-card-btn row" action="admin/tao-don-hang-xuat.htm?addProductId=${prod.maMatHang }" method="POST">
 								<input name="soLuong" class="form-control col-6" required="required" pattern="[0-9]{0-8}"/>
+								&nbsp;&nbsp;
 								<button class="btn btn-light btn-round px-3" style="float: right;" ><i class="zmdi zmdi-plus"></i>Thêm</button>
 							</form:form>
 						</figure>
@@ -132,17 +139,17 @@
     </div><!--End content-wrapper-->
 <!-- 	=======================================================script==================================== -->
 	<script>
-	    document.getElementById('mainLabel').innerHTML = 'Thêm đơn hàng nhập';
+	    document.getElementById('mainLabel').innerHTML = 'Thêm đơn hàng xuất';
 	    document.getElementById("search").style.visibility = "hidden";
 		function searchMatHang() {
 			var input, filter, table, tr, i, txtValue, txtValue2, firstCol, secondCol;
 			input = document.getElementById("search-mat-hang");
 			filter = input.value.toUpperCase();
-			table = document.getElementById("table-mat-hang");
-			tr = table.getElementsByTagName("tr");
+			table = document.getElementById("danh-sach-mat-hang");
+			tr = table.getElementsByTagName("div");
 		    for (i = 0; i < tr.length; i++) {
-		        firstCol = tr[i].getElementsByTagName("td")[0];
-		        secondCol = tr[i].getElementsByTagName("td")[1];
+		        firstCol = tr[i].getElementsByTagName("a")[0];
+		        secondCol = tr[i].getElementsByTagName("a")[1];
 		        if (firstCol || secondCol) {
 					txtValue = firstCol.textContent || firstCol.innerText;
 					txtValue2 = secondCol.textContent || secondCol.innerText;

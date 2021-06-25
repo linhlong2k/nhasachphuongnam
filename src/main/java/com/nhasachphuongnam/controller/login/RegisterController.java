@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.nhasachphuongnam.entity.KhachHang;
 import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.model.RoleDTO;
@@ -49,18 +48,18 @@ public class RegisterController {
 			@RequestParam(value = "password", required = false) String password,
 			@RequestParam(value = "passwordconfirm", required = false) String passwordConfirm, BindingResult errors) {
 		if(password.trim().length() == 0) {
-			model.addAttribute("message", "Mật khẩu không được để trống!");
+			model.addAttribute("notification", "Mật khẩu không được để trống!");
 		}
 		if (!password.equals(passwordConfirm)) {
-			model.addAttribute("message", "Mật khẩu xác nhận không trùng khớp");
+			model.addAttribute("notification", "Mật khẩu xác nhận không trùng khớp");
 			return "login/register";
 		}
 		if (loginService.getByID(khachHang.getUsername()) != null) {
-			model.addAttribute("message", "Tên đăng nhập đã tồn tại");
+			model.addAttribute("notification", "Tên đăng nhập đã tồn tại");
 			return "login/register";
 		}
 		if(errors.hasErrors()) {
-			model.addAttribute("message", "Thông tin nhập vào không hợp lệ, vui lòng nhập lại!");
+			model.addAttribute("notification", "Thông tin nhập vào không hợp lệ, vui lòng nhập lại!");
 		} else {
 			Login login = new Login();
 			login.setUsername(khachHang.getUsername());
@@ -71,7 +70,7 @@ public class RegisterController {
 			if (piService.add(khachHang, login)) {
 				model.addAttribute("message", "Tạo tài khoản mới thành công");
 			} else {
-				model.addAttribute("message", "Không thể khởi tạo thông tin đăng nhập mới");
+				model.addAttribute("notification", "Không thể khởi tạo thông tin đăng nhập mới");
 			}
 		}
 		return "login/register";

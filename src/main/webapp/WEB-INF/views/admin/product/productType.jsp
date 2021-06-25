@@ -44,6 +44,9 @@
 	                       			${t.maLoai }
 	                       			<form:input path="maLoai" value="${t.maLoai }" class="form-control" readonly="true" hidden="hidden" />
 	                       		</td>
+	                       		<td hidden="hidden">
+	                       			${t.tenLoai }
+	                       		</td>
 		                        <td><form:input path="tenLoai" value="${t.tenLoai }" class="form-control" /></td>
 		                        <td style="padding: 0;">
 		                         	<button type="submit" class="btn btn-light btn-round px-3">
@@ -135,16 +138,18 @@
 	<script>
 	document.getElementById('mainLabel').innerHTML = 'Danh sách loại mặt hàng';
 	function myFunction() {
-		var input, filter, table, tr, i, txtValue, firstCol;
+		var input, filter, table, tr, i, txtValue, txtValue2, firstCol, secondCol;
 		input = document.getElementById("search");
 		filter = input.value.toUpperCase();
 		table = document.getElementById("table");
 		tr = table.getElementsByTagName("tr");
 	    for (i = 0; i < tr.length; i++) {
 	        firstCol = tr[i].getElementsByTagName("td")[0];
+	        secondCol = tr[i].getElementsByTagName("td")[1];
 	        if (firstCol) {
 				txtValue = firstCol.textContent || firstCol.innerText;
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				txtValue2 = secondCol.textContent || secondCol.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
 					tr[i].style.display = "";
 				} else {
 					tr[i].style.display = "none";

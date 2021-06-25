@@ -19,14 +19,17 @@ public class ProductTypeServiceImpl implements ProductTypeService{
 	LoaiMatHangDAO loaiMatHangDAO;
 	
 	public String theNextMaLoai() {
-		String mamh = loaiMatHangDAO.getLastMa();
-		int index = Integer.parseInt(mamh.substring(1, mamh.length()));
-		String newmamh = "L";
-		index++;
-		for(int i = 0; i < 9 - String.valueOf(index).length(); i++)
-			newmamh += '0';
-		newmamh += String.valueOf(index);
-		return newmamh;
+		String ma = loaiMatHangDAO.getLastMa();
+		if(ma == null) {
+			return "L000000001";
+		}
+		int index = Integer.parseInt(ma.substring(1, ma.length())) + 1;
+		StringBuilder newMaL = new StringBuilder("L");
+		for(int i = 0; i < 9 - String.valueOf(index).length(); i++) {
+			newMaL.append('0');
+		}
+		newMaL.append(index);
+		return newMaL.toString();
 	}
 	
 	public ProductType convert(LoaiMatHang loaiMatHang) {

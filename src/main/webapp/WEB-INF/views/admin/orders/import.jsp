@@ -38,11 +38,27 @@
                 <table class="table align-items-center" id="table-phieu-nhap">
                 	<thead>
                 		<tr>
-                            <th rowspan="2"><i class="text-white mr-2"></i>Mã đơn</th>
-                            <th rowspan="2">Thời gian</th>
-                            <th rowspan="2">Nhân viên</th>
-                            <th rowspan="2">Nhà cung cấp</th>
-                            <th colspan="4" >Chi tiết đơn hàng</th>
+                            <th rowspan="2"> Mã đơn
+                            	<button onclick="sortMaDonHang()" style="background-color: transparent; border: hidden;" >
+		             				<i class="zmdi zmdi-swap-vertical-circle" style="margin-left: 2px;color: white; font-size: 15px;"></i>
+		             			</button>
+                            </th>
+                            <th rowspan="2"> Thời gian
+                            	<button onclick="sortThoiGian()" style="background-color: transparent; border: hidden;" >
+		             				<i class="zmdi zmdi-swap-vertical-circle" style="margin-left: 2px;color: white; font-size: 15px;"></i>
+		             			</button>
+                            </th>
+                            <th rowspan="2"> Nhân viên
+                            	<button onclick="sortMaNhanVien()" style="background-color: transparent; border: hidden;" >
+		             				<i class="zmdi zmdi-swap-vertical-circle" style="margin-left: 2px;color: white; font-size: 15px;"></i>
+		             			</button>
+                            </th>
+                            <th rowspan="2"> Nhà cung cấp
+                            	<button onclick="sortMaNhaCungCap()" style="background-color: transparent; border: hidden;" >
+		             				<i class="zmdi zmdi-swap-vertical-circle" style="margin-left: 2px;color: white; font-size: 15px;"></i>
+		             			</button>
+                            </th>
+                            <th colspan="4"> Chi tiết đơn hàng</th>
                             <th rowspan="2"></th>
                         </tr>
                         <tr>
@@ -52,10 +68,10 @@
 					    	<th>Giá tiền</th>
                         </tr>
                 	</thead>
-                    <tbody>
+                    <tbody id="table-body">
                         <c:forEach var="io" items="${danhSachPhieuNhap }">
                         <tr>
-							<td scope="row">${io.maDonHang }</td>
+							<td scope="row"><a href="admin/chi-tiet-phieu-nhap/${io.maDonHang }.htm">${io.maDonHang }</a></td>
 	                    	<td>${io.thoiGian }</td>
 	                    	<td>${io.maNhanVien }</td>
 	                    	<td>${io.maNhaCungCap }</td>
@@ -106,6 +122,178 @@
 					}
 				}   
 		    }
+		}
+	    function sortMaDonHang() {
+			var table, rows, switching, i, x, y, shouldSwitch;
+			table = document.getElementById("table-body");
+			switching = true;
+			if (table.rows[0].getElementsByTagName("td")[0].innerHTML.toLowerCase() > table.rows[table.rows.length - 1].getElementsByTagName("TD")[0].innerHTML.toLowerCase()) {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 0; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[0];
+						y = rows[i + 1].getElementsByTagName("td")[0];
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+			} else {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 0; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[0];
+						y = rows[i + 1].getElementsByTagName("td")[0];
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+
+			}
+		}
+	    function sortThoiGian() {
+			var table, rows, switching, i, x, y, shouldSwitch;
+			table = document.getElementById("table-body");
+			switching = true;
+			if (table.rows[0].getElementsByTagName("td")[1].innerHTML.toLowerCase() > table.rows[table.rows.length - 1].getElementsByTagName("TD")[1].innerHTML.toLowerCase()) {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 0; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[1];
+						y = rows[i + 1].getElementsByTagName("td")[1];
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+			} else {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 0; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[1];
+						y = rows[i + 1].getElementsByTagName("td")[1];
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+
+			}
+		}
+	    function sortMaNhanVien() {
+			var table, rows, switching, i, x, y, shouldSwitch;
+			table = document.getElementById("table-body");
+			switching = true;
+			if (table.rows[0].getElementsByTagName("td")[2].innerHTML.toLowerCase() > table.rows[table.rows.length - 1].getElementsByTagName("TD")[2].innerHTML.toLowerCase()) {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 0; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[2];
+						y = rows[i + 1].getElementsByTagName("td")[2];
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+			} else {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 0; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[2];
+						y = rows[i + 1].getElementsByTagName("td")[2];
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+
+			}
+		}
+	    function sortMaNhaCungCap() {
+			var table, rows, switching, i, x, y, shouldSwitch;
+			table = document.getElementById("table-body");
+			switching = true;
+			if (table.rows[0].getElementsByTagName("td")[3].innerHTML.toLowerCase() > table.rows[table.rows.length - 1].getElementsByTagName("TD")[3].innerHTML.toLowerCase()) {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 0; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[3];
+						y = rows[i + 1].getElementsByTagName("td")[3];
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+			} else {
+				while (switching) {
+					switching = false;
+					rows = table.rows;
+					for (i = 0; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[3];
+						y = rows[i + 1].getElementsByTagName("td")[3];
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+
+			}
 		}
 	</script>
 <!-- 	========================================================end content======================================================================= -->

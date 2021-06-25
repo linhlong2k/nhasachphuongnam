@@ -8,11 +8,13 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.NhanVienDAO;
+import com.nhasachphuongnam.entity.HoaDon;
 import com.nhasachphuongnam.entity.NhanVien;
 
 @Repository
@@ -66,8 +68,18 @@ public class NhanVienDAOImpl implements NhanVienDAO {
 		 * if(ctHoaDon == null) return false;
 		 */
 		try {
+			Criteria cr = session.createCriteria(HoaDon.class);
+			cr.add(Restrictions.eq("nhanVien.maNV", nhanVien.getMaNV()));
+			@SuppressWarnings("unchecked")
+			List<HoaDon> hoaDons = cr.list();
+			if(hoaDons != null) {
+				for(HoaDon i: hoaDons) {
+					i.setNhanVien(null);
+					session.save(i);
+				}
+			}
 			session.delete(nhanVien);
-			session.delete(nhanVien.getTaiKhoan()); 
+			session.delete(nhanVien.getTaiKhoan());
 			tran.commit();
 		} catch(HibernateException ex) {
 			tran.rollback();
@@ -107,6 +119,9 @@ public class NhanVienDAOImpl implements NhanVienDAO {
 		SQLQuery query = session.createSQLQuery(sql);
 		@SuppressWarnings("unchecked")
 		List<String> results = (List<String>)query.list();
+		if(results.size() == 0) {
+			return null;
+		}
 		return results.get(0);
 	}
 	

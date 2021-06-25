@@ -51,26 +51,31 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	
 	public String theNextMa() {
 		String ma = hoaDonDAO.getLastMa();
-		int index = Integer.parseInt(ma.substring(2, ma.length()));
-		String newmaMH = "HD";
-		index++;
-		for(int i = 0; i < 8 - String.valueOf(index).length(); i++)
-			newmaMH += '0';
-		newmaMH += String.valueOf(index);
-		return newmaMH;
+		if(ma == null) {
+			return "HD00000001";
+		}
+		int index = Integer.parseInt(ma.substring(2, ma.length())) + 1;
+		StringBuilder newmaMH = new StringBuilder("HD");
+		for(int i = 0; i < 8 - String.valueOf(index).length(); i++) {
+			newmaMH.append('0');
+		}
+		newmaMH.append(index);
+		return newmaMH.toString();
 	}
 	
 	public ExportOrder convert(HoaDon var) {
 		ExportOrder res = new ExportOrder();
-		res.setMaKhachHang(var.getKhachHang().getMaKH());
+		if(var.getKhachHang() != null) {
+			res.setMaKhachHang(var.getKhachHang().getMaKH());
+		}
+		if(var.getNhanVien() != null) {
+			res.setMaNhanVien(var.getNhanVien().getMaNV());
+		}
 		res.setDiaChi(var.getDiaChi());
 		res.setSdt(var.getSdt());
 		res.setMaDonHang(var.getMaHD());
 		res.setThoiGian(var.getThoiGian().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		res.setTinhTrang(var.getTinhTrang());
-		if(var.getNhanVien() != null) {
-			res.setMaNhanVien(var.getNhanVien().getMaNV());
-		}
 		res.setGiamGia(var.getGiamGia());
 		List<ProductDetail> temp2 = new ArrayList<ProductDetail>();
 		ProductDetail temp3;
@@ -94,10 +99,14 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		if (temp1 == null)
 			temp1 = new HoaDon();
 		temp1.setDiaChi(var.getDiaChi());
-		KhachHang temp2 = khachHangDAO.getByID(var.getMaKhachHang());
-		temp1.setKhachHang(temp2);
-		NhanVien temp3 = nhanVienDAO.getByID(var.getMaNhanVien());
-		temp1.setNhanVien(temp3);
+		if(var.getMaKhachHang() != null) {
+			KhachHang temp2 = khachHangDAO.getByID(var.getMaKhachHang());
+			temp1.setKhachHang(temp2);
+		}
+		if(var.getMaNhanVien() != null) {
+			NhanVien temp3 = nhanVienDAO.getByID(var.getMaNhanVien());
+			temp1.setNhanVien(temp3);
+		}
 		temp1.setSdt(var.getSdt());
 		temp1.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		temp1.setGiamGia(var.getGiamGia());
@@ -108,12 +117,26 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	public String add(ExportOrder var) {
 		HoaDon temp1 = new HoaDon();	//tọa HoaDon mới
 		temp1.setMaHD(this.theNextMa());	//Thêm mã đơn hàng cho hóa đơn vừa tạo
-		try {
-			//cập nhật mã khách hàng cho đơn hàng
-			temp1.setKhachHang(khachHangDAO.getByID(var.getMaKhachHang()));	
-		} catch (NullPointerException e) {	//kiểm tra null
-			e.printStackTrace();
-			return null;
+		if(var.getMaKhachHang() == null) {
+			temp1.setKhachHang(null);
+		} else {
+			try {
+				//cập nhật mã khách hàng cho đơn hàng
+				temp1.setKhachHang(khachHangDAO.getByID(var.getMaKhachHang()));	
+			} catch (Exception e) {	//kiểm tra null
+				e.printStackTrace();
+				return null;
+			}
+		}
+		if(var.getMaNhanVien() == null) {
+			temp1.setNhanVien(null);
+		} else {
+			try {
+				temp1.setNhanVien(nhanVienDAO.getByID(var.getMaNhanVien()));
+			} catch(Exception e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
 		temp1.setSdt(var.getSdt());		//thêm số điện thoại cho đơn hàng
 		//thêm thông tin thời gian cho đơn hàng và convert thời gian từ LocalDate sang Date để phù hợp với jpa hibernate 4
@@ -157,8 +180,9 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	
 	public ExportOrder getByID(String ma) {
 		HoaDon temp = hoaDonDAO.getByID(ma);
-		if(temp == null)
+		if(temp == null) {
 			return null;
+		}
 		ExportOrder res = convert(temp);
 		return res;
 	}

@@ -137,7 +137,7 @@
 			var table, rows, switching, i, x, y, shouldSwitch;
 			table = document.getElementById("table");
 			switching = true;
-			if (table.rows[1].getElementsByTagName("TD")[0].innerHTML.toLowerCase() > table.rows[2].getElementsByTagName("TD")[0].innerHTML.toLowerCase()) {
+			if (table.rows[1].getElementsByTagName("TD")[0].innerHTML.toLowerCase() > table.rows[table.rows.length - 1].getElementsByTagName("TD")[0].innerHTML.toLowerCase()) {
 				while (switching) {
 					switching = false;
 					rows = table.rows;
@@ -180,7 +180,7 @@
 			var table, rows, switching, i, x, y, shouldSwitch;
 			table = document.getElementById("table");
 			switching = true;
-			if (table.rows[1].getElementsByTagName("TD")[2].innerHTML.toLowerCase() > table.rows[2].getElementsByTagName("TD")[2].innerHTML.toLowerCase()) {
+			if (table.rows[1].getElementsByTagName("TD")[2].innerHTML.toLowerCase() > table.rows[table.rows.length - 1].getElementsByTagName("TD")[2].innerHTML.toLowerCase()) {
 				while (switching) {
 					switching = false;
 					rows = table.rows;
@@ -223,7 +223,7 @@
 			var table, rows, switching, i, x, y, shouldSwitch;
 			table = document.getElementById("table");
 			switching = true;
-			if (table.rows[1].getElementsByTagName("TD")[5].innerHTML.toLowerCase() > table.rows[2].getElementsByTagName("TD")[5].innerHTML.toLowerCase()) {
+			if (table.rows[1].getElementsByTagName("TD")[5].innerHTML.toLowerCase() > table.rows[table.rows.length - 1].getElementsByTagName("TD")[5].innerHTML.toLowerCase()) {
 				while (switching) {
 					switching = false;
 					rows = table.rows;

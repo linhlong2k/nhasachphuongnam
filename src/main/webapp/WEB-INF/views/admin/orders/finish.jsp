@@ -49,21 +49,21 @@
 						</thead>
 						<tbody>
 							<c:forEach var="item" items="${danhSachDonHang}">
-							<form action="admin/xac-nhan-nhan-hang.htm" method="post" >
-								<tr>
-									<td>${item.maDonHang }</td>
-									<td>${item.maNhanVien }</td>
-									<td>${item.maKhachHang }</td>
-									<td>${item.thoiGian }</td>
-									<input name="id" value="${item.maDonHang }" hidden="hidden" />
-									<td>
-										<button type="submit" name="ok" class="btn btn-light btn-round px-3"> Xác nhận</button>
-									</td>
-									<td>
-										 <button  type="submit" name="cancel" class="btn btn-light btn-round px-3"> Xóa đơn hàng</button>
-									</td>
-								</tr>
-							</form>
+								<form action="admin/xac-nhan-nhan-hang.htm" method="post" >
+									<tr>
+										<td><a href="admin/chi-tiet-hoa-don/${item.maDonHang }.htm">${item.maDonHang }</a></td>
+										<td>${item.maNhanVien }</td>
+										<td>${item.maKhachHang }</td>
+										<td>${item.thoiGian }</td>
+										<td hidden="hidden"><input name="id" value="${item.maDonHang }" hidden="hidden" /></td>
+										<td>
+											<button type="submit" name="ok" class="btn btn-light btn-round px-3"> Xác nhận</button>
+										</td>
+										<td>
+											 <button  type="submit" name="cancel" class="btn btn-light btn-round px-3"> Xóa đơn hàng</button>
+										</td>
+									</tr>
+								</form>
 							</c:forEach>
 						</tbody>
 					</table>

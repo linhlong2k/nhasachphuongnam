@@ -1,3 +1,4 @@
+
 package com.nhasachphuongnam.service.impl;
 
 import java.util.ArrayList;
@@ -8,9 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nhasachphuongnam.dao.RoleDAO;
-import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.entity.Role;
-import com.nhasachphuongnam.model.Product;
 import com.nhasachphuongnam.model.RoleDTO;
 import com.nhasachphuongnam.service.RoleService;
 

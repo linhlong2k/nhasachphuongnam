@@ -106,6 +106,9 @@ public class HoatDongDAOImpl implements HoatDongDAO{
 		SQLQuery query = session.createSQLQuery(sql);
 		@SuppressWarnings("unchecked")
 		List<String> results = (List<String>)query.list();
+		if(results.size() == 0) {
+			return null;
+		}
 		return results.get(0);
 	}
 	
