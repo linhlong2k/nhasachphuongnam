@@ -41,7 +41,7 @@ public class ImportOrderDetailController {
 			}
 			long tongTien = 0;
 			for(ProductDetail i: this.importOrder.getChiTiets()) {
-				tongTien += i.getGia() * (1- i.getGiamGia());
+				tongTien += i.getGia() * (1 - i.getGiamGia()) * i.getSoLuong();
 			}
 			model.addAttribute("tongTien", tongTien);
 			return this.importOrder;

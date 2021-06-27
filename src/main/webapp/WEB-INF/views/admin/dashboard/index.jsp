@@ -66,6 +66,27 @@
 					</div>
 					<div class="col-12 col-lg-6 col-xl-3 border-light">
 						<div class="card-body">
+							<div class="w3-bar w3-black">
+								 Theo:
+								<form method="get">
+									<button name="day" type="submit" class="btn btn-light">
+										 ngày
+									</button>
+									<button name="month" type="submit" class="btn btn-light">
+										 tháng
+									</button>
+									<button name="year" type="submit" class="btn btn-light">
+										 năm
+									</button>
+									<!-- <button name="custom" type="submit" class="btn btn-light">
+										 tùy chỉnh
+									</button> -->
+								</form>
+							  	<!-- <a href="#" class="w3-bar-item w3-button"> ngày</a>
+							  	<a href="#" class="w3-bar-item w3-button"> tháng</a>
+							  	<a href="#" class="w3-bar-item w3-button"> năm</a>
+							  	<a href="#" class="w3-bar-item w3-button"> tùy biến</a> -->
+							</div>
 							<!-- <h5 class="text-white mb-0">
 								250620 
 								<span class="float-right"><i class="fa fa-eye"></i></span>

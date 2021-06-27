@@ -119,7 +119,7 @@
 					                    <tbody>
 					                        <c:forEach var="eo" items="${danhSachDonHang }">
 					                        <tr>
-												<td scope="row" >${eo.maDonHang }</td>
+												<td scope="row" ><a href="chi-tiet-don-hang/${eo.maDonHang }.htm">${eo.maDonHang }</a></td>
 						                    	<td >${eo.thoiGian }</td>
 						                    	<td ><fmt:formatNumber pattern="#,###.# %; -#,###.# %" value="${eo.giamGia }" type="currency" /></td>
 						                    	<td >

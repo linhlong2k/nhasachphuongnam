@@ -1,5 +1,8 @@
 package com.nhasachphuongnam.controller.admin;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,7 +39,7 @@ public class ExportOrderDetailController {
 			}
 			long tongTien = 0;
 			for(ProductDetail i: this.exportOrder.getChiTiets()) {
-				tongTien += i.getGia();
+				tongTien += i.getGia() * i.getSoLuong();
 			}
 			model.addAttribute("tongTien", tongTien);
 			return this.exportOrder;

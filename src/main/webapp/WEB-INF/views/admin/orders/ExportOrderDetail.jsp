@@ -82,7 +82,7 @@
 					<li></li>
 					<li style="float: right;">
 						<form method="post">
-							<button type="submit" class="btn btn-light btn-round px-3" >
+							<button type="submit" class="btn btn-light btn-round px-3" formtarget="_blank" >
 								Xuất PDF <i class="icon icon-arrow-right" style="color: white; font-size: 20px;"></i>
 							</button>
 						</form>

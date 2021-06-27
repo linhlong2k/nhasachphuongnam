@@ -14,14 +14,14 @@
 				<div class="col-xs-12">
 					<h2 class="page-header">
 						<img alt="logo" src="resources/images/logo.png" width="50px;"> Nhasachphuongnam.com<small
-							class="pull-right">Date: <%= (new java.util.Date()).toLocaleString()%></small>
+							class="pull-right">Date: <%= (new java.util.Date()).toLocaleString() %></small>
 					</h2>
 				</div>
 			</div>
 			<!-- info row -->
 			<div class="row invoice-info">
 				<div class="col-sm-4 invoice-col">
-					From
+					Bên bán:
 					<address>
 						<strong>Nhà sách Phương Nam</strong><br>
 						Address: 97 Man Thiện, p.Hiệp Phú, tp.Thủ Đức<br>
@@ -31,16 +31,17 @@
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-4 invoice-col">
-					To
+					Bên mua
 					<address>
-						<strong> ${user.ten } </strong> <br> 
-						Address: ${user.diaChi } <br>
-						Phone: ${user.soDienThoai } <br>
+						<strong> ${khachHang.ten } </strong> <br> 
+						Address: ${khachHang.diaChi } <br>
+						Phone: ${khachHang.soDienThoai } <br>
 						Email:
 					</address>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-4 invoice-col">
+					<b>Thông tin đơn hàng: </b><br>
 					<b>Mã hóa đơn: </b>${donHang.maDonHang }<br>
 					<b>Số điện thoại:</b> ${donHang.sdt }<br>
 					<b>Ngày đặt hàng:</b> ${donHang.thoiGian }<br> 
@@ -70,7 +71,7 @@
 									<td>${item.maMatHang }</td>
 									<td>${item.soLuong }</td>
 									<td><fmt:formatNumber pattern=" #,###.## VND; -#,###.## VND" value="${item.gia }" /></td>
-									<td>${item.soLuong * item.gia }</td>
+									<td><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value="${item.soLuong * item.gia }" type="currency" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -88,8 +89,16 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<th>Total:</th>
-									<td>${tongTien }</td>
+									<th>Tạm tính:</th>
+									<td><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value="${tongTien }" type="currency" /></td>
+								</tr>
+								<tr>
+									<th>Giảm giá</th>
+									<td><fmt:formatNumber pattern="#,###.# %; -#,###.# %" value="${donHang.giamGia }" type="currency" /></td>
+								</tr>
+								<tr>
+									<th>Tổng tiền: </th>
+									<td><fmt:formatNumber pattern="#,###.## VND; -#,###.## VND" value="${tongTien * (1 - donHang.giamGia) }" type="currency" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -103,7 +112,7 @@
 			<div class="row no-print">
 				<div class="col-xs-12">
 					<form method="get">
-						<button name="printInvoice" class="btn btn-success pull-right" formtarget="_blank" >
+						<button name="printInvoice" class="btn btn-light btn-round px-5 btn-success pull-right" formtarget="_blank" >
 							<i class="fa fa-credit-card"></i> Xuất hóa đơn
 						</button>
 					</form>
@@ -111,6 +120,7 @@
 			</div>
 		</section>
 	</section>
+	<br><br>
 <!-- / product category -->
 <!--  end content-->
 

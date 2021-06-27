@@ -12,7 +12,7 @@
    <ul class="sidebar-menu do-nicescrol" id="side">
       <li class="sidebar-header">Nhân Viên</li>
 		<li class="item">
-			<a href="admin/dashboard/index.htm" class="">
+			<a href="admin/dashboard.htm" class="">
 				<i class="zmdi zmdi-view-dashboard"></i>
 				<span>Dashboard</span>
 			</a>
