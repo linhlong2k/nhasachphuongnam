@@ -22,7 +22,7 @@ public class ExportOrderSuccessController {
 	
 	@ModelAttribute("danhSachDonHang")
 	public List<ExportOrder> danhSachDonHang(){
-		List<ExportOrder> res = eoService.getDanhSachGiaoHang();
+		List<ExportOrder> res = eoService.getDanhSachUserDeliveryOrder();
 		return res;
 	}
 	
@@ -40,7 +40,7 @@ public class ExportOrderSuccessController {
 			@RequestParam(value="id") String id) {
 		if(id.isEmpty()) {		//trường hợp này không xảy ra.
 			model.addAttribute("message", "Không nhận được mã đơn hàng!");
-		}else if(eoService.xacNhanNhanHang(id) == null) {
+		}else if(eoService.comfirmUserDeliveryOrder(id) == null) {
 			model.addAttribute("message", "Xác nhận đơn hàng vận chuyển " + id + " không thành công");
 		} else {
 			model.addAttribute("message", "Xác nhận đơn hàng vận chuyển " + id + " thành công!");

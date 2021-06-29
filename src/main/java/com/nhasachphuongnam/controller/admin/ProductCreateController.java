@@ -46,7 +46,7 @@ public class ProductCreateController {
 	}
 	
 	@PostMapping(value="", params="btnCreate")
-	public String themMatHangMoi(ModelMap model,
+	public String createProductNew(ModelMap model,
 			@RequestParam(value="photo", required = false) MultipartFile file,
 			@Validated @ModelAttribute(value="matHang") Product matHang,
 			BindingResult errors) {

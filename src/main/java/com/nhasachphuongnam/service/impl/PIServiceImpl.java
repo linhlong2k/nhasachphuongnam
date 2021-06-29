@@ -216,7 +216,7 @@ public class PIServiceImpl implements PIService{
 		}
 	}
 	
-	public List<PersonalInfo> getAllKhachHang(){
+	public List<PersonalInfo> getAllCustomer(){
 		List<KhachHang> khachHangs = khachHangDAO.getAll();
 		List<PersonalInfo> pis = new ArrayList<PersonalInfo>();
 		for(KhachHang i: khachHangs)
@@ -224,7 +224,7 @@ public class PIServiceImpl implements PIService{
 		return pis;
 	}
 	
-	public List<PersonalInfo> getAllNhanVien(){
+	public List<PersonalInfo> getAllStaff(){
 		List<NhanVien> nhanViens = nhanVienDAO.getAll();
 		List<PersonalInfo> pis = new ArrayList<PersonalInfo>();
 		for(NhanVien i: nhanViens)
@@ -232,7 +232,7 @@ public class PIServiceImpl implements PIService{
 		return pis;
 	}
 	
-	public boolean capNhapAnh(String id, byte[] photo) {
+	public boolean updatePhoto(String id, byte[] photo) {
 		if(id.substring(0, 2).equals("KH")) {
 			KhachHang khachHang = khachHangDAO.getByID(id);
 			if(khachHang == null) {

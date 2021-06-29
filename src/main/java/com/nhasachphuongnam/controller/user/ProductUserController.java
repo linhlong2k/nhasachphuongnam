@@ -30,7 +30,7 @@ import com.nhasachphuongnam.service.impl.ProductServiceImpl;
 
 @Controller
 @RequestMapping("san-pham")
-public class SanPhamController {
+public class ProductUserController {
 	private List<Product> sanPhamList;
 	private List<Product> sanPhamGanDayList;
 	

@@ -52,7 +52,7 @@ public class DashboardController {
 		this.soDonNhap = 0;
 		this.soDonXuat = 0;
 			//Đơn hàng xuất - khách hàng mua
-		List<ExportOrder> temp = eoService.GetAllBetweenDate(start, end);
+		List<ExportOrder> temp = eoService.getAllBetweenDate(start, end);
 		this.danhSachMatHangXuat = new HashMap<String, Integer>();
 		for(ExportOrder i: temp) {
 			this.soDonXuat++;
@@ -69,7 +69,7 @@ public class DashboardController {
 		}
 		this.donNhap = new long [] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 			//Đơn hàng nhập - mua từ nhà cung cấp
-		List<ImportOrder> temp2 = ioService.GetAllBetweenDate(start, end);
+		List<ImportOrder> temp2 = ioService.getAllBetweenDate(start, end);
 		for(ImportOrder i: temp2) {
 			this.soDonNhap++;
 			for(ProductDetail j: i.getChiTiets()) {
@@ -93,7 +93,7 @@ public class DashboardController {
 		this.soDonNhap = 0;
 		this.soDonXuat = 0;
 			//Đơn hàng xuất - khách hàng mua
-		List<ExportOrder> temp = eoService.GetAllBetweenDate(start, end);
+		List<ExportOrder> temp = eoService.getAllBetweenDate(start, end);
 		this.danhSachMatHangXuat = new HashMap<String, Integer>();
 		for(ExportOrder i: temp) {
 			this.soDonXuat++;
@@ -110,7 +110,7 @@ public class DashboardController {
 		}
 		this.donNhap = new long [] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 			//Đơn hàng nhập - mua từ nhà cung cấp
-		List<ImportOrder> temp2 = ioService.GetAllBetweenDate(start, end);
+		List<ImportOrder> temp2 = ioService.getAllBetweenDate(start, end);
 		for(ImportOrder i: temp2) {
 			this.soDonNhap++;
 			for(ProductDetail j: i.getChiTiets()) {
@@ -130,7 +130,6 @@ public class DashboardController {
 	public int chart1(ModelMap model) {
 		int doanhThu = 0;
 		List <String> chart1Label = new ArrayList<String>();
-		int i;
 		if(this.type == 0) {
 			
 		} else if(type == 1) {
@@ -140,7 +139,9 @@ public class DashboardController {
 			    //chart1Label.add(this.danhSachThang[i]);
 			    date1 = date1.plus(Period.ofMonths(1));
 			}
-			
+			if(!chart1Label.contains(this.end.getMonth().toString().substring(0, 3))) {
+				chart1Label.add(this.end.getMonth().toString().substring(0, 3));
+			}
 			/* chart1Label.add(this.end.getMonth().toString().substring(0, 3)); */
 			this.doanhThuTheoThang();
 				//top row
@@ -192,7 +193,9 @@ public class DashboardController {
 			    //chart1Label.add(this.danhSachThang[i]);
 			    date1 = date1.plus(Period.ofDays(1));
 			}
-			
+			if(!chart1Label.contains(String.valueOf(this.end.getDayOfMonth()))) {
+				chart1Label.add(String.valueOf(this.end.getDayOfMonth()));
+			}
 			/* chart1Label.add(this.end.getMonth().toString().substring(0, 3)); */
 			this.doanhThuTheoNgay();
 				//top row

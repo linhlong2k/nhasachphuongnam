@@ -22,7 +22,7 @@ import com.nhasachphuongnam.service.ProductService;
 
 @Controller
 @RequestMapping("gio-hang")
-public class GioHangController {
+public class CartUserController {
 	
 	@Autowired
 	GioHangModelAttribute gioHangService;

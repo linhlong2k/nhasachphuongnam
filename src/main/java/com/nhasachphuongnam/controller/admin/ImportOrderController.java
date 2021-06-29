@@ -32,7 +32,7 @@ public class ImportOrderController {
 	}
 	
 	@PostMapping(value="", params="deleteOrderId")
-	public String xoaPhieuNhap(ModelMap model,
+	public String deleteImportOrder(ModelMap model,
 			@RequestParam(value="deleteOrderId", required=false) String id) {
 		if(ioService.getByID(id) == null) {
 			model.addAttribute("message", "Không tìm thấy đơn hàng có mã đơn hàng " + id + "!");

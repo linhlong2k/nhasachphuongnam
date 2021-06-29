@@ -63,7 +63,7 @@ public class ExportOrderCreateController {
 	}
 	
 	@PostMapping(value="", params="addProductId")
-	public String themMatHang(ModelMap model,
+	public String addProduct(ModelMap model,
 			@RequestParam(value="addProductId", required=false) String id,
 			@RequestParam(value="soLuong", required = false) int soLuong) {
 		if(soLuong==0) {
@@ -93,7 +93,7 @@ public class ExportOrderCreateController {
 	}
 	
 	@PostMapping(value="", params="removeProductId")
-	public String xoaMatHang(ModelMap model,
+	public String removeProduct(ModelMap model,
 			@RequestParam(value="removeProductId") String id) {
 		for(ProductDetail i: this.selecteds) {
 			if(i.getMaMatHang().equals(id)) {
@@ -106,14 +106,14 @@ public class ExportOrderCreateController {
 	}
 	
 	@PostMapping(value="", params="reset")
-	public String resetMatHang(ModelMap model) {
+	public String removeAllProduct(ModelMap model) {
 		this.selecteds.clear();
 		this.reloadModel(model);
 		return "admin/orders/createEO";
 	}
 	
 	@PostMapping(value="", params="save")
-	public String saveDonHangNhap(ModelMap model,
+	public String createExportOrder(ModelMap model,
 			@RequestParam(value="giamGia", required=false) Float giamGia,
 			@ModelAttribute("user") PersonalInfo nhanVien,
 			BindingResult errors) {

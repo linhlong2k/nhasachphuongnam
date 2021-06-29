@@ -57,7 +57,7 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	@Autowired
 	SupplierService supplierService;
 	
-	public String theNextMa() {
+	public String theNextID() {
 		String ma = phieuNhapDAO.getLastMa();
 		if(ma == null) {
 			return "PN00000001";
@@ -127,7 +127,7 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 	//chưa cập nhập số lượng của mặt hàng
 	public String add(ImportOrder var) {
 		PhieuNhap res = new PhieuNhap();
-		res.setMaPN(this.theNextMa());
+		res.setMaPN(this.theNextID());
 		res.setThoiGian(Date.from(var.getThoiGian().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		if(var.getMaNhanVien() != null) {
 			NhanVien nhanVien = nhanVienDAO.getByID(var.getMaNhanVien());
@@ -188,7 +188,7 @@ public class ImportOrderServiceImpl implements ImportOrderService{
 		return res;
 	}
 	
-	public List<ImportOrder> GetAllBetweenDate(LocalDate start, LocalDate end){
+	public List<ImportOrder> getAllBetweenDate(LocalDate start, LocalDate end){
 		List<ImportOrder>  res = new ArrayList<ImportOrder>();
 		List<PhieuNhap> temp = phieuNhapDAO.getBetweenThoiGian(Date.from(start.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), Date.from(end.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		for(PhieuNhap i: temp) {

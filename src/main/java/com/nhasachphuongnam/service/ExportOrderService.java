@@ -21,19 +21,19 @@ public interface ExportOrderService {
 	//Lấy danh sách toàn bộ đơn hàng trong database
 	List<ExportOrder> getAll();
 	//Lấy toàn bộ đơn hàng có mã khách hàng là id
-	List<ExportOrder> GetAllByMaKH(String id);
+	List<ExportOrder> getAllByCustomerID(String id);
 	//Lấy toàn bộ đơn hàng phụ trách bởi nhân viên có mã nhân viên là id
-	List<ExportOrder> getAllByMaNV(String id);
+	List<ExportOrder> getAllByStaffID(String id);
 	//Lấy danh sách đơn hàng đã hoàn thành trong khoản thời gian
-	List<ExportOrder> GetAllBetweenDate(LocalDate start, LocalDate end);
+	List<ExportOrder> getAllBetweenDate(LocalDate start, LocalDate end);
 	//Lấy danh sách các đơn đặt hàng của khách hàng
-	List<ExportOrder> getDanhSachDatHang();
+	List<ExportOrder> getDanhSachUserOrder();
 	//Lấy danh sách các mặt hàng có trong hóa đơn có mã là ma
-	List<Product> getDanhSachMatHangByMaHD(String ma);
+	List<Product> getDanhSachMatHangByExportOrderID(String ma);
 	//Lấy danh sách đơn hàng đang ở trạng thái giao hàng
-	List<ExportOrder> getDanhSachGiaoHang();
+	List<ExportOrder> getDanhSachUserDeliveryOrder();
 	//Xác nhận đặt hàng - đơn hàng chuyển sang trạng thái giao hàng
-	String xacNhanDatHang(String ma, String maNhanVien);
+	String confirmUserOrder(String ma, String maNhanVien);
 	//Xác nhận nhận hàng - đơn hàng chuyển sang trạng thái hoàn thành
-	String xacNhanNhanHang(String ma);
+	String comfirmUserDeliveryOrder(String ma);
 }

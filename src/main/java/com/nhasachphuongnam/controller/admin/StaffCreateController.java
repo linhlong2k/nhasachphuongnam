@@ -37,7 +37,7 @@ public class StaffCreateController {
 	
 	@ModelAttribute("danhSachNhanVien")
 	public List<PersonalInfo> danhSachNhanVien() {
-		List<PersonalInfo> pis = piService.getAllNhanVien();
+		List<PersonalInfo> pis = piService.getAllStaff();
 		return pis;
 	} 
 	

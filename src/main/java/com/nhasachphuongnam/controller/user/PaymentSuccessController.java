@@ -15,7 +15,7 @@ import com.nhasachphuongnam.service.PIService;
 
 @Controller
 @RequestMapping("thanh-toan/thanh-toan-thanh-cong")
-public class ThanhToanThanhCongController {
+public class PaymentSuccessController {
 public ExportOrder exportOrder;
 	
 	@Autowired

@@ -9,7 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,7 +26,7 @@ class ExportOrderConfirmControll {
 	
 	@ModelAttribute("danhSachDonHang")		//danh sách đơn hàng đặt chưa được xác nhận
 	public List<ExportOrder> danhSachDonHang() {
-		List<ExportOrder> res = eoService.getDanhSachDatHang();
+		List<ExportOrder> res = eoService.getDanhSachUserOrder();
 		return res;
 	}
 	
@@ -58,7 +57,7 @@ class ExportOrderConfirmControll {
 			@RequestParam("id") String id) {
 		ExportOrder temp = eoService.getByID(id);
 		model.addAttribute("donHang", temp);
-		model.addAttribute("danhSachMatHang", eoService.getDanhSachMatHangByMaHD(temp.getMaDonHang()));
+		model.addAttribute("danhSachMatHang", eoService.getDanhSachMatHangByExportOrderID(temp.getMaDonHang()));
 		return "admin/orders/confirm";
 	}
 	
@@ -68,7 +67,7 @@ class ExportOrderConfirmControll {
 			@ModelAttribute("user") PersonalInfo nhanVien) {
 		if(id.isEmpty()) {
 			model.addAttribute("message", "Bạn chưa lựa chọn đơn hàng!");
-		} else if(eoService.xacNhanDatHang(id, nhanVien.getMa()) == null) {
+		} else if(eoService.confirmUserOrder(id, nhanVien.getMa()) == null) {
 			model.addAttribute("message", "Không thể chuyển đơn hàng sang trạng thái chuyển hàng!");
 		} else {
 			model.addAttribute("message", "Chuyển đơn hàng " + id + " sang trạng thái chuyển hàng!");

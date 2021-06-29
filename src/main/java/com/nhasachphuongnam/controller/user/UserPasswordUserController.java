@@ -15,7 +15,7 @@ import com.nhasachphuongnam.service.LoginService;
 
 @Controller
 @RequestMapping("thay-doi-mat-khau")
-public class ThongTinMatKhau {
+public class UserPasswordUserController {
 	@Autowired
 	LoginService loginService;
 	
@@ -25,7 +25,7 @@ public class ThongTinMatKhau {
 	}
 	
 	@PostMapping(value="")
-	public String thayDoiMatKhau(ModelMap model,
+	public String changePassword(ModelMap model,
 			@ModelAttribute("user") PersonalInfo user,
 			@RequestParam(value="passwordOld", required=false) String passwordOld,
 			@RequestParam(value="password", required = false) String password,

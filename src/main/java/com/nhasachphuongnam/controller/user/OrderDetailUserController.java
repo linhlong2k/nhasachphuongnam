@@ -15,7 +15,7 @@ import com.nhasachphuongnam.service.PIService;
 
 @Controller
 @RequestMapping("chi-tiet-don-hang")
-public class DonHangChiTietController {
+public class OrderDetailUserController {
 public ExportOrder exportOrder;
 	
 	@Autowired

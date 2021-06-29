@@ -16,7 +16,7 @@ import com.nhasachphuongnam.service.PIService;
 @RequestMapping("admin/khach-hang/")
 public class CustomerController {
 
-	@Autowired(required=true)
+	@Autowired
 	PIService piService;
 	
 	//===============================================Model-Attribute===================================
@@ -24,10 +24,10 @@ public class CustomerController {
 	
 	@ModelAttribute("danhSachKhachHang")
 	public List<PersonalInfo> danhSachKhachHang() {
-		List<PersonalInfo> pis = piService.getAllKhachHang();
+		List<PersonalInfo> pis = piService.getAllCustomer();
 		return pis;
 	}
-	 
+	
 	//===============================================Controller========================================
 	@RequestMapping("index")
 	public String index(ModelMap model) {
@@ -36,13 +36,13 @@ public class CustomerController {
 	
 		//xóa luôn tài khoản của khách hàng
 	@RequestMapping("xoa-khach-hang/{id}")
-	public String deleteGET(ModelMap model,
+	public String delete(ModelMap model,
 			@PathVariable("id") String ma) {
 		if(piService.getByID(ma) == null)
 			model.addAttribute("message", "Không tìm thấy khách hàng mã: " + ma + " để xóa!");
 		else if(piService.delete(ma)) {
 			model.addAttribute("message", "Xóa khách hàng mã " + ma + " thành công!");
-			model.addAttribute("danhSachKhachHang", piService.getAllKhachHang());
+			model.addAttribute("danhSachKhachHang", piService.getAllCustomer());
 		} else
 			model.addAttribute("message", "Xóa khách hàng mã " + ma + " không thành công!");
 		return "admin/customer/index";

@@ -91,7 +91,7 @@ public class ImportOrderCreateController {
 	}
 	
 	@PostMapping(value="", params="linkPinDonHang")		//ghim thông tin đơn hàng để modelAttribute donHangNhapMoi không bị reload
-	public String pinThongTin(ModelMap model,
+	public String pinInfo(ModelMap model,
 			@ModelAttribute("donHangNhapMoi") ImportOrder importOrder) {
 		if(importOrder.getThoiGian() == null) {
 			model.addAttribute("message", "Thông tin đơn hàng nhập mới không đủ\nVui lòng nhập thời gian");
@@ -102,7 +102,7 @@ public class ImportOrderCreateController {
 	}
 	
 	@PostMapping(value="", params="linkAddProduct")
-	public String themMatHang(ModelMap model,
+	public String addProduct(ModelMap model,
 			@ModelAttribute("matHangChon") ProductDetail prodDetail) {
 		boolean flag = true;
 		for(ProductDetail i: this.selecteds) {
@@ -122,7 +122,7 @@ public class ImportOrderCreateController {
 	}
 	
 	@PostMapping(value="", params="linkDeleteProductId")
-	public String xoaMatHang(ModelMap model,
+	public String removeProduct(ModelMap model,
 			@RequestParam(value="linkDeleteProductId") String id) {
 		for(ProductDetail i: this.selecteds) {
 			if(i.getMaMatHang().equals(id)) {
@@ -135,14 +135,14 @@ public class ImportOrderCreateController {
 	}
 	
 	@PostMapping(value="", params="linkReset")
-	public String resetMatHang(ModelMap model) {
+	public String removeAllProduct(ModelMap model) {
 		this.selecteds.clear();
 		this.reloadModel(model);
 		return "admin/orders/createIO";
 	}
 	
 	@PostMapping(value="", params="linkSave")
-	public String saveDonHangNhap(ModelMap model,
+	public String createImportOrder(ModelMap model,
 			@ModelAttribute("donHangNhapMoi") ImportOrder importOrder,
 			@ModelAttribute("user") PersonalInfo nhanVien,
 			BindingResult errors) {

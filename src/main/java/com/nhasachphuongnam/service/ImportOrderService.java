@@ -20,5 +20,5 @@ public interface ImportOrderService {
 	
 	List<ImportOrder> getAll() ;
 	
-	List<ImportOrder> GetAllBetweenDate(LocalDate start, LocalDate end);
+	List<ImportOrder> getAllBetweenDate(LocalDate start, LocalDate end);
 }

@@ -16,10 +16,10 @@ import com.nhasachphuongnam.service.SupplierService;
 @Transactional
 public class SupplierServiceImpl implements SupplierService {
 	
-	@Autowired(required=true)
+	@Autowired
 	NhaCungCapDAO nhaCungCapDAO;
 	
-	public String theNextMa() {
+	public String theNextID() {
 		String ma = nhaCungCapDAO.getLastMa();
 		if(ma == null) {
 			return "NCC0000001";
@@ -52,7 +52,7 @@ public class SupplierServiceImpl implements SupplierService {
 	
 	public boolean add(Supplier supplier) {
 		NhaCungCap nhaCungCap = convert(supplier);
-		nhaCungCap.setMaNCC(theNextMa());
+		nhaCungCap.setMaNCC(theNextID());
 		if(nhaCungCapDAO.add(nhaCungCap))
 			return true;
 		return false;

@@ -33,7 +33,7 @@ public class ExportOrderController {
 	}
 	
 	@PostMapping(value="", params="deleteOrderId")
-	public String xoaPhieuNhap(ModelMap model,
+	public String deleteExportOrder(ModelMap model,
 			@RequestParam(value="deleteOrderId", required=false) String id) {
 		if(eoService.getByID(id) == null) {
 			model.addAttribute("message", "Không tìm thấy đơn hàng có mã đơn hàng " + id + "!");

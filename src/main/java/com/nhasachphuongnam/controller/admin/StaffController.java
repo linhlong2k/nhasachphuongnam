@@ -31,7 +31,7 @@ public class StaffController {
 	
 	@ModelAttribute("danhSachNhanVien")
 	public List<PersonalInfo> danhSachNhanVien() {
-		List<PersonalInfo> pis = piService.getAllNhanVien();
+		List<PersonalInfo> pis = piService.getAllStaff();
 		return pis;
 	} 
 	
@@ -60,7 +60,7 @@ public class StaffController {
 			model.addAttribute("message", "Không tìm thấy tài khoản có username = "+ username + " để xóa quyền admin!");
 		else if(loginService.toNormal(username)) {
 			model.addAttribute("message", "Xóa quyền admin thành công");
-			model.addAttribute("danhSachNhanVien", piService.getAllNhanVien());
+			model.addAttribute("danhSachNhanVien", piService.getAllStaff());
 		} else
 			model.addAttribute("message", "Xóa quyền Admin không thành công!");
 		return "admin/staff/index";
@@ -73,7 +73,7 @@ public class StaffController {
 			model.addAttribute("message", "Không tìm thấy tài khoản có username = "+ username + " để thêm quyền admin!");
 		else if(loginService.toAdmin(username)) {
 			model.addAttribute("message", "Thêm quyền admin thành công");
-			model.addAttribute("danhSachNhanVien", piService.getAllNhanVien());
+			model.addAttribute("danhSachNhanVien", piService.getAllStaff());
 		} else
 			model.addAttribute("message", "Thêm quyền Admin không thành công!");
 		return "admin/staff/index";
@@ -115,7 +115,7 @@ public class StaffController {
 			model.addAttribute("message", "Không tìm thấy mã nhân viên " + ma + " để xóa!");
 		else if(piService.delete(ma)) {
 			model.addAttribute("message", "Xóa nhân viên thành công!");
-			model.addAttribute("danhSachNhanVien", piService.getAllNhanVien());
+			model.addAttribute("danhSachNhanVien", piService.getAllStaff());
 		} else
 			model.addAttribute("message", "Xóa nhân viên không thành công!");
 		return "admin/staff/index";

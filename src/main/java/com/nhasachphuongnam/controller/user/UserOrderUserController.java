@@ -14,14 +14,14 @@ import com.nhasachphuongnam.service.ExportOrderService;
 
 @Controller
 @RequestMapping("thong-tin-don-hang")
-public class ThongTinDonHangController {
+public class UserOrderUserController {
 	
 	@Autowired
 	ExportOrderService eoService;
 	
 	@ModelAttribute("danhSachDonHang")
 	public List<ExportOrder> danhSachDonHang(@ModelAttribute("user") PersonalInfo user){
-		return eoService.GetAllByMaKH(user.getMa());
+		return eoService.getAllByCustomerID(user.getMa());
 	}
 	
 	@GetMapping(value="")

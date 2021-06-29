@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class LienHeController {
-	@RequestMapping("lien-he")
+public class NewsUserController {
+	@RequestMapping("tin-tuc")
 	public String index() {
-		return "user/contact";
+		return "user/news";
 	}
 }

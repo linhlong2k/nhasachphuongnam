@@ -15,10 +15,10 @@ import com.nhasachphuongnam.service.ProductTypeService;
 @Repository
 @Transactional
 public class ProductTypeServiceImpl implements ProductTypeService{
-	@Autowired(required=true)
+	@Autowired
 	LoaiMatHangDAO loaiMatHangDAO;
 	
-	public String theNextMaLoai() {
+	public String theNextID() {
 		String ma = loaiMatHangDAO.getLastMa();
 		if(ma == null) {
 			return "L000000001";
@@ -48,7 +48,7 @@ public class ProductTypeServiceImpl implements ProductTypeService{
 	
 	public boolean add(ProductType productType) {
 		LoaiMatHang loai = convert(productType);
-		loai.setMaLoai(theNextMaLoai());
+		loai.setMaLoai(this.theNextID());
 		if(loaiMatHangDAO.add(loai))
 			return true;
 		return false;

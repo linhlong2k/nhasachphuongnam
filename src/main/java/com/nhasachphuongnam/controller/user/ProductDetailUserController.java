@@ -23,7 +23,7 @@ import com.nhasachphuongnam.service.impl.ProductServiceImpl;
 
 @Controller
 @RequestMapping("chi-tiet-san-pham")
-public class ChiTietSanPhamController {
+public class ProductDetailUserController {
 	
 	@Autowired
 	GioHangModelAttribute gioHangService;

@@ -49,7 +49,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	@Autowired
 	CtHoaDonDAO ctHoaDonDAO;
 	
-	public String theNextMa() {
+	public String theNextID() {
 		String ma = hoaDonDAO.getLastMa();
 		if(ma == null) {
 			return "HD00000001";
@@ -116,7 +116,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 
 	public String add(ExportOrder var) {
 		HoaDon temp1 = new HoaDon();	//tọa HoaDon mới
-		temp1.setMaHD(this.theNextMa());	//Thêm mã đơn hàng cho hóa đơn vừa tạo
+		temp1.setMaHD(this.theNextID());	//Thêm mã đơn hàng cho hóa đơn vừa tạo
 		if(var.getMaKhachHang() == null) {
 			temp1.setKhachHang(null);
 		} else {
@@ -196,7 +196,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
-	public List<ExportOrder> GetAllByMaKH(String id){
+	public List<ExportOrder> getAllByCustomerID(String id){
 		List<ExportOrder> res = new ArrayList<ExportOrder>();
 		List<HoaDon> temp = hoaDonDAO.getHoaDonByMaKhachHang(id);
 		for(HoaDon i: temp) {
@@ -205,7 +205,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
-	public List<ExportOrder> getAllByMaNV(String id){
+	public List<ExportOrder> getAllByStaffID(String id){
 		List<ExportOrder> res = new ArrayList<ExportOrder>();
 		List<HoaDon> temp = hoaDonDAO.getHoaDonByMaNhanVien(id);
 		for(HoaDon i: temp) {
@@ -214,7 +214,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
-	public List<ExportOrder> GetAllBetweenDate(LocalDate start, LocalDate end) {
+	public List<ExportOrder> getAllBetweenDate(LocalDate start, LocalDate end) {
 		List<ExportOrder>  res = new ArrayList<ExportOrder>();	//tạo danh sách đơn hàng
 		//Lấy danh sách các đơn hàng có trong khoảng thời gian cho nhập vào đồng thời chuyển đổi kiểu dữ liệu từ LocalDate sang Date cho phù hợp
 		List<HoaDon> temp = hoaDonDAO.getBetweenThoiGian(Date.from(start.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), Date.from(end.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
@@ -225,7 +225,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	}
 
 
-	public List<ExportOrder> getDanhSachDatHang(){
+	public List<ExportOrder> getDanhSachUserOrder(){
 		List<ExportOrder> res = new ArrayList<ExportOrder>();
 		List<HoaDon> hoaDons = hoaDonDAO.getAll();
 		for(HoaDon i: hoaDons) {
@@ -236,7 +236,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
-	public List<ExportOrder> getDanhSachGiaoHang(){
+	public List<ExportOrder> getDanhSachUserDeliveryOrder(){
 		List<ExportOrder> res = new ArrayList<ExportOrder>();
 		List<HoaDon> hoaDons = hoaDonDAO.getAll();
 		for(HoaDon i: hoaDons) {
@@ -247,7 +247,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
-	public List<Product> getDanhSachMatHangByMaHD(String ma){
+	public List<Product> getDanhSachMatHangByExportOrderID(String ma){
 		List<Product> res = new ArrayList<>();
 		List<CtHoaDon> temp = ctHoaDonDAO.getbyMaHD(ma);
 		Product temp2;
@@ -260,7 +260,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return res;
 	}
 	
-	public String xacNhanDatHang(String ma, String maNhanVien) {
+	public String confirmUserOrder(String ma, String maNhanVien) {
 		HoaDon temp = hoaDonDAO.getByID(ma);
 		NhanVien temp2 = nhanVienDAO.getByID(maNhanVien);
 		if(temp == null || temp2 == null) {
@@ -274,7 +274,7 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 		return null;
 	}
 	
-	public String xacNhanNhanHang(String ma) {
+	public String comfirmUserDeliveryOrder(String ma) {
 		HoaDon temp = hoaDonDAO.getByID(ma);
 		if(temp == null) {
 			return null;	

@@ -44,14 +44,14 @@ public class SupplierController {
 	}
 	
 	@RequestMapping(value="index", params = "chinh-sua-nha-cung-cap", method=RequestMethod.POST)
-	public String nhaCungCapUpdate(ModelMap model,
+	public String updateSupplier(ModelMap model,
 			@ModelAttribute("nhaCungCapIndex") Supplier supplier) {
 		model.addAttribute("nhaCungCapNew", supplierService.getByID(supplier.getMaNhaCungCap()));
 		return "admin/supplier/index";
 	}
 	
 	@RequestMapping(value="index", params = "xoa-nha-cung-cap", method=RequestMethod.POST)
-	public String nhaCungCapDelete(ModelMap model,
+	public String deleteSupplier(ModelMap model,
 			@ModelAttribute("nhaCungCapIndex") Supplier supplier) {
 		if(supplierService.getByID(supplier.getMaNhaCungCap()) == null)
 			model.addAttribute("message", "Không tìm thấy nhà cung cấp này trong database");
@@ -64,7 +64,7 @@ public class SupplierController {
 	}
 	
 	@RequestMapping(value="cap-nhat-nha-cung-cap", method=RequestMethod.POST)
-	public String nhaCungCapMerge(ModelMap model,
+	public String mergeSupplier(ModelMap model,
 			@ModelAttribute("nhaCungCapNew") Supplier supplier,
 			BindingResult errors) {
 		if (supplier.getTenNhaCungCap().trim().length() == 0) {
@@ -88,7 +88,7 @@ public class SupplierController {
 	}
 	
 	@RequestMapping(value="cap-nhat-nha-cung-cap", params = "reset", method=RequestMethod.POST)
-	public String nhaCungCapReset(ModelMap model) {
+	public String removeAllInfomation(ModelMap model) {
 		model.addAttribute("nhaCungCapNew", new Supplier());
 		return "admin/supplier/index";
 	}

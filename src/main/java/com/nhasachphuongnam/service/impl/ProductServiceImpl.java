@@ -13,20 +13,19 @@ import com.nhasachphuongnam.dao.MatHangDAO;
 import com.nhasachphuongnam.entity.LoaiMatHang;
 import com.nhasachphuongnam.entity.MatHang;
 import com.nhasachphuongnam.model.Product;
-import com.nhasachphuongnam.model.ProductType;
 import com.nhasachphuongnam.service.ProductService;
 
 @Repository
 @Transactional
 public class ProductServiceImpl implements ProductService{
 	
-	@Autowired(required=true)
+	@Autowired
 	MatHangDAO matHangDAO;
 	
-	@Autowired(required = true)
+	@Autowired
 	LoaiMatHangDAO loaiMatHangDAO;
 
-	public String theNextMaMH() {
+	public String theNextID() {
 		String ma = matHangDAO.getLastMa();
 		if(ma == null) {
 			return "MH00000000001";
@@ -73,7 +72,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	public boolean add(Product product) {
 		MatHang matHang = convert(product);
-		matHang.setMaMH(theNextMaMH());
+		matHang.setMaMH(theNextID());
 		matHang.setAllow(true);
 		matHang.setGiamGia(Float.valueOf(0));
 		if(matHangDAO.add(matHang))
@@ -136,7 +135,7 @@ public class ProductServiceImpl implements ProductService{
 		return productList;
 	}
 	
-	public boolean updateGiamGia(String ma, Float giamGia) {
+	public boolean updateDiscount(String ma, Float giamGia) {
 		MatHang temp = matHangDAO.getByID(ma);
 		if(temp == null) {
 			return false;

@@ -21,9 +21,9 @@ public interface PIService {
 	
 	PersonalInfo getByID(String ma);
 	
-	List<PersonalInfo> getAllKhachHang();
+	List<PersonalInfo> getAllCustomer();
 	
-	List<PersonalInfo> getAllNhanVien();
+	List<PersonalInfo> getAllStaff();
 	
-	boolean capNhapAnh(String id, byte[] photo);
+	boolean updatePhoto(String id, byte[] photo);
 }

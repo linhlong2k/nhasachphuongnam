@@ -26,7 +26,7 @@ import com.nhasachphuongnam.service.ProductService;
 
 @Controller
 @RequestMapping("thanh-toan")
-public class ThanhToanController {
+public class PaymentUserController {
 	
 	@Autowired
 	ProductService productService;
@@ -61,7 +61,7 @@ public class ThanhToanController {
 	
 	//chương trình chưa có check null
 	@PostMapping(value="")
-	public String thanhToan(ModelMap model,
+	public String payment(ModelMap model,
 			HttpServletResponse response,
 			@RequestParam("soDienThoai") String soDienThoai,
 			@RequestParam("diaChi") String diaChi,

@@ -15,16 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nhasachphuongnam.model.ExportOrder;
 import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.model.RoleDTO;
-import com.nhasachphuongnam.service.ExportOrderService;
 import com.nhasachphuongnam.service.PIService;
 import com.nhasachphuongnam.service.RoleService;
 
 @Controller
 @RequestMapping("thong-tin-ca-nhan")
-public class ThongTinController {
+public class UserInformationUserController {
 	
 	@Autowired
 	PIService piService;
@@ -44,7 +42,7 @@ public class ThongTinController {
 	}
 	
 	@PostMapping(value="", params="uploadPhotoId")
-	public String capNhatHinhAnh(ModelMap model,
+	public String updatePhoto(ModelMap model,
 			@RequestParam(value="uploadPhotoId", required = false) String id,
 			@RequestParam(value="photo", required = false) MultipartFile file) {
 		if(file.isEmpty()) {
@@ -57,7 +55,7 @@ public class ThongTinController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if(piService.capNhapAnh(id, image)) {
+		if(piService.updatePhoto(id, image)) {
 			model.addAttribute("notification", "Cập nhập ảnh thành công!");
 			model.addAttribute("user", piService.getByID(id));
 		} else {
@@ -67,7 +65,7 @@ public class ThongTinController {
 	}
 	
 	@PostMapping(value="", params = "editInfo")
-	public String capNhatThongTinCaNhan(ModelMap model,
+	public String updateInfomation(ModelMap model,
 			@Validated @ModelAttribute(value = "user") PersonalInfo user,
 			BindingResult errors) {
 		if(errors.hasErrors()) {

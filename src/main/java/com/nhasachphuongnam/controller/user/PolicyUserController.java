@@ -1,15 +1,12 @@
 package com.nhasachphuongnam.controller.user;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("huong-dan-dat-hang")
-public class HuongDanDatHangController {
-
-	@GetMapping(value="")
+public class PolicyUserController {
+	@RequestMapping("chinh-sach")
 	public String index() {
-		return "user/guildOrder";
+		return "user/policy";
 	}
 }

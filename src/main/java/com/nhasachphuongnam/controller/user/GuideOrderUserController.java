@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("huong-dan-thanh-toan")
-public class HuongDanThanhToanController {
+@RequestMapping("huong-dan-dat-hang")
+public class GuideOrderUserController {
+
 	@GetMapping(value="")
 	public String index() {
-		return "user/guildPayment";
+		return "user/guildOrder";
 	}
 }
