@@ -18,7 +18,11 @@ public interface LoginService {
 	
 	Boolean checkLogin(Login login);
 	
+	Boolean changePassword(Login login);
+	
 	boolean toAdmin(String username);
 	
 	boolean toNormal(String username);
+	
+	void changPasswordToSHA1();
 }

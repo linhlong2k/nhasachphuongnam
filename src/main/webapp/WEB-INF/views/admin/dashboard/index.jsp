@@ -75,7 +75,7 @@
 									<button name="month" type="submit" class="btn btn-light">
 										 tháng
 									</button>
-									<button name="year" type="submit" class="btn btn-light">
+									<button name="year" type="submit" class="btn btn-light" disabled="true">
 										 năm
 									</button>
 									<!-- <button name="custom" type="submit" class="btn btn-light">

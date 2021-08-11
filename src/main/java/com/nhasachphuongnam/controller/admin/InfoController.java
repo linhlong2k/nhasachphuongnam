@@ -20,10 +20,14 @@ import com.nhasachphuongnam.model.RoleDTO;
 import com.nhasachphuongnam.service.LoginService;
 import com.nhasachphuongnam.service.PIService;
 import com.nhasachphuongnam.service.RoleService;
+import com.nhasachphuongnam.tools.EncryptSHA1;
 
 @Controller
 @RequestMapping("admin/thong-tin-ca-nhan/")
 public class InfoController {
+	
+	EncryptSHA1 encrypt = new EncryptSHA1();
+	
 	@Autowired(required = true)
 	PIService piService;
 	
@@ -102,7 +106,7 @@ public class InfoController {
 		} else if(!passwordConfirm.equals(passwordNew)) {
 			model.addAttribute("message", "Mật khẩu xác nhận không trùng khớp!");
 			return "admin/info/changepassword";
-		} else if(!login.getPassword().equals(password)) {
+		} else if(!login.getPassword().equals(encrypt.encrypt(password))) {
 			model.addAttribute("message", "Mật khẩu cũ không chính xác!");
 			return "admin/info/changepassword";
 		} else {

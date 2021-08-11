@@ -43,8 +43,9 @@ public class CustomerController {
 		else if(piService.delete(ma)) {
 			model.addAttribute("message", "Xóa khách hàng mã " + ma + " thành công!");
 			model.addAttribute("danhSachKhachHang", piService.getAllCustomer());
-		} else
+		} else {
 			model.addAttribute("message", "Xóa khách hàng mã " + ma + " không thành công!");
+		}
 		return "admin/customer/index";
 	}
 

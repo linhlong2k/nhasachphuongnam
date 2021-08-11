@@ -44,7 +44,7 @@
 				</a>
 				<ul class="dropdown-menu dropdown-menu-right">
 					<li class="dropdown-item user-details">
-						<a href="javaScript:void();">
+						<a  href="admin/thong-tin-ca-nhan/index.htm" > <!-- href="javaScript:void();" -->
 							<div class="media">
 								<div class="avatar">
 									<c:choose>
@@ -62,7 +62,8 @@
 									<p class="user-subtitle">${user.soDienThoai }</p>
 								</div>
 							</div>
-					</a></li>
+						</a>
+					</li>
 					<li class="dropdown-divider"></li>
 					<li class="dropdown-item"><i class="icon-envelope mr-2"></i>Tin nhắn</li>
 					<li class="dropdown-divider"></li>

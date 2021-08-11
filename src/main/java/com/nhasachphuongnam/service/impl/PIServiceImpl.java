@@ -18,6 +18,7 @@ import com.nhasachphuongnam.entity.TaiKhoan;
 import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.service.PIService;
+import com.nhasachphuongnam.tools.EncryptSHA1;
 
 @Repository
 @Transactional
@@ -25,6 +26,7 @@ public class PIServiceImpl implements PIService{
 	/*
 	 * phần service này không xử lý các thông tin liên quan đến username, passord, role
 	 */
+	EncryptSHA1 encrypt = new EncryptSHA1();
 	
 	@Autowired
 	KhachHangDAO khachHangDAO;
@@ -147,7 +149,7 @@ public class PIServiceImpl implements PIService{
 			khachHang.setSdt(pi.getSoDienThoai());
 			TaiKhoan taiKhoan = new TaiKhoan();
 			taiKhoan.setUsername(login.getUsername());
-			taiKhoan.setPassword(login.getPassword());
+			taiKhoan.setPassword(encrypt.encrypt(login.getPassword()));
 			taiKhoan.setRole(login.getRole().toRole());
 			khachHang.setTaiKhoan(taiKhoan);
 			if(khachHangDAO.add(khachHang)) {
@@ -164,7 +166,7 @@ public class PIServiceImpl implements PIService{
 			nhanVien.setTenNV(pi.getTen());
 			TaiKhoan taiKhoan = new TaiKhoan();
 			taiKhoan.setUsername(login.getUsername());
-			taiKhoan.setPassword(login.getPassword());
+			taiKhoan.setPassword(encrypt.encrypt(login.getPassword()));
 			taiKhoan.setRole(login.getRole().toRole());
 			nhanVien.setTaiKhoan(taiKhoan);
 			if(nhanVienDAO.add(nhanVien)) {

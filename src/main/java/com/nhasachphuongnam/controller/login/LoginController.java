@@ -22,16 +22,16 @@ import com.nhasachphuongnam.service.LoginService;
 @Controller
 public class LoginController {
 
-	@Autowired(required = true)
+	@Autowired
 	LoginService loginService;
 
-	@Autowired(required = true)
+	@Autowired
 	RoleDAO roleDAO;
 
-	@Autowired(required = true)
+	@Autowired
 	NhanVienDAO nhanVienDAO;
 	
-	@Autowired(required = true)
+	@Autowired
 	KhachHangDAO khachHangDAO;
 
 	// ==========================================model-attribute===============================
@@ -47,7 +47,7 @@ public class LoginController {
 	}
 
 	// ==========================================controller====================================
-
+	
 	@RequestMapping(value = "/dang-nhap", method = RequestMethod.GET)
 	public String login(ModelMap model) {
 		return "login/login";

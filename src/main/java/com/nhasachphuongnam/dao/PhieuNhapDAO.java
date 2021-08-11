@@ -3,7 +3,6 @@ package com.nhasachphuongnam.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.nhasachphuongnam.entity.HoaDon;
 import com.nhasachphuongnam.entity.PhieuNhap;
 
 public interface PhieuNhapDAO {

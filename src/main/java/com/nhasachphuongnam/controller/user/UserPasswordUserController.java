@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.nhasachphuongnam.model.Login;
 import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.service.LoginService;
+import com.nhasachphuongnam.tools.EncryptSHA1;
 
 @Controller
 @RequestMapping("thay-doi-mat-khau")
 public class UserPasswordUserController {
+	
+	EncryptSHA1 encrypt = new EncryptSHA1();
+	
 	@Autowired
 	LoginService loginService;
 	
@@ -43,7 +47,7 @@ public class UserPasswordUserController {
 			model.addAttribute("message", "Người dùng không xác thực");
 			return "user/infoPassword";
 		}
-		if(!login.getPassword().equals(passwordOld)) {
+		if(!login.getPassword().equals(encrypt.encrypt(passwordOld))) {
 			model.addAttribute("message", "Mật khẫu cũ không chính xác!");
 			return "user/infoPassword";
 		}
