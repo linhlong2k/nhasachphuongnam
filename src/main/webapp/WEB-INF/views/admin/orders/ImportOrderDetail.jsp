@@ -29,11 +29,11 @@
 			<div class="card-header"><h2> Đơn hàng ${donHang.maDonHang }</h2></div>
 			<div class="card-body">
 				<ul style="list-style-type: none;" >
-					<li><label><strong> Thông tin nhà cung cấp: </strong></label></li>
+					<li><label style="font-size: 20px;"><strong> Thông tin nhà cung cấp: </strong></label></li>
 					<li><label><strong> Tên: </strong>${nhaCungCap.tenNhaCungCap }</label></li>
 					<li><label><strong> Số điện thoại: </strong>${nhaCungCap.soDienThoai }</label></li>
 					<li><label><strong> Địa chỉ: </strong>${nhaCungCap.diaChi }</label></li>
-					<li><label><strong> Thông tin đơn hàng: </strong></label></li>
+					<li><label style="font-size: 20px;"><strong> Thông tin đơn hàng: </strong></label></li>
 					<li><label><strong> Ngày đặt hàng: </strong> ${donHang.thoiGian }</label></li>
 					<li>
 						<div class="table-responsive">

@@ -114,7 +114,7 @@
 							<c:forEach var="item" items="${danhSachDonHang}">
 								<form action="admin/xac-nhan-dat-hang.htm" method="post">
 									<tr>
-										<td scope="row">${item.maDonHang } </td>
+										<td scope="row"><a href="admin/chi-tiet-hoa-don/${item.maDonHang }.htm" >${item.maDonHang } </a></td>
 										<td>${item.thoiGian }</td>
 										<td>${item.maKhachHang }</td>
 										<input name="id" value="${item.maDonHang }" class="form-control" hidden="hidden"/>

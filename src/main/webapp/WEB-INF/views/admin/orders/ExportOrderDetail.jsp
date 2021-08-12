@@ -29,14 +29,14 @@
 			<div class="card-header"><h2> Đơn hàng ${donHang.maDonHang }</h2></div>
 			<div class="card-body">
 				<ul style="list-style-type: none;" >
-					<li><label><strong> Thông tin nhân viên phụ trách: </strong></label></li>
+					<li><label style="font-size: 20px;"><strong> Thông tin nhân viên phụ trách: </strong></label></li>
 					<li><label><strong> Tên: </strong>${nhanVien.ten }</label></li>
 					<li><label><strong> Số điện thoại: </strong>${nhanVien.soDienThoai }</label></li>
-					<li><label><strong> Thông tin người mua: </strong></label></li>
+					<li><label style="font-size: 20px;"><strong> Thông tin người mua: </strong></label></li>
 					<li><label><strong> Tên: </strong>${khachHang.ten }</label></li>
 					<li><label><strong> Số điện thoại: </strong>${khachHang.soDienThoai }</label></li>
 					<li><label><strong> Địa chỉ: </strong>${khachHang.diaChi }</label></li>
-					<li><label><strong> Thông tin đơn hàng: </strong></label></li>
+					<li><label style="font-size: 20px;"><strong> Thông tin đơn hàng: </strong></label></li>
 					<li><label><strong> Số điện thoại nhận hàng: </strong> ${donHang.sdt }</label></li>
 					<li><label><strong> Địa chỉ nhận hàng: </strong> ${donHang.diaChi }</label></li>
 					<li><label><strong> Ngày đặt hàng: </strong> ${donHang.thoiGian }</label></li>
