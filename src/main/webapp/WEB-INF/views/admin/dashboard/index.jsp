@@ -344,4 +344,7 @@
 	</div><!-- End container-fluid-->
 	</div><!--End content-wrapper-->
 <!-- 	====================================================script======================================================================= -->
+<script type="text/javascript">
+	document.getElementById("search").style.visibility = "hidden";
+</script>
 <%@ include file="/resources/admin/template/footer.jsp"%>

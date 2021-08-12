@@ -139,7 +139,7 @@
 	    /* var activeItem = document.querySelector("a[href='mat-hang/index.htm']").class += ' active'; */
 	    document.getElementById('mainLabel').innerHTML = 'Xác nhận đơn hàng';
 	    document.getElementById("search").style.visibility = "hidden";
-		function searchMatHang() {
+		function searchDonHang() {
 			var input, filter, table, tr, i, txtValue, txtValue2, firstCol, secondCol;
 			input = document.getElementById("search-don-hang");
 			filter = input.value.toUpperCase();
@@ -159,6 +159,7 @@
 				}   
 		    }
 		}
+		
 	</script>
 <!-- 	========================================================end content======================================================================= -->
 <%@ include file="/resources/admin/template/footer.jsp" %>

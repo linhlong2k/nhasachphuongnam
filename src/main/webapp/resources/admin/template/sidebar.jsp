@@ -18,6 +18,8 @@
 			</a>
 		</li>
 		
+		<li class="sidebar-header">Thêm</li>
+		
 		<li class="item">
 			<a href="admin/them-mat-hang.htm" class="">
 				<i class="zmdi zmdi-collection-plus"></i>
@@ -39,6 +41,8 @@
 			</a>
 		</li>
 		
+		<li class="sidebar-header">Xác nhận</li>
+		
 		<li class="item">
 			<a href="admin/xac-nhan-dat-hang.htm" class="">
 				<i class="zmdi zmdi-assignment-check"></i>
@@ -59,6 +63,8 @@
 				<span>Đơn hàng</span>
 			</a>
 		</li> -->
+		
+		<li class="sidebar-header">Danh sách</li>
 		
 		<li class="item">
 			<a href="admin/don-hang-nhap.htm" class="">

@@ -173,8 +173,13 @@ public class ExportOrderServiceImpl implements ExportOrderService{
 	}
 	
 	public boolean delete(String ma) {
-		if(hoaDonDAO.delete(ma))
+		List<CtHoaDon> ctHoaDons = ctHoaDonDAO.getbyMaHD(ma);
+		if(hoaDonDAO.delete(ma)) {
+			for(CtHoaDon i: ctHoaDons) {
+				matHangDAO.changeSoLuong(i.getMatHang().getMaMH(), i.getSoLuong());
+			}
 			return true;
+		}
 		return false;
 	}
 	

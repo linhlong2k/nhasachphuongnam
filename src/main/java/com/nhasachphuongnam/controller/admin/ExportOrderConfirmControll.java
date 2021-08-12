@@ -16,6 +16,7 @@ import com.nhasachphuongnam.model.ExportOrder;
 import com.nhasachphuongnam.model.PersonalInfo;
 import com.nhasachphuongnam.model.Product;
 import com.nhasachphuongnam.service.ExportOrderService;
+import com.nhasachphuongnam.service.ProductService;
 
 @Controller
 @RequestMapping("admin/xac-nhan-dat-hang")
@@ -23,6 +24,9 @@ class ExportOrderConfirmControll {
 	
 	@Autowired
 	ExportOrderService eoService;
+	
+	@Autowired
+	ProductService productService;
 	
 	@ModelAttribute("danhSachDonHang")		//danh sách đơn hàng đặt chưa được xác nhận
 	public List<ExportOrder> danhSachDonHang() {
